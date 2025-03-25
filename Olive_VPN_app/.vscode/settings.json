@@ -1,0 +1,18 @@
+{
+    "search.exclude": {
+        "**/*.code-search": false,
+        "**/bower_components": false,
+        "**/node_modules": false
+    },
+    "files.exclude": {
+        "**/.DS_Store": false,
+        "**/.git": false,
+        "**/.hg": false,
+        "**/.svn": false,
+        "**/Thumbs.db": false
+    },
+    "search.useIgnoreFiles": false,
+    "cmake.sourceDirectory": "/root/Desktop/projects/Olive_VPN_project/development/Olive_VPN_app/node_modules/expo-modules-core/android",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic"
+}
