@@ -4,7 +4,14 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
-const defaultAppTheme = {type: 'Dark', palette: 'MainTheme'}
+const defaultAppTheme = `{"type": "Dark", "palette": "MainTheme"}`  // there may me error because of added '{', '}'
+
+const appThemes = [
+
+  `{"type": "Dark", "palette": "MainTheme"}`,
+  `{"type": "Light", "palette": "MainTheme"}`
+
+]
 
 
 const SetTheme = createAsyncThunk (
@@ -22,7 +29,7 @@ const SetTheme = createAsyncThunk (
 
       if (!AsyncStorageTheme) {  // 1st launch
 
-        await AsyncStorage.setItem ('AppTheme', JSON.stringify (defaultAppTheme))
+        await AsyncStorage.setItem ('AppTheme', defaultAppTheme)
         dispatch (SetThemeState (defaultAppTheme))
 
       }
@@ -33,10 +40,19 @@ const SetTheme = createAsyncThunk (
 
     }
 
+    else if (theme == 'reverse') {  // functionality
+
+      const newThemeState = appThemes[1 - appThemes.indexOf (current_state)]
+
+      await AsyncStorage.setItem ('AppTheme', JSON.stringify (newThemeState))
+      dispatch (SetThemeState (newThemeState))
+
+    }
+
     else {  // app usage
 
-      await AsyncStorage.setItem ('AppTheme', JSON.stringify (theme))  // let it be
-      if (!_.isEqual (current_state, theme)) dispatch (SetThemeState (theme))
+      await AsyncStorage.setItem ('AppTheme', JSON.stringify (theme))
+      dispatch (SetThemeState (theme))
 
     }
 
@@ -71,9 +87,9 @@ const ThemeSlice = createSlice ({
 
 })
 
-const {SetThemeState} = ThemeSlice.actions
+const { SetThemeState } = ThemeSlice.actions
 
 const ThemeReducer = ThemeSlice.reducer
 
 
-export {ThemeReducer, SetTheme}
+export { ThemeReducer, SetTheme }

@@ -1,3 +1,6 @@
+// Component.
+
+
 import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
 import { Text, View } from 'react-native'
 
@@ -27,7 +30,7 @@ const OliveVPN_Title = () => {
       height: 2.75,
       marginTop: -2.25,
       borderRadius: 1000,
-      backgroundColor: '#8B9E80'}}/>
+      backgroundColor: styles.lineColor}}/>
 
     </View>
 

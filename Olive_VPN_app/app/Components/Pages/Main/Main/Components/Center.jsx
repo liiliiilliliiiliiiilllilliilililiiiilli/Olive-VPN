@@ -1,5 +1,11 @@
+// Component.
+
+
+import { useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
+
+import { SetMainPageStatusText } from '../../../../../../Redux/MainPageStatusTextSlice'
 
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 import { Platform } from 'react-native'
@@ -16,22 +22,26 @@ const Center = () => {
 
   [styles] = useThemes (styles => styles.MainPage.Main.Center)
 
-
-  const [VPN_Logs, set_VPN_Logs] = useState ('')
-
+  const dispatch = useDispatch ()
+  const setStatusText = text => dispatch (SetMainPageStatusText (text))
+  
   const [tipText, setTipText] = useState ('Нажмите для подключения к VPN')
+  const [connectionDestination, setConnectionDestination] = useState ('Нидерланды')
+  
+  const [VPN_logs, set_VPN_logs] = useState ('')
 
 
-  const updateLogs = log => {
+  const addLogs = text => {
 
     const currentTime = new Date().toLocaleTimeString()
-    set_VPN_Logs (prev => `${prev}\n` + `[${currentTime}]:  ${log}`)
+
+    set_VPN_logs (prev => `${prev}\n` + `[${currentTime}]:  ${text}`)
 
   }
 
   const clearLogs = () => {
 
-    set_VPN_Logs ('')
+    set_VPN_logs ('')
 
   }
 
@@ -39,13 +49,13 @@ const Center = () => {
 
     const VPN_state = await RNSimpleOpenvpn.getCurrentState ()
 
-    updateLogs (VPN_state)
+    addLogs (VPN_state)
 
   }
 
   const printVpnStateTypes = () => {
 
-    updateLogs (JSON.stringify (RNSimpleOpenvpn.VpnState, undefined, 2))
+    addLogs (JSON.stringify (RNSimpleOpenvpn.VpnState))
 
   }
 
@@ -56,9 +66,6 @@ const Center = () => {
 
       await RNSimpleOpenvpn.connect ({
 
-        remoteAddress: '185.233.184.204 1194',  // may be removed
-        username: 'lime',  // may be removed
-        password: 'prime_pilo',  // may be removed
         ovpnFileName: 'lime',
         notificationTitle: 'RNSimpleOpenVPN',
         compatMode: RNSimpleOpenvpn.CompatMode.MODERN_DEFAULTS,
@@ -71,7 +78,7 @@ const Center = () => {
     
     catch (error) {
       
-      updateLogs (error)
+      addLogs (error)
     
     }
 
@@ -87,7 +94,7 @@ const Center = () => {
     
     catch (error) {
       
-      updateLogs (error)
+      addLogs (error)
     
     }
 
@@ -97,14 +104,25 @@ const Center = () => {
 
     console.info ('toggle VPN acted!')
 
+
     const VPN_state = await RNSimpleOpenvpn.getCurrentState ()
 
+    switch (VPN_state) {
 
-    if (VPN_state == 2 || VPN_state == '2') {console.info ('stopVPN()'); await stopVPN ()}
+      case 2: await stopVPN (); break
 
-    else if (VPN_state == 0 || VPN_state == '0') {console.info ('startVPN()'); await startVPN ()}
+      case 0: await startVPN (); break
 
-    else updateLogs ('problems with switching to another state of VPN')
+      default: console.info ('Просисходит какое-то одновременное переключение')
+
+    }
+
+  }
+
+
+  const HandleLocationPress = () => {
+
+    console.info ('Location pressed')
 
   }
 
@@ -115,21 +133,19 @@ const Center = () => {
 
     addVpnStateListener (async event => {
 
-      updateLogs (JSON.stringify(event), undefined, 2)
+      addLogs (JSON.stringify(event))
 
-      
+
       const VPN_state = await RNSimpleOpenvpn.getCurrentState ()
 
       switch (VPN_state) {
 
-        case 2: setTipText ('Нажмите, чтобы отключиться'); break
+        case 2: setTipText ('Нажмите, чтобы отключиться'); setStatusText ('Подключено: 5:27'); break
 
-        case 0: setTipText ('Нажмите для подключения к VPN'); break
-
-        default: alert ('Просисходит какое-то одновременное переключение')
+        case 0: setTipText ('Нажмите для подключения к VPN'); setStatusText ('Соединение не защищено'); break
 
       }
-        
+
     })
 
   }
@@ -157,17 +173,18 @@ const Center = () => {
     <View style = {{
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 25}}>
+    gap: 21}}>
 
       <VPN_button
       onPress = {() => toggleVPN()}/>
 
       <Tip
       text = {tipText}
-      onPress = {() => {}}/>
+      onPress = {() => toggleVPN()}/>
 
       <Action 
-      text = 'Нидерланды'/>
+      text = {connectionDestination}
+      onPress = {() => HandleLocationPress()}/>
 
     </View>
 
@@ -181,20 +198,33 @@ const VPN_button = ({onPress}) => {
   return (
 
     <TouchableOpacity
+    activeOpacity = {1}
     onPress = {() => onPress()}
     style = {{
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 200,
-    height: 200,
-    backgroundColor: styles.VPN_button.backgroundColor,
+    padding: 15,
+    marginBottom: -15,
     borderRadius: 1000}}>
 
-      <Image
-      source = {styles.VPN_button.Olive_PNG}
+      <View
+      onPress = {() => onPress()}
       style = {{
-      width: 175,
-      height: 175}}/>
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 225,
+      height: 225,
+      borderWidth: 2.5,
+      borderRadius: 1000,
+      borderColor: styles.VPN_button.borderColor,
+      backgroundColor: styles.VPN_button.backgroundColor,
+      boxShadow: styles.VPN_button.boxShadow}}>
+
+        <Image
+        source = {styles.VPN_button.Olive_PNG}
+        style = {{
+        width: 185,
+        height: 185}}/>
+
+      </View>
 
     </TouchableOpacity>
 
@@ -207,14 +237,18 @@ const Tip = ({text, onPress}) => {
   return (
 
     <TouchableOpacity
+    activeOpacity = {1}
     onPress = {() => onPress()}
     style = {{
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8}}>
+    gap: 8,
+    padding: 10,
+    marginVertical: -10,
+    borderRadius: 15}}>
 
       <Image
-      source = {styles.Tip.Tap_dark_green_PNG}
+      source = {styles.Tip.Tap_PNG}
       style = {{
       width: 17,
       height: 17}}/>
@@ -222,7 +256,7 @@ const Tip = ({text, onPress}) => {
       <Text style = {{
       fontFamily: styles.Tip.fontFamily,
       color: styles.Tip.color,
-      fontSize: 15}}>
+      fontSize: 17}}>
 
         {text}
 
@@ -243,30 +277,34 @@ const Action = ({text, onPress}) => {
     style = {{
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8}}>
+    gap: 8,
+    padding: 10,
+    paddingHorizontal: 16,
+    marginVertical: -10,
+    borderRadius: 8}}>
 
       <Image
-      source = {styles.Action.Location_green_PNG}
+      source = {styles.Action.Location_PNG}
       style = {{
       width: 17,
       height: 17,
-      top: 0.75}}/>
+      bottom: 0.75}}/>
 
       <Text style = {{
       fontFamily: styles.Action.fontFamily,
       color: styles.Action.color,
-      fontSize: 15}}>
+      fontSize: 17}}>
 
         {text}
 
       </Text>
 
       <Image
-      source = {styles.Action.ArrowCompact_green_PNG}
+      source = {styles.Action.Arrow_PNG}
       style = {{
       width: 15,
       height: 15,
-      top: 1.5}}/>
+      top: 0.75}}/>
 
     </TouchableOpacity>
 

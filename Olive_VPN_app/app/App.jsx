@@ -1,5 +1,6 @@
 // This is application main file.
 
+
 import axios from 'axios'
 import * as SecureStore from 'expo-secure-store'
 
@@ -30,14 +31,14 @@ const generalScreenOptions = {
 }
 
 
-export default function App () {
+const App = () => {
 
   const [isAppSetUp, setIsAppSetUp] = useState (false)
 
   const [styles, theme, setTheme] = useThemes ()
 
-  const [JWT_Access_user, set_JWT_Access_user] = useState (null)  // need to put into redux for futher global usage and trigger it
-  const [JWT_Refresh_user, set_JWT_Refresh_user] = useState (null)  // need to put into redux for futher global usage and trigger it
+  const [JWT_Access_user, set_JWT_Access_user] = useState ()  // need to put into redux for futher global usage and trigger it
+  const [JWT_Refresh_user, set_JWT_Refresh_user] = useState ()  // need to put into redux for futher global usage and trigger it
 
 
   const configureUserTokens = async () => {
@@ -49,7 +50,7 @@ export default function App () {
 
   const configureThemes = () => {
 
-    setTheme ('Initialization')
+    setTheme (`{"type": "Dark", "palette": "MainTheme"}`)  // add Initialization later
 
   }
 
@@ -79,7 +80,7 @@ export default function App () {
 
   })
 
-  useEffect (() => {  // call all independant threads in parallel
+  useEffect (() => {  // call all independant initialization threads in parallel
 
     Promise.all ([
 
@@ -95,7 +96,7 @@ export default function App () {
     const isThemeConfigured = theme != null
     const areUserTokensConfigured = (JWT_Access_user != null) && (JWT_Refresh_user != null)
 
-    if (isThemeConfigured && areUserTokensConfigured) setTimeout (() => setIsAppSetUp (true), 1000)  // adding load delay just for development
+    if (isThemeConfigured && areUserTokensConfigured) setIsAppSetUp (true)
       
   }, [JWT_Access_user, JWT_Refresh_user, theme])
 
@@ -133,3 +134,6 @@ export default function App () {
   )
 
 }
+
+
+export default App

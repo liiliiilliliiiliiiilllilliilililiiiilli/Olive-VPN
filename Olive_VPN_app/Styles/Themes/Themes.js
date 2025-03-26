@@ -5,7 +5,7 @@ import { MainTheme as MainTheme_Light } from './Light/MainTheme'
 import { BlueTheme as BlueTheme_Light } from './Light/BlueTheme'
 
 
-export const Themes = {
+const Themes = {
 
     Dark: {
 
@@ -22,3 +22,6 @@ export const Themes = {
     }
 
 }
+
+
+export { Themes }

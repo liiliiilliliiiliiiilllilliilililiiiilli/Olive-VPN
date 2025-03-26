@@ -40,8 +40,9 @@ const Tip = () => {
     backgroundColor: styles.backgroundColor}}>
 
       <Text style = {{
-      fontSize: 17,
-      color: styles.textColor}}>
+      fontFamily: styles.fontFamily,
+      color: styles.color,
+      fontSize: 17}}>
 
         <Text style = {{color: styles.metalinkColor}}>Подробнее</Text> о приложении, которое созданно для обхода ограничений.
 

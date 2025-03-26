@@ -1,3 +1,6 @@
+// Component.
+
+
 import { useThemes } from '../../../../../Styles/Hooks/UseThemes'
 import { View } from 'react-native'
 
@@ -8,28 +11,46 @@ import ThemeSwitcher from './Components/ThemeSwitcher'
 
 const TopBar = () => {
 
-    const [styles] = useThemes (styles => styles.MainPage.Top)
+  const [styles, theme, setTheme] = useThemes (styles => styles.MainPage.Top)
 
 
-    return (
+  const HandleMenuButtonPressed = () => {
 
-        <View style = {{
-        flexDirection: 'row',
-        alignItems: 'center',
-        height: 65.5,
-        marginBottom: 28,
-        paddingHorizontal: 18.5,
-        borderBottomWidth: 2,
-        borderColor: styles.borderColor,
-        backgroundColor: styles.backgroundColor}}>
-                
-          <MenuButton/>
-          <OliveVPN_Title/>
-          <ThemeSwitcher/>
+    console.info ('MenuButton pressed')
 
-        </View>
+  }
 
-    )
+  const HandleThemeSwitcherPressed = () => {
+
+    console.info ('ThemeSwitcher pressed')
+    setTheme ('reverse')
+
+  }
+
+
+  return (
+
+    <View style = {{
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 65.5,
+    marginBottom: 28,
+    paddingHorizontal: 18.5,
+    borderBottomWidth: 2,
+    borderColor: styles.borderColor,
+    backgroundColor: styles.backgroundColor}}>
+            
+      <MenuButton
+      onPress = {() => HandleMenuButtonPressed()}/>
+
+      <OliveVPN_Title/>
+
+      <ThemeSwitcher
+      onPress = {() => HandleThemeSwitcherPressed()}/>
+
+    </View>
+
+  )
 
 }
 

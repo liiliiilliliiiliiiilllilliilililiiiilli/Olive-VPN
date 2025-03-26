@@ -1,10 +1,12 @@
-/*  This file contains style varriables on which app themes depend.
+/*
+
+    This file contains style varriables on which app themes depend.
 
 
     # Pictures:
 
     All pictures are in .png format (.svg may increase computattional consts).
-    
+
     Small ones: 150px * 150px size.
     Big ones: 500px * 500px size.
 
@@ -15,27 +17,27 @@
 
 
     Any stuff this file contains is either meaningfully grouped or alphabetically sorted, just for better understanding.
-    
+
 */
 
 
 const ColorfulBackgroundImage_PNG = require ('../../../assets/PNG/_General_/ColorfulBackgroundImage.png')
 
+const ArrowCompact_grey_PNG = require ('../../../assets/PNG/Arrows/Grey.png')
+const ArrowCompact_green_PNG = require ('../../../assets/PNG/Arrows/Green.png')
+
 const Burger_grey_PNG = require ('../../../assets/PNG/Burger/Grey.png')
 const Moon_grey_PNG = require ('../../../assets/PNG/Moon/Grey.png')
 const Sun_grey_PNG = require ('../../../assets/PNG/Sun/Grey.png')
-
-const ArrowCompact_grey_PNG = require ('../../../assets/PNG/Arrows/Grey.png')
-const ArrowCompact_green_PNG = require ('../../../assets/PNG/Arrows/Green.png')
 
 const Apps_grey_PNG = require ('../../../assets/PNG/Apps/Grey.png')
 const Olive_black_PNG = require ('../../../assets/PNG/Olive/Black.png')
 const Tap_dark_green_PNG = require ('../../../assets/PNG/Tap/DarkGreen.png')
 const Location_green_PNG = require ('../../../assets/PNG/Location/Green.png')
-const Magic_wand_grey_PNG = require ('../../../assets/PNG/Magic_wand/Grey.png')
+const Magic_wand_light_PNG = require ('../../../assets/PNG/Magic_wand/Light.png')
 
 
-const colors = {
+const Colors = {
 
     BarBackground: '#070707',
     BarBorder: '#171717',
@@ -44,6 +46,7 @@ const colors = {
     Grey: '#808080',
     Line: '#1c1c1c',
     Olive: '#8b9e80',
+    OliveButtonShadow: '0px 2.5px 10px rgb(3, 10, 1)',
     OliveDark: '#687262',
     PreWhite: '#f2f2f2',
     Sun: '#9e9780',
@@ -63,20 +66,20 @@ const MainTheme = {
 
         ColorfulBackgroundImage_PNG: ColorfulBackgroundImage_PNG,
 
-        backgroundColor: colors.Black
+        backgroundColor: Colors.Black
     
     },
 
 
     StatusBar: {
 
-        backgroundColor: colors.BarBackground
+        backgroundColor: Colors.BarBackground
     
     },
 
     MainField: {
 
-        backgroundColor: colors.Black
+        backgroundColor: Colors.Black
 
     },
 
@@ -85,60 +88,34 @@ const MainTheme = {
 
         Top: {
 
-            borderColor: colors.BarBorder,
-            backgroundColor: colors.BarBackground,
+            borderColor: Colors.BarBorder,
+            backgroundColor: Colors.BarBackground,
 
 
             Title: {
     
                 fontFamily: 'Fredoka-SemiBold',
-                color: colors.PreWhite
+                color: Colors.PreWhite,
+                lineColor: Colors.Olive
     
             },
     
             Button: {
     
-                borderColor: colors.Button,
-                backgroundColor: colors.Black,
-    
-    
-                // BackButton: {
-    
-                //     pic: ArrowCompact_light_PNG
-    
-                // },
-    
+                borderColor: Colors.Button,
+                backgroundColor: Colors.Black,
+
+
                 ThemeSwitcher: {
     
-                    pic_Light: Sun_grey_PNG,
-                    pic_Dark: Moon_grey_PNG
+                    Light_PNG: Sun_grey_PNG,
+                    Dark_PNG: Moon_grey_PNG
     
                 },
     
                 MenuButton: {
     
-                    pic: Burger_grey_PNG
-    
-                }
-    
-            },
-    
-            SearchField: {
-    
-                SearchInputField: {
-    
-                    borderColor: colors.Button,
-                    backgroundColor: colors.Black,
-    
-                    fontFamily: 'Fredoka-SemiBold',
-                    color: colors.PreWhite
-                
-                },
-    
-                SuperCastSearchField: {
-    
-                    fontFamily: 'Fredoka-SemiBold',
-                    color: colors.PreWhite
+                    Menu_PNG: Burger_grey_PNG
     
                 }
     
@@ -152,8 +129,8 @@ const MainTheme = {
 
                 StatusText: {
 
-                    fontFamily: 'Fredoka-SemiBold',
-                    color: colors.PreWhite
+                    fontFamily: 'Archivo-Bold',
+                    color: Colors.PreWhite
 
                 },
 
@@ -162,8 +139,8 @@ const MainTheme = {
                     Apps_PNG: Apps_grey_PNG,
                     Arrow_PNG: ArrowCompact_grey_PNG,
 
-                    fontFamily: 'Archivo-Bold',
-                    color: colors.Grey
+                    fontFamily: 'Archivo-SemiBold',
+                    color: Colors.Grey
 
                 }
 
@@ -174,24 +151,29 @@ const MainTheme = {
                 VPN_button: {
 
                     Olive_PNG: Olive_black_PNG,
-                    backgroundColor: colors.Olive
+
+                    borderColor: Colors.Black,
+                    backgroundColor: Colors.Olive,
+                    boxShadow: Colors.OliveButtonShadow
 
                 },
 
                 Tip: {
 
-                    Tap_dark_green_PNG: Tap_dark_green_PNG,
-                    fontFamily: 'Arimo-SemiBold',
-                    color: colors.OliveDark
+                    Tap_PNG: Tap_dark_green_PNG,
+
+                    fontFamily: 'Archivo-SemiBold',
+                    color: Colors.OliveDark
 
                 },
 
                 Action: {
 
-                    Location_green_PNG: Location_green_PNG,
-                    ArrowCompact_green_PNG: ArrowCompact_green_PNG,
+                    Location_PNG: Location_green_PNG,
+                    Arrow_PNG: ArrowCompact_green_PNG,
+
                     fontFamily: 'Arimo-SemiBold',
-                    color: colors.Olive
+                    color: Colors.Olive
 
                 }
 
@@ -199,22 +181,24 @@ const MainTheme = {
 
             Bottom: {
 
-                backgroundColor: colors.Line,
-
-
                 NetButton: {
 
-                    Magic_wand_PNG: Magic_wand_grey_PNG,
+                    MagicWand_PNG: Magic_wand_light_PNG,
 
-                    fontFamily: 'Archivo-Bold',
-                    color: colors.PreWhite
+
+                    fontFamily: 'Archivo-SemiBold',
+                    color: Colors.PreWhite,
+
+                    borderColor: Colors.Black,
+                    backgroundColor: Colors.Line
+
 
                 },
 
                 NetInfo: {
 
-                    fontFamily: 'Archivo-Bold',
-                    color: colors.Grey
+                    fontFamily: 'Archivo-SemiBold',
+                    color: Colors.Grey
 
                 }
 
@@ -224,10 +208,11 @@ const MainTheme = {
 
         Bottom: {
 
-            backgroundColor: colors.Tip,
-
-            textColor: colors.TipText,
-            metalinkColor: colors.Olive
+            fontFamily: 'Archivo-Regular',
+            color: Colors.TipText,
+            metalinkColor: Colors.Olive,
+            
+            backgroundColor: Colors.Tip
 
         }
 

@@ -1,3 +1,6 @@
+// Component.
+
+
 import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
 import Button from './Components/Button'
 
@@ -11,7 +14,7 @@ const ThemeSwitcher = ({onPress}) => {
 
     <Button
     onPress = {() => onPress()}
-    pic = {styles.pic_Light}
+    pic = {styles.Light_PNG}
     style = {{borderRadius: 1000}}/>
 
   )

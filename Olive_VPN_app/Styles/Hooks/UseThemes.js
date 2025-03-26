@@ -8,7 +8,7 @@ export const useThemes = (callback__object_to_return = e => e) => {
     const dispatch = useDispatch ()
 
 
-    const theme = useSelector (state => state.theme.value)  // theme has already been declared to default or AsyncStorage value in Redux reducer scince initialization
+    const theme = JSON.parse (useSelector (state => state.theme.value))  // theme has already been declared to default or AsyncStorage value in Redux reducer scince initialization
 
     const setTheme = theme => dispatch (SetThemeRedux (theme))
 

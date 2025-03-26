@@ -1,3 +1,6 @@
+// Component.
+
+
 import { useThemes } from '../../../../../../../Styles/Hooks/UseThemes'
 import { View, TouchableOpacity, Image } from 'react-native'
 
@@ -29,7 +32,8 @@ const Button = ({pic, imageStyle, style, onPress}) => {
       zIndex: 1,
       position: 'absolute',
       width: 50,
-      height: 50}}/>
+      height: 50,
+      borderRadius: 10}}/>
 
       <Image
       source = {pic}

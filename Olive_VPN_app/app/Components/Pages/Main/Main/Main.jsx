@@ -1,3 +1,6 @@
+// Component.
+
+
 import { View } from 'react-native'
 
 import Top from './Components/Top'
@@ -10,11 +13,11 @@ const Main = () => {
   return (
 
     <View style = {{
+    flexGrow: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    gap: 25,
-    flexGrow: 1}}>
+    gap: 25}}>
 
       <Top/>
       <Center/>

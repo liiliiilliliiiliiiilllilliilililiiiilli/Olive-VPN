@@ -1,4 +1,9 @@
+// Component.
+
+
+import { useState } from 'react'
 import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
+
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 
 
@@ -8,6 +13,16 @@ let styles
 const Bottom = () => {
 
   [styles] = useThemes (styles => styles.MainPage.Main.Bottom)
+  
+  const [NetButtonText, setNetButtonText] = useState ('Расширить сеть')  // to redux later
+  const [NetInfoData, setNetInfoData] = useState ('WiFi: TP-Link-GH-51')  // to redux later
+  
+
+  const HandleNetButtonPress = () => {
+
+    console.info ('Expand the network')
+
+  }
 
 
   return (
@@ -19,11 +34,11 @@ const Bottom = () => {
     gap: 19}}>
 
       <NetButton
-      text = 'Расширить сеть'
-      onPress = {() => {}}/>
+      text = {NetButtonText}
+      onPress = {() => HandleNetButtonPress()}/>
 
       <NetInfo
-      text = 'WiFi: TP-Link-GH-51'/>
+      text = {NetInfoData}/>
 
     </View>
 
@@ -39,30 +54,38 @@ const NetButton = ({text, onPress}) => {
     <TouchableOpacity
     onPress = {() => onPress()}
     style = {{
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    paddingTop: 7.5,
-    paddingBottom: 7,
-    paddingHorizontal: 15,
-    backgroundColor: styles.backgroundColor,
+    padding: 5,
+    margin: -5,
     borderRadius: 1000}}>
 
-      <Text style = {{
-      fontFamily: styles.NetButton.fontFamily,
-      color: styles.NetButton.color,
-      fontSize: 15}}>
+      <View style = {{
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 10,
+      paddingTop: 7.5,
+      paddingBottom: 7,
+      paddingHorizontal: 15,
+      borderWidth: 2,
+      borderRadius: 1000,
+      borderColor: styles.NetButton.borderColor,
+      backgroundColor: styles.NetButton.backgroundColor}}>
 
-        {text}
+        <Text style = {{
+        fontFamily: styles.NetButton.fontFamily,
+        color: styles.NetButton.color,
+        fontSize: 15.5}}>
 
-      </Text>
+          {text}
 
-      <Image
-      source = {styles.NetButton.Magic_wand_PNG}
-      style = {{
-      width: 17,
-      height: 17,
-      bottom: 0.5}}/>
+        </Text>
+
+        <Image
+        source = {styles.NetButton.MagicWand_PNG}
+        style = {{
+        width: 17,
+        height: 17}}/>
+
+      </View>
 
     </TouchableOpacity>
 
@@ -77,7 +100,7 @@ const NetInfo = ({text}) => {
     <Text style = {{
     fontFamily: styles.NetInfo.fontFamily,
     color: styles.NetInfo.color,
-    fontSize: 15}}>
+    fontSize: 15.5}}>
 
       {text}
 

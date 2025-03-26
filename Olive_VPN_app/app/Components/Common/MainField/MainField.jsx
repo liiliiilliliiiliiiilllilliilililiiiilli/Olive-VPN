@@ -1,3 +1,6 @@
+// Component.
+
+
 import { useThemes } from '../../../../Styles/Hooks/UseThemes'
 import { View, Image } from 'react-native'
 import { StatusBar } from 'react-native'
@@ -14,6 +17,7 @@ const MainField = ({style, children}) => {
     width: '100%',
     height: '100%',
     backgroundColor: styles.MainField.backgroundColor,
+
     ...style}}>
 
       <StatusBar
@@ -25,10 +29,6 @@ const MainField = ({style, children}) => {
       style = {{
       zIndex: 0,
       position: 'absolute',
-      // width: 2000,
-      // height: 2000,
-      // resizeMode: 'contain',
-      // transform: [{rotate: '90deg'}]
       opacity: 0.5}}/>
 
       {children}

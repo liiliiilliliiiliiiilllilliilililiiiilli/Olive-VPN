@@ -1,4 +1,10 @@
+// Component.
+
+
+import { useSelector } from 'react-redux'
+import { useState } from 'react'
 import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
+
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 
 
@@ -9,19 +15,29 @@ const Top = () => {
 
   [styles] = useThemes (styles => styles.MainPage.Main.Top)
 
+  const statusText = useSelector (state => state.MainPageStatusText.value)
+  const [actionText, setActionText] = useState ('Для всех приложений')  // need to change to redux too later
+
+
+  const HandleActionPress = () => {
+
+    console.info ('Top Action pressed')
+
+  }
+
 
   return (
 
     <View style = {{
     alignItems: 'center',
-    gap: 8}}>
+    gap: 7.5}}>
 
       <StatusText
-      text = 'Соединение не защищено'/>
+      text = {statusText}/>
 
       <Action
-      text = 'Для всех приложений'
-      onPress = {() => {}}/>
+      text = {actionText}
+      onPress = {() => HandleActionPress()}/>
 
     </View>
 
@@ -52,22 +68,28 @@ const Action = ({text, onPress}) => {
   return (
 
     <TouchableOpacity
+    activeOpacity = {1}
     onPress = {() => onPress()}
     style = {{
     alignItems: 'center',
     flexDirection: 'row',
-    gap: 10}}>
+    gap: 10,
+    padding: 5,
+    paddingHorizontal: 15,
+    margin: -5,
+    borderRadius: 10}}>
 
       <Image
       source = {styles.Action.Apps_PNG}
       style = {{
       width: 17,
-      height: 17}}/>
+      height: 17,
+      bottom: 0.75}}/>
 
       <Text style = {{
       fontFamily: styles.Action.fontFamily,
       color: styles.Action.color,
-      fontSize: 21}}>
+      fontSize: 19.5}}>
 
         {text}
 
@@ -77,7 +99,8 @@ const Action = ({text, onPress}) => {
       source = {styles.Action.Arrow_PNG}
       style = {{
       width: 15,
-      height: 15}}/>
+      height: 15,
+      top: 0.75}}/>
 
     </TouchableOpacity>
 

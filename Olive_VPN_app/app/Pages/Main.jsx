@@ -13,8 +13,8 @@ const Main = () => {
   return (
 
     <MainField style = {{
-    alignItems: 'center',
     display: 'flex',
+    alignItems: 'center',
     flex: 1}}>
 
       <TopBar/>
