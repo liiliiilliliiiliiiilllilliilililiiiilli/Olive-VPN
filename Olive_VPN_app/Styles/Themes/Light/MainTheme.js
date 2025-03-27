@@ -23,27 +23,28 @@
 
 const ColorfulBackgroundImage_PNG = require ('../../../assets/PNG/_General_/ColorfulBackgroundImage.png')
 
-const ArrowCompact_grey_PNG = require ('../../../assets/PNG/Arrows/Grey.png')
-const ArrowCompact_green_PNG = require ('../../../assets/PNG/Arrows/Green.png')
+const ArrowCompact_black_PNG = require ('../../../assets/PNG/Arrows/Black.png')
 
-const Burger_grey_PNG = require ('../../../assets/PNG/Burger/Grey.png')
-const Moon_grey_PNG = require ('../../../assets/PNG/Moon/Grey.png')
-const Sun_grey_PNG = require ('../../../assets/PNG/Sun/Grey.png')
+const Burger_dark_grey_PNG = require ('../../../assets/PNG/Burger/DarkGrey.png')
+const Moon_dark_grey_PNG = require ('../../../assets/PNG/Moon/DarkGrey.png')
 
-const Apps_grey_PNG = require ('../../../assets/PNG/Apps/Grey.png')
+const Apps_black_PNG = require ('../../../assets/PNG/Apps/Black.png')
 const Olive_black_PNG = require ('../../../assets/PNG/Olive/Black.png')
-const Tap_dark_green_PNG = require ('../../../assets/PNG/Tap/DarkGreen.png')
-const Location_green_PNG = require ('../../../assets/PNG/Location/Green.png')
-const Magic_wand_light_PNG = require ('../../../assets/PNG/Magic_wand/Light.png')
+const Tap_black_PNG = require ('../../../assets/PNG/Tap/Black.png')
+const Location_black_PNG = require ('../../../assets/PNG/Location/Black.png')
+const Magic_wand_black_PNG = require ('../../../assets/PNG/Magic_wand/Black.png')
 
 
 const Colors = {
 
-    BarBackground: '#070707',
+    BarBackground: '#f8f8f8',
     BarBorder: '#171717',
     Black: '#000000',
     Button: '#202020',
+    DarkBlockButton: '#bfbfbf',
+    DarkGrey: '#404040',
     Grey: '#808080',
+    LightBorderButton: 'rgba(0, 0, 0, 0.125)',
     Line: '#1c1c1c',
     Olive: '#8b9e80',
     OliveButtonShadow: '0px 2.5px 10px rgb(3, 10, 1)',
@@ -52,7 +53,8 @@ const Colors = {
     Sun: '#9e9780',
     Text: '#bfbfbf',
     Tip: '#0d0d0d',
-    TipText: '#545454'
+    TipText: '#545454',
+    White: '#ffffff'
 
     // cartes: 'rgba(128, 128, 255, 0.5)',
     // olive_dark: 'rgb(41, 52, 50)'
@@ -65,21 +67,21 @@ const MainTheme = {
     _General_: {
 
         ColorfulBackgroundImage_PNG: ColorfulBackgroundImage_PNG,
+        backgroundTransform: [{rotate: '180deg'}]
 
-        backgroundColor: Colors.Black
-    
     },
 
 
     StatusBar: {
 
-        backgroundColor: Colors.BarBackground
+        color: 'dark-content',
+        backgroundColor: "rgb(171, 171, 171)"
     
     },
 
     MainField: {
 
-        backgroundColor: Colors.Black
+        backgroundColor: 'rgba(0, 0, 0, 0.0)'
 
     },
 
@@ -88,34 +90,33 @@ const MainTheme = {
 
         Top: {
 
-            borderColor: Colors.BarBorder,
-            backgroundColor: Colors.BarBackground,
+            borderColor: "rgba(0, 0, 0, 0.125)",
+            backgroundColor: "rgba(255, 255, 255, 0.625)",
 
 
             Title: {
     
                 fontFamily: 'Fredoka-SemiBold',
-                color: Colors.PreWhite,
+                color: Colors.Black,
                 lineColor: Colors.Olive
     
             },
     
             Button: {
-    
-                borderColor: Colors.Button,
-                backgroundColor: Colors.Black,
+
+                borderColor: Colors.LightBorderButton,
+                backgroundColor: "rgba(255, 255, 255, 0.25)",
 
 
                 ThemeSwitcher: {
     
-                    Light_PNG: Sun_grey_PNG,
-                    Dark_PNG: Moon_grey_PNG
+                    ThemeIcon_PNG: Moon_dark_grey_PNG
     
                 },
     
                 MenuButton: {
     
-                    Menu_PNG: Burger_grey_PNG
+                    Menu_PNG: Burger_dark_grey_PNG
     
                 }
     
@@ -129,18 +130,18 @@ const MainTheme = {
 
                 StatusText: {
 
-                    fontFamily: 'Archivo-Bold',
-                    color: Colors.PreWhite
+                    fontFamily: 'Archivo-ExtraBold',
+                    color: Colors.Black
 
                 },
 
                 Action: {
 
-                    Apps_PNG: Apps_grey_PNG,
-                    Arrow_PNG: ArrowCompact_grey_PNG,
+                    Apps_PNG: Apps_black_PNG,
+                    Arrow_PNG: ArrowCompact_black_PNG,
 
-                    fontFamily: 'Archivo-SemiBold',
-                    color: Colors.Grey
+                    fontFamily: 'Archivo-Bold',
+                    color: Colors.Black
 
                 }
 
@@ -160,20 +161,20 @@ const MainTheme = {
 
                 Tip: {
 
-                    Tap_PNG: Tap_dark_green_PNG,
+                    Tap_PNG: Tap_black_PNG,
 
-                    fontFamily: 'Archivo-SemiBold',
-                    color: Colors.OliveDark
+                    fontFamily: 'Archivo-Regular',
+                    color: Colors.OliveButtonShadow
 
                 },
 
                 Action: {
 
-                    Location_PNG: Location_green_PNG,
-                    Arrow_PNG: ArrowCompact_green_PNG,
+                    Location_PNG: Location_black_PNG,
+                    Arrow_PNG: ArrowCompact_black_PNG,
 
-                    fontFamily: 'Arimo-SemiBold',
-                    color: Colors.Olive
+                    fontFamily: 'Arimo-Bold',
+                    color: Colors.Black
 
                 }
 
@@ -183,22 +184,21 @@ const MainTheme = {
 
                 NetButton: {
 
-                    MagicWand_PNG: Magic_wand_light_PNG,
+                    MagicWand_PNG: Magic_wand_black_PNG,
 
 
-                    fontFamily: 'Archivo-SemiBold',
-                    color: Colors.PreWhite,
+                    fontFamily: 'Archivo-Bold',
+                    color: Colors.Black,
 
                     borderColor: Colors.Black,
-                    backgroundColor: Colors.Line
-
+                    backgroundColor: Colors.DarkBlockButton
 
                 },
 
                 NetInfo: {
 
-                    fontFamily: 'Archivo-SemiBold',
-                    color: Colors.Grey
+                    fontFamily: 'Archivo-Bold',
+                    color: Colors.PreWhite
 
                 }
 
@@ -208,11 +208,12 @@ const MainTheme = {
 
         Bottom: {
 
-            fontFamily: 'Archivo-Regular',
-            color: Colors.TipText,
-            metalinkColor: Colors.Olive,
+            fontFamily: 'Archivo-Medium',
+            color: Colors.Black,
+            metalinkColor: Colors.PreWhite,
             
-            backgroundColor: Colors.Tip
+            borderColor: "rgba(194, 194, 194, 0.125)",
+            backgroundColor: 'rgba(255, 255, 255, 0.125)'
 
         }
 

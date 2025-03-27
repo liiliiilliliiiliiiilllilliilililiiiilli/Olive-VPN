@@ -5,7 +5,7 @@ import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
 import Button from './Components/Button'
 
 
-const MenuButton = ({onPress}) => {
+const MenuButton = ({onPress, style}) => {
 
 	const [styles] = useThemes (styles => styles.MainPage.Top.Button.MenuButton)
 
@@ -14,7 +14,8 @@ const MenuButton = ({onPress}) => {
 
 		<Button
 		onPress = {() => onPress()}
-		pic = {styles.Menu_PNG}/>
+		pic = {styles.Menu_PNG}
+		style = {{...style}}/>
 
 	)
 

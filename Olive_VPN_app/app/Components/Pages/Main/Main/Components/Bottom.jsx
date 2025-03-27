@@ -31,7 +31,7 @@ const Bottom = () => {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 19}}>
+    gap: 18}}>
 
       <NetButton
       text = {NetButtonText}
@@ -73,7 +73,7 @@ const NetButton = ({text, onPress}) => {
         <Text style = {{
         fontFamily: styles.NetButton.fontFamily,
         color: styles.NetButton.color,
-        fontSize: 15.5}}>
+        fontSize: 16}}>
 
           {text}
 
@@ -100,7 +100,7 @@ const NetInfo = ({text}) => {
     <Text style = {{
     fontFamily: styles.NetInfo.fontFamily,
     color: styles.NetInfo.color,
-    fontSize: 15.5}}>
+    fontSize: 16}}>
 
       {text}
 

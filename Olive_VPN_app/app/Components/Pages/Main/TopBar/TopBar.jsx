@@ -14,11 +14,11 @@ const TopBar = () => {
   const [styles, theme, setTheme] = useThemes (styles => styles.MainPage.Top)
 
 
-  const HandleMenuButtonPressed = () => {
+  // const HandleMenuButtonPressed = () => {
 
-    console.info ('MenuButton pressed')
+  //   console.info ('MenuButton pressed')
 
-  }
+  // }
 
   const HandleThemeSwitcherPressed = () => {
 
@@ -41,7 +41,9 @@ const TopBar = () => {
     backgroundColor: styles.backgroundColor}}>
             
       <MenuButton
-      onPress = {() => HandleMenuButtonPressed()}/>
+      style = {{opacity: 0}}
+      // onPress = {() => HandleMenuButtonPressed()}  // temporal, this feature is for futher develoment
+      onPress = {() => {}}/>
 
       <OliveVPN_Title/>
 

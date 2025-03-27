@@ -14,7 +14,7 @@ const ThemeSwitcher = ({onPress}) => {
 
     <Button
     onPress = {() => onPress()}
-    pic = {styles.Light_PNG}
+    pic = {styles.ThemeIcon_PNG}  // Light_PNG
     style = {{borderRadius: 1000}}/>
 
   )

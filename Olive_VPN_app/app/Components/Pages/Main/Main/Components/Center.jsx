@@ -1,8 +1,10 @@
 // Component.
 
 
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import { useDispatch } from 'react-redux'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
 
 import { SetMainPageStatusText } from '../../../../../../Redux/MainPageStatusTextSlice'
@@ -21,14 +23,16 @@ let styles
 const Center = () => {
 
   [styles] = useThemes (styles => styles.MainPage.Main.Center)
-
-  const dispatch = useDispatch ()
-  const setStatusText = text => dispatch (SetMainPageStatusText (text))
-  
-  const [tipText, setTipText] = useState ('Нажмите для подключения к VPN')
-  const [connectionDestination, setConnectionDestination] = useState ('Нидерланды')
   
   const [VPN_logs, set_VPN_logs] = useState ('')
+  
+  const dispatch = useDispatch ()
+  const setReduxStatusText = text => dispatch (SetMainPageStatusText (text))
+  const countInterval = useRef (null)
+  const [connectionDuration, setConnectionDuration] = useState ({'connection_initialization_time': null, 'current_connection_duration': null})
+
+  const [tipText, setTipText] = useState ('Нажмите для подключения к VPN')
+  const [connectionDestination, setConnectionDestination] = useState ('Нидерланды')
 
 
   const addLogs = text => {
@@ -117,7 +121,89 @@ const Center = () => {
 
     }
 
+  } 
+
+
+  const convertTime = inp_seconds => {
+
+    let days = Math.floor (inp_seconds / (60 * 60 * 24))
+    let hours = Math.floor ((inp_seconds - (days * 60 * 60 * 24)) / (60 * 60))
+    let minutes = Math.floor ((inp_seconds - (hours * 60 * 60) - (days * 60 * 60 * 24)) / 60)
+    let seconds = inp_seconds - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60)
+  
+    days = days == 0 ? '' : `${days} дн. `
+    hours = days == 0 && hours == 0 ? '' : `${hours} ч. `
+    minutes = days == 0 && hours == 0 && minutes == 0 ? '' : `${minutes} мин. `
+    seconds = hours != 0 || days != 0 ? '' : `${seconds} сек.`
+  
+    return days + hours + minutes + seconds
+  
   }
+
+
+  const SetStatusText_Connected = async () => {
+
+    countInterval.current !== null && clearInterval (countInterval.current)
+
+    const savedConnectionDuration = JSON.parse (await AsyncStorage.getItem ('connectionDuration')) ['connection_initialization_time']
+    const initSeconds = savedConnectionDuration || Math.floor(new Date().getTime()/1000)
+    setConnectionDuration ({'connection_initialization_time': initSeconds, 'current_connection_duration': null})
+
+    countInterval.current = setInterval (() => {
+
+      const currSeconds = Math.floor(new Date().getTime()/1000)
+      setConnectionDuration (prev => ({'connection_initialization_time': prev['connection_initialization_time'], 'current_connection_duration': currSeconds - prev['connection_initialization_time']}))
+
+    }, 1000)
+
+  }
+
+  const SetStatusText_Disconnected = async () => {
+
+    countInterval.current !== null && clearInterval (countInterval.current)
+
+    setConnectionDuration ({'connection_initialization_time': null, 'current_connection_duration': null})
+
+  }
+
+  useEffect (() => {
+
+    (async () => {
+
+      const VPN_state = await RNSimpleOpenvpn.getCurrentState ()
+
+      switch (VPN_state) {
+
+        case 2: setTipText ('Нажмите, чтобы отключиться'); SetStatusText_Connected (); break
+
+        case 0: setTipText ('Нажмите для подключения к VPN'); SetStatusText_Disconnected (); break
+
+        default: console.info ('something else')
+
+      }
+
+    }) ()
+
+  }, [])
+
+  useEffect (() => {
+
+    (async () => {
+
+      setReduxStatusText (
+      
+        connectionDuration['connection_initialization_time'] != null && connectionDuration['current_connection_duration'] != null
+  
+          ? `Подключено:  ${convertTime (connectionDuration['current_connection_duration'])}`
+          : 'Соединение не защищено'
+  
+      )
+
+      await AsyncStorage.setItem ('connectionDuration', JSON.stringify (connectionDuration))
+
+    }) ()
+
+  }, [connectionDuration])
 
 
   const HandleLocationPress = () => {
@@ -140,9 +226,11 @@ const Center = () => {
 
       switch (VPN_state) {
 
-        case 2: setTipText ('Нажмите, чтобы отключиться'); setStatusText ('Подключено: 5:27'); break
+        case 2: setTipText ('Нажмите, чтобы отключиться'); SetStatusText_Connected (); break
 
-        case 0: setTipText ('Нажмите для подключения к VPN'); setStatusText ('Соединение не защищено'); break
+        case 0: setTipText ('Нажмите для подключения к VPN'); SetStatusText_Disconnected (); break
+
+        default: console.info ('something else')
 
       }
 
@@ -256,7 +344,7 @@ const Tip = ({text, onPress}) => {
       <Text style = {{
       fontFamily: styles.Tip.fontFamily,
       color: styles.Tip.color,
-      fontSize: 17}}>
+      fontSize: 19}}>
 
         {text}
 
@@ -293,7 +381,7 @@ const Action = ({text, onPress}) => {
       <Text style = {{
       fontFamily: styles.Action.fontFamily,
       color: styles.Action.color,
-      fontSize: 17}}>
+      fontSize: 19}}>
 
         {text}
 

@@ -27,7 +27,6 @@ const ArrowCompact_grey_PNG = require ('../../../assets/PNG/Arrows/Grey.png')
 const ArrowCompact_green_PNG = require ('../../../assets/PNG/Arrows/Green.png')
 
 const Burger_grey_PNG = require ('../../../assets/PNG/Burger/Grey.png')
-const Moon_grey_PNG = require ('../../../assets/PNG/Moon/Grey.png')
 const Sun_grey_PNG = require ('../../../assets/PNG/Sun/Grey.png')
 
 const Apps_grey_PNG = require ('../../../assets/PNG/Apps/Grey.png')
@@ -43,7 +42,10 @@ const Colors = {
     BarBorder: '#171717',
     Black: '#000000',
     Button: '#202020',
+    DarkBlockButton: '#bfbfbf',
+    DarkGrey: '#404040',
     Grey: '#808080',
+    LightBorderButton: '#cdcdcd',
     Line: '#1c1c1c',
     Olive: '#8b9e80',
     OliveButtonShadow: '0px 2.5px 10px rgb(3, 10, 1)',
@@ -52,7 +54,8 @@ const Colors = {
     Sun: '#9e9780',
     Text: '#bfbfbf',
     Tip: '#0d0d0d',
-    TipText: '#545454'
+    TipText: '#545454',
+    White: '#ffffff'
 
     // cartes: 'rgba(128, 128, 255, 0.5)',
     // olive_dark: 'rgb(41, 52, 50)'
@@ -65,14 +68,14 @@ const MainTheme = {
     _General_: {
 
         ColorfulBackgroundImage_PNG: ColorfulBackgroundImage_PNG,
+        backgroundTransform: [{rotate: '0deg'}],
 
-        backgroundColor: Colors.Black
-    
     },
 
 
     StatusBar: {
 
+        color: 'light-content',
         backgroundColor: Colors.BarBackground
     
     },
@@ -108,9 +111,8 @@ const MainTheme = {
 
                 ThemeSwitcher: {
     
-                    Light_PNG: Sun_grey_PNG,
-                    Dark_PNG: Moon_grey_PNG
-    
+                    ThemeIcon_PNG: Sun_grey_PNG
+
                 },
     
                 MenuButton: {
@@ -129,7 +131,7 @@ const MainTheme = {
 
                 StatusText: {
 
-                    fontFamily: 'Archivo-Bold',
+                    fontFamily: 'Archivo-ExtraBold',
                     color: Colors.PreWhite
 
                 },
@@ -139,7 +141,7 @@ const MainTheme = {
                     Apps_PNG: Apps_grey_PNG,
                     Arrow_PNG: ArrowCompact_grey_PNG,
 
-                    fontFamily: 'Archivo-SemiBold',
+                    fontFamily: 'Archivo-Bold',
                     color: Colors.Grey
 
                 }
@@ -162,7 +164,7 @@ const MainTheme = {
 
                     Tap_PNG: Tap_dark_green_PNG,
 
-                    fontFamily: 'Archivo-SemiBold',
+                    fontFamily: 'Archivo-Regular',
                     color: Colors.OliveDark
 
                 },
@@ -172,7 +174,7 @@ const MainTheme = {
                     Location_PNG: Location_green_PNG,
                     Arrow_PNG: ArrowCompact_green_PNG,
 
-                    fontFamily: 'Arimo-SemiBold',
+                    fontFamily: 'Arimo-Bold',
                     color: Colors.Olive
 
                 }
@@ -186,18 +188,17 @@ const MainTheme = {
                     MagicWand_PNG: Magic_wand_light_PNG,
 
 
-                    fontFamily: 'Archivo-SemiBold',
+                    fontFamily: 'Archivo-Bold',
                     color: Colors.PreWhite,
 
                     borderColor: Colors.Black,
                     backgroundColor: Colors.Line
 
-
                 },
 
                 NetInfo: {
 
-                    fontFamily: 'Archivo-SemiBold',
+                    fontFamily: 'Archivo-Bold',
                     color: Colors.Grey
 
                 }
@@ -212,7 +213,8 @@ const MainTheme = {
             color: Colors.TipText,
             metalinkColor: Colors.Olive,
             
-            backgroundColor: Colors.Tip
+            borderColor: "rgba(0, 0, 0, 0.25)",
+            backgroundColor: "rgba(11, 11, 11, 0.80)"
 
         }
 

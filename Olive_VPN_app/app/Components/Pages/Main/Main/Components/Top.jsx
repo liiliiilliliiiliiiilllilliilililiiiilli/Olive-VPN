@@ -11,7 +11,7 @@ import { View, TouchableOpacity, Image, Text } from 'react-native'
 let styles
 
 
-const Top = () => {
+const Top = ({style}) => {
 
   [styles] = useThemes (styles => styles.MainPage.Main.Top)
 
@@ -30,12 +30,15 @@ const Top = () => {
 
     <View style = {{
     alignItems: 'center',
-    gap: 7.5}}>
+    gap: 7.5,
+
+    ...style}}>
 
       <StatusText
       text = {statusText}/>
 
-      <Action
+      <Action  // temporal, this feature is for futher develoment
+      // style = {{opacity: 0}}
       text = {actionText}
       onPress = {() => HandleActionPress()}/>
 
@@ -53,7 +56,7 @@ const StatusText = ({text}) => {
     <Text style = {{
     fontFamily: styles.StatusText.fontFamily,
     color: styles.StatusText.color,
-    fontSize: 27}}>
+    fontSize: 29}}>
 
       {text}
 
@@ -63,12 +66,12 @@ const StatusText = ({text}) => {
 
 }
 
-const Action = ({text, onPress}) => {
+const Action = ({text, onPress, style}) => {
 
   return (
 
     <TouchableOpacity
-    activeOpacity = {1}
+    // activeOpacity = {1}
     onPress = {() => onPress()}
     style = {{
     alignItems: 'center',
@@ -77,7 +80,9 @@ const Action = ({text, onPress}) => {
     padding: 5,
     paddingHorizontal: 15,
     margin: -5,
-    borderRadius: 10}}>
+    borderRadius: 10,
+    
+    ...style}}>
 
       <Image
       source = {styles.Action.Apps_PNG}

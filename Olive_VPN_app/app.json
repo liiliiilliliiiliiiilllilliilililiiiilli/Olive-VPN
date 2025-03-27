@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Olive_VPN",
-    "slug": "qq",
+    "slug": "li",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -46,9 +46,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "395755c9-60e7-4f2a-997d-7a546a8742e8"
+        "projectId": "8efb5e98-fc4f-46c8-a81d-0e13283296bb"
       }
     },
-    "owner": "li-o00o"
+    "owner": "liliilil0"
   }
 }

@@ -37,6 +37,8 @@ const Tip = () => {
     height: 75,
     paddingVertical: 12,
     paddingHorizontal: 25,
+    borderTopWidth: 2,
+    borderColor: styles.borderColor,
     backgroundColor: styles.backgroundColor}}>
 
       <Text style = {{

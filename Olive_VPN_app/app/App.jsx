@@ -58,8 +58,11 @@ const App = () => {
   // set up the app after start up:
 
   useFonts ({  // configure global app fonts
-    
+
+    'Archivo': require ('../assets/Fonts/Archivo/Archivo-VariableFont_wdth,wght.ttf'),
+
     'Archivo-Regular': require ('../assets/Fonts/Archivo/Archivo-Regular.ttf'),
+    'Archivo-Medium': require ('../assets/Fonts/Archivo/Archivo-Medium.ttf'),
     'Archivo-SemiBold': require ('../assets/Fonts/Archivo/Archivo-SemiBold.ttf'),
     'Archivo-Bold': require ('../assets/Fonts/Archivo/Archivo-Bold.ttf'),
     'Archivo-ExtraBold': require ('../assets/Fonts/Archivo/Archivo-ExtraBold.ttf'),
