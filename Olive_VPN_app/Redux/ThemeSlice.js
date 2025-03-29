@@ -42,10 +42,10 @@ const SetTheme = createAsyncThunk (
 
     else if (theme == 'reverse') {  // functionality
 
-      const newThemeState = appThemes[1 - appThemes.indexOf (current_state)]
+      const settedTheme = appThemes[1 - appThemes.indexOf(current_state)]
 
-      await AsyncStorage.setItem ('AppTheme', JSON.stringify (newThemeState))
-      dispatch (SetThemeState (newThemeState))
+      await AsyncStorage.setItem ('AppTheme', JSON.stringify (settedTheme))
+      dispatch (SetThemeState (settedTheme))
 
     }
 

@@ -4,7 +4,7 @@
 import MainField from '../Components/Common/MainField/MainField'
 
 import TopBar from '../Components/Pages/Main/TopBar/TopBar'
-import { default as Center } from '../Components/Pages/Main/Main/Main'
+import MainContent from '../Components/Pages/Main/MainContent/MainContent'
 import BottomBar from '../Components/Pages/Main/BottomBar/BottomBar'
 
 
@@ -18,7 +18,7 @@ const Main = () => {
     flex: 1}}>
 
       <TopBar/>
-      <Center/>
+      <MainContent/>
       <BottomBar/>
 
     </MainField>

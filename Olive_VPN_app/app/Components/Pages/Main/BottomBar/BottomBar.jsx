@@ -1,5 +1,5 @@
 import { useThemes } from '../../../../../Styles/Hooks/UseThemes'
-import { View, Text } from 'react-native'
+import { View, Text, Touchable, TouchableOpacity } from 'react-native'
 
 
 let styles
@@ -10,6 +10,13 @@ const BottomBar = () => {
   [styles] = useThemes (styles => styles.MainPage.Bottom)
 
 
+  const HandleTipPress = () => {
+    
+    console.info ('Metalink pressed!')
+
+  }
+
+
   return (
 
     <View style = {{
@@ -18,7 +25,7 @@ const BottomBar = () => {
     width: '100%',
     paddingTop: 28}}>
 
-      <Tip/>
+      <Tip onPress = {() => HandleTipPress()}/>
 
     </View>
 
@@ -27,11 +34,13 @@ const BottomBar = () => {
 }
 
 
-const Tip = () => {
+const Tip = ({onPress}) => {
 
   return (
 
-    <View style = {{
+    <TouchableOpacity
+    onPress = {() => onPress()}
+    style = {{
     justifyContent: 'center',
     width: '100%',
     height: 75,
@@ -46,11 +55,25 @@ const Tip = () => {
       color: styles.color,
       fontSize: 17}}>
 
-        <Text style = {{color: styles.metalinkColor}}>Подробнее</Text> о приложении, которое созданно для обхода ограничений.
+        <MetaLink>Подробнее</MetaLink> о приложении, которое созданно для обхода ограничений.
 
       </Text>
 
-    </View>
+    </TouchableOpacity>
+
+  )
+
+}
+
+const MetaLink = ({children}) => {
+
+  return (
+
+    <Text style = {{color: styles.metalinkColor}}>
+
+      {children}
+
+    </Text>
 
   )
 

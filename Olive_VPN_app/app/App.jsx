@@ -50,7 +50,8 @@ const App = () => {
 
   const configureThemes = () => {
 
-    setTheme (`{"type": "Dark", "palette": "MainTheme"}`)  // add Initialization later
+    setTheme ('Initialization')
+    // setTheme (`{"type": "Dark", "palette": "MainTheme"}`)  // add Initialization later
 
   }
 

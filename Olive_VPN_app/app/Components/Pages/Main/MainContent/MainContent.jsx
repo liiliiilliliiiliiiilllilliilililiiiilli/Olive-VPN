@@ -8,7 +8,7 @@ import Center from './Components/Center'
 import Bottom from './Components/Bottom'
 
 
-const Main = () => {
+const MainContent = () => {
 
   return (
 
@@ -32,4 +32,4 @@ const Main = () => {
 }
 
 
-export default Main
+export default MainContent

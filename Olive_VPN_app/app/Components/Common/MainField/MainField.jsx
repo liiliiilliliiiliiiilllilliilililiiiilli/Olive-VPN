@@ -25,6 +25,7 @@ const MainField = ({style, children}) => {
 
       <StatusBar
       animated = {true}
+      // translucent = {true}
       backgroundColor = {styles.StatusBar.backgroundColor}
       barStyle = {styles.StatusBar.color}/>
 

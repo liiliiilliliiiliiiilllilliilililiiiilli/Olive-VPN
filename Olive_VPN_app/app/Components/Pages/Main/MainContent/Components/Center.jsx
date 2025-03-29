@@ -1,13 +1,15 @@
 // Component.
 
 
+const lodash = require ('lodash')
+
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { useDispatch } from 'react-redux'
 import { useState, useEffect, useRef } from 'react'
 import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
 
-import { SetMainPageStatusText } from '../../../../../../Redux/MainPageStatusTextSlice'
+import { SetMainPageStatusText as SetMainPageStatus } from '../../../../../../Redux/MainPageStatusTextSlice'
 
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 import { Platform } from 'react-native'
@@ -15,7 +17,7 @@ import { Platform } from 'react-native'
 import RNSimpleOpenvpn, { addVpnStateListener, removeVpnStateListener } from 'react-native-simple-openvpn'
 
 
-const is_iphone = Platform.OS === 'ios'
+const device_is_iphone = Platform.OS === 'ios'
 
 let styles
 
@@ -24,47 +26,16 @@ const Center = () => {
 
   [styles] = useThemes (styles => styles.MainPage.Main.Center)
   
-  const [VPN_logs, set_VPN_logs] = useState ('')
-  
+  const durationInterval = useRef (null)
+  const [connectionTime, setConnectionTime] = useState ({initialization_moment: null, current_duration: null})
   const dispatch = useDispatch ()
-  const setReduxStatusText = text => dispatch (SetMainPageStatusText (text))
-  const countInterval = useRef (null)
-  const [connectionDuration, setConnectionDuration] = useState ({'connection_initialization_time': null, 'current_connection_duration': null})
+  const setReduxStatusText = text => dispatch (SetMainPageStatus (text))
 
   const [tipText, setTipText] = useState ('Нажмите для подключения к VPN')
-  const [connectionDestination, setConnectionDestination] = useState ('Нидерланды')
+  const [connectionDestination, setConnectionDestination] = useState ('Нидерланды')  //
 
 
-  const addLogs = text => {
-
-    const currentTime = new Date().toLocaleTimeString()
-
-    set_VPN_logs (prev => `${prev}\n` + `[${currentTime}]:  ${text}`)
-
-  }
-
-  const clearLogs = () => {
-
-    set_VPN_logs ('')
-
-  }
-
-  const printVpnState = async () => {
-
-    const VPN_state = await RNSimpleOpenvpn.getCurrentState ()
-
-    addLogs (VPN_state)
-
-  }
-
-  const printVpnStateTypes = () => {
-
-    addLogs (JSON.stringify (RNSimpleOpenvpn.VpnState))
-
-  }
-
-
-  const startVPN = async () => {
+  const connectVPN = async () => {
 
     try {
 
@@ -81,14 +52,14 @@ const Center = () => {
     }
     
     catch (error) {
-      
-      addLogs (error)
-    
+
+      console.info ('connectVPN: error while connecting to VPN server')
+
     }
 
   }
 
-  const stopVPN = async () => {
+  const disconnectVPN = async () => {
 
     try {
       
@@ -97,32 +68,32 @@ const Center = () => {
     }
     
     catch (error) {
-      
-      addLogs (error)
-    
+
+      console.info ('stoptVPN: error while disconnecting from VPN server')
+
     }
 
   }
 
   const toggleVPN = async () => {
 
-    console.info ('toggle VPN acted!')
-
-
     const VPN_state = await RNSimpleOpenvpn.getCurrentState ()
 
     switch (VPN_state) {
 
-      case 2: await stopVPN (); break
-
-      case 0: await startVPN (); break
-
-      default: console.info ('Просисходит какое-то одновременное переключение')
+      case 0: await connectVPN (); break
+      case 2: await disconnectVPN (); break
 
     }
 
   } 
 
+
+  const currentTime = () => {
+
+    return Math.floor (new Date().getTime() / 1000)
+
+  }
 
   const convertTime = inp_seconds => {
 
@@ -141,96 +112,88 @@ const Center = () => {
   }
 
 
-  const SetStatusText_Connected = async () => {
+  const clearDurationInterval = () => {
 
-    countInterval.current !== null && clearInterval (countInterval.current)
-
-    const savedConnectionDuration = JSON.parse (await AsyncStorage.getItem ('connectionDuration')) ['connection_initialization_time']
-    const initSeconds = savedConnectionDuration || Math.floor(new Date().getTime()/1000)
-    setConnectionDuration ({'connection_initialization_time': initSeconds, 'current_connection_duration': null})
-
-    countInterval.current = setInterval (() => {
-
-      const currSeconds = Math.floor(new Date().getTime()/1000)
-      setConnectionDuration (prev => ({'connection_initialization_time': prev['connection_initialization_time'], 'current_connection_duration': currSeconds - prev['connection_initialization_time']}))
-
-    }, 1000)
+    if (durationInterval.current != null) clearInterval (durationInterval.current)
+    durationInterval.current = null
 
   }
 
-  const SetStatusText_Disconnected = async () => {
+  const setDurationInterval = (func, interval) => {
 
-    countInterval.current !== null && clearInterval (countInterval.current)
-
-    setConnectionDuration ({'connection_initialization_time': null, 'current_connection_duration': null})
+    clearDurationInterval ()
+    durationInterval.current = setInterval (() => func(), interval)
 
   }
 
-  useEffect (() => {
 
-    (async () => {
+  class manageStatusText {
 
-      const VPN_state = await RNSimpleOpenvpn.getCurrentState ()
+    static async connected (init_time_type) {
 
-      switch (VPN_state) {
+      let init_time
 
-        case 2: setTipText ('Нажмите, чтобы отключиться'); SetStatusText_Connected (); break
 
-        case 0: setTipText ('Нажмите для подключения к VPN'); SetStatusText_Disconnected (); break
+      switch (init_time_type) {
 
-        default: console.info ('something else')
+        case 'onAsyncStorage':
+          
+          init_time = await AsyncStorage.getItem ('init_time');
+          init_time = parseInt (init_time)
+          break
+
+        case 'onCurrentTime':
+
+          init_time = currentTime ();
+          await AsyncStorage.setItem ('init_time', `${init_time}`);
+          break
+
+        default:
+
+          console.info ('manageStatusText: error on init_time argument')
 
       }
 
-    }) ()
 
-  }, [])
+      setDurationInterval (() =>
 
-  useEffect (() => {
-
-    (async () => {
-
-      setReduxStatusText (
-      
-        connectionDuration['connection_initialization_time'] != null && connectionDuration['current_connection_duration'] != null
+        setConnectionTime (prev => ({  // triggers useEffect
   
-          ? `Подключено:  ${convertTime (connectionDuration['current_connection_duration'])}`
-          : 'Соединение не защищено'
+          initialization_moment: typeof (prev.initialization_moment) == 'number' ? prev.initialization_moment : init_time,
+          current_duration: typeof (prev.initialization_moment) == 'number' ? currentTime() - prev.initialization_moment : 1
   
-      )
-
-      await AsyncStorage.setItem ('connectionDuration', JSON.stringify (connectionDuration))
-
-    }) ()
-
-  }, [connectionDuration])
+        }))
+  
+      , 1000)
 
 
-  const HandleLocationPress = () => {
+      setTipText ('Нажмите, чтобы отключиться')
 
-    console.info ('Location pressed')
+    }
+  
+    static disconnected () {
+  
+      clearDurationInterval ()
+      setConnectionTime ({initialization_moment: null, current_duration: null})  // triggers useEffect
+      setTipText ('Нажмите для подключения к VPN')
+
+    }
 
   }
 
 
   const subscribeVPN = async () => {  // logging on triggering
 
-    if (is_iphone) await RNSimpleOpenvpn.observeState ()
+    if (device_is_iphone) await RNSimpleOpenvpn.observeState ()
 
-    addVpnStateListener (async event => {
-
-      addLogs (JSON.stringify(event))
-
+    addVpnStateListener (async () => {
 
       const VPN_state = await RNSimpleOpenvpn.getCurrentState ()
 
       switch (VPN_state) {
 
-        case 2: setTipText ('Нажмите, чтобы отключиться'); SetStatusText_Connected (); break
-
-        case 0: setTipText ('Нажмите для подключения к VPN'); SetStatusText_Disconnected (); break
-
-        default: console.info ('something else')
+        case 0: manageStatusText.disconnected (); break
+        case 2: await manageStatusText.connected ('onCurrentTime'); break
 
       }
 
@@ -240,39 +203,73 @@ const Center = () => {
 
   const unsubscribeVPN = async () => {  // removing triggering
 
-    if (is_iphone) await RNSimpleOpenvpn.stopObserveState ()
-
+    if (device_is_iphone) await RNSimpleOpenvpn.stopObserveState ()
+      
     removeVpnStateListener ()
 
   }
 
 
   useEffect (() => {
-    
-    subscribeVPN ()
+
+    lodash.isEqual (connectionTime, {initialization_moment: null, current_duration: null})
+
+      ? setReduxStatusText ('Соединение не защищено')
+      : setReduxStatusText (`Подключено:  ${convertTime (connectionTime.current_duration)}`)
+
+  }, [connectionTime])
+
+
+  useEffect (() => {(async () => {
+
+    await subscribeVPN ()
+
+
+    const VPN_state = await RNSimpleOpenvpn.getCurrentState ()
+
+    switch (VPN_state) {
+
+      case 0: manageStatusText.disconnected (); break
+      case 2: await manageStatusText.connected ('onAsyncStorage'); break
+
+    }
+
 
     return async () => await unsubscribeVPN ()
 
-  })
+  })()}, [])
+
+
+  const HandleVpnPress = async () => {
+
+    await toggleVPN ()
+
+  }
+
+  const HandleLocationPress = () => {
+
+    console.info ('Location pressed')
+
+  }
 
 
   return (
 
     <View style = {{
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
     gap: 21}}>
 
       <VPN_button
-      onPress = {() => toggleVPN()}/>
+      onPress = {async () => await HandleVpnPress()}/>
 
       <Tip
       text = {tipText}
-      onPress = {() => toggleVPN()}/>
+      onPress = {async () => await HandleVpnPress()}/>
 
       <Action 
       text = {connectionDestination}
-      onPress = {() => HandleLocationPress()}/>
+      onPress = {async () => HandleLocationPress()}/>
 
     </View>
 
