@@ -49,6 +49,9 @@ const BottomBar = () => {
 
 const Tip = ({tipText, onPress}) => {
 
+  const [metalinkText, mainText] = [tipText[0], tipText[1]]
+
+
   return (
 
     <TouchableOpacity
@@ -68,7 +71,7 @@ const Tip = ({tipText, onPress}) => {
       color: styles.color,
       fontSize: 17}}>
 
-        <MetaLink>{tipText[0]}</MetaLink>{tipText[1]}
+        <MetaLink>{metalinkText}</MetaLink>{mainText}
 
       </Text>
 
