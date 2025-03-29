@@ -16,7 +16,7 @@ const BottomBar = () => {
   const tipText = [
 
     'Подробнее',
-    'о приложении, которое созданно для обхода ограничений.'
+    ' о приложении, которое созданно для обхода ограничений.'
 
   ]
 
@@ -68,7 +68,7 @@ const Tip = ({tipText, onPress}) => {
       color: styles.color,
       fontSize: 17}}>
 
-        <MetaLink>{tipText[1]}</MetaLink>{tipText[2]}
+        <MetaLink>{tipText[0]}</MetaLink>{tipText[1]}
 
       </Text>
 
