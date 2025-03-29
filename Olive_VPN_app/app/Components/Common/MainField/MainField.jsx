@@ -2,16 +2,17 @@
 
 
 import { useThemes } from '../../../../Styles/Hooks/UseThemes'
-import { View, Image, Dimensions } from 'react-native'
-import { StatusBar } from 'react-native'
+import { StatusBar, View, Image } from 'react-native'
+import { Dimensions } from 'react-native'
 
 
 const MainField = ({style, children}) => {
 
   const [styles] = useThemes ()
 
-  let windowWidth = Dimensions.get('window').width
-  let windowHeight = Dimensions.get('window').height
+
+  const windowWidth = Dimensions.get('window').width  // should it be under triggering ?
+  const windowHeight = Dimensions.get('window').height  // should it be under triggering ?
 
 
   return (
@@ -20,24 +21,23 @@ const MainField = ({style, children}) => {
     width: '100%',
     height: '100%',
     backgroundColor: styles.MainField.backgroundColor,
-
     ...style}}>
 
       <StatusBar
       animated = {true}
-      // translucent = {true}
+      translucent = {false}  // temporal
       backgroundColor = {styles.StatusBar.backgroundColor}
       barStyle = {styles.StatusBar.color}/>
 
       <Image
-      source = {styles._General_.ColorfulBackgroundImage_PNG}
+      source = {styles._Other_.ColorfulBackground_PNG}
       style = {{
       zIndex: 0,
       position: 'absolute',
       width: windowWidth,
       height: windowHeight,
       resizeMode: 'stretch',
-      transform: styles._General_.backgroundTransform,
+      transform: styles._Other_.backgroundTransform,
       opacity: 0.5}}/>
 
       {children}

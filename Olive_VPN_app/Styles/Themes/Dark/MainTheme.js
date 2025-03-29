@@ -21,7 +21,7 @@
 */
 
 
-const ColorfulBackgroundImage_PNG = require ('../../../assets/PNG/_General_/ColorfulBackgroundImage.png')
+const ColorfulBackground_PNG = require ('../../../assets/PNG/_Other_/ColorfulBackgroundImage.png')
 
 const ArrowCompact_grey_PNG = require ('../../../assets/PNG/Arrows/Grey.png')
 const ArrowCompact_green_PNG = require ('../../../assets/PNG/Arrows/Green.png')
@@ -33,7 +33,7 @@ const Apps_grey_PNG = require ('../../../assets/PNG/Apps/Grey.png')
 const Olive_black_PNG = require ('../../../assets/PNG/Olive/Black.png')
 const Tap_dark_green_PNG = require ('../../../assets/PNG/Tap/DarkGreen.png')
 const Location_green_PNG = require ('../../../assets/PNG/Location/Green.png')
-const Magic_wand_light_PNG = require ('../../../assets/PNG/Magic_wand/Light.png')
+const MagicWand_light_PNG = require ('../../../assets/PNG/MagicWand/Light.png')
 
 
 const Colors = {
@@ -65,10 +65,10 @@ const Colors = {
 
 const MainTheme = {
 
-    _General_: {
+    _Other_: {
 
-        ColorfulBackgroundImage_PNG: ColorfulBackgroundImage_PNG,
-        backgroundTransform: [{rotate: '0deg'}],
+        ColorfulBackground_PNG: ColorfulBackground_PNG,
+        backgroundTransform: [{rotate: '0deg'}]
 
     },
 
@@ -150,7 +150,7 @@ const MainTheme = {
 
             Center: {
 
-                VPN_button: {
+                VpnButton: {
 
                     Olive_PNG: Olive_black_PNG,
 
@@ -183,9 +183,9 @@ const MainTheme = {
 
             Bottom: {
 
-                NetButton: {
+                ManageNetButton: {
 
-                    MagicWand_PNG: Magic_wand_light_PNG,
+                    MagicWand_PNG: MagicWand_light_PNG,
 
 
                     fontFamily: 'Archivo-Bold',
@@ -213,8 +213,8 @@ const MainTheme = {
             color: Colors.TipText,
             metalinkColor: Colors.Olive,
             
-            borderColor: "rgba(0, 0, 0, 0.25)",
-            backgroundColor: "rgba(11, 11, 11, 0.80)"
+            borderColor: 'rgba(0, 0, 0, 0.25)',
+            backgroundColor: 'rgba(11, 11, 11, 0.80)'
 
         }
 

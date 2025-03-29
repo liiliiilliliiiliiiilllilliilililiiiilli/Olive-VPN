@@ -19,9 +19,7 @@ const MainContent = () => {
     width: '100%',
     gap: 25}}>
 
-      <Top style = {{
-        // marginTop: 25
-      }}/>
+      <Top/>
       <Center/>
       <Bottom/>
 

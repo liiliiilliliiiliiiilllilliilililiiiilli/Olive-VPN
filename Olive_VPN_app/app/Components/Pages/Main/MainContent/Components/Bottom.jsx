@@ -14,8 +14,8 @@ const Bottom = () => {
 
   [styles] = useThemes (styles => styles.MainPage.Main.Bottom)
   
-  const [NetButtonText, setNetButtonText] = useState ('Расширить сеть')  // to redux later
-  const [NetInfoData, setNetInfoData] = useState ('WiFi: TP-Link-GH-51')  // to redux later
+  const [manageNetButtonText, setManageNetButtonText] = useState ('Расширить сеть')  // to redux later
+  const [netInfoData, setNetInfoData] = useState ('WiFi: TP-Link-GH-51')  // to redux later
   
 
   const HandleNetButtonPress = () => {
@@ -33,12 +33,12 @@ const Bottom = () => {
     justifyContent: 'center',
     gap: 18}}>
 
-      <NetButton
-      text = {NetButtonText}
+      <ManageNetButton
+      text = {manageNetButtonText}
       onPress = {() => HandleNetButtonPress()}/>
 
       <NetInfo
-      text = {NetInfoData}/>
+      text = {netInfoData}/>
 
     </View>
 
@@ -47,7 +47,7 @@ const Bottom = () => {
 }
 
 
-const NetButton = ({text, onPress}) => {
+const ManageNetButton = ({text, onPress}) => {
 
   return (
 
@@ -67,12 +67,12 @@ const NetButton = ({text, onPress}) => {
       paddingHorizontal: 15,
       borderWidth: 2,
       borderRadius: 1000,
-      borderColor: styles.NetButton.borderColor,
-      backgroundColor: styles.NetButton.backgroundColor}}>
+      borderColor: styles.ManageNetButton.borderColor,
+      backgroundColor: styles.ManageNetButton.backgroundColor}}>
 
         <Text style = {{
-        fontFamily: styles.NetButton.fontFamily,
-        color: styles.NetButton.color,
+        fontFamily: styles.ManageNetButton.fontFamily,
+        color: styles.ManageNetButton.color,
         fontSize: 16}}>
 
           {text}
@@ -80,7 +80,7 @@ const NetButton = ({text, onPress}) => {
         </Text>
 
         <Image
-        source = {styles.NetButton.MagicWand_PNG}
+        source = {styles.ManageNetButton.MagicWand_PNG}
         style = {{
         width: 17,
         height: 17}}/>

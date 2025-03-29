@@ -51,7 +51,6 @@ const App = () => {
   const configureThemes = () => {
 
     setTheme ('Initialization')
-    // setTheme (`{"type": "Dark", "palette": "MainTheme"}`)  // add Initialization later
 
   }
 
@@ -113,7 +112,7 @@ const App = () => {
     
       {!isAppSetUp ?
 
-        <Text> Загрузка... </Text>
+        <Text>Загрузка...</Text>
 
       :
 

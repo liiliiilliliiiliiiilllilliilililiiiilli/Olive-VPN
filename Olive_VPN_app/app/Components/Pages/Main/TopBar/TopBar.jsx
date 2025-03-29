@@ -5,7 +5,7 @@ import { useThemes } from '../../../../../Styles/Hooks/UseThemes'
 import { View } from 'react-native'
 
 import MenuButton from './Components/MenuButton'
-import OliveVPN_Title from './Components/OliveVPN_Title'
+import OliveVpnTitle from './Components/OliveVpnTitle'
 import ThemeSwitcher from './Components/ThemeSwitcher'
 
 
@@ -40,10 +40,10 @@ const TopBar = () => {
     backgroundColor: styles.backgroundColor}}>
             
       <MenuButton
-      style = {{opacity: 0}}  // temporal, this feature is for futher develoment
+      style = {{opacity: 0}}  // temporal, this feature is for futher development
       onPress = {() => HandleMenuButtonPressed()}/>
 
-      <OliveVPN_Title/>
+      <OliveVpnTitle/>
 
       <ThemeSwitcher
       onPress = {() => HandleThemeSwitcherPressed()}/>

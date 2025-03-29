@@ -4,17 +4,16 @@
 const lodash = require ('lodash')
 
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import RNSimpleOpenvpn, { addVpnStateListener, removeVpnStateListener } from 'react-native-simple-openvpn'
 
 import { useDispatch } from 'react-redux'
 import { useState, useEffect, useRef } from 'react'
 import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
 
-import { SetMainPageStatusText as SetMainPageStatus } from '../../../../../../Redux/MainPageStatusTextSlice'
+import { SetMainPageStatusText } from '../../../../../../Redux/MainPageStatusTextSlice'
 
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 import { Platform } from 'react-native'
-
-import RNSimpleOpenvpn, { addVpnStateListener, removeVpnStateListener } from 'react-native-simple-openvpn'
 
 
 const device_is_iphone = Platform.OS === 'ios'
@@ -29,31 +28,33 @@ const Center = () => {
   const durationInterval = useRef (null)
   const [connectionTime, setConnectionTime] = useState ({initialization_moment: null, current_duration: null})
   const dispatch = useDispatch ()
-  const setReduxStatusText = text => dispatch (SetMainPageStatus (text))
+  const setReduxStatusText = text => dispatch (SetMainPageStatusText (text))
 
   const [tipText, setTipText] = useState ('Нажмите для подключения к VPN')
-  const [connectionDestination, setConnectionDestination] = useState ('Нидерланды')  //
+  const [connectionDestinationText, setConnectionDestinationText] = useState ('Нидерланды')
 
 
-  const connectVPN = async () => {
+  const limeVpnConnectionConfiguration = {
+
+    ovpnFileName: 'lime',
+    notificationTitle: 'RNSimpleOpenVPN',
+    compatMode: RNSimpleOpenvpn.CompatMode.MODERN_DEFAULTS,
+    providerBundleIdentifier: 'com.example.OliveVPN',
+    localizedDescription: 'TestRNSimpleOvpn'
+
+  }
+
+  const connectVPN = async vpnConnectionConfiguration => {
 
     try {
 
-      await RNSimpleOpenvpn.connect ({
-
-        ovpnFileName: 'lime',
-        notificationTitle: 'RNSimpleOpenVPN',
-        compatMode: RNSimpleOpenvpn.CompatMode.MODERN_DEFAULTS,
-        providerBundleIdentifier: 'com.example.OliveVPN',
-        localizedDescription: 'TestRNSimpleOvpn'
-
-      })
+      await RNSimpleOpenvpn.connect (vpnConnectionConfiguration)
 
     }
     
     catch (error) {
 
-      console.info ('connectVPN: error while connecting to VPN server')
+      console.info ('connectVPN: error while connecting to VPN server', `\n${error}`)
 
     }
 
@@ -69,7 +70,7 @@ const Center = () => {
     
     catch (error) {
 
-      console.info ('stoptVPN: error while disconnecting from VPN server')
+      console.info ('disconnectVPN: error while disconnecting from VPN server.', `\n${error}`)
 
     }
 
@@ -77,12 +78,12 @@ const Center = () => {
 
   const toggleVPN = async () => {
 
-    const VPN_state = await RNSimpleOpenvpn.getCurrentState ()
+    const VpnState = await RNSimpleOpenvpn.getCurrentState ()
 
-    switch (VPN_state) {
+    switch (VpnState) {
 
-      case 0: await connectVPN (); break
-      case 2: await disconnectVPN (); break
+      case 0: connectVPN (limeVpnConnectionConfiguration); break
+      case 2: disconnectVPN (); break
 
     }
 
@@ -137,15 +138,14 @@ const Center = () => {
       switch (init_time_type) {
 
         case 'onAsyncStorage':
-          
-          init_time = await AsyncStorage.getItem ('init_time');
-          init_time = parseInt (init_time)
+
+          init_time = parseInt (await AsyncStorage.getItem ('init_time'))
           break
 
         case 'onCurrentTime':
 
-          init_time = currentTime ();
-          await AsyncStorage.setItem ('init_time', `${init_time}`);
+          init_time = currentTime ()
+          await AsyncStorage.setItem ('init_time', `${init_time}`)
           break
 
         default:
@@ -188,12 +188,12 @@ const Center = () => {
 
     addVpnStateListener (async () => {
 
-      const VPN_state = await RNSimpleOpenvpn.getCurrentState ()
+      const VpnState = await RNSimpleOpenvpn.getCurrentState ()
 
-      switch (VPN_state) {
+      switch (VpnState) {
 
         case 0: manageStatusText.disconnected (); break
-        case 2: await manageStatusText.connected ('onCurrentTime'); break
+        case 2: manageStatusText.connected ('onCurrentTime'); break
 
       }
 
@@ -210,39 +210,9 @@ const Center = () => {
   }
 
 
-  useEffect (() => {
+  const HandleVpnPress = () => {
 
-    lodash.isEqual (connectionTime, {initialization_moment: null, current_duration: null})
-
-      ? setReduxStatusText ('Соединение не защищено')
-      : setReduxStatusText (`Подключено:  ${convertTime (connectionTime.current_duration)}`)
-
-  }, [connectionTime])
-
-
-  useEffect (() => {(async () => {
-
-    await subscribeVPN ()
-
-
-    const VPN_state = await RNSimpleOpenvpn.getCurrentState ()
-
-    switch (VPN_state) {
-
-      case 0: manageStatusText.disconnected (); break
-      case 2: await manageStatusText.connected ('onAsyncStorage'); break
-
-    }
-
-
-    return async () => await unsubscribeVPN ()
-
-  })()}, [])
-
-
-  const HandleVpnPress = async () => {
-
-    await toggleVPN ()
+    toggleVPN ()
 
   }
 
@@ -253,6 +223,36 @@ const Center = () => {
   }
 
 
+  useEffect (() => {
+
+    lodash.isEqual (connectionTime, {initialization_moment: null, current_duration: null})
+
+      ? setReduxStatusText ('Соединение не защищено')
+      : setReduxStatusText (`Подключено:  ${convertTime(connectionTime.current_duration)}`)
+
+  }, [connectionTime])
+
+
+  useEffect (() => {(async () => {
+
+    await subscribeVPN ()
+
+
+    const VpnState = await RNSimpleOpenvpn.getCurrentState ()
+
+    switch (VpnState) {
+
+      case 0: manageStatusText.disconnected (); break
+      case 2: manageStatusText.connected ('onAsyncStorage'); break
+
+    }
+
+
+    return async () => await unsubscribeVPN ()
+
+  })()}, [])
+
+
   return (
 
     <View style = {{
@@ -260,16 +260,16 @@ const Center = () => {
     alignItems: 'center',
     gap: 21}}>
 
-      <VPN_button
-      onPress = {async () => await HandleVpnPress()}/>
+      <VpnButton
+      onPress = {() => HandleVpnPress()}/>
 
       <Tip
       text = {tipText}
-      onPress = {async () => await HandleVpnPress()}/>
+      onPress = {() => HandleVpnPress()}/>
 
       <Action 
-      text = {connectionDestination}
-      onPress = {async () => HandleLocationPress()}/>
+      text = {connectionDestinationText}
+      onPress = {() => HandleLocationPress()}/>
 
     </View>
 
@@ -278,12 +278,11 @@ const Center = () => {
 }
 
 
-const VPN_button = ({onPress}) => {
+const VpnButton = ({onPress}) => {
 
   return (
 
     <TouchableOpacity
-    activeOpacity = {1}
     onPress = {() => onPress()}
     style = {{
     padding: 15,
@@ -299,12 +298,12 @@ const VPN_button = ({onPress}) => {
       height: 225,
       borderWidth: 2.5,
       borderRadius: 1000,
-      borderColor: styles.VPN_button.borderColor,
-      backgroundColor: styles.VPN_button.backgroundColor,
-      boxShadow: styles.VPN_button.boxShadow}}>
+      borderColor: styles.VpnButton.borderColor,
+      backgroundColor: styles.VpnButton.backgroundColor,
+      boxShadow: styles.VpnButton.boxShadow}}>
 
         <Image
-        source = {styles.VPN_button.Olive_PNG}
+        source = {styles.VpnButton.Olive_PNG}
         style = {{
         width: 185,
         height: 185}}/>
@@ -322,7 +321,6 @@ const Tip = ({text, onPress}) => {
   return (
 
     <TouchableOpacity
-    activeOpacity = {1}
     onPress = {() => onPress()}
     style = {{
     flexDirection: 'row',

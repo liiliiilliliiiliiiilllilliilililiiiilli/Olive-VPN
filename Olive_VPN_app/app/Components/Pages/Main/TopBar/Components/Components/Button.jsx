@@ -5,7 +5,7 @@ import { useThemes } from '../../../../../../../Styles/Hooks/UseThemes'
 import { View, TouchableOpacity, Image } from 'react-native'
 
 
-const Button = ({pic, imageStyle, style, onPress}) => {
+const Button = ({pic, style, imageStyle, onPress}) => {
 
   const [styles] = useThemes (styles => styles.MainPage.Top.Button)
 
@@ -23,7 +23,6 @@ const Button = ({pic, imageStyle, style, onPress}) => {
     borderColor: styles.borderColor,
     backgroundColor: styles.backgroundColor,
     marginHorizontal: 6.25, 
-
     ...style}}>
 
       <TouchableOpacity  // touch field
@@ -40,7 +39,6 @@ const Button = ({pic, imageStyle, style, onPress}) => {
       style = {{
       width: 17,
       height: 17,
-
       ...imageStyle}}/>
 
     </View>

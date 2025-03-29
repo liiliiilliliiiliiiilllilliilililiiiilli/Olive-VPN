@@ -21,7 +21,7 @@
 */
 
 
-const ColorfulBackgroundImage_PNG = require ('../../../assets/PNG/_General_/ColorfulBackgroundImage.png')
+const ColorfulBackground_PNG = require ('../../../assets/PNG/_Other_/ColorfulBackgroundImage.png')
 
 const ArrowCompact_black_PNG = require ('../../../assets/PNG/Arrows/Black.png')
 
@@ -32,7 +32,7 @@ const Apps_black_PNG = require ('../../../assets/PNG/Apps/Black.png')
 const Olive_black_PNG = require ('../../../assets/PNG/Olive/Black.png')
 const Tap_black_PNG = require ('../../../assets/PNG/Tap/Black.png')
 const Location_black_PNG = require ('../../../assets/PNG/Location/Black.png')
-const Magic_wand_black_PNG = require ('../../../assets/PNG/Magic_wand/Black.png')
+const MagicWand_black_PNG = require ('../../../assets/PNG/MagicWand/Black.png')
 
 
 const Colors = {
@@ -64,9 +64,9 @@ const Colors = {
 
 const MainTheme = {
 
-    _General_: {
+    _Other_: {
 
-        ColorfulBackgroundImage_PNG: ColorfulBackgroundImage_PNG,
+        ColorfulBackground_PNG: ColorfulBackground_PNG,
         backgroundTransform: [{rotate: '180deg'}]
 
     },
@@ -75,7 +75,7 @@ const MainTheme = {
     StatusBar: {
 
         color: 'dark-content',
-        backgroundColor: "rgb(171, 171, 171)"
+        backgroundColor: 'rgb(171, 171, 171)'
     
     },
 
@@ -90,8 +90,8 @@ const MainTheme = {
 
         Top: {
 
-            borderColor: "rgba(0, 0, 0, 0.125)",
-            backgroundColor: "rgba(255, 255, 255, 0.625)",
+            borderColor: 'rgba(0, 0, 0, 0.125)',
+            backgroundColor: 'rgba(255, 255, 255, 0.625)',
 
 
             Title: {
@@ -105,7 +105,7 @@ const MainTheme = {
             Button: {
 
                 borderColor: Colors.LightBorderButton,
-                backgroundColor: "rgba(255, 255, 255, 0.25)",
+                backgroundColor: 'rgba(255, 255, 255, 0.25)',
 
 
                 ThemeSwitcher: {
@@ -149,7 +149,7 @@ const MainTheme = {
 
             Center: {
 
-                VPN_button: {
+                VpnButton: {
 
                     Olive_PNG: Olive_black_PNG,
 
@@ -182,9 +182,9 @@ const MainTheme = {
 
             Bottom: {
 
-                NetButton: {
+                ManageNetButton: {
 
-                    MagicWand_PNG: Magic_wand_black_PNG,
+                    MagicWand_PNG: MagicWand_black_PNG,
 
 
                     fontFamily: 'Archivo-Bold',
@@ -212,7 +212,7 @@ const MainTheme = {
             color: Colors.Black,
             metalinkColor: Colors.PreWhite,
             
-            borderColor: "rgba(194, 194, 194, 0.125)",
+            borderColor: 'rgba(194, 194, 194, 0.125)',
             backgroundColor: 'rgba(255, 255, 255, 0.125)'
 
         }

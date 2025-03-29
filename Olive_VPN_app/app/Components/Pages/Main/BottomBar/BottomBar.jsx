@@ -1,5 +1,8 @@
+// Component.
+
+
 import { useThemes } from '../../../../../Styles/Hooks/UseThemes'
-import { View, Text, Touchable, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, Text } from 'react-native'
 
 
 let styles
@@ -8,6 +11,14 @@ let styles
 const BottomBar = () => {
 
   [styles] = useThemes (styles => styles.MainPage.Bottom)
+
+
+  const tipText = [
+
+    'Подробнее',
+    'о приложении, которое созданно для обхода ограничений.'
+
+  ]
 
 
   const HandleTipPress = () => {
@@ -25,7 +36,9 @@ const BottomBar = () => {
     width: '100%',
     paddingTop: 28}}>
 
-      <Tip onPress = {() => HandleTipPress()}/>
+      <Tip
+      tipText = {tipText}
+      onPress = {() => HandleTipPress()}/>
 
     </View>
 
@@ -34,7 +47,7 @@ const BottomBar = () => {
 }
 
 
-const Tip = ({onPress}) => {
+const Tip = ({tipText, onPress}) => {
 
   return (
 
@@ -55,7 +68,7 @@ const Tip = ({onPress}) => {
       color: styles.color,
       fontSize: 17}}>
 
-        <MetaLink>Подробнее</MetaLink> о приложении, которое созданно для обхода ограничений.
+        <MetaLink>{tipText[1]}</MetaLink>{tipText[2]}
 
       </Text>
 
@@ -65,13 +78,13 @@ const Tip = ({onPress}) => {
 
 }
 
-const MetaLink = ({children}) => {
+const MetaLink = ({children: text}) => {
 
   return (
 
     <Text style = {{color: styles.metalinkColor}}>
 
-      {children}
+      {text}
 
     </Text>
 

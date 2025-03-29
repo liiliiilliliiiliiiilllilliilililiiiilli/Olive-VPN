@@ -2,10 +2,10 @@
 
 
 import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
-import { Text, View } from 'react-native'
+import { View, Text } from 'react-native'
 
 
-const OliveVPN_Title = () => {
+const OliveVpnTitle = () => {
 
   const [styles] = useThemes (styles => styles.MainPage.Top.Title)
 
@@ -17,9 +17,9 @@ const OliveVPN_Title = () => {
     alignItems: 'center'}}>
 
       <Text style = {{
-      fontSize: 25,
       fontFamily: styles.fontFamily,
-      color: styles.color}}>
+      color: styles.color,
+      fontSize: 25}}>
 
         OliveVPN
 
@@ -39,4 +39,4 @@ const OliveVPN_Title = () => {
 }
 
 
-export default OliveVPN_Title
+export default OliveVpnTitle

@@ -1,5 +1,3 @@
-const _ = require ('lodash')
-
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 

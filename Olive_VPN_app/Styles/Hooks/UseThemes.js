@@ -3,7 +3,7 @@ import { SetTheme as SetThemeRedux } from '../../Redux/ThemeSlice'
 import { Themes } from '../Themes/Themes'
 
 
-export const useThemes = (callback__object_to_return = e => e) => {
+const useThemes = (style_object_to_return_callback = e => e) => {
     
     const dispatch = useDispatch ()
 
@@ -13,9 +13,12 @@ export const useThemes = (callback__object_to_return = e => e) => {
     const setTheme = theme => dispatch (SetThemeRedux (theme))
 
     let stylesObject = Themes?.[theme?.type]?.[theme?.palette]
-    stylesObject = callback__object_to_return (stylesObject)
+    stylesObject = style_object_to_return_callback (stylesObject)
 
 
     return [stylesObject, theme, setTheme]
 
 }
+
+
+export { useThemes }
