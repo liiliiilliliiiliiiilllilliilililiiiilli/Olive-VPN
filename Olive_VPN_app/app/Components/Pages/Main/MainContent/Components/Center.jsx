@@ -38,20 +38,34 @@ const Center = () => {
 
     ovpnFileName: 'lime',
     notificationTitle: 'RNSimpleOpenVPN',
-    compatMode: RNSimpleOpenvpn.CompatMode.MODERN_DEFAULTS,
     providerBundleIdentifier: 'com.example.OliveVPN',
-    localizedDescription: 'TestRNSimpleOvpn'
+    localizedDescription: 'TestRNSimpleOvpn',
+    compatMode: 'MODERN_DEFAULTS'
 
   }
+
 
   const connectVPN = async vpnConnectionConfiguration => {
 
     try {
 
-      await RNSimpleOpenvpn.connect (vpnConnectionConfiguration)
+      await RNSimpleOpenvpn.connect ({
+
+        ...vpnConnectionConfiguration,
+
+        compatMode: {
+
+          'MODERN_DEFAULTS': RNSimpleOpenvpn.CompatMode.MODERN_DEFAULTS,
+          'OVPN_TWO_FIVE_PEER': RNSimpleOpenvpn.CompatMode.OVPN_TWO_FIVE_PEER,
+          'OVPN_TWO_FOUR_PEER': RNSimpleOpenvpn.CompatMode.OVPN_TWO_FOUR_PEER,
+          'OVPN_TWO_THREE_PEER': RNSimpleOpenvpn.CompatMode.OVPN_TWO_THREE_PEER
+
+        } [vpnConnectionConfiguration.compatMode]
+
+      })
 
     }
-    
+
     catch (error) {
 
       console.info ('connectVPN: error while connecting to VPN server', `\n${error}`)
@@ -160,7 +174,7 @@ const Center = () => {
         setConnectionTime (prev => ({  // triggers useEffect
   
           initialization_moment: typeof (prev.initialization_moment) == 'number' ? prev.initialization_moment : init_time,
-          current_duration: typeof (prev.initialization_moment) == 'number' ? currentTime() - prev.initialization_moment : 1
+          current_duration: typeof (prev.initialization_moment) == 'number' ? currentTime() - prev.initialization_moment : currentTime() - init_time
   
         }))
   

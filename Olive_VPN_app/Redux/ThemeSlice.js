@@ -23,7 +23,7 @@ const SetTheme = createAsyncThunk (
 
     if (theme == 'Initialization') {  // app launching
 
-      const AsyncStorageTheme = JSON.parse (await AsyncStorage.getItem ('AppTheme'))
+      const AsyncStorageTheme = await AsyncStorage.getItem ('AppTheme')
 
       if (!AsyncStorageTheme) {  // 1st launch
 
@@ -34,7 +34,7 @@ const SetTheme = createAsyncThunk (
 
       else  // regular launch
 
-        dispatch (SetThemeState (AsyncStorageTheme))
+        dispatch (SetThemeState (JSON.parse (AsyncStorageTheme)))
 
     }
 
