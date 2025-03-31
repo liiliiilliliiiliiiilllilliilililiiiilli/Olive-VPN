@@ -50,7 +50,7 @@ const App = () => {
 
   const configureThemes = () => {
 
-    setTheme ('Initialization')
+    setTheme ('init')
 
   }
 

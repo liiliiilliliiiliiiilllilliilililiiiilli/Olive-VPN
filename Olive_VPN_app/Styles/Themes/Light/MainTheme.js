@@ -27,6 +27,7 @@ const ArrowCompact_black_PNG = require ('../../../assets/PNG/Arrows/Black.png')
 
 const Burger_dark_grey_PNG = require ('../../../assets/PNG/Burger/DarkGrey.png')
 const Moon_dark_grey_PNG = require ('../../../assets/PNG/Moon/DarkGrey.png')
+const A_dark_grey_PNG = require ('../../../assets/PNG/A/DarkGrey.png')
 
 const Apps_black_PNG = require ('../../../assets/PNG/Apps/Black.png')
 const Olive_black_PNG = require ('../../../assets/PNG/Olive/Black.png')
@@ -108,15 +109,16 @@ const MainTheme = {
                 backgroundColor: 'rgba(255, 255, 255, 0.25)',
 
 
-                ThemeSwitcher: {
-    
-                    ThemeIcon_PNG: Moon_dark_grey_PNG
-    
-                },
-    
                 MenuButton: {
     
                     Menu_PNG: Burger_dark_grey_PNG
+    
+                },
+
+                ThemeSwitcher: {
+    
+                    ThemeIcon_PNG: Moon_dark_grey_PNG,
+                    AutomaticThemeIcon_PNG: A_dark_grey_PNG
     
                 }
     

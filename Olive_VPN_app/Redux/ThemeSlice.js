@@ -1,15 +1,22 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Appearance } from 'react-native'
+
+const lodash = require ('lodash')
 
 
-const defaultAppTheme = `{"type": "Dark", "palette": "MainTheme"}`  // there may me error because of added '{', '}'
+const appThemes = {
 
-const appThemes = [
+  light: {palette: 'MainTheme', type: 'Light'},
+  dark: {palette: 'MainTheme', type: 'Dark'},
+  system: 'systemTheme'
 
-  `{"type": "Dark", "palette": "MainTheme"}`,
-  `{"type": "Light", "palette": "MainTheme"}`
+}
 
-]
+const appThemesValues = Object.values (appThemes)
+
+const defaultAppTheme = appThemes.dark
 
 
 const SetTheme = createAsyncThunk (
@@ -18,39 +25,74 @@ const SetTheme = createAsyncThunk (
 
   async (theme, {getState, dispatch}) => {
 
-    const current_state = getState().theme.value
+    const currentThemeType = JSON.parse (await AsyncStorage.getItem ('AppTheme'))
 
 
-    if (theme == 'Initialization') {  // app launching
+    Appearance.addChangeListener (async preferences => {  // tgigger
 
-      const AsyncStorageTheme = await AsyncStorage.getItem ('AppTheme')
+      const systemTheme = preferences.colorScheme
+      const currentThemeType = JSON.parse (await AsyncStorage.getItem ('AppTheme'))
 
-      if (!AsyncStorageTheme) {  // 1st launch
+      if (currentThemeType == appThemes.system)
+        
+        dispatch (SetThemeState ( {'light': 'systemThemeLight', 'dark': 'systemThemeDark'} [systemTheme] ))
 
-        await AsyncStorage.setItem ('AppTheme', defaultAppTheme)
-        dispatch (SetThemeState (defaultAppTheme))
+    })
 
-      }
 
-      else  // regular launch
+    switch (theme) {
 
-        dispatch (SetThemeState (JSON.parse (AsyncStorageTheme)))
+      case 'init': {
 
-    }
+        if (!currentThemeType) {  // app's very 1st launch
 
-    else if (theme == 'reverse') {  // functionality
+          dispatch (SetThemeState (defaultAppTheme))
+          await AsyncStorage.setItem ('AppTheme', JSON.stringify (defaultAppTheme))
 
-      const settedTheme = appThemes[1 - appThemes.indexOf(current_state)]
+        }
 
-      await AsyncStorage.setItem ('AppTheme', JSON.stringify (settedTheme))
-      dispatch (SetThemeState (settedTheme))
+        else currentThemeType == appThemes.system
+        
+          ? dispatch (SetThemeState ( {'light': 'systemThemeLight', 'dark': 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the tgigger acts
+          : dispatch (SetThemeState (currentThemeType))
 
-    }
+      break }
 
-    else {  // app usage
 
-      await AsyncStorage.setItem ('AppTheme', JSON.stringify (theme))
-      dispatch (SetThemeState (theme))
+      case 'next': {
+
+        let nextThemeState
+        
+        for (let index in appThemesValues)
+
+          if (lodash.isEqual (appThemesValues[index], currentThemeType)) nextThemeState = appThemesValues[(index + 1) % 3]
+
+
+        nextThemeState == appThemes.system
+        
+          ? dispatch (SetThemeState ( {'light': 'systemThemeLight', 'dark': 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the tgigger acts
+          : dispatch (SetThemeState (nextThemeState))
+
+
+        await AsyncStorage.setItem ('AppTheme', JSON.stringify (nextThemeState))
+
+      break }
+
+
+      case 'light': {
+
+        dispatch (SetThemeState (appThemes.light))
+        await AsyncStorage.setItem ('AppTheme', JSON.stringify (appThemes.light))
+
+      break }
+
+
+      case 'dark': {
+
+        dispatch (SetThemeState (appThemes.dark))
+        await AsyncStorage.setItem ('AppTheme', JSON.stringify (appThemes.dark))
+
+      break }
 
     }
 

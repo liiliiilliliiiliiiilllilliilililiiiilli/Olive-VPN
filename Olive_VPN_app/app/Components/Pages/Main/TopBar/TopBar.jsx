@@ -22,7 +22,7 @@ const TopBar = () => {
 
   const HandleThemeSwitcherPressed = () => {
 
-    setTheme ('reverse')
+    setTheme ('next')
 
   }
 

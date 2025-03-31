@@ -3,20 +3,18 @@ import { SetTheme as SetThemeRedux } from '../../Redux/ThemeSlice'
 import { Themes } from '../Themes/Themes'
 
 
-const useThemes = (style_object_to_return_callback = e => e) => {
-    
-    const dispatch = useDispatch ()
+const useThemes = (specific_styles_to_return_callback = e => e) => {  
+
+  const theme = useSelector (state => state.theme.value)  // theme has already been declared to default or AsyncStorage value in Redux reducer scince initialization
+
+  const dispatch = useDispatch ()
+  const setTheme = theme => dispatch (SetThemeRedux (theme))
+
+  let stylesObject = Themes?.[theme?.type]?.[theme?.palette] || {'systemThemeLight': Themes.Light.MainTheme, 'systemThemeDark': Themes.Dark.MainTheme} [theme]
+  stylesObject = specific_styles_to_return_callback (stylesObject)
 
 
-    const theme = JSON.parse (useSelector (state => state.theme.value))  // theme has already been declared to default or AsyncStorage value in Redux reducer scince initialization
-
-    const setTheme = theme => dispatch (SetThemeRedux (theme))
-
-    let stylesObject = Themes?.[theme?.type]?.[theme?.palette]
-    stylesObject = style_object_to_return_callback (stylesObject)
-
-
-    return [stylesObject, theme, setTheme]
+  return [stylesObject, theme, setTheme]
 
 }
 
