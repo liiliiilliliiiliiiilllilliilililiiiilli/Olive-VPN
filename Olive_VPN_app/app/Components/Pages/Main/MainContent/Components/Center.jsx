@@ -15,6 +15,10 @@ import { SetMainPageStatusText } from '../../../../../../Redux/MainPageStatusTex
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 import { Platform } from 'react-native'
 
+import Animated, { useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from 'react-native-reanimated'
+
+const AnimatedTouchableOpacity = Animated.createAnimatedComponent (TouchableOpacity)
+
 
 const device_is_iphone = Platform.OS === 'ios'
 
@@ -294,16 +298,61 @@ const Center = () => {
 
 const VpnButton = ({onPress}) => {
 
+  // animations:
+  const scaleControl = useSharedValue (1)
+  const opacityControl = useSharedValue (1)
+
+  const animationStyles = useAnimatedStyle (() => {
+
+    return {
+
+      transform: [{scale: scaleControl.value}],
+      opacity: opacityControl.value
+
+    }
+
+  })
+
+
+  const animationDuration = 95
+
+  const handlePressIn = () => {
+
+    scaleControl.value = withTiming (0.975, {duration: animationDuration})
+    opacityControl.value = withTiming (0.5, {duration: animationDuration})
+
+  }
+
+  const handlePressOut = () => {
+
+    scaleControl.value = withTiming (1, {duration: animationDuration})
+    opacityControl.value = withTiming (1, {duration: animationDuration})
+
+  }
+  // .
+
+
+  const handlePress = () => {
+
+    onPress ()
+
+  }
+
+
   return (
 
-    <TouchableOpacity
-    onPress = {() => onPress()}
-    style = {{
+    <AnimatedTouchableOpacity
+    activeOpacity = {1}
+    onPressIn = {() => handlePressIn()}
+    onPressOut = {() => handlePressOut()}
+    onPress = {() => handlePress()}
+    style = {[{
     padding: 15,
     marginBottom: -15,
-    borderRadius: 1000}}>
+    borderRadius: 1000},
+    animationStyles]}>
 
-      <View
+      <Animated.View
       onPress = {() => onPress()}
       style = {{
       justifyContent: 'center',
@@ -322,9 +371,9 @@ const VpnButton = ({onPress}) => {
         width: 185,
         height: 185}}/>
 
-      </View>
+      </Animated.View>
 
-    </TouchableOpacity>
+    </AnimatedTouchableOpacity>
 
   )
 
@@ -332,9 +381,60 @@ const VpnButton = ({onPress}) => {
 
 const Tip = ({text, onPress}) => {
 
+  const opacityControl = useSharedValue (1)
+
+
+  const subscribeVPN = async () => {  // logging on triggering
+
+    const VpnState = await RNSimpleOpenvpn.getCurrentState ()
+
+    switch (VpnState) {
+
+      case 2: opacityControl.value = withTiming (1, {duration: 1000}); break
+      default: opacityControl.value = withRepeat (withSequence (withDelay (5000, withTiming (1, {duration: 1})), withDelay (500, withTiming (0.33, {duration: 1000})), withTiming (1, {duration: 1000})), -1)
+
+    }
+
+
+    if (device_is_iphone) await RNSimpleOpenvpn.observeState ()
+
+    addVpnStateListener (async () => {
+
+      const VpnState = await RNSimpleOpenvpn.getCurrentState ()
+
+      switch (VpnState) {
+
+        case 2: opacityControl.value = withTiming (1, {duration: 1000}); break
+        default: opacityControl.value = withRepeat (withSequence (withDelay (5000, withTiming (1, {duration: 1})), withDelay (500, withTiming (0.33, {duration: 1000})), withTiming (1, {duration: 1000})), -1)
+
+      }
+
+    })
+
+  }
+
+  const unsubscribeVPN = async () => {  // removing triggering
+
+    if (device_is_iphone) await RNSimpleOpenvpn.stopObserveState ()
+      
+    removeVpnStateListener ()
+
+  }
+
+
+  useEffect (() => {
+
+    subscribeVPN ()
+
+    return () => unsubscribeVPN ()
+
+  }, [])
+
+
   return (
 
-    <TouchableOpacity
+    <AnimatedTouchableOpacity
+    activeOpacity = {1}
     onPress = {() => onPress()}
     style = {{
     flexDirection: 'row',
@@ -342,7 +442,9 @@ const Tip = ({text, onPress}) => {
     gap: 8,
     padding: 10,
     marginVertical: -10,
-    borderRadius: 15}}>
+    borderRadius: 15,
+    
+    opacity: opacityControl}}>
 
       <Image
       source = {styles.Tip.Tap_PNG}
@@ -359,7 +461,7 @@ const Tip = ({text, onPress}) => {
 
       </Text>
 
-    </TouchableOpacity>
+    </AnimatedTouchableOpacity>
 
   )
 
@@ -367,18 +469,63 @@ const Tip = ({text, onPress}) => {
 
 const Action = ({text, onPress}) => {
 
+  // animations:
+  const scaleControl = useSharedValue (1)
+  const opacityControl = useSharedValue (1)
+
+  const animationStyles = useAnimatedStyle (() => {
+
+    return {
+
+      transform: [{scale: scaleControl.value}],
+      opacity: opacityControl.value
+
+    }
+
+  })
+
+
+  const animationDuration = 95
+
+  const handlePressIn = () => {
+
+    scaleControl.value = withTiming (0.9575, {duration: animationDuration})
+    opacityControl.value = withTiming (0.5, {duration: animationDuration})
+
+  }
+
+  const handlePressOut = () => {
+
+    scaleControl.value = withTiming (1, {duration: animationDuration})
+    opacityControl.value = withTiming (1, {duration: animationDuration})
+
+  }
+  // .
+
+
+  const handlePress = () => {
+
+    onPress ()
+
+  }
+
+
   return (
 
-    <TouchableOpacity
-    onPress = {() => onPress()}
-    style = {{
+    <AnimatedTouchableOpacity
+    activeOpacity = {1}
+    onPressIn = {() => handlePressIn()}
+    onPressOut = {() => handlePressOut()}
+    onPress = {() => handlePress()}
+    style = {[{
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
     padding: 10,
     paddingHorizontal: 16,
     marginVertical: -10,
-    borderRadius: 8}}>
+    borderRadius: 8},
+    animationStyles]}>
 
       <Image
       source = {styles.Action.Location_PNG}
@@ -403,7 +550,7 @@ const Action = ({text, onPress}) => {
       height: 15,
       top: 0.75}}/>
 
-    </TouchableOpacity>
+    </AnimatedTouchableOpacity>
 
   )
 

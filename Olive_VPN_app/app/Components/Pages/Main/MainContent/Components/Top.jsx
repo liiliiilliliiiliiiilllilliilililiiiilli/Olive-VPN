@@ -6,6 +6,9 @@ import { useState } from 'react'
 import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
 
 import { View, TouchableOpacity, Image, Text } from 'react-native'
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
+
+const AnimatedTouchableOpacity = Animated.createAnimatedComponent (TouchableOpacity)
 
 
 let styles
@@ -65,11 +68,55 @@ const StatusText = ({text}) => {
 
 const Action = ({text, onPress, style}) => {
 
+  // animations:
+  const scaleControl = useSharedValue (1)
+  const opacityControl = useSharedValue (1)
+
+  const animationStyles = useAnimatedStyle (() => {
+
+    return {
+
+      transform: [{scale: scaleControl.value}],
+      opacity: opacityControl.value
+
+    }
+
+  })
+
+
+  const animationDuration = 95
+
+  const handlePressIn = () => {
+
+    scaleControl.value = withTiming (0.9575, {duration: animationDuration})
+    opacityControl.value = withTiming (0.5, {duration: animationDuration})
+
+  }
+
+  const handlePressOut = () => {
+
+    scaleControl.value = withTiming (1, {duration: animationDuration})
+    opacityControl.value = withTiming (1, {duration: animationDuration})
+
+  }
+  // .
+
+
+  const handlePress = () => {
+
+    onPress ()
+
+  }
+
+
   return (
 
-    <TouchableOpacity
-    onPress = {() => onPress()}
-    style = {{
+    <AnimatedTouchableOpacity
+    activeOpacity = {1}
+    onPressIn = {() => handlePressIn()}
+    onPressOut = {() => handlePressOut()}
+    onPress = {() => handlePress()}
+    style = {[{
     alignItems: 'center',
     flexDirection: 'row',
     gap: 10,
@@ -77,7 +124,8 @@ const Action = ({text, onPress, style}) => {
     paddingHorizontal: 15,
     margin: -5,
     borderRadius: 10,
-    ...style}}>
+    ...style},
+    animationStyles]}>
 
       <Image
       source = {styles.Action.Apps_PNG}
@@ -102,7 +150,7 @@ const Action = ({text, onPress, style}) => {
       height: 15,
       top: 0.75}}/>
 
-    </TouchableOpacity>
+    </AnimatedTouchableOpacity>
 
   )
 

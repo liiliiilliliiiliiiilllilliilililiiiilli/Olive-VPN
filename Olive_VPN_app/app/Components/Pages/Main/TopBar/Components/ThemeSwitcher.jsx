@@ -13,11 +13,18 @@ const ThemeSwitcher = ({onPress}) => {
   const [themePic, setThemePic] = useState ()
 
 
+  const isThemeSystemType = () => {
+
+    return ['systemThemeLight', 'systemThemeDark'].includes(theme)
+
+  }
+
+
   useEffect (() =>
 
     setThemePic (
 
-      ['systemThemeLight', 'systemThemeDark'].includes(theme)
+      isThemeSystemType ()
       
         ? styles.AutomaticThemeIcon_PNG
         : styles.ThemeIcon_PNG
@@ -32,7 +39,9 @@ const ThemeSwitcher = ({onPress}) => {
     <Button
     onPress = {() => onPress()}
     pic = {themePic}
-    style = {{borderRadius: 1000}}/>
+    style = {{
+    ... isThemeSystemType() && {paddingBottom: 7.75},
+    borderRadius: 1000}}/>
 
   )
 

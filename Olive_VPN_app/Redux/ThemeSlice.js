@@ -8,15 +8,15 @@ const lodash = require ('lodash')
 
 const appThemes = {
 
+  system: 'systemTheme',
   light: {palette: 'MainTheme', type: 'Light'},
-  dark: {palette: 'MainTheme', type: 'Dark'},
-  system: 'systemTheme'
+  dark: {palette: 'MainTheme', type: 'Dark'}
 
 }
 
 const appThemesValues = Object.values (appThemes)
 
-const defaultAppTheme = appThemes.dark
+const defaultAppTheme = appThemes.system
 
 
 const SetTheme = createAsyncThunk (
@@ -46,7 +46,11 @@ const SetTheme = createAsyncThunk (
 
         if (!currentThemeType) {  // app's very 1st launch
 
-          dispatch (SetThemeState (defaultAppTheme))
+          defaultAppTheme == appThemes.system
+        
+            ? dispatch (SetThemeState ( {'light': 'systemThemeLight', 'dark': 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the tgigger acts
+            : dispatch (SetThemeState (defaultAppTheme))
+
           await AsyncStorage.setItem ('AppTheme', JSON.stringify (defaultAppTheme))
 
         }
