@@ -48,6 +48,7 @@ const Colors = {
     LightBorderButton: 'rgba(0, 0, 0, 0.125)',
     Line: '#1c1c1c',
     Olive: '#8b9e80',
+    OliveHightTransparent: 'rgba(139, 158, 128, 0.75)',
     OliveButtonShadow: '0px 2.5px 10px rgb(3, 10, 1)',
     OliveDark: '#687262',
     PreWhite: '#f2f2f2',
@@ -55,6 +56,7 @@ const Colors = {
     Text: '#bfbfbf',
     Tip: '#0d0d0d',
     TipText: '#545454',
+    TipTextDark: '#030a01',
     White: '#ffffff'
 
     // cartes: 'rgba(128, 128, 255, 0.5)',
@@ -65,14 +67,6 @@ const Colors = {
 
 const MainTheme = {
 
-    _Other_: {
-
-        ColorfulBackground_PNG: ColorfulBackground_PNG,
-        backgroundTransform: [{rotate: '180deg'}]
-
-    },
-
-
     StatusBar: {
 
         color: 'dark-content',
@@ -82,10 +76,17 @@ const MainTheme = {
 
     MainField: {
 
+        ColorfulBackground_PNG: ColorfulBackground_PNG,
+
         backgroundColor: 'rgba(0, 0, 0, 0.0)'
 
     },
 
+    LanguageWindow: {},
+
+    LocationsWindow: {},
+
+    DescriptionWindow: {},
 
     MainPage: {
 
@@ -156,7 +157,7 @@ const MainTheme = {
                     Olive_PNG: Olive_black_PNG,
 
                     borderColor: Colors.Black,
-                    backgroundColor: Colors.Olive,
+                    backgroundColor: Colors.OliveHightTransparent,
                     boxShadow: Colors.OliveButtonShadow
 
                 },
@@ -166,7 +167,7 @@ const MainTheme = {
                     Tap_PNG: Tap_black_PNG,
 
                     fontFamily: 'Archivo-Regular',
-                    color: Colors.OliveButtonShadow
+                    color: Colors.TipTextDark
 
                 },
 

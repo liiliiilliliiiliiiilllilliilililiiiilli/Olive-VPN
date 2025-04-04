@@ -6,7 +6,7 @@ import { Appearance } from 'react-native'
 const lodash = require ('lodash')
 
 
-const appThemes = {
+const appThemeTypes = {
 
   system: 'systemTheme',
   light: {palette: 'MainTheme', type: 'Light'},
@@ -14,9 +14,9 @@ const appThemes = {
 
 }
 
-const appThemesValues = Object.values (appThemes)
+const appThemes = Object.values (appThemeTypes)
 
-const defaultAppTheme = appThemes.system
+const defaultAppTheme = appThemeTypes.system
 
 
 const SetTheme = createAsyncThunk (
@@ -28,14 +28,14 @@ const SetTheme = createAsyncThunk (
     const currentThemeType = JSON.parse (await AsyncStorage.getItem ('AppTheme'))
 
 
-    Appearance.addChangeListener (async preferences => {  // tgigger
+    Appearance.addChangeListener (async preferences => {  // trigger
 
       const systemTheme = preferences.colorScheme
       const currentThemeType = JSON.parse (await AsyncStorage.getItem ('AppTheme'))
 
-      if (currentThemeType == appThemes.system)
+      if (currentThemeType == appThemeTypes.system)
         
-        dispatch (SetThemeState ( {'light': 'systemThemeLight', 'dark': 'systemThemeDark'} [systemTheme] ))
+        dispatch (SetThemeState ( {light: 'systemThemeLight', dark: 'systemThemeDark'} [systemTheme] ))
 
     })
 
@@ -46,18 +46,18 @@ const SetTheme = createAsyncThunk (
 
         if (!currentThemeType) {  // app's very 1st launch
 
-          defaultAppTheme == appThemes.system
+          defaultAppTheme == appThemeTypes.system
         
-            ? dispatch (SetThemeState ( {'light': 'systemThemeLight', 'dark': 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the tgigger acts
+            ? dispatch (SetThemeState ( {light: 'systemThemeLight', dark: 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the trigger acts
             : dispatch (SetThemeState (defaultAppTheme))
 
           await AsyncStorage.setItem ('AppTheme', JSON.stringify (defaultAppTheme))
 
         }
 
-        else currentThemeType == appThemes.system
+        else currentThemeType == appThemeTypes.system
         
-          ? dispatch (SetThemeState ( {'light': 'systemThemeLight', 'dark': 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the tgigger acts
+          ? dispatch (SetThemeState ( {light: 'systemThemeLight', dark: 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the trigger acts
           : dispatch (SetThemeState (currentThemeType))
 
       break }
@@ -67,14 +67,14 @@ const SetTheme = createAsyncThunk (
 
         let nextThemeState
         
-        for (let index in appThemesValues)
+        for (let index in appThemes)
 
-          if (lodash.isEqual (appThemesValues[index], currentThemeType)) nextThemeState = appThemesValues[(index + 1) % 3]
+          if (lodash.isEqual (appThemes[index], currentThemeType)) nextThemeState = appThemes[(index + 1) % 3]
 
 
-        nextThemeState == appThemes.system
+        nextThemeState == appThemeTypes.system
         
-          ? dispatch (SetThemeState ( {'light': 'systemThemeLight', 'dark': 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the tgigger acts
+          ? dispatch (SetThemeState ( {light: 'systemThemeLight', dark: 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the trigger acts
           : dispatch (SetThemeState (nextThemeState))
 
 
@@ -85,16 +85,16 @@ const SetTheme = createAsyncThunk (
 
       case 'light': {
 
-        dispatch (SetThemeState (appThemes.light))
-        await AsyncStorage.setItem ('AppTheme', JSON.stringify (appThemes.light))
+        dispatch (SetThemeState (appThemeTypes.light))
+        await AsyncStorage.setItem ('AppTheme', JSON.stringify (appThemeTypes.light))
 
       break }
 
 
       case 'dark': {
 
-        dispatch (SetThemeState (appThemes.dark))
-        await AsyncStorage.setItem ('AppTheme', JSON.stringify (appThemes.dark))
+        dispatch (SetThemeState (appThemeTypes.dark))
+        await AsyncStorage.setItem ('AppTheme', JSON.stringify (appThemeTypes.dark))
 
       break }
 

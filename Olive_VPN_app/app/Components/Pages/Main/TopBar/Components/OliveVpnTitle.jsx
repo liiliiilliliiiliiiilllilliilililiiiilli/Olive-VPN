@@ -1,13 +1,35 @@
 // Component.
 
 
+import { useEffect } from 'react'
 import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
+import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
 
 
 const OliveVpnTitle = () => {
 
-  const [styles] = useThemes (styles => styles.MainPage.Top.Title)
+  const [styles, theme] = useThemes (styles => styles.MainPage.Top.Title)
+
+
+  const textColorControl = useSharedValue (styles.color)
+  const lineColorControl = useSharedValue (styles.lineColor)
+
+
+  const commonEasing = comEsng = Easing.inOut (Easing.quad)
+  const themeAnimationDuration = thAnDu = 250
+
+
+  // theme animations:
+
+  useEffect (() => {
+
+    textColorControl.value = withTiming (styles.color, {duration: thAnDu, easing: comEsng})
+    lineColorControl.value = withTiming (styles.lineColor, {duration: thAnDu, easing: comEsng})
+
+  }, [theme])
+
+  // .
 
 
   return (
@@ -16,21 +38,21 @@ const OliveVpnTitle = () => {
     flex: 1,
     alignItems: 'center'}}>
 
-      <Text style = {{
+      <Animated.Text style = {{
       fontFamily: styles.fontFamily,
-      color: styles.color,
+      color: textColorControl,
       fontSize: 25}}>
 
         OliveVPN
 
-      </Text>
+      </Animated.Text>
 
-      <View style = {{
+      <Animated.View style = {{
       width: 110,
       height: 2.75,
       marginTop: -2.25,
       borderRadius: 1000,
-      backgroundColor: styles.lineColor}}/>
+      backgroundColor: lineColorControl}}/>
 
     </View>
 

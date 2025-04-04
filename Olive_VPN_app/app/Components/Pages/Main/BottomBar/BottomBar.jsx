@@ -1,25 +1,28 @@
 // Component.
 
 
+import { useEffect } from 'react'
 import { useThemes } from '../../../../../Styles/Hooks/UseThemes'
-import { View, TouchableOpacity, Text } from 'react-native'
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
+import { View, TouchableOpacity } from 'react-native'
+import Animated, { useSharedValue, useAnimatedStyle, withTiming, withSequence, Easing } from 'react-native-reanimated'
 
 
-let styles
+const AnimatedTouchableOpacity = Animated.createAnimatedComponent (TouchableOpacity)
+
+let styles, theme
 
 
 const BottomBar = () => {
 
-  [styles] = useThemes (styles => styles.MainPage.Bottom)
+  [styles, theme] = useThemes (styles => styles.MainPage.Bottom)
 
 
-  const tipText = [
+  const tipText = {
 
-    'Подробнее',
-    ' о приложении, которое созданно для обхода ограничений.'
+    metalinkText: 'Подробнее',
+    restText: ' о приложении, которое созданно для обхода ограничений.'
 
-  ]
+  }
 
 
   const HandleTipPress = () => {
@@ -50,48 +53,69 @@ const BottomBar = () => {
 
 const Tip = ({tipText, onPress}) => {
 
-  const [metalinkText, mainText] = [tipText[0], tipText[1]]
+  const barBorderColorControl = useSharedValue (styles.borderColor)
+  const barBackgroundColorControl = useSharedValue (styles.backgroundColor)
+  const textColorControl = useSharedValue (styles.color)
 
-  
-  // animations:
   const scaleControl = useSharedValue (1)
   const opacityControl = useSharedValue (1)
   const marginControl = useSharedValue (0)
 
-  const animationStyles = useAnimatedStyle (() => {
+  const animationStyles = useAnimatedStyle (() => ({
 
-    return {
+      color: textColorControl.value,
 
       transform: [{scale: scaleControl.value}],
       opacity: opacityControl.value,
       top: marginControl.value
 
-    }
+  }))
 
-  })
+  const commonEasing = comEsng = Easing.inOut (Easing.quad)
+  const themeAnimationDuration = thAnDu = 250
 
+
+  // theme animations:
+
+  useEffect (() => {
+
+    barBorderColorControl.value = withTiming (styles.borderColor, {duration: thAnDu, easing: comEsng})
+    barBackgroundColorControl.value = withTiming (styles.backgroundColor, {duration: thAnDu, easing: comEsng})
+    textColorControl.value = withTiming (styles.color, {duration: thAnDu, easing: comEsng})
+
+  }, [theme])
+
+  // .
+
+
+  // press animations:
 
   const animationDuration = 95
 
   const handlePressIn = () => {
 
-    scaleControl.value = withTiming (0.975, {duration: animationDuration})
-    opacityControl.value = withTiming (0.5, {duration: animationDuration})
-    marginControl.value = withTiming (-0.5, {duration: animationDuration})
+    scaleControl.value = withTiming (0.975, {duration: animationDuration, easing: comEsng})
+    opacityControl.value = withTiming (0.5, {duration: animationDuration, easing: comEsng})
+    marginControl.value = withTiming (-0.5, {duration: animationDuration, easing: comEsng})
 
   }
 
   const handlePressOut = () => {
 
-    scaleControl.value = withTiming (1, {duration: animationDuration})
-    opacityControl.value = withTiming (1, {duration: animationDuration})
-    marginControl.value = withTiming (0, {duration: animationDuration})
+    scaleControl.value = withTiming (1, {duration: animationDuration, easing: comEsng})
+    opacityControl.value = withTiming (1, {duration: animationDuration, easing: comEsng})
+    marginControl.value = withTiming (0, {duration: animationDuration, easing: comEsng})
 
   }
+
   // .
 
 
   const handlePress = () => {
+
+    scaleControl.value = withSequence (withTiming (0.975, {duration: animationDuration, easing: comEsng}), withTiming (1, {duration: animationDuration, easing: comEsng}))
+    opacityControl.value = withSequence (withTiming (0.5, {duration: animationDuration, easing: comEsng}), withTiming (1, {duration: animationDuration, easing: comEsng}))
+    marginControl.value = withSequence (withTiming (-0.5, {duration: animationDuration, easing: comEsng}), withTiming (0, {duration: animationDuration, easing: comEsng}))
 
     onPress ()
 
@@ -100,7 +124,7 @@ const Tip = ({tipText, onPress}) => {
 
   return (
 
-    <TouchableOpacity
+    <AnimatedTouchableOpacity
     activeOpacity = {1}
     onPressIn = {() => handlePressIn()}
     onPressOut = {() => handlePressOut()}
@@ -112,20 +136,19 @@ const Tip = ({tipText, onPress}) => {
     paddingVertical: 12,
     paddingHorizontal: 25,
     borderTopWidth: 2,
-    borderColor: styles.borderColor,
-    backgroundColor: styles.backgroundColor}}>
+    borderColor: barBorderColorControl,
+    backgroundColor: barBackgroundColorControl}}>
 
-      <Animated.Text style = {[
-      {fontFamily: styles.fontFamily,
-      color: styles.color,
+      <Animated.Text style = {[{
+      fontFamily: styles.fontFamily,
       fontSize: 17},
       animationStyles]}>
 
-        <MetaLink>{metalinkText}</MetaLink>{mainText}
+        <MetaLink>{tipText.metalinkText}</MetaLink>{tipText.restText}
 
       </Animated.Text>
 
-    </TouchableOpacity>
+    </AnimatedTouchableOpacity>
 
   )
 
@@ -133,13 +156,23 @@ const Tip = ({tipText, onPress}) => {
 
 const MetaLink = ({children: text}) => {
 
+  const textColorControl = useSharedValue (styles.metalinkColor)
+
+
+  useEffect (() =>
+
+    textColorControl.value = withTiming (styles.metalinkColor, {duration: thAnDu, easing: comEsng})
+
+  , [theme])
+
+
   return (
 
-    <Text style = {{color: styles.metalinkColor}}>
+    <Animated.Text style = {{color: textColorControl}}>
 
       {text}
 
-    </Text>
+    </Animated.Text>
 
   )
 

@@ -49,6 +49,7 @@ const Colors = {
     LightBorderButton: '#cdcdcd',
     Line: '#1c1c1c',
     Olive: '#8b9e80',
+    OliveHightTransparent: 'rgba(139, 158, 128, 0.75)',
     OliveButtonShadow: '0px 2.5px 10px rgb(3, 10, 1)',
     OliveDark: '#687262',
     PreWhite: '#f2f2f2',
@@ -66,14 +67,6 @@ const Colors = {
 
 const MainTheme = {
 
-    _Other_: {
-
-        ColorfulBackground_PNG: ColorfulBackground_PNG,
-        backgroundTransform: [{rotate: '0deg'}]
-
-    },
-
-
     StatusBar: {
 
         color: 'light-content',
@@ -83,10 +76,17 @@ const MainTheme = {
 
     MainField: {
 
+        ColorfulBackground_PNG: ColorfulBackground_PNG,
+
         backgroundColor: Colors.Black
 
     },
 
+    LanguageWindow: {},
+
+    LocationsWindow: {},
+
+    DescriptionWindow: {},
 
     MainPage: {
 
@@ -157,7 +157,7 @@ const MainTheme = {
                     Olive_PNG: Olive_black_PNG,
 
                     borderColor: Colors.Black,
-                    backgroundColor: Colors.Olive,
+                    backgroundColor: Colors.OliveHightTransparent,
                     boxShadow: Colors.OliveButtonShadow
 
                 },

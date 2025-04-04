@@ -27,6 +27,7 @@
         <data android:scheme="myapp"/>
         <data android:scheme="com.li_o.Olive_VPN"/>
         <data android:scheme="exp+olivevpn"/>
+        <data android:scheme="exp+q"/>
       </intent-filter>
     </activity>
   </application>

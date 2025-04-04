@@ -1,4 +1,4 @@
-// This is application main file.
+// This is application start up file.
 
 
 import axios from 'axios'
@@ -9,9 +9,7 @@ import { useFonts } from 'expo-font'
 import { useThemes } from '../Styles/Hooks/UseThemes'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-
 import { Text } from 'react-native'
-
 import Main from './Pages/Main'
 import Options from './Pages/Options'
 
@@ -37,20 +35,20 @@ const App = () => {
 
   const [styles, theme, setTheme] = useThemes ()
 
-  const [JWT_Access_user, set_JWT_Access_user] = useState ()  // need to put into redux for futher global usage and trigger it
-  const [JWT_Refresh_user, set_JWT_Refresh_user] = useState ()  // need to put into redux for futher global usage and trigger it
+  const [JwtAccessUser, setJwtAccessUser] = useState ()  // need to put into redux for futher global usage and trigger it
+  const [JwtRefreshUser, setJwtRefreshUser] = useState ()  // need to put into redux for futher global usage and trigger it
 
-
-  const configureUserTokens = async () => {
-
-    set_JWT_Access_user (await SecureStore.getItemAsync ('JWT_Access_user') || '')
-    set_JWT_Refresh_user (await SecureStore.getItemAsync ('JWT_Refresh_user') || '')
-
-  }
 
   const configureThemes = () => {
 
     setTheme ('init')
+
+  }
+
+  const configureUserTokens = async () => {
+
+    setJwtAccessUser (await SecureStore.getItemAsync ('JwtAccessUser') || '')
+    setJwtRefreshUser (await SecureStore.getItemAsync ('JwtRefreshUser') || '')
 
   }
 
@@ -87,8 +85,8 @@ const App = () => {
 
     Promise.all ([
 
-      configureUserTokens (),
-      configureThemes ()
+      configureThemes (),
+      configureUserTokens ()
 
     ])
     
@@ -97,11 +95,11 @@ const App = () => {
   useEffect (() => {  // trigger threads readiness
 
     const isThemeConfigured = theme != null
-    const areUserTokensConfigured = (JWT_Access_user != null) && (JWT_Refresh_user != null)
+    const areUserTokensConfigured = (JwtAccessUser != null) && (JwtRefreshUser != null)
 
     if (isThemeConfigured && areUserTokensConfigured) setIsAppSetUp (true)
       
-  }, [JWT_Access_user, JWT_Refresh_user, theme])
+  }, [theme, JwtAccessUser, JwtRefreshUser])
 
   // .
 

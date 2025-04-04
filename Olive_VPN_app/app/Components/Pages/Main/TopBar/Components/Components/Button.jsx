@@ -1,56 +1,79 @@
 // Component.
 
 
+import { useEffect } from 'react'
 import { useThemes } from '../../../../../../../Styles/Hooks/UseThemes'
-import { View, TouchableOpacity, Image } from 'react-native'
-
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
+import { TouchableOpacity, Image } from 'react-native'
+import Animated, { useSharedValue, useAnimatedStyle, withSequence, withTiming, Easing } from 'react-native-reanimated'
 
 
 const Button = ({pic, style, imageStyle, onPress}) => {
 
-  const [styles] = useThemes (styles => styles.MainPage.Top.Button)
+  const [styles, theme] = useThemes (styles => styles.MainPage.Top.Button)
 
 
-  // animations:
+  const borderColorControl = useSharedValue (styles.borderColor)
+  const backgroundColorControl = useSharedValue (styles.backgroundColor)
+
   const scaleControl = useSharedValue (1)
-  const opacityControl = useSharedValue (1)
   const marginControl = useSharedValue (0)
+  const opacityControl = useSharedValue (1)
 
-  const animationStyles = useAnimatedStyle (() => {
+  const animationStyles = useAnimatedStyle (() => ({
 
-    return {
+    borderColor: borderColorControl.value,
+    backgroundColor: backgroundColorControl.value,
 
-      transform: [{scale: scaleControl.value}],
-      opacity: opacityControl.value,
-      top: marginControl.value
+    transform: [{scale: scaleControl.value}],
+    top: marginControl.value,
+    opacity: opacityControl.value
 
-    }
-
-  })
+  }))
 
 
-  const animationDuration = 95
+  const commonEasing = comEsng = Easing.inOut (Easing.quad)
+  const themeAnimationDuration = thAnDu = 250
+  const animationDuration = AnDu = 95
+
+
+  // theme animations:
+
+  useEffect (() => {
+
+    borderColorControl.value = withTiming (styles.borderColor, {duration: thAnDu, easing: comEsng})
+    backgroundColorControl.value = withTiming (styles.backgroundColor, {duration: thAnDu, easing: comEsng})
+
+  }, [theme])
+
+  // .
+
+
+  // press animations:
 
   const handlePressIn = () => {
 
-    scaleControl.value = withTiming (0.975, {duration: animationDuration})
-    opacityControl.value = withTiming (0.5, {duration: animationDuration})
-    marginControl.value = withTiming (0.5, {duration: animationDuration})
+    scaleControl.value = withTiming (0.975, {duration: AnDu, easing: comEsng})
+    marginControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
+    opacityControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
 
   }
 
   const handlePressOut = () => {
 
-    scaleControl.value = withTiming (1, {duration: animationDuration})
-    opacityControl.value = withTiming (1, {duration: animationDuration})
-    marginControl.value = withTiming (0, {duration: animationDuration})
+    scaleControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+    marginControl.value = withTiming (0, {duration: AnDu, easing: comEsng})
+    opacityControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
 
   }
+  
   // .
 
 
   const handlePress = () => {
+
+    scaleControl.value = withSequence (withTiming (0.975, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+    marginControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (0, {duration: AnDu, easing: comEsng}))
+    opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
 
     onPress ()
 
@@ -67,11 +90,9 @@ const Button = ({pic, style, imageStyle, onPress}) => {
     padding: 7,
     borderWidth: 3,
     borderRadius: 10,
-    borderColor: styles.borderColor,
-    backgroundColor: styles.backgroundColor,
-    marginHorizontal: 6.25, 
-    ...style},
-    animationStyles]}>
+    marginHorizontal: 6.25},
+    animationStyles,
+    style]}>
 
       <TouchableOpacity  // touch field
       activeOpacity = {1}
@@ -87,11 +108,10 @@ const Button = ({pic, style, imageStyle, onPress}) => {
 
       <Image
       source = {pic}
-      style = {[
-      // imgOpacity,
-      {width: 17,
+      style = {{
+      width: 17,
       height: 17,
-      ...imageStyle}]}/>
+      ...imageStyle}}/>
 
     </Animated.View>
 

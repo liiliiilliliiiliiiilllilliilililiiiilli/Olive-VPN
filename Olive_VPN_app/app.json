@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Olive_VPN",
-    "slug": "q",
+    "slug": "q-2rgzbzvxpxy5qswxguh",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -9,14 +9,20 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.li-o.Olive-VPN"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.li_o.Olive_VPN"
+      "package": "com.li_o.Olive_VPN",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_WIFI_STATE",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -46,9 +52,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "cde441bc-5366-4b84-928e-41ed80523cd3"
+        "projectId": "5c5c0327-8fad-42ed-b352-9f079d2617d5"
       }
     },
-    "owner": "liiliiilliliiiliii_0"
+    "owner": "liiliiilliliiiliii_0o0"
   }
 }

@@ -1,4 +1,4 @@
-// Initial file + for additional providers and so on.
+// Here additional buisness providers, contexts and so on are added.
 
 
 import { Provider } from 'react-redux'

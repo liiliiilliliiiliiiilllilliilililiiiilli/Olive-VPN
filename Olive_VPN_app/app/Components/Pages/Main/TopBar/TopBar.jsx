@@ -1,8 +1,10 @@
 // Component.
 
 
+import { useEffect } from 'react'
 import { useThemes } from '../../../../../Styles/Hooks/UseThemes'
-import { View } from 'react-native'
+
+import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
 
 import MenuButton from './Components/MenuButton'
 import OliveVpnTitle from './Components/OliveVpnTitle'
@@ -12,6 +14,13 @@ import ThemeSwitcher from './Components/ThemeSwitcher'
 const TopBar = () => {
 
   const [styles, theme, setTheme] = useThemes (styles => styles.MainPage.Top)
+
+
+  const borderColorControl = useSharedValue (styles.borderColor)
+  const backgroundColorControl = useSharedValue (styles.backgroundColor)
+
+  const commonEasing = comEsng = Easing.inOut (Easing.quad)
+  const themeAnimationDuration = thAnDu = 250
 
 
   const HandleMenuButtonPressed = () => {
@@ -27,20 +36,27 @@ const TopBar = () => {
   }
 
 
+  useEffect (() => {
+
+    borderColorControl.value = withTiming (styles.borderColor, {duration: thAnDu, easing: comEsng})
+    backgroundColorControl.value = withTiming (styles.backgroundColor, {duration: thAnDu, easing: comEsng})
+
+  }, [theme])
+
+
   return (
 
-    <View style = {{
+    <Animated.View style = {{
     flexDirection: 'row',
     alignItems: 'center',
     height: 65.5,
     marginBottom: 28,
     paddingHorizontal: 18.5,
     borderBottomWidth: 2,
-    borderColor: styles.borderColor,
-    backgroundColor: styles.backgroundColor}}>
+    borderColor: borderColorControl,
+    backgroundColor: backgroundColorControl}}>
             
       <MenuButton
-      style = {{opacity: 0}}  // temporal, this feature is for futher development
       onPress = {() => HandleMenuButtonPressed()}/>
 
       <OliveVpnTitle/>
@@ -48,7 +64,7 @@ const TopBar = () => {
       <ThemeSwitcher
       onPress = {() => HandleThemeSwitcherPressed()}/>
 
-    </View>
+    </Animated.View>
 
   )
 

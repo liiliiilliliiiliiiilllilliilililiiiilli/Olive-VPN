@@ -6,28 +6,28 @@ const lodash = require ('lodash')
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import RNSimpleOpenvpn, { addVpnStateListener, removeVpnStateListener } from 'react-native-simple-openvpn'
 
-import { useDispatch } from 'react-redux'
-import { useState, useEffect, useRef } from 'react'
-import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
-
 import { SetMainPageStatusText } from '../../../../../../Redux/MainPageStatusTextSlice'
 
-import { View, TouchableOpacity, Image, Text } from 'react-native'
+import { useDispatch } from 'react-redux'
+import React, { useState, useEffect, useRef } from 'react'
+import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
+
+import { View, TouchableOpacity, Image } from 'react-native'
 import { Platform } from 'react-native'
 
-import Animated, { useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from 'react-native-reanimated'
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from 'react-native-reanimated'
 
-const AnimatedTouchableOpacity = Animated.createAnimatedComponent (TouchableOpacity)
+// const {uri, width, height} = Image.resolveAssetSource (require ('../../../../../../assets/PNG/Location/Black.svg'))
 
 
 const device_is_iphone = Platform.OS === 'ios'
 
-let styles
+let styles, theme
 
 
 const Center = () => {
 
-  [styles] = useThemes (styles => styles.MainPage.Main.Center)
+  [styles, theme] = useThemes (styles => styles.MainPage.Main.Center)
   
   const durationInterval = useRef (null)
   const [connectionTime, setConnectionTime] = useState ({initialization_moment: null, current_duration: null})
@@ -59,10 +59,10 @@ const Center = () => {
 
         compatMode: {
 
-          'MODERN_DEFAULTS': RNSimpleOpenvpn.CompatMode.MODERN_DEFAULTS,
-          'OVPN_TWO_FIVE_PEER': RNSimpleOpenvpn.CompatMode.OVPN_TWO_FIVE_PEER,
-          'OVPN_TWO_FOUR_PEER': RNSimpleOpenvpn.CompatMode.OVPN_TWO_FOUR_PEER,
-          'OVPN_TWO_THREE_PEER': RNSimpleOpenvpn.CompatMode.OVPN_TWO_THREE_PEER
+          MODERN_DEFAULTS: RNSimpleOpenvpn.CompatMode.MODERN_DEFAULTS,
+          OVPN_TWO_FIVE_PEER: RNSimpleOpenvpn.CompatMode.OVPN_TWO_FIVE_PEER,
+          OVPN_TWO_FOUR_PEER: RNSimpleOpenvpn.CompatMode.OVPN_TWO_FOUR_PEER,
+          OVPN_TWO_THREE_PEER: RNSimpleOpenvpn.CompatMode.OVPN_TWO_THREE_PEER
 
         } [vpnConnectionConfiguration.compatMode]
 
@@ -282,8 +282,7 @@ const Center = () => {
       onPress = {() => HandleVpnPress()}/>
 
       <Tip
-      text = {tipText}
-      onPress = {() => HandleVpnPress()}/>
+      text = {tipText}/>
 
       <Action 
       text = {connectionDestinationText}
@@ -298,41 +297,43 @@ const Center = () => {
 
 const VpnButton = ({onPress}) => {
 
-  // animations:
   const scaleControl = useSharedValue (1)
   const opacityControl = useSharedValue (1)
 
-  const animationStyles = useAnimatedStyle (() => {
 
-    return {
+  const animationStyles = useAnimatedStyle (() => ({
 
       transform: [{scale: scaleControl.value}],
       opacity: opacityControl.value
 
-    }
+  }))
 
-  })
 
+  // press animations:
 
   const animationDuration = 95
 
   const handlePressIn = () => {
 
-    scaleControl.value = withTiming (0.975, {duration: animationDuration})
-    opacityControl.value = withTiming (0.5, {duration: animationDuration})
+    scaleControl.value = withTiming (0.955, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
+    opacityControl.value = withTiming (0.5, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
 
   }
 
   const handlePressOut = () => {
 
-    scaleControl.value = withTiming (1, {duration: animationDuration})
-    opacityControl.value = withTiming (1, {duration: animationDuration})
+    scaleControl.value = withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
+    opacityControl.value = withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
 
   }
+
   // .
 
 
   const handlePress = () => {
+
+    scaleControl.value = withSequence (withTiming (0.955, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}), withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}))
+    opacityControl.value = withSequence (withTiming (0.5, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}), withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}))
 
     onPress ()
 
@@ -341,20 +342,17 @@ const VpnButton = ({onPress}) => {
 
   return (
 
-    <AnimatedTouchableOpacity
+    <TouchableOpacity
     activeOpacity = {1}
     onPressIn = {() => handlePressIn()}
     onPressOut = {() => handlePressOut()}
     onPress = {() => handlePress()}
-    style = {[{
+    style = {{
     padding: 15,
     marginBottom: -15,
-    borderRadius: 1000},
-    animationStyles]}>
+    borderRadius: 1000}}>
 
-      <Animated.View
-      onPress = {() => onPress()}
-      style = {{
+      <Animated.View style = {[{
       justifyContent: 'center',
       alignItems: 'center',
       width: 225,
@@ -363,7 +361,8 @@ const VpnButton = ({onPress}) => {
       borderRadius: 1000,
       borderColor: styles.VpnButton.borderColor,
       backgroundColor: styles.VpnButton.backgroundColor,
-      boxShadow: styles.VpnButton.boxShadow}}>
+      boxShadow: styles.VpnButton.boxShadow},
+      animationStyles]}>
 
         <Image
         source = {styles.VpnButton.Olive_PNG}
@@ -373,16 +372,48 @@ const VpnButton = ({onPress}) => {
 
       </Animated.View>
 
-    </AnimatedTouchableOpacity>
+    </TouchableOpacity>
 
   )
 
 }
 
-const Tip = ({text, onPress}) => {
+const Tip = ({text}) => {
+
+  const picOpacityTemporalControl = useSharedValue (1)
+  const textColorControl = useSharedValue (styles.Tip.color)
 
   const opacityControl = useSharedValue (1)
+  const scaleControl = useSharedValue (1)
 
+
+  // theme animations:
+
+  const hexToRgb = hex => {
+
+    const rgb_data = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
+    ,(m, r, g, b) => '#' + r + r + g + g + b + b)
+    .substring(1).match(/.{2}/g)
+    .map(x => parseInt(x, 16))
+
+    return `rgba(${rgb_data[0]}, ${rgb_data[1]}, ${rgb_data[2]}, 1)`
+
+  }
+
+  useEffect (() => {
+
+    const currRgba = textColorControl.value[0] == '#' ? hexToRgb (textColorControl.value) : textColorControl.value
+    const nextRgba = hexToRgb (styles.Tip.color)
+
+    if (currRgba != nextRgba) picOpacityTemporalControl.value = withSequence (withTiming (0.66, {duration: 125, easing: Easing.inOut(Easing.quad)}), withTiming (1, {duration: 125, easing: Easing.inOut(Easing.quad)}))
+    textColorControl.value = withTiming (styles.Tip.color, {duration: 250, easing: Easing.inOut(Easing.quad)})
+
+  }, [theme])
+
+  // .
+
+
+  // + press animations:
 
   const subscribeVPN = async () => {  // logging on triggering
 
@@ -390,8 +421,16 @@ const Tip = ({text, onPress}) => {
 
     switch (VpnState) {
 
-      case 2: opacityControl.value = withTiming (1, {duration: 1000}); break
-      default: opacityControl.value = withRepeat (withSequence (withDelay (5000, withTiming (1, {duration: 1})), withDelay (500, withTiming (0.33, {duration: 1000})), withTiming (1, {duration: 1000})), -1)
+      case 2:
+
+        opacityControl.value = withTiming (1, {duration: 1000})
+        scaleControl.value = withTiming (1, {duration: 1000})
+        break
+
+      default:
+
+        opacityControl.value = withRepeat (withSequence (withDelay (5000, withTiming (1, {duration: 1})), withDelay (500, withTiming (0.33, {duration: 1000})), withTiming (1, {duration: 1000})), -1)
+        scaleControl.value = withRepeat (withSequence (withDelay (5000, withTiming (1, {duration: 1})), withDelay (500, withTiming (0.995, {duration: 1000})), withTiming (1, {duration: 1000})), -1)
 
     }
 
@@ -404,8 +443,16 @@ const Tip = ({text, onPress}) => {
 
       switch (VpnState) {
 
-        case 2: opacityControl.value = withTiming (1, {duration: 1000}); break
-        default: opacityControl.value = withRepeat (withSequence (withDelay (5000, withTiming (1, {duration: 1})), withDelay (500, withTiming (0.33, {duration: 1000})), withTiming (1, {duration: 1000})), -1)
+        case 2:
+
+          opacityControl.value = withTiming (1, {duration: 1000})
+          scaleControl.value = withTiming (1, {duration: 1000})
+          break
+
+        default:
+
+          opacityControl.value = withRepeat (withSequence (withDelay (5000, withTiming (1, {duration: 1})), withDelay (500, withTiming (0.33, {duration: 1000})), withTiming (1, {duration: 1000})), -1)
+          scaleControl.value = withRepeat (withSequence (withDelay (5000, withTiming (1, {duration: 1})), withDelay (500, withTiming (0.995, {duration: 1000})), withTiming (1, {duration: 1000})), -1)
 
       }
 
@@ -421,6 +468,8 @@ const Tip = ({text, onPress}) => {
 
   }
 
+  // .
+
 
   useEffect (() => {
 
@@ -433,10 +482,7 @@ const Tip = ({text, onPress}) => {
 
   return (
 
-    <AnimatedTouchableOpacity
-    activeOpacity = {1}
-    onPress = {() => onPress()}
-    style = {{
+    <Animated.View style = {{
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
@@ -444,24 +490,26 @@ const Tip = ({text, onPress}) => {
     marginVertical: -10,
     borderRadius: 15,
     
-    opacity: opacityControl}}>
+    opacity: opacityControl,
+    transform: [{scale: scaleControl}]}}>
 
-      <Image
+      <Animated.Image
       source = {styles.Tip.Tap_PNG}
       style = {{
       width: 17,
-      height: 17}}/>
+      height: 17,
+      opacity: picOpacityTemporalControl}}/>
 
-      <Text style = {{
+      <Animated.Text style = {{
       fontFamily: styles.Tip.fontFamily,
-      color: styles.Tip.color,
+      color: textColorControl,
       fontSize: 19}}>
 
         {text}
 
-      </Text>
+      </Animated.Text>
 
-    </AnimatedTouchableOpacity>
+    </Animated.View>
 
   )
 
@@ -469,41 +517,72 @@ const Tip = ({text, onPress}) => {
 
 const Action = ({text, onPress}) => {
 
-  // animations:
+  const picOpacityTemporalControl = useSharedValue (1)
+  const textColorControl = useSharedValue (styles.Action.color)
+
   const scaleControl = useSharedValue (1)
   const opacityControl = useSharedValue (1)
 
-  const animationStyles = useAnimatedStyle (() => {
 
-    return {
+  const animationStyles = useAnimatedStyle (() => ({
 
-      transform: [{scale: scaleControl.value}],
-      opacity: opacityControl.value
+    transform: [{scale: scaleControl.value}],
+    opacity: opacityControl.value
 
-    }
+  }))
 
-  })
 
+  // theme animations:
+
+  const hexToRgb = hex => {
+
+    const rgb_data = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
+    ,(m, r, g, b) => '#' + r + r + g + g + b + b)
+    .substring(1).match(/.{2}/g)
+    .map(x => parseInt(x, 16))
+
+    return `rgba(${rgb_data[0]}, ${rgb_data[1]}, ${rgb_data[2]}, 1)`
+
+  }
+  
+  useEffect (() => {
+    
+    const currRgba = textColorControl.value[0] == '#' ? hexToRgb (textColorControl.value) : textColorControl.value
+    const nextRgba = hexToRgb (styles.Action.color)
+    
+    if (currRgba != nextRgba) picOpacityTemporalControl.value = withSequence (withTiming (0.66, {duration: 125, easing: Easing.inOut(Easing.quad)}), withTiming (1, {duration: 125, easing: Easing.inOut(Easing.quad)}))
+    textColorControl.value = withTiming (styles.Action.color, {duration: 250, easing: Easing.inOut(Easing.quad)})
+
+  }, [theme])
+
+  // .
+
+
+  // press animations:
 
   const animationDuration = 95
 
   const handlePressIn = () => {
 
-    scaleControl.value = withTiming (0.9575, {duration: animationDuration})
-    opacityControl.value = withTiming (0.5, {duration: animationDuration})
+    scaleControl.value = withTiming (0.9575, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
+    opacityControl.value = withTiming (0.5, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
 
   }
 
   const handlePressOut = () => {
 
-    scaleControl.value = withTiming (1, {duration: animationDuration})
-    opacityControl.value = withTiming (1, {duration: animationDuration})
+    scaleControl.value = withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
+    opacityControl.value = withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
 
   }
+
   // .
 
 
   const handlePress = () => {
+
+    scaleControl.value = withSequence (withTiming (0.9575, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}), withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}))
+    opacityControl.value = withSequence (withTiming (0.5, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}), withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}))
 
     onPress ()
 
@@ -512,45 +591,54 @@ const Action = ({text, onPress}) => {
 
   return (
 
-    <AnimatedTouchableOpacity
+    <TouchableOpacity
     activeOpacity = {1}
     onPressIn = {() => handlePressIn()}
     onPressOut = {() => handlePressOut()}
     onPress = {() => handlePress()}
-    style = {[{
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+    style = {{
     padding: 10,
     paddingHorizontal: 16,
     marginVertical: -10,
-    borderRadius: 8},
-    animationStyles]}>
+    borderRadius: 8}}>
 
-      <Image
-      source = {styles.Action.Location_PNG}
-      style = {{
-      width: 17,
-      height: 17,
-      bottom: 0.75}}/>
+      <Animated.View
+      style = {[{
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 8},
+      animationStyles]}>
 
-      <Text style = {{
-      fontFamily: styles.Action.fontFamily,
-      color: styles.Action.color,
-      fontSize: 19}}>
+        <Animated.Image
+        source = {styles.Action.Location_PNG}
+        style = {{
+        width: 17,
+        height: 17,
+        bottom: 0.75,
+        right: 0.25,
+        opacity: picOpacityTemporalControl}}/>
 
-        {text}
+        <Animated.Text style = {{
+        fontFamily: styles.Action.fontFamily,
+        color: textColorControl,
+        fontSize: 19}}>
 
-      </Text>
+          {text}
 
-      <Image
-      source = {styles.Action.Arrow_PNG}
-      style = {{
-      width: 15,
-      height: 15,
-      top: 0.75}}/>
+        </Animated.Text>
 
-    </AnimatedTouchableOpacity>
+        <Animated.Image
+        source = {styles.Action.Arrow_PNG}
+        style = {{
+        width: 15,
+        height: 15,
+        top: 0.25,
+        right: 0.25,
+        opacity: picOpacityTemporalControl}}/>
+
+      </Animated.View>
+
+    </TouchableOpacity>
 
   )
 

@@ -34,7 +34,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>exp+olivevpn</string>
+          <string>exp+q</string>
         </array>
       </dict>
     </array>
