@@ -71,8 +71,10 @@ const Tip = ({tipText, onPress}) => {
 
   }))
 
+
   const commonEasing = comEsng = Easing.inOut (Easing.quad)
   const themeAnimationDuration = thAnDu = 250
+  const animationDuration = AnDu = 95
 
 
   // theme animations:
@@ -90,21 +92,19 @@ const Tip = ({tipText, onPress}) => {
 
   // press animations:
 
-  const animationDuration = 95
-
   const handlePressIn = () => {
 
-    scaleControl.value = withTiming (0.975, {duration: animationDuration, easing: comEsng})
-    opacityControl.value = withTiming (0.5, {duration: animationDuration, easing: comEsng})
-    marginControl.value = withTiming (-0.5, {duration: animationDuration, easing: comEsng})
+    scaleControl.value = withTiming (0.975, {duration: AnDu, easing: comEsng})
+    opacityControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
+    marginControl.value = withTiming (-0.5, {duration: AnDu, easing: comEsng})
 
   }
 
   const handlePressOut = () => {
 
-    scaleControl.value = withTiming (1, {duration: animationDuration, easing: comEsng})
-    opacityControl.value = withTiming (1, {duration: animationDuration, easing: comEsng})
-    marginControl.value = withTiming (0, {duration: animationDuration, easing: comEsng})
+    scaleControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+    opacityControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+    marginControl.value = withTiming (0, {duration: AnDu, easing: comEsng})
 
   }
 
@@ -113,9 +113,9 @@ const Tip = ({tipText, onPress}) => {
 
   const handlePress = () => {
 
-    scaleControl.value = withSequence (withTiming (0.975, {duration: animationDuration, easing: comEsng}), withTiming (1, {duration: animationDuration, easing: comEsng}))
-    opacityControl.value = withSequence (withTiming (0.5, {duration: animationDuration, easing: comEsng}), withTiming (1, {duration: animationDuration, easing: comEsng}))
-    marginControl.value = withSequence (withTiming (-0.5, {duration: animationDuration, easing: comEsng}), withTiming (0, {duration: animationDuration, easing: comEsng}))
+    scaleControl.value = withSequence (withTiming (0.975, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+    opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+    marginControl.value = withSequence (withTiming (-0.5, {duration: AnDu, easing: comEsng}), withTiming (0, {duration: AnDu, easing: comEsng}))
 
     onPress ()
 

@@ -17,8 +17,6 @@ import { Platform } from 'react-native'
 
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from 'react-native-reanimated'
 
-// const {uri, width, height} = Image.resolveAssetSource (require ('../../../../../../assets/PNG/Location/Black.svg'))
-
 
 const device_is_iphone = Platform.OS === 'ios'
 
@@ -300,7 +298,6 @@ const VpnButton = ({onPress}) => {
   const scaleControl = useSharedValue (1)
   const opacityControl = useSharedValue (1)
 
-
   const animationStyles = useAnimatedStyle (() => ({
 
       transform: [{scale: scaleControl.value}],
@@ -309,21 +306,23 @@ const VpnButton = ({onPress}) => {
   }))
 
 
-  // press animations:
+  const commonEasing = comEsng = Easing.inOut (Easing.quad)
+  const animationDuration = AnDu = 95
 
-  const animationDuration = 95
+
+  // press animations:
 
   const handlePressIn = () => {
 
-    scaleControl.value = withTiming (0.955, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
-    opacityControl.value = withTiming (0.5, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
+    scaleControl.value = withTiming (0.955, {duration: AnDu, easing: comEsng})
+    opacityControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
 
   }
 
   const handlePressOut = () => {
 
-    scaleControl.value = withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
-    opacityControl.value = withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
+    scaleControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+    opacityControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
 
   }
 
@@ -332,8 +331,8 @@ const VpnButton = ({onPress}) => {
 
   const handlePress = () => {
 
-    scaleControl.value = withSequence (withTiming (0.955, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}), withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}))
-    opacityControl.value = withSequence (withTiming (0.5, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}), withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}))
+    scaleControl.value = withSequence (withTiming (0.955, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+    opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
 
     onPress ()
 
@@ -387,6 +386,9 @@ const Tip = ({text}) => {
   const scaleControl = useSharedValue (1)
 
 
+  const commonEasing = comEsng = Easing.inOut (Easing.quad)
+
+
   // theme animations:
 
   const hexToRgb = hex => {
@@ -405,8 +407,8 @@ const Tip = ({text}) => {
     const currRgba = textColorControl.value[0] == '#' ? hexToRgb (textColorControl.value) : textColorControl.value
     const nextRgba = hexToRgb (styles.Tip.color)
 
-    if (currRgba != nextRgba) picOpacityTemporalControl.value = withSequence (withTiming (0.66, {duration: 125, easing: Easing.inOut(Easing.quad)}), withTiming (1, {duration: 125, easing: Easing.inOut(Easing.quad)}))
-    textColorControl.value = withTiming (styles.Tip.color, {duration: 250, easing: Easing.inOut(Easing.quad)})
+    if (currRgba != nextRgba) picOpacityTemporalControl.value = withSequence (withTiming (0.66, {duration: 125, easing: comEsng}), withTiming (1, {duration: 125, easing: comEsng}))
+    textColorControl.value = withTiming (styles.Tip.color, {duration: 250, easing: comEsng})
 
   }, [theme])
 
@@ -523,13 +525,15 @@ const Action = ({text, onPress}) => {
   const scaleControl = useSharedValue (1)
   const opacityControl = useSharedValue (1)
 
-
   const animationStyles = useAnimatedStyle (() => ({
 
     transform: [{scale: scaleControl.value}],
     opacity: opacityControl.value
 
   }))
+
+
+  const commonEasing = comEsng = Easing.inOut (Easing.quad)
 
 
   // theme animations:
@@ -550,8 +554,8 @@ const Action = ({text, onPress}) => {
     const currRgba = textColorControl.value[0] == '#' ? hexToRgb (textColorControl.value) : textColorControl.value
     const nextRgba = hexToRgb (styles.Action.color)
     
-    if (currRgba != nextRgba) picOpacityTemporalControl.value = withSequence (withTiming (0.66, {duration: 125, easing: Easing.inOut(Easing.quad)}), withTiming (1, {duration: 125, easing: Easing.inOut(Easing.quad)}))
-    textColorControl.value = withTiming (styles.Action.color, {duration: 250, easing: Easing.inOut(Easing.quad)})
+    if (currRgba != nextRgba) picOpacityTemporalControl.value = withSequence (withTiming (0.66, {duration: 125, easing: comEsng}), withTiming (1, {duration: 125, easing: comEsng}))
+    textColorControl.value = withTiming (styles.Action.color, {duration: 250, easing: comEsng})
 
   }, [theme])
 
@@ -560,19 +564,19 @@ const Action = ({text, onPress}) => {
 
   // press animations:
 
-  const animationDuration = 95
+  const animationDuration = AnDu = 95
 
   const handlePressIn = () => {
 
-    scaleControl.value = withTiming (0.9575, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
-    opacityControl.value = withTiming (0.5, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
+    scaleControl.value = withTiming (0.9575, {duration: AnDu, easing: comEsng})
+    opacityControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
 
   }
 
   const handlePressOut = () => {
 
-    scaleControl.value = withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
-    opacityControl.value = withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)})
+    scaleControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+    opacityControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
 
   }
 
@@ -581,8 +585,8 @@ const Action = ({text, onPress}) => {
 
   const handlePress = () => {
 
-    scaleControl.value = withSequence (withTiming (0.9575, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}), withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}))
-    opacityControl.value = withSequence (withTiming (0.5, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}), withTiming (1, {duration: animationDuration, easing: Easing.inOut(Easing.quad)}))
+    scaleControl.value = withSequence (withTiming (0.9575, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+    opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
 
     onPress ()
 

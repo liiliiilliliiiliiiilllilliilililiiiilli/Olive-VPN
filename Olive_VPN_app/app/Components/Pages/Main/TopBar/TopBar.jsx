@@ -15,7 +15,6 @@ const TopBar = () => {
 
   const [styles, theme, setTheme] = useThemes (styles => styles.MainPage.Top)
 
-
   const borderColorControl = useSharedValue (styles.borderColor)
   const backgroundColorControl = useSharedValue (styles.backgroundColor)
 

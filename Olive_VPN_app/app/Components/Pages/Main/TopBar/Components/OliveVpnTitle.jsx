@@ -11,10 +11,9 @@ const OliveVpnTitle = () => {
 
   const [styles, theme] = useThemes (styles => styles.MainPage.Top.Title)
 
-
+  
   const textColorControl = useSharedValue (styles.color)
   const lineColorControl = useSharedValue (styles.lineColor)
-
 
   const commonEasing = comEsng = Easing.inOut (Easing.quad)
   const themeAnimationDuration = thAnDu = 250

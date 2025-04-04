@@ -9,6 +9,7 @@ const ThemeSwitcher = ({onPress}) => {
 
   const [styles, theme] = useThemes (styles => styles.MainPage.Top.Button.ThemeSwitcher)
 
+  
   const isSystemTheme = ['systemThemeLight', 'systemThemeDark'].includes(theme)
 
   const themePic = isSystemTheme ? styles.AutomaticThemeIcon_PNG : styles.ThemeIcon_PNG
