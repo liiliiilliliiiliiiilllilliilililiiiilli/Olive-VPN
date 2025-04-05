@@ -3,7 +3,7 @@
 
 import { useEffect } from 'react'
 import { useThemes } from '../../../../../Styles/Hooks/UseThemes'
-import { useAppMainSlider } from '../../../../../Redux/Hooks/MainSlider'
+import { useAppMenuSlider } from '../../../../../Redux/Hooks/MenuSlider'
 
 import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
 
@@ -15,7 +15,7 @@ import ThemeSwitcher from './Components/ThemeSwitcher'
 const TopBar = () => {
 
   const [styles, theme, setTheme] = useThemes (styles => styles.MainPage.Top)
-  const [isAppMainSliderOpened, setAppIsMainSliderOpened] = useAppMainSlider ()
+  const [isAppMenuSliderOpened, setAppIsMenuSliderOpened] = useAppMenuSlider ()
 
   const borderColorControl = useSharedValue (styles.borderColor)
   const backgroundColorControl = useSharedValue (styles.backgroundColor)
@@ -26,7 +26,7 @@ const TopBar = () => {
 
   const handleMenuButtonPressed = () => {
 
-    setAppIsMainSliderOpened (true)
+    setAppIsMenuSliderOpened (true)
 
   }
 

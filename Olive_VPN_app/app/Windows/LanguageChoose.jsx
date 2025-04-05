@@ -2,9 +2,7 @@
 
 
 import { useAppOpenedWindows } from '../../Redux/Hooks/OpenedWindows'
-
-import { ScrollView, View } from 'react-native'
-
+import { View } from 'react-native'
 import Window from '../Components/Common/Window/Window'
 
 
@@ -41,25 +39,28 @@ const LanguageChoose = () => {
 
     <Window
     isOpened = {isOpened}
+    closeSelf = {() => handleDonePress()}
     title = 'Язык приложения'
     rightButton = {{
-    text: 'Готово',
-    onPress: () => handleDonePress()}}>
+      text: 'Готово',
+      onPress: () => handleDonePress()}}>
 
-      <ScrollView
-      showsVerticalScrollIndicator = {false}
-      showsHorizontalScrollIndicator = {false}
-      style = {{
-      width: '100%',
-      height: '100%',
-      paddingHorizontal: 25}}>
-  
-        <View style = {{}}>
-        </View>
-
-      </ScrollView>
+      <Content/>
 
     </Window>
+
+  )
+
+}
+
+const Content = () => {
+
+  return (
+
+    <View style = {{
+    width: 100,
+    height: 100,
+    backgroundColor: 'blue'}}/>
 
   )
 

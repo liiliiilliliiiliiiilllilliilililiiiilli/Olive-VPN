@@ -4,7 +4,7 @@
 import { View, TouchableOpacity, Text } from 'react-native'
 
 
-const Window = ({isOpened, closeSelf, title, centerButton, rightButton, leftButton, children}) => {
+const Window = ({isOpened, closeSelf, title, centerButton, rightButton, leftButton, children, style}) => {
 
   const handleShadowPress = () => {
 
@@ -39,7 +39,8 @@ const Window = ({isOpened, closeSelf, title, centerButton, rightButton, leftButt
           title = {title}
           centerButton = {centerButton}
           rightButton = {rightButton}
-          leftButton = {leftButton}>
+          leftButton = {leftButton}
+          style = {style}>
 
             {children}
 
@@ -55,7 +56,7 @@ const Window = ({isOpened, closeSelf, title, centerButton, rightButton, leftButt
 
 }
 
-const WindowBlock = ({title, centerButton, leftButton, rightButton, children}) => {
+const WindowBlock = ({title, centerButton, leftButton, rightButton, children, style}) => {
 
   const TopBar = ({title: title}) => {
 
@@ -115,14 +116,16 @@ const WindowBlock = ({title, centerButton, leftButton, rightButton, children}) =
       height: 53 + 5,
       boxShadow: '0px -2.5px 10px #141414'}}>
 
-        {centerButton ?
+        { centerButton ?
 
           <TouchableOpacity
           onPress = {() => centerButton.onPress()}
           style = {{
           justifyContent: 'center',
           alignItems: 'center',
-          flex: 1}}>
+          flex: 1,
+          height: '100%',
+          paddingBottom: 2.5}}>
 
             <Text style = {{
             fontFamily: 'Archivo-SemiBold',
@@ -146,6 +149,7 @@ const WindowBlock = ({title, centerButton, leftButton, rightButton, children}) =
             justifyContent: 'center',
             alignItems: 'flex-start',
             flex: 1,
+            height: '100%',
             marginRight: 'auto',
             paddingLeft: 35,
             paddingBottom: 2.5}}>
@@ -199,7 +203,7 @@ const WindowBlock = ({title, centerButton, leftButton, rightButton, children}) =
 
   return (
 
-    <View style = {{
+    <View style = {[{
     position: 'absolute',
     width: '90%',
     maxWidth: 500,
@@ -209,12 +213,15 @@ const WindowBlock = ({title, centerButton, leftButton, rightButton, children}) =
     borderBottomLeftRadius: 12,
     backgroundColor: '#141414',
     overflow: 'hidden',
-    boxShadow: '0px 2.5px 5px rgb(3, 10, 1)'}}>
+    boxShadow: '0px 2.5px 5px rgb(3, 10, 1)'},
+    style]}>
 
       <TopBar
       title = {title}/>
 
-      <MainContent>{children}</MainContent>
+      <MainContent>
+        {children}
+      </MainContent>
       
       <BottomBar
       centerButton = {centerButton}

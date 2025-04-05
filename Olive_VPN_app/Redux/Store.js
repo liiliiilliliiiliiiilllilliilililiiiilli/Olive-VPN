@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { ThemeReducer } from './ThemeSlice'
 import { MainPageStatusTextReducer } from './MainPageStatusTextSlice'
 import { OpenedWindowsReducer } from './OpenedWindowsSlice'
-import { IsMainSliderOpenedReducer } from './IsMainSliderOpenedSclice'
+import { IsMenuSliderOpenedReducer } from './IsMenuSliderOpenedSclice'
 
 
 const ReduxStore = configureStore ({
@@ -13,7 +13,7 @@ const ReduxStore = configureStore ({
         theme: ThemeReducer,
         MainPageStatusText: MainPageStatusTextReducer,
         openedWindows: OpenedWindowsReducer,
-        isMainSliderOpened: IsMainSliderOpenedReducer
+        isMenuSliderOpened: IsMenuSliderOpenedReducer
     
     },
 

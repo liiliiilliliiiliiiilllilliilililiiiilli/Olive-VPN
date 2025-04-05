@@ -36,6 +36,11 @@ const Tap_dark_green_PNG = require ('../../../assets/PNG/Tap/DarkGreen.png')
 const Location_green_PNG = require ('../../../assets/PNG/Location/Green.png')
 const MagicWand_light_PNG = require ('../../../assets/PNG/MagicWand/Light.png')
 
+const World_grey_PNG = require ('../../../assets/PNG/World/Grey.png')
+const Info_grey_PNG = require ('../../../assets/PNG/Info/Grey.png')
+const Done_Black_PNG = require ('../../../assets/PNG/Done/Black.png')
+const Done_White_PNG = require ('../../../assets/PNG/Done/White.png')
+
 
 const Colors = {
 
@@ -82,11 +87,43 @@ const MainTheme = {
 
     },
 
-    LanguageWindow: {},
+    LanguageChooseWindow: {},
 
     LocationsWindow: {},
 
-    DescriptionWindow: {},
+    AppDescriptionWindow: {},
+
+    MenuSlider: {
+
+        Skeleton: {},
+
+        Separator: {},
+
+        LanguageButton: {
+
+            Planet_PNG: World_grey_PNG
+
+        },
+
+        FeedbackButton: {
+
+            Info_PNG: Info_grey_PNG,
+            Arrow_PNG: ArrowCompact_grey_PNG
+
+        },
+
+        AutoVpnToggler: {
+
+            Done_PNG: Done_Black_PNG,
+
+            backgroundColor_Chosen: 'rgb(175, 192, 168)',
+            backgroundColor_Unchosen: '#171717',
+            borderColor_Chosen: '#f2f2f2',
+            borderColor_Unchosen: '#f2f2f2'
+
+        }
+
+    },
 
     MainPage: {
 

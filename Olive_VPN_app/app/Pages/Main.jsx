@@ -7,9 +7,10 @@ import TopBar from '../Components/Pages/Main/TopBar/TopBar'
 import MainContent from '../Components/Pages/Main/MainContent/MainContent'
 import BottomBar from '../Components/Pages/Main/BottomBar/BottomBar'
 
-import { default as MainSlider } from '../Sliders/Main'
+import { default as MenuSlider } from '../Sliders/Menu'
 
 import { default as LanguageChooseWindow } from '../Windows/LanguageChoose'
+import { default as FeedbackWindow } from '../Windows/Feedback'
 import { default as AppDescriptionWindow } from '../Windows/AppDescription'
 
 
@@ -26,9 +27,10 @@ const Main = () => {
       <MainContent/>
       <BottomBar/>
 
-      <MainSlider/>
+      <MenuSlider/>
 
       <LanguageChooseWindow/>
+      <FeedbackWindow/>
       <AppDescriptionWindow/>
 
     </MainField>
