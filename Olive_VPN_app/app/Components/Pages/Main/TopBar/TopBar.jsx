@@ -3,6 +3,7 @@
 
 import { useEffect } from 'react'
 import { useThemes } from '../../../../../Styles/Hooks/UseThemes'
+import { useAppMainSlider } from '../../../../../Redux/Hooks/MainSlider'
 
 import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
 
@@ -14,6 +15,7 @@ import ThemeSwitcher from './Components/ThemeSwitcher'
 const TopBar = () => {
 
   const [styles, theme, setTheme] = useThemes (styles => styles.MainPage.Top)
+  const [isAppMainSliderOpened, setAppIsMainSliderOpened] = useAppMainSlider ()
 
   const borderColorControl = useSharedValue (styles.borderColor)
   const backgroundColorControl = useSharedValue (styles.backgroundColor)
@@ -22,13 +24,13 @@ const TopBar = () => {
   const themeAnimationDuration = thAnDu = 250
 
 
-  const HandleMenuButtonPressed = () => {
+  const handleMenuButtonPressed = () => {
 
-    console.info ('MenuButton pressed')
+    setAppIsMainSliderOpened (true)
 
   }
 
-  const HandleThemeSwitcherPressed = () => {
+  const handleThemeSwitcherPressed = () => {
 
     setTheme ('next')
 
@@ -56,12 +58,12 @@ const TopBar = () => {
     backgroundColor: backgroundColorControl}}>
             
       <MenuButton
-      onPress = {() => HandleMenuButtonPressed()}/>
+      onPress = {() => handleMenuButtonPressed()}/>
 
       <OliveVpnTitle/>
 
       <ThemeSwitcher
-      onPress = {() => HandleThemeSwitcherPressed()}/>
+      onPress = {() => handleThemeSwitcherPressed()}/>
 
     </Animated.View>
 

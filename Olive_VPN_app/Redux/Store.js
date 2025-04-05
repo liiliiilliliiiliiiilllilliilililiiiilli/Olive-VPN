@@ -2,6 +2,8 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import { ThemeReducer } from './ThemeSlice'
 import { MainPageStatusTextReducer } from './MainPageStatusTextSlice'
+import { OpenedWindowsReducer } from './OpenedWindowsSlice'
+import { IsMainSliderOpenedReducer } from './IsMainSliderOpenedSclice'
 
 
 const ReduxStore = configureStore ({
@@ -9,7 +11,9 @@ const ReduxStore = configureStore ({
     reducer: {
         
         theme: ThemeReducer,
-        MainPageStatusText: MainPageStatusTextReducer
+        MainPageStatusText: MainPageStatusTextReducer,
+        openedWindows: OpenedWindowsReducer,
+        isMainSliderOpened: IsMainSliderOpenedReducer
     
     },
 

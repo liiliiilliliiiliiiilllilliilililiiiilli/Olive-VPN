@@ -220,7 +220,7 @@ const Center = () => {
   }
 
 
-  const HandleLocationPress = () => {
+  const handleLocationPress = () => {
 
     console.info ('Location pressed')
 
@@ -297,7 +297,7 @@ const Center = () => {
 
       <Action 
       text = {connectionDestination}
-      onPress = {() => HandleLocationPress()}/>
+      onPress = {() => handleLocationPress()}/>
 
     </View>
 

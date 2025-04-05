@@ -14,7 +14,7 @@ const SetMainPageStatusText = createAsyncThunk (
 )
 
 
-const ThemeSlice = createSlice ({
+const MainPageStatusTextSlice = createSlice ({
 
   name: 'MainPageStatusText',
 
@@ -40,9 +40,9 @@ const ThemeSlice = createSlice ({
 
 })
 
-const { SetMainPageStatusTextState } = ThemeSlice.actions
+const { SetMainPageStatusTextState } = MainPageStatusTextSlice.actions
 
-const MainPageStatusTextReducer = ThemeSlice.reducer
+const MainPageStatusTextReducer = MainPageStatusTextSlice.reducer
 
 
 export { MainPageStatusTextReducer, SetMainPageStatusText }

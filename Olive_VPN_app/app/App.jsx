@@ -9,9 +9,11 @@ import { useFonts } from 'expo-font'
 import { useThemes } from '../Styles/Hooks/UseThemes'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
 import { Text } from 'react-native'
+
 import Main from './Pages/Main'
-import Options from './Pages/Options'
+import ServersList from './Pages/ServersList'
 
 
 // axios.defaults.baseURL = 'https://OliveVPN.net:5000'
@@ -123,8 +125,8 @@ const App = () => {
           component = {Main}/>
 
           <Stack.Screen
-          name = 'Options'
-          component = {Options}/>
+          name = 'ServersList'
+          component = {ServersList}/>
 
         </Stack.Navigator>
 

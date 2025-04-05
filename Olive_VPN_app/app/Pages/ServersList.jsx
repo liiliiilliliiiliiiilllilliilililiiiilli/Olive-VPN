@@ -4,7 +4,7 @@
 import MainField from '../Components/Common/MainField/MainField'
 
 
-const Options = () => {
+const ServersList = () => {
 
   return (
 
@@ -16,4 +16,4 @@ const Options = () => {
 }
 
 
-export default Options
+export default ServersList

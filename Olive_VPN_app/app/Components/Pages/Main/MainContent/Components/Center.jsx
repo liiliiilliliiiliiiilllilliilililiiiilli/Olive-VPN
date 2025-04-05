@@ -226,13 +226,13 @@ const Center = () => {
   }
 
 
-  const HandleVpnPress = () => {
+  const handleVpnPress = () => {
 
     toggleVPN ()
 
   }
 
-  const HandleLocationPress = () => {
+  const handleLocationPress = () => {
 
     console.info ('Location pressed')
 
@@ -277,14 +277,14 @@ const Center = () => {
     gap: 21}}>
 
       <VpnButton
-      onPress = {() => HandleVpnPress()}/>
+      onPress = {() => handleVpnPress()}/>
 
       <Tip
       text = {tipText}/>
 
       <Action 
       text = {connectionDestinationText}
-      onPress = {() => HandleLocationPress()}/>
+      onPress = {() => handleLocationPress()}/>
 
     </View>
 

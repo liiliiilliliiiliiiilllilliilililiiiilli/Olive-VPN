@@ -2,7 +2,7 @@
 
 
 import { Provider } from 'react-redux'
-import { ReduxStore } from '../Redux/Store.js'
+import { ReduxStore } from '../Redux/Store'
 
 import App from './App'
 

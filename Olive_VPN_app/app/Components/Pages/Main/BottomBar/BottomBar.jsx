@@ -1,9 +1,14 @@
 // Component.
 
 
+import { useDispatch, useSelector } from 'react-redux'
+import { setOpenedWindows } from '../../../../../Redux/OpenedWindowsSlice'
+
 import { useEffect } from 'react'
 import { useThemes } from '../../../../../Styles/Hooks/UseThemes'
+
 import { View, TouchableOpacity } from 'react-native'
+
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, withSequence, Easing } from 'react-native-reanimated'
 
 
@@ -25,9 +30,23 @@ const BottomBar = () => {
   }
 
 
-  const HandleTipPress = () => {
-    
-    console.info ('Metalink pressed!')
+  const openedWindows = useSelector (state => state.openedWindows.value)
+
+  const dispatch = useDispatch ()
+  const setReduxOpenedWindows = callback => dispatch (setOpenedWindows (callback (openedWindows)))
+
+  const setReduxIsOpened = bool => {
+
+    bool
+
+      ? setReduxOpenedWindows (prev => [...prev, 'AppDescription'])
+      : setReduxOpenedWindows (prev => prev.filter (el => el != 'AppDescription'))
+
+  }
+
+  const handleTipPress = () => {
+
+    setReduxIsOpened (true)
 
   }
 
@@ -42,7 +61,7 @@ const BottomBar = () => {
 
       <Tip
       tipText = {tipText}
-      onPress = {() => HandleTipPress()}/>
+      onPress = {() => handleTipPress()}/>
 
     </View>
 
