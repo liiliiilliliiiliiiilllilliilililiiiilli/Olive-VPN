@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { setOpenedWindows } from '../../Redux/OpenedWindowsSlice'
+import { setOpenedWindows } from '../OpenedWindowsSlice'
 
 
 const useAppOpenedWindows = () => {

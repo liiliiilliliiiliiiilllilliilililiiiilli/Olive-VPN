@@ -1,19 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import { ThemeReducer } from './ThemeSlice'
-import { MainPageStatusTextReducer } from './MainPageStatusTextSlice'
-import { OpenedWindowsReducer } from './OpenedWindowsSlice'
-import { IsMenuSliderOpenedReducer } from './IsMenuSliderOpenedSclice'
+import { themeReducer } from './ThemeSlice'
+import { mainPageStatusTextReducer } from './MainPageStatusTextSlice'
+import { openedWindowsReducer } from './OpenedWindowsSlice'
+import { menuSliderReducer } from './MenuSliderSlice'
 
 
 const ReduxStore = configureStore ({
 
     reducer: {
         
-        theme: ThemeReducer,
-        MainPageStatusText: MainPageStatusTextReducer,
-        openedWindows: OpenedWindowsReducer,
-        isMenuSliderOpened: IsMenuSliderOpenedReducer
+        theme: themeReducer,
+        mainPageStatusText: mainPageStatusTextReducer,
+        openedWindows: openedWindowsReducer,
+        isMenuSliderOpened: menuSliderReducer
     
     },
 

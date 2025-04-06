@@ -1,15 +1,12 @@
 // Component.
 
 
-import { useDispatch, useSelector } from 'react-redux'
-import { setOpenedWindows } from '../../../../../Redux/OpenedWindowsSlice'
+import { useAppOpenedWindows } from '../../../../../Redux/Hooks/OpenedWindows'
 
 import { useEffect } from 'react'
-import { useThemes } from '../../../../../Styles/Hooks/UseThemes'
-
+import { useThemes } from '../../../../../Redux/Hooks/UseThemes'
 import { View, TouchableOpacity } from 'react-native'
-
-import Animated, { useSharedValue, useAnimatedStyle, withTiming, withSequence, Easing } from 'react-native-reanimated'
+import Animated, { useSharedValue, useAnimatedStyle, withSequence, withTiming, Easing } from 'react-native-reanimated'
 
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent (TouchableOpacity)
@@ -21,6 +18,8 @@ const BottomBar = () => {
 
   [styles, theme] = useThemes (styles => styles.MainPage.Bottom)
 
+  const [appOpenedWindows, setAppOpenedWindows] = useAppOpenedWindows ()
+
 
   const tipText = {
 
@@ -30,23 +29,18 @@ const BottomBar = () => {
   }
 
 
-  const openedWindows = useSelector (state => state.openedWindows.value)
-
-  const dispatch = useDispatch ()
-  const setReduxOpenedWindows = callback => dispatch (setOpenedWindows (callback (openedWindows)))
-
-  const setReduxIsOpened = bool => {
+  const setIsAppDescriptionOpened = bool => {
 
     bool
 
-      ? setReduxOpenedWindows (prev => [...prev, 'AppDescription'])
-      : setReduxOpenedWindows (prev => prev.filter (el => el != 'AppDescription'))
+      ? setAppOpenedWindows (prev => [...prev, 'AppDescription'])
+      : setAppOpenedWindows (prev => prev.filter (el => el != 'AppDescription'))
 
   }
 
   const handleTipPress = () => {
 
-    setReduxIsOpened (true)
+    setIsAppDescriptionOpened (true)
 
   }
 
@@ -82,11 +76,11 @@ const Tip = ({tipText, onPress}) => {
 
   const animationStyles = useAnimatedStyle (() => ({
 
-      color: textColorControl.value,
+    color: textColorControl.value,
 
-      transform: [{scale: scaleControl.value}],
-      opacity: opacityControl.value,
-      top: marginControl.value
+    transform: [{scale: scaleControl.value}],
+    opacity: opacityControl.value,
+    top: marginControl.value
 
   }))
 
@@ -127,9 +121,6 @@ const Tip = ({tipText, onPress}) => {
 
   }
 
-  // .
-
-
   const handlePress = () => {
 
     scaleControl.value = withSequence (withTiming (0.975, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
@@ -139,6 +130,8 @@ const Tip = ({tipText, onPress}) => {
     onPress ()
 
   }
+
+  // .
 
 
   return (
@@ -177,12 +170,19 @@ const MetaLink = ({children: text}) => {
 
   const textColorControl = useSharedValue (styles.metalinkColor)
 
+  const commonEasing = comEsng = Easing.inOut (Easing.quad)
+  const themeAnimationDuration = thAnDu = 250
+
+
+  // theme animations:
 
   useEffect (() =>
 
     textColorControl.value = withTiming (styles.metalinkColor, {duration: thAnDu, easing: comEsng})
 
   , [theme])
+
+  // .
 
 
   return (

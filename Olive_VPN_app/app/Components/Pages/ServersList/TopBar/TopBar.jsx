@@ -3,7 +3,7 @@
 
 import { useEffect } from 'react'
 import { useNavigation } from 'expo-router'
-import { useThemes } from '../../../../../Styles/Hooks/UseThemes'
+import { useThemes } from '../../../../../Redux/Hooks/UseThemes'
 
 import { View } from 'react-native'
 
@@ -13,11 +13,10 @@ import BackButton from './Components/BackButton'
 import Title from './Components/Title'
 
 
-
 const TopBar = () => {
   
-  const [styles, theme] = useThemes (styles => styles.MainPage.Top)
   const navigatiton = useNavigation ()
+  const [styles, theme] = useThemes (styles => styles.MainPage.Top)
 
   const borderColorControl = useSharedValue (styles.borderColor)
   const backgroundColorControl = useSharedValue (styles.backgroundColor)
@@ -26,12 +25,7 @@ const TopBar = () => {
   const themeAnimationDuration = thAnDu = 250
 
 
-  const handleBackButtonPressed = () => {
-
-    navigatiton.goBack ()
-
-  }
-
+  // theme animations:
 
   useEffect (() => {
 
@@ -39,6 +33,15 @@ const TopBar = () => {
     backgroundColorControl.value = withTiming (styles.backgroundColor, {duration: thAnDu, easing: comEsng})
 
   }, [theme])
+
+  // .
+
+
+  const handleBackButtonPressed = () => {
+
+    navigatiton.goBack ()
+
+  }
 
 
   return (

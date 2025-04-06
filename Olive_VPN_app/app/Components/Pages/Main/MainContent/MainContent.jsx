@@ -13,9 +13,9 @@ const MainContent = () => {
   return (
 
     <View style = {{
-    flexGrow: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
+    flexGrow: 1,
     width: '100%',
     gap: 25}}>
 

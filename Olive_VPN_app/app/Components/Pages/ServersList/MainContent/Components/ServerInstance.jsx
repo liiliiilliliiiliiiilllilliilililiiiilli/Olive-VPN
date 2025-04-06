@@ -1,13 +1,9 @@
 // Component.
 
 
-import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
+import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
 
-import { Image, Text, TouchableOpacity, View } from 'react-native'
-
-import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
+import { View, TouchableOpacity, Image, Text } from 'react-native'
 
 
 const ServerInstance = ({pic, title, availability, isChosen, style}) => {

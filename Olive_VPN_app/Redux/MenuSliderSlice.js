@@ -14,7 +14,7 @@ const setIsMenuSliderOpened = createAsyncThunk (
 )
 
 
-const IsMenuSliderOpenedSlice = createSlice ({
+const menuSliderSlice = createSlice ({
 
   name: 'isMenuSliderOpened',
 
@@ -32,7 +32,7 @@ const IsMenuSliderOpenedSlice = createSlice ({
 
     builder.addCase (setIsMenuSliderOpened.rejected, (state, action) => {
 
-      throw new Error (`IsMenuSliderOpenedSlice error: ${action.error.message}`)
+      throw new Error (`menuSliderSlice error: ${action.error.message}`)
 
     })
 
@@ -40,9 +40,9 @@ const IsMenuSliderOpenedSlice = createSlice ({
 
 })
 
-const { setIsMenuSliderOpenedState } = IsMenuSliderOpenedSlice.actions
+const { setIsMenuSliderOpenedState } = menuSliderSlice.actions
 
-const IsMenuSliderOpenedReducer = IsMenuSliderOpenedSlice.reducer
+const menuSliderReducer = menuSliderSlice.reducer
 
 
-export { IsMenuSliderOpenedReducer, setIsMenuSliderOpened }
+export { menuSliderReducer, setIsMenuSliderOpened }

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { SetTheme as SetThemeRedux } from '../../Redux/ThemeSlice'
-import { Themes } from '../Themes/Themes'
+import { SetTheme as SetThemeRedux } from '../ThemeSlice'
+import { Themes } from '../../Styles/Themes/Themes'
 
 
 const useThemes = (specific_styles_to_return_callback = e => e) => {  

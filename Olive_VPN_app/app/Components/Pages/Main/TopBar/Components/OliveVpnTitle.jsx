@@ -2,7 +2,7 @@
 
 
 import { useEffect } from 'react'
-import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
+import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
 import { View } from 'react-native'
 import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
 
@@ -10,7 +10,6 @@ import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reani
 const OliveVpnTitle = () => {
 
   const [styles, theme] = useThemes (styles => styles.MainPage.Top.Title)
-
   
   const textColorControl = useSharedValue (styles.color)
   const lineColorControl = useSharedValue (styles.lineColor)
@@ -34,8 +33,8 @@ const OliveVpnTitle = () => {
   return (
 
     <View style = {{
-    flex: 1,
-    alignItems: 'center'}}>
+    alignItems: 'center',
+    flex: 1}}>
 
       <Animated.Text style = {{
       fontFamily: styles.fontFamily,

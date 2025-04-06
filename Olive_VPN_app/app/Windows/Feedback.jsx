@@ -1,22 +1,21 @@
-// This is language choose window.
+// This is app feedback window.
 
 
 import TextLink from 'react-native-text-link'
-import { View, Linking } from 'react-native'
+
 import { useAppOpenedWindows } from '../../Redux/Hooks/OpenedWindows'
+import { View, Linking } from 'react-native'
 import Window from '../Components/Common/Window/Window'
 
 
 const Feedback = () => {
 
-  const [openedAppWindows, setAppOpenedWindows] = useAppOpenedWindows ()
+  const [appOpenedWindows, setAppOpenedWindows] = useAppOpenedWindows ()
 
 
-  // this window existence code:
+  const isOpened = appOpenedWindows.includes ('Feedback')
 
-  const isOpened = openedAppWindows.includes ('Feedback')
-
-  const setReduxIsOpened = bool => {
+  const setIsSelfOpened = bool => {
 
     bool
 
@@ -25,12 +24,10 @@ const Feedback = () => {
 
   }
 
-  // .
 
+  const handleOkayPress = () => {
 
-  const handleDonePress = () => {
-
-    setReduxIsOpened (false)
+    setIsSelfOpened (false)
 
   }
 
@@ -39,11 +36,11 @@ const Feedback = () => {
 
     <Window
     isOpened = {isOpened}
-    closeSelf = {() => handleDonePress()}
+    closeSelf = {() => handleOkayPress()}
     title = 'Обратная связь'
     rightButton = {{
       text: 'Ок',
-      onPress: () => handleDonePress()}}
+      onPress: () => handleOkayPress()}}
     style = {{height: 'auto'}}>
 
       <Content/>
@@ -53,6 +50,7 @@ const Feedback = () => {
   )
 
 }
+
 
 const Content = () => {
 

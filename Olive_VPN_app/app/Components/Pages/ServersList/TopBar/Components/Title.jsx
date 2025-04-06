@@ -2,7 +2,7 @@
 
 
 import { useEffect } from 'react'
-import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
+import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
 import { View } from 'react-native'
 import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
 
@@ -11,7 +11,7 @@ const Title = () => {
 
   const [styles, theme] = useThemes (styles => styles.ServersListPage.Top.Title)
 
-  
+
   const textColorControl = useSharedValue (styles.color)
   const lineColorControl = useSharedValue (styles.lineColor)
 
@@ -34,8 +34,8 @@ const Title = () => {
   return (
 
     <View style = {{
-    flex: 1,
-    paddingLeft: 14}}>
+    paddingLeft: 14,
+    flex: 1}}>
 
       <Animated.Text style = {{
       fontFamily: styles.fontFamily,

@@ -1,38 +1,38 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 
-const SetMainPageStatusText = createAsyncThunk (
+const setMainPageStatusText = createAsyncThunk (
 
-  'MainPageStatusText/SetMainPageStatusText',
+  'mainPageStatusText/setMainPageStatusText',
 
-  async (MainPageStatusText, {getState, dispatch}) => {
+  async (mainPageStatusText, {getState, dispatch}) => {
 
-    dispatch (SetMainPageStatusTextState (MainPageStatusText))
+    dispatch (setMainPageStatusTextState (mainPageStatusText))
 
   }
 
 )
 
 
-const MainPageStatusTextSlice = createSlice ({
+const mainPageStatusTextSlice = createSlice ({
 
-  name: 'MainPageStatusText',
+  name: 'mainPageStatusText',
 
   initialState: {value: 'Соединение не защищено'},  // temporal
 
   reducers: {
     
-    SetMainPageStatusTextState: (state, action) => {state.value = action.payload}
+    setMainPageStatusTextState: (state, action) => {state.value = action.payload}
   
   },
 
   extraReducers: builder => {
 
-    builder.addCase (SetMainPageStatusText.fulfilled)
+    builder.addCase (setMainPageStatusText.fulfilled)
 
-    builder.addCase (SetMainPageStatusText.rejected, (state, action) => {
+    builder.addCase (setMainPageStatusText.rejected, (state, action) => {
 
-      throw new Error (`MainPageStatusTextSlice error: ${action.error.message}`)
+      throw new Error (`mainPageStatusTextSlice error: ${action.error.message}`)
 
     })
 
@@ -40,9 +40,9 @@ const MainPageStatusTextSlice = createSlice ({
 
 })
 
-const { SetMainPageStatusTextState } = MainPageStatusTextSlice.actions
+const { setMainPageStatusTextState } = mainPageStatusTextSlice.actions
 
-const MainPageStatusTextReducer = MainPageStatusTextSlice.reducer
+const mainPageStatusTextReducer = mainPageStatusTextSlice.reducer
 
 
-export { MainPageStatusTextReducer, SetMainPageStatusText }
+export { mainPageStatusTextReducer, setMainPageStatusText }

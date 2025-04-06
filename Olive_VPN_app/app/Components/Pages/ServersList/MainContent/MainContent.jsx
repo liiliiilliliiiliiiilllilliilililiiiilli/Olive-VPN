@@ -1,7 +1,7 @@
 // Component.
 
 
-import { useThemes } from '../../../../../Styles/Hooks/UseThemes'
+import { useThemes } from '../../../../../Redux/Hooks/UseThemes'
 
 import { View } from 'react-native'
 
@@ -13,8 +13,8 @@ const MainContent = () => {
 
   const [styles, theme] = useThemes (styles => styles.ServersListPage.Main)
 
-  const useAppAvailableServers = () => [1, () => 1]
-  const [availableServers, setServer] = useAppAvailableServers ()
+  // const [availableServers, setServer] = useAppAvailableServers ()
+  const [availableServers, setServer] = [1, () => 1]
 
 
   const Netherlands = {
@@ -35,16 +35,13 @@ const MainContent = () => {
   return (
 
     <View style = {{
-    flexGrow: 1,
     alignItems: 'center',
+    flexGrow: 1,
     width: '100%'}}>
 
       <Liner
       text = '3 онлайн'
-      style = {{
-        marginBottom: 14,
-        // backgroundColor: 'blue',
-      }}/>
+      style = {{marginBottom: 14}}/>
 
       {/* {availableServers.map ((server, index) => */}
 
@@ -70,9 +67,13 @@ const MainContent = () => {
 
       <Liner
       text = '1 оффлайн'
-      style = {{
-        marginBottom: 25,
-      }}/>
+      style = {{marginBottom: 25}}/>
+
+      {/* {availableServers.map ((server, index) => */}
+
+        {/* <ServerInstance pic = {server.pic} title = {server.tutle} availability = {server.availability} id = {index}/> */}
+
+      {/* )} */}
 
       <ServerInstance
       pic = {styles.ServerInstance.Germany_PNG}

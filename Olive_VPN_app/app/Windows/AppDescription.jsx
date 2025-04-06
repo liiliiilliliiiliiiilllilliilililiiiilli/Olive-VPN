@@ -8,14 +8,12 @@ import Window from '../Components/Common/Window/Window'
 
 const AppDescription = () => {
 
-  const [openedAppWindows, setAppOpenedWindows] = useAppOpenedWindows ()
+  const [appOpenedWindows, setAppOpenedWindows] = useAppOpenedWindows ()
 
 
-  // this window existence code:
+  const isOpened = appOpenedWindows.includes ('AppDescription')
 
-  const isOpened = openedAppWindows.includes ('AppDescription')
-
-  const setReduxIsOpened = bool => {
+  const setIsSelfOpened = bool => {
 
     bool
 
@@ -24,12 +22,10 @@ const AppDescription = () => {
 
   }
 
-  // .
-
 
   const handleOkayPress = () => {
 
-    setReduxIsOpened (false)
+    setIsSelfOpened (false)
 
   }
 
@@ -51,6 +47,7 @@ const AppDescription = () => {
   )
 
 }
+
 
 const Content = () => {
 

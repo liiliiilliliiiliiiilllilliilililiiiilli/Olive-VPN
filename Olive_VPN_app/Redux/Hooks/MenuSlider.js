@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { setIsMenuSliderOpened } from '../IsMenuSliderOpenedSclice'
+import { setIsMenuSliderOpened } from '../MenuSliderSlice'
 
 
 const useAppMenuSlider = () => {

@@ -19,9 +19,9 @@ const appThemes = Object.values (appThemeTypes)
 const defaultAppTheme = appThemeTypes.system
 
 
-const SetTheme = createAsyncThunk (
+const setTheme = createAsyncThunk (
 
-  'theme/SetTheme',
+  'theme/setTheme',
 
   async (theme, {getState, dispatch}) => {
 
@@ -35,7 +35,7 @@ const SetTheme = createAsyncThunk (
 
       if (currentThemeType == appThemeTypes.system)
         
-        dispatch (SetThemeState ( {light: 'systemThemeLight', dark: 'systemThemeDark'} [systemTheme] ))
+        dispatch (setThemeState ( {light: 'systemThemeLight', dark: 'systemThemeDark'} [systemTheme] ))
 
     })
 
@@ -48,8 +48,8 @@ const SetTheme = createAsyncThunk (
 
           defaultAppTheme == appThemeTypes.system
         
-            ? dispatch (SetThemeState ( {light: 'systemThemeLight', dark: 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the trigger acts
-            : dispatch (SetThemeState (defaultAppTheme))
+            ? dispatch (setThemeState ( {light: 'systemThemeLight', dark: 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the trigger acts
+            : dispatch (setThemeState (defaultAppTheme))
 
           await AsyncStorage.setItem ('AppTheme', JSON.stringify (defaultAppTheme))
 
@@ -57,8 +57,8 @@ const SetTheme = createAsyncThunk (
 
         else currentThemeType == appThemeTypes.system
         
-          ? dispatch (SetThemeState ( {light: 'systemThemeLight', dark: 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the trigger acts
-          : dispatch (SetThemeState (currentThemeType))
+          ? dispatch (setThemeState ( {light: 'systemThemeLight', dark: 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the trigger acts
+          : dispatch (setThemeState (currentThemeType))
 
       break }
 
@@ -74,8 +74,8 @@ const SetTheme = createAsyncThunk (
 
         nextThemeState == appThemeTypes.system
         
-          ? dispatch (SetThemeState ( {light: 'systemThemeLight', dark: 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the trigger acts
-          : dispatch (SetThemeState (nextThemeState))
+          ? dispatch (setThemeState ( {light: 'systemThemeLight', dark: 'systemThemeDark'} [Appearance.getColorScheme()] ))  // and then the trigger acts
+          : dispatch (setThemeState (nextThemeState))
 
 
         await AsyncStorage.setItem ('AppTheme', JSON.stringify (nextThemeState))
@@ -85,7 +85,7 @@ const SetTheme = createAsyncThunk (
 
       case 'light': {
 
-        dispatch (SetThemeState (appThemeTypes.light))
+        dispatch (setThemeState (appThemeTypes.light))
         await AsyncStorage.setItem ('AppTheme', JSON.stringify (appThemeTypes.light))
 
       break }
@@ -93,7 +93,7 @@ const SetTheme = createAsyncThunk (
 
       case 'dark': {
 
-        dispatch (SetThemeState (appThemeTypes.dark))
+        dispatch (setThemeState (appThemeTypes.dark))
         await AsyncStorage.setItem ('AppTheme', JSON.stringify (appThemeTypes.dark))
 
       break }
@@ -105,7 +105,7 @@ const SetTheme = createAsyncThunk (
 )
 
 
-const ThemeSlice = createSlice ({
+const themeSlice = createSlice ({
 
   name: 'theme',
 
@@ -113,17 +113,17 @@ const ThemeSlice = createSlice ({
 
   reducers: {
     
-    SetThemeState: (state, action) => {state.value = action.payload}
+    setThemeState: (state, action) => {state.value = action.payload}
   
   },
 
   extraReducers: builder => {
 
-    builder.addCase (SetTheme.fulfilled)
+    builder.addCase (setTheme.fulfilled)
 
-    builder.addCase (SetTheme.rejected, (state, action) => {
+    builder.addCase (setTheme.rejected, (state, action) => {
 
-      throw new Error (`ThemeSlice error: ${action.error.message}`)
+      throw new Error (`themeSlice error: ${action.error.message}`)
 
     })
 
@@ -131,9 +131,9 @@ const ThemeSlice = createSlice ({
 
 })
 
-const { SetThemeState } = ThemeSlice.actions
+const { setThemeState } = themeSlice.actions
 
-const ThemeReducer = ThemeSlice.reducer
+const themeReducer = themeSlice.reducer
 
 
-export { ThemeReducer, SetTheme }
+export { themeReducer, setTheme }

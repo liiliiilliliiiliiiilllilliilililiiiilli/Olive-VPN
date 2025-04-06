@@ -4,7 +4,7 @@
 import { View, TouchableOpacity, Text } from 'react-native'
 
 
-const Window = ({isOpened, closeSelf, title, centerButton, rightButton, leftButton, children, style}) => {
+const Window = ({isOpened, closeSelf, title, leftButton, rightButton, centerButton, style, children}) => {
 
   const handleShadowPress = () => {
 
@@ -37,9 +37,9 @@ const Window = ({isOpened, closeSelf, title, centerButton, rightButton, leftButt
 
           <WindowBlock
           title = {title}
-          centerButton = {centerButton}
-          rightButton = {rightButton}
           leftButton = {leftButton}
+          rightButton = {rightButton}
+          centerButton = {centerButton}
           style = {style}>
 
             {children}
@@ -56,7 +56,8 @@ const Window = ({isOpened, closeSelf, title, centerButton, rightButton, leftButt
 
 }
 
-const WindowBlock = ({title, centerButton, leftButton, rightButton, children, style}) => {
+
+const WindowBlock = ({title, leftButton, rightButton, centerButton, style, children}) => {
 
   const TopBar = ({title: title}) => {
 
@@ -209,24 +210,26 @@ const WindowBlock = ({title, centerButton, leftButton, rightButton, children, st
     maxWidth: 500,
     height: 500,
     borderRadius: 8,
-    borderBottomRightRadius: 12,
     borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
     backgroundColor: '#141414',
-    overflow: 'hidden',
-    boxShadow: '0px 2.5px 25px rgb(3, 10, 1)'},
+    boxShadow: '0px 2.5px 25px rgb(3, 10, 1)',
+    overflow: 'hidden'},
     style]}>
 
       <TopBar
       title = {title}/>
 
       <MainContent>
+
         {children}
+
       </MainContent>
       
       <BottomBar
-      centerButton = {centerButton}
+      leftButton = {leftButton}
       rightButton = {rightButton}
-      leftButton = {leftButton}/>
+      centerButton = {centerButton}/>
 
     </View>
 

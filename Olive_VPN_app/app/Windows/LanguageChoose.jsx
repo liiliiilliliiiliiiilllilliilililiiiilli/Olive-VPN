@@ -1,4 +1,4 @@
-// This is language choose window.
+// This is app language choose window.
 
 
 import { useAppOpenedWindows } from '../../Redux/Hooks/OpenedWindows'
@@ -9,14 +9,12 @@ import Window from '../Components/Common/Window/Window'
 const LanguageChoose = () => {
 
   // const [appLanguage, setAppLanguage] = useAppLanguage ()
-  const [openedAppWindows, setAppOpenedWindows] = useAppOpenedWindows ()
+  const [appOpenedWindows, setAppOpenedWindows] = useAppOpenedWindows ()
 
 
-  // this window existence code:
+  const isOpened = appOpenedWindows.includes ('LanguageChoose')
 
-  const isOpened = openedAppWindows.includes ('LanguageChoose')
-
-  const setReduxIsOpened = bool => {
+  const setIsSelfOpened = bool => {
 
     bool
 
@@ -25,12 +23,10 @@ const LanguageChoose = () => {
 
   }
 
-  // .
-
 
   const handleDonePress = () => {
 
-    setReduxIsOpened (false)
+    setIsSelfOpened (false)
 
   }
 
@@ -52,6 +48,7 @@ const LanguageChoose = () => {
   )
 
 }
+
 
 const Content = () => {
 

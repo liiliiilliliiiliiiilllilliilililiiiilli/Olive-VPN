@@ -6,5 +6,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "app/Pages/ServersList.jsx", "app/Pages/Main.jsx", "Styles/Hooks/UseThemes.js"  ]
+, "app/Pages/ServersList.jsx", "app/Pages/Main.jsx", "Styles/Hooks/UseThemes.jsx"  ]
 }

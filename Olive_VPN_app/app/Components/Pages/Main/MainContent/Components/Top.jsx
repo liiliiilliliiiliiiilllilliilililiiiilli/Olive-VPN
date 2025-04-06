@@ -5,9 +5,9 @@ import publicIP from 'react-native-public-ip'
 import NetInfo from '@react-native-community/netinfo'
 import RNSimpleOpenvpn, { addVpnStateListener, removeVpnStateListener } from 'react-native-simple-openvpn'
 
-import { useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
-import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
+import { useState, useEffect } from 'react'
+import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
+import { useMainPageStatusText } from '../../../../../../Redux/Hooks/MainPageStatusText'
 
 import { View } from 'react-native'
 import { Platform } from 'react-native'
@@ -25,18 +25,13 @@ const Top = () => {
   [styles, theme] = useThemes (styles => styles.MainPage.Main.Top)
 
 
-  const statusText = useSelector (state => state.MainPageStatusText.value)
-
-
   return (
 
     <View style = {{
     alignItems: 'center',
     gap: 7.5}}>
 
-      <StatusText
-      text = {statusText}/>
-
+      <StatusText/>
       <Action/>
 
     </View>
@@ -46,16 +41,17 @@ const Top = () => {
 }
 
 
-const StatusText = ({text}) => {
+const StatusText = () => {
+
+  const [textValue] = useMainPageStatusText ()
 
   const colorControl = useSharedValue (styles.StatusText.color)
-
 
   const commonEasing = comEsng = Easing.inOut (Easing.quad)
   const themeAnimationDuration = thAnDu = 250
 
 
-  // theme animations
+  // theme animations:
 
   useEffect (() =>
 
@@ -73,7 +69,7 @@ const StatusText = ({text}) => {
     color: colorControl,
     fontSize: 29}}>
 
-      {text}
+      {textValue}
 
     </Animated.Text>
 
@@ -85,12 +81,15 @@ const Action = () => {
 
   const [ipTextState, setIpTextState] = useState ('')
 
-
   const colorControl = useSharedValue (styles.Action.color)
   const opacityControl = useSharedValue (1)
 
+  const commonEasing = comEsng = Easing.inOut (Easing.quad)
+  const themeAnimationDuration = thAnDu = 250
+  const switchAnimationDuration = swAnDu = 350
 
-  // theme animations
+
+  // theme animations:
 
   useEffect (() =>
 
@@ -101,14 +100,14 @@ const Action = () => {
   // .
 
 
-  // + press animations
+  // + switch animations:
 
   const setIpText = text => {
 
     if (text == ' ') {
 
-      setTimeout (() => setIpTextState (''), 350)
-      opacityControl.value = withSequence (withTiming (0, {duration: 350}), withTiming (1, {duration: 350}))
+      setTimeout (() => setIpTextState (''), swAnDu)
+      opacityControl.value = withSequence (withTiming (0, {duration: swAnDu}), withTiming (1, {duration: swAnDu}))
 
     }
 
@@ -116,15 +115,15 @@ const Action = () => {
 
       if (ipTextState == '') {
 
-        setTimeout (() => setIpTextState (`IP:  ${text}`), 350)
-        opacityControl.value = withSequence (withTiming (0, {duration: 350}), withTiming (1, {duration: 350}))
+        setTimeout (() => setIpTextState (`IP:  ${text}`), swAnDu)
+        opacityControl.value = withSequence (withTiming (0, {duration: swAnDu}), withTiming (1, {duration: swAnDu}))
 
       }
 
       else {
 
-        setTimeout (() => setIpTextState (`IP:  ${text}`), 350)
-        opacityControl.value = withSequence (withTiming (0, {duration: 350}), withTiming (1, {duration: 350}))
+        setTimeout (() => setIpTextState (`IP:  ${text}`), swAnDu)
+        opacityControl.value = withSequence (withTiming (0, {duration: swAnDu}), withTiming (1, {duration: swAnDu}))
 
       }
 
@@ -132,8 +131,8 @@ const Action = () => {
 
     else {
 
-      opacityControl.value = withTiming (0, {duration: 350})
-      setTimeout (() => setIpTextState (''), 350)
+      opacityControl.value = withTiming (0, {duration: swAnDu})
+      setTimeout (() => setIpTextState (''), swAnDu)
 
     }
 
@@ -147,7 +146,7 @@ const Action = () => {
 
         publicIP ()
         .then (ip => setIpText (ip))
-        .catch (error => console.info ('Unable to get IP address:', error))
+        .catch (error => console.info (`Unable to get IP address: ${error}`))
 
       }
 
@@ -197,7 +196,7 @@ const Action = () => {
 
     publicIP ()
     .then (ip => setIpText (ip))
-    .catch (error => console.info ('Unable to get IP address:', error))
+    .catch (error => console.info (`Unable to get IP address: ${error}`))
 
     const unsubscribeNet = subscribeNet ()
     subscribeVpn ()
@@ -216,12 +215,12 @@ const Action = () => {
   return (
 
     <View style = {{
-    alignItems: 'center',
     flexDirection: 'row',
-    gap: 10,
-    padding: 5,
-    paddingHorizontal: 15,
+    alignItems: 'center',
     margin: -5,
+    gap: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
     borderRadius: 10}}>
 
       <Animated.Text style = {{

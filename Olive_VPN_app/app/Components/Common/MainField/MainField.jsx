@@ -2,7 +2,7 @@
 
 
 import { useEffect } from 'react'
-import { useThemes } from '../../../../Styles/Hooks/UseThemes'
+import { useThemes } from '../../../../Redux/Hooks/UseThemes'
 
 import { StatusBar } from 'react-native'
 import { Dimensions } from 'react-native'
@@ -71,7 +71,7 @@ const MainField = ({style, children}) => {
   // .
 
 
-  // main view animations:
+  // theme animations:
 
   useEffect (() =>
 
@@ -84,11 +84,11 @@ const MainField = ({style, children}) => {
 
   return (
 
-    <Animated.View style = {{
+    <Animated.View style = {[{
     width: '100%',
     height: '100%',
-    backgroundColor: viewBackgroundColorControl,
-    ...style}}>
+    backgroundColor: viewBackgroundColorControl},
+    style]}>
 
       <StatusBar
       animated = {true}
@@ -96,7 +96,7 @@ const MainField = ({style, children}) => {
       backgroundColor = {styles.StatusBar.backgroundColor}
       barStyle = {styles.StatusBar.color}/>
 
-      <Animated.Image  // cool animated background gradient image
+      <Animated.Image  // cool animated background gradient image, temporal
       source = {styles.MainField.ColorfulBackground_PNG}
       style = {{
       zIndex: 0,

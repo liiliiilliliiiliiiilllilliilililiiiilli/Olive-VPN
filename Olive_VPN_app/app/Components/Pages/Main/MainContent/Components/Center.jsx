@@ -6,17 +6,17 @@ const lodash = require ('lodash')
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import RNSimpleOpenvpn, { addVpnStateListener, removeVpnStateListener } from 'react-native-simple-openvpn'
 
-import { SetMainPageStatusText } from '../../../../../../Redux/MainPageStatusTextSlice'
+import React from 'react'
 
-import { useDispatch } from 'react-redux'
 import { useNavigation } from 'expo-router'
-import React, { useState, useEffect, useRef } from 'react'
-import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
+import { useState, useEffect, useRef } from 'react'
+import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
+import { useMainPageStatusText } from '../../../../../../Redux/Hooks/MainPageStatusText'
 
 import { View, TouchableOpacity, Image } from 'react-native'
 import { Platform } from 'react-native'
 
-import Animated, { Easing, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from 'react-native-reanimated'
+import Animated, { useSharedValue, useAnimatedStyle, withSequence, withRepeat, withDelay, withTiming, Easing } from 'react-native-reanimated'
 
 
 const device_is_iphone = Platform.OS === 'ios'
@@ -27,11 +27,11 @@ let styles, theme
 const Center = () => {
 
   [styles, theme] = useThemes (styles => styles.MainPage.Main.Center)
+
+  const [mainPageStatusText, setMainPageStatusText] = useMainPageStatusText ()
   
   const durationInterval = useRef (null)
   const [connectionTime, setConnectionTime] = useState ({initialization_moment: null, current_duration: null})
-  const dispatch = useDispatch ()
-  const setReduxStatusText = text => dispatch (SetMainPageStatusText (text))
 
   const [tipText, setTipText] = useState ('Нажмите для подключения к VPN')
   const [connectionDestinationText, setConnectionDestinationText] = useState ('Нидерланды')
@@ -71,7 +71,7 @@ const Center = () => {
 
     catch (error) {
 
-      console.info ('connectVPN: error while connecting to VPN server', `\n${error}`)
+      console.info (`connectVPN: error while connecting to VPN server\n\n${error}`)
 
     }
 
@@ -87,7 +87,7 @@ const Center = () => {
     
     catch (error) {
 
-      console.info ('disconnectVPN: error while disconnecting from VPN server.', `\n${error}`)
+      console.info (`disconnectVPN: error while disconnecting from VPN server\n\n${error}`)
 
     }
 
@@ -233,19 +233,13 @@ const Center = () => {
 
   }
 
-  const handleLocationPress = () => {
-
-    console.info ('Location pressed')
-
-  }
-
 
   useEffect (() => {
 
     lodash.isEqual (connectionTime, {initialization_moment: null, current_duration: null})
 
-      ? setReduxStatusText ('Соединение не защищено')
-      : setReduxStatusText (`Подключено:  ${convertTime(connectionTime.current_duration)}`)
+      ? setMainPageStatusText ('Соединение не защищено')
+      : setMainPageStatusText (`Подключено:  ${convertTime(connectionTime.current_duration)}`)
 
   }, [connectionTime])
 
@@ -284,8 +278,7 @@ const Center = () => {
       text = {tipText}/>
 
       <Action 
-      text = {connectionDestinationText}
-      onPress = {() => handleLocationPress()}/>
+      text = {connectionDestinationText}/>
 
     </View>
 
@@ -301,8 +294,8 @@ const VpnButton = ({onPress}) => {
 
   const animationStyles = useAnimatedStyle (() => ({
 
-      transform: [{scale: scaleControl.value}],
-      opacity: opacityControl.value
+    transform: [{scale: scaleControl.value}],
+    opacity: opacityControl.value
 
   }))
 
@@ -327,9 +320,6 @@ const VpnButton = ({onPress}) => {
 
   }
 
-  // .
-
-
   const handlePress = () => {
 
     scaleControl.value = withSequence (withTiming (0.955, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
@@ -338,6 +328,8 @@ const VpnButton = ({onPress}) => {
     onPress ()
 
   }
+
+  // .
 
 
   return (
@@ -492,7 +484,6 @@ const Tip = ({text}) => {
     padding: 10,
     marginVertical: -10,
     borderRadius: 15,
-    
     opacity: opacityControl,
     transform: [{scale: scaleControl}]}}>
 
@@ -518,7 +509,7 @@ const Tip = ({text}) => {
 
 }
 
-const Action = ({text, onPress}) => {
+const Action = ({text}) => {
 
   const navigation = useNavigation ()
 
@@ -538,6 +529,8 @@ const Action = ({text, onPress}) => {
 
 
   const commonEasing = comEsng = Easing.inOut (Easing.quad)
+  const animationDuration = AnDu = 95
+  const pressAnimationDuration = prAnDu = 250
 
 
   // theme animations:
@@ -558,8 +551,8 @@ const Action = ({text, onPress}) => {
     const currRgba = textColorControl.value[0] == '#' ? hexToRgb (textColorControl.value) : textColorControl.value
     const nextRgba = hexToRgb (styles.Action.color)
     
-    if (currRgba != nextRgba) picOpacityTemporalControl.value = withSequence (withTiming (0.66, {duration: 125, easing: comEsng}), withTiming (1, {duration: 125, easing: comEsng}))
-    textColorControl.value = withTiming (styles.Action.color, {duration: 250, easing: comEsng})
+    if (currRgba != nextRgba) picOpacityTemporalControl.value = withSequence (withTiming (0.66, {duration: prAnDu/2, easing: comEsng}), withTiming (1, {duration: prAnDu/2, easing: comEsng}))
+    textColorControl.value = withTiming (styles.Action.color, {duration: prAnDu, easing: comEsng})
 
   }, [theme])
 
@@ -567,8 +560,6 @@ const Action = ({text, onPress}) => {
 
 
   // press animations:
-
-  const animationDuration = AnDu = 95
 
   const handlePressIn = () => {
 
@@ -584,19 +575,16 @@ const Action = ({text, onPress}) => {
 
   }
 
-  // .
-
-
   const handlePress = () => {
 
     scaleControl.value = withSequence (withTiming (0.9575, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
     opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
 
-    onPress ()
-
     navigation.navigate ('ServersList')
 
   }
+
+  // .
 
 
   return (
@@ -607,13 +595,12 @@ const Action = ({text, onPress}) => {
     onPressOut = {() => handlePressOut()}
     onPress = {() => handlePress()}
     style = {{
-    padding: 10,
+    paddingVertical: 10,
     paddingHorizontal: 16,
     marginVertical: -10,
     borderRadius: 8}}>
 
-      <Animated.View
-      style = {[{
+      <Animated.View style = {[{
       flexDirection: 'row',
       alignItems: 'center',
       gap: 8},

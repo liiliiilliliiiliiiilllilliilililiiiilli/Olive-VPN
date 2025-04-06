@@ -1,11 +1,11 @@
 // This is Main Page menu slider.
 
 
-import { useThemes } from '../../Styles/Hooks/UseThemes'
+import { useThemes } from '../../Redux/Hooks/UseThemes'
 import { useAppMenuSlider } from '../../Redux/Hooks/MenuSlider'
+import { useAppOpenedWindows } from '../../Redux/Hooks/OpenedWindows'
 
 import { View, TouchableOpacity, Image, Text } from 'react-native'
-import { useAppOpenedWindows } from '../../Redux/Hooks/OpenedWindows'
 
 
 let styles
@@ -56,6 +56,7 @@ const Menu = () => {
   )
 
 }
+
 
 const SliderBlock = () => {
 

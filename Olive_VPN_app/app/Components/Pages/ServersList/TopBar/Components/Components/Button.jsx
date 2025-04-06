@@ -2,7 +2,7 @@
 
 
 import { useEffect } from 'react'
-import { useThemes } from '../../../../../../../Styles/Hooks/UseThemes'
+import { useThemes } from '../../../../../../../Redux/Hooks/UseThemes'
 import { TouchableOpacity, Image } from 'react-native'
 import Animated, { useSharedValue, useAnimatedStyle, withSequence, withTiming, Easing } from 'react-native-reanimated'
 
@@ -65,9 +65,6 @@ const Button = ({pic, style, imageStyle, onPress}) => {
     opacityControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
 
   }
-  
-  // .
-
 
   const handlePress = () => {
 
@@ -78,6 +75,8 @@ const Button = ({pic, style, imageStyle, onPress}) => {
     onPress ()
 
   }
+
+  // .
 
 
   return (
@@ -108,10 +107,10 @@ const Button = ({pic, style, imageStyle, onPress}) => {
 
       <Image
       source = {pic}
-      style = {{
+      style = {[{
       width: 17,
-      height: 17,
-      ...imageStyle}}/>
+      height: 17},
+      imageStyle]}/>
 
     </Animated.View>
 

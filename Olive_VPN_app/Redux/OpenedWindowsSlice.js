@@ -14,7 +14,7 @@ const setOpenedWindows = createAsyncThunk (
 )
 
 
-const OpenedWindowsSlice = createSlice ({
+const openedWindowsSlice = createSlice ({
 
   name: 'openedWindows',
 
@@ -32,7 +32,7 @@ const OpenedWindowsSlice = createSlice ({
 
     builder.addCase (setOpenedWindows.rejected, (state, action) => {
 
-      throw new Error (`OpenedWindowsSlice error: ${action.error.message}`)
+      throw new Error (`openedWindowsSlice error: ${action.error.message}`)
 
     })
 
@@ -40,9 +40,9 @@ const OpenedWindowsSlice = createSlice ({
 
 })
 
-const { setOpenedWindowsState } = OpenedWindowsSlice.actions
+const { setOpenedWindowsState } = openedWindowsSlice.actions
 
-const OpenedWindowsReducer = OpenedWindowsSlice.reducer
+const openedWindowsReducer = openedWindowsSlice.reducer
 
 
-export { OpenedWindowsReducer, setOpenedWindows }
+export { openedWindowsReducer, setOpenedWindows }

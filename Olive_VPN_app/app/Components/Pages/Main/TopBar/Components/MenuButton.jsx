@@ -1,7 +1,7 @@
 // Component.
 
 
-import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
+import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
 import Button from './Components/Button'
 
 

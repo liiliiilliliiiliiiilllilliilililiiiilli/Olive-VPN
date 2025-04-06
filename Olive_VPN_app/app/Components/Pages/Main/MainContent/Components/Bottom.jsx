@@ -4,51 +4,37 @@
 import NetInfo from '@react-native-community/netinfo'
 
 import { useEffect, useState } from 'react'
-import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
+import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
 import { View } from 'react-native'
-
 import Animated, { useSharedValue, withSequence, withTiming, Easing } from 'react-native-reanimated'
-
-
-let styles, theme
 
 
 const Bottom = () => {
 
-  [styles, theme] = useThemes (styles => styles.MainPage.Main.Bottom)
-
-
-
-  return (
-
-    <View style = {{
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 18}}>
-
-      <NetInfoComponent/>
-
-    </View>
-
-  )
-
-}
-
-const NetInfoComponent = () => {
+  const [styles, theme] = useThemes (styles => styles.MainPage.Main.Bottom)
 
   const [netInfoTextState, setNetInfoTextState] = useState ('')  // to redux later
 
   const colorControl = useSharedValue (styles.NetInfo.color)
   const opacityControl = useSharedValue (1)
 
+  const commonEasing = comEsng = Easing.inOut (Easing.quad)
+  const themeAnimationDuration = thAnDu = 250
+  const switchAnimationDuration = swAnDu = 350
 
-  useEffect (() => {
 
-    colorControl.value = withTiming (styles.NetInfo.color, {duration: 250, easing: Easing.inOut(Easing.quad)})
+  // theme animations:
 
-  }, [theme])
+  useEffect (() =>
 
+    colorControl.value = withTiming (styles.NetInfo.color, {duration: thAnDu, easing: comEsng})
+
+  , [theme])
+
+  // .
+
+
+  // + switch animations:
 
   const setNetInfoText = text => {
 
@@ -56,15 +42,15 @@ const NetInfoComponent = () => {
 
       if (netInfoTextState == '') {
 
-        setTimeout (() => setNetInfoTextState (text), 350)
-        opacityControl.value = withSequence (withTiming (0, {duration: 350}), withTiming (1, {duration: 350}))
+        opacityControl.value = withSequence (withTiming (0, {duration: swAnDu}), withTiming (1, {duration: swAnDu}))
+        setTimeout (() => setNetInfoTextState (text), swAnDu)
 
       }
 
       else {
 
-        setTimeout (() => setNetInfoTextState (text), 350)
-        opacityControl.value = withSequence (withTiming (0, {duration: 350}), withTiming (1, {duration: 350}))
+        opacityControl.value = withSequence (withTiming (0, {duration: swAnDu}), withTiming (1, {duration: swAnDu}))
+        setTimeout (() => setNetInfoTextState (text), swAnDu)
 
       }
 
@@ -72,8 +58,8 @@ const NetInfoComponent = () => {
 
     else {
 
-      opacityControl.value = withTiming (0, {duration: 350})
-      setTimeout (() => setNetInfoTextState (''), 350)
+      opacityControl.value = withTiming (0, {duration: swAnDu})
+      setTimeout (() => setNetInfoTextState (''), swAnDu)
 
     }
 
@@ -81,11 +67,11 @@ const NetInfoComponent = () => {
 
   const subscribeNet = () => {
 
-    return NetInfo.addEventListener (async change => {
+    return NetInfo.addEventListener (change => {
 
-      if (change.type == 'cellular' && change?.details?.cellularGeneration && change?.details?.carrier) {
+      if (change?.type == 'cellular' && change?.details?.cellularGeneration && change?.details?.carrier) {
 
-        const cellularGeneration = {'5g': '5G', '4g': '4G', '3g': '3G', '2g': '2G'} [change?.details?.cellularGeneration]
+        const cellularGeneration = {'5g': '5G', '4g': '4G', '3g': '3G', '2g': '2G'} [change.details.cellularGeneration]
         const carrier = change.details.carrier
         const richability = change.isInternetReachable ? 'Доступ в Интернет' : 'Без Интернета'
 
@@ -93,9 +79,10 @@ const NetInfoComponent = () => {
 
       }
 
-      else if (change.type == 'wifi') {
+      else if (change?.type == 'wifi') {
       
-        const richability = change.isInternetReachable ? 'Доступ в Интернет' : 'Без Интернета'
+        const richability = change?.isInternetReachable ? 'Доступ в Интернет' : 'Без Интернета'
+
         setNetInfoText (`WiFi,  ${richability}`)
       
       }
@@ -105,6 +92,8 @@ const NetInfoComponent = () => {
     })
 
   }
+
+  // .
 
 
   useEffect (() => {
@@ -119,19 +108,27 @@ const NetInfoComponent = () => {
     }
 
   }, [])
-  
+
 
   return (
 
-    <Animated.Text style = {{
-    fontFamily: styles.NetInfo.fontFamily,
-    color: colorControl,
-    fontSize: 16,
-    opacity: opacityControl}}>
+    <View style = {{
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 18}}>
 
-      {netInfoTextState}
+      <Animated.Text style = {{
+      fontFamily: styles.NetInfo.fontFamily,
+      color: colorControl,
+      fontSize: 16,
+      opacity: opacityControl}}>
 
-    </Animated.Text>
+        {netInfoTextState}
+
+      </Animated.Text>
+
+    </View>
 
   )
 
