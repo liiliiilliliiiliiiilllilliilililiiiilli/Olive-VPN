@@ -9,6 +9,7 @@ import RNSimpleOpenvpn, { addVpnStateListener, removeVpnStateListener } from 're
 import { SetMainPageStatusText } from '../../../../../../Redux/MainPageStatusTextSlice'
 
 import { useDispatch } from 'react-redux'
+import { useNavigation } from 'expo-router'
 import React, { useState, useEffect, useRef } from 'react'
 import { useThemes } from '../../../../../../Styles/Hooks/UseThemes'
 
@@ -519,6 +520,9 @@ const Tip = ({text}) => {
 
 const Action = ({text, onPress}) => {
 
+  const navigation = useNavigation ()
+
+
   const picOpacityTemporalControl = useSharedValue (1)
   const textColorControl = useSharedValue (styles.Action.color)
 
@@ -589,6 +593,8 @@ const Action = ({text, onPress}) => {
     opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
 
     onPress ()
+
+    navigation.navigate ('ServersList')
 
   }
 

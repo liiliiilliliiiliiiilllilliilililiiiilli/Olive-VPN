@@ -41,6 +41,9 @@ const Info_grey_PNG = require ('../../../assets/PNG/Info/Grey.png')
 const Done_Black_PNG = require ('../../../assets/PNG/Done/Black.png')
 const Done_White_PNG = require ('../../../assets/PNG/Done/White.png')
 
+const Netherlands_PNG = require ('../../../assets/PNG/Flags/Netherlands.png')
+const Germany_PNG = require ('../../../assets/PNG/Flags/Germany.png')
+
 
 const Colors = {
 
@@ -87,11 +90,13 @@ const MainTheme = {
 
     },
 
+
     LanguageChooseWindow: {},
 
     LocationsWindow: {},
 
     AppDescriptionWindow: {},
+
 
     MenuSlider: {
 
@@ -124,6 +129,7 @@ const MainTheme = {
         }
 
     },
+
 
     MainPage: {
 
@@ -254,6 +260,44 @@ const MainTheme = {
             
             borderColor: 'rgba(0, 0, 0, 0.25)',
             backgroundColor: 'rgba(11, 11, 11, 0.80)'
+
+        }
+
+    },
+
+    ServersListPage: {
+
+        Top: {
+
+            BackButton: {
+
+                Arrow_PNG: ArrowCompact_grey_PNG
+
+            },
+
+            Title: {
+
+                fontFamily: 'Fredoka-SemiBold',
+                color: Colors.PreWhite
+
+            }
+
+        },
+
+        Main: {
+
+            Liner: {
+
+
+
+            },
+
+            ServerInstance: {
+
+                Netherlands_PNG: Netherlands_PNG,
+                Germany_PNG: Germany_PNG
+
+            }
 
         }
 

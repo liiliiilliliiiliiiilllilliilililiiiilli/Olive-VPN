@@ -213,7 +213,7 @@ const WindowBlock = ({title, centerButton, leftButton, rightButton, children, st
     borderBottomLeftRadius: 12,
     backgroundColor: '#141414',
     overflow: 'hidden',
-    boxShadow: '0px 2.5px 5px rgb(3, 10, 1)'},
+    boxShadow: '0px 2.5px 25px rgb(3, 10, 1)'},
     style]}>
 
       <TopBar

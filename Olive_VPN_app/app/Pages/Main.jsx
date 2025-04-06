@@ -29,9 +29,9 @@ const Main = () => {
 
       <MenuSlider/>
 
+      <AppDescriptionWindow/>
       <LanguageChooseWindow/>
       <FeedbackWindow/>
-      <AppDescriptionWindow/>
 
     </MainField>
 
