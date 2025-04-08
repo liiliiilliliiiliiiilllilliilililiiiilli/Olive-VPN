@@ -3,15 +3,25 @@
 
 import NetInfo from '@react-native-community/netinfo'
 
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
+import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
+
 import { View } from 'react-native'
+
 import Animated, { useSharedValue, withSequence, withTiming, Easing } from 'react-native-reanimated'
 
 
 const Bottom = () => {
 
   const [styles, theme] = useThemes (styles => styles.MainPage.Main.Bottom)
+  const [texts, appLanguage] = useAppLanguage (texts => texts.MainPage.Main.Bottom)
+
+
+  const access_to_internet_TXT = texts.access_to_internet
+  const no_access_to_internet_TXT = texts.no_access_to_internet
+  const no_connection_TXT = texts.no_connection
+
 
   const [netInfoTextState, setNetInfoTextState] = useState ('')  // to redux later
 
@@ -65,29 +75,55 @@ const Bottom = () => {
 
   }
 
-  const subscribeNet = () => {
+
+  const subscribeNet = (texts) => {
+
+    NetInfo.fetch().then(state => {
+
+      if (state?.type == 'cellular' && state?.details?.cellularGeneration && state?.details?.carrier) {
+
+        let cellularGeneration = {'5g': '5G', '4g': '4G', '3g': '3G', '2g': '2G'} [state.details.cellularGeneration]
+        let carrier = state.details.carrier
+        let richability = state.isInternetReachable ? access_to_internet_TXT : no_access_to_internet_TXT
+
+        setNetInfoText (`${cellularGeneration},  ${carrier},  ${richability}`)
+
+      }
+
+      else if (state?.type == 'wifi') {
+      
+        let richability = state?.isInternetReachable ? access_to_internet_TXT : no_access_to_internet_TXT
+
+        setNetInfoText (`WiFi,  ${richability}`)
+      
+      }
+
+      else setNetInfoText (no_connection_TXT)
+
+    })
+
 
     return NetInfo.addEventListener (change => {
 
       if (change?.type == 'cellular' && change?.details?.cellularGeneration && change?.details?.carrier) {
 
-        const cellularGeneration = {'5g': '5G', '4g': '4G', '3g': '3G', '2g': '2G'} [change.details.cellularGeneration]
-        const carrier = change.details.carrier
-        const richability = change.isInternetReachable ? 'Доступ в Интернет' : 'Без Интернета'
+        let cellularGeneration = {'5g': '5G', '4g': '4G', '3g': '3G', '2g': '2G'} [change.details.cellularGeneration]
+        let carrier = change.details.carrier
+        let richability = change.isInternetReachable ? access_to_internet_TXT : no_access_to_internet_TXT
 
         setNetInfoText (`${cellularGeneration},  ${carrier},  ${richability}`)
 
       }
 
       else if (change?.type == 'wifi') {
-      
-        const richability = change?.isInternetReachable ? 'Доступ в Интернет' : 'Без Интернета'
+
+        let richability = change?.isInternetReachable ? access_to_internet_TXT : no_access_to_internet_TXT
 
         setNetInfoText (`WiFi,  ${richability}`)
       
       }
 
-      else setNetInfoText ('Нет подключения')
+      else setNetInfoText (no_connection_TXT)
 
     })
 
@@ -98,7 +134,7 @@ const Bottom = () => {
 
   useEffect (() => {
 
-    const unsubscribe = subscribeNet ()
+    const unsubscribe = subscribeNet (texts)
 
     return () => {
 
@@ -107,7 +143,7 @@ const Bottom = () => {
 
     }
 
-  }, [])
+  }, [appLanguage])
 
 
   return (

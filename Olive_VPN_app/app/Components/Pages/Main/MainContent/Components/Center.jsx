@@ -11,6 +11,7 @@ import React from 'react'
 import { useNavigation } from 'expo-router'
 import { useState, useEffect, useRef } from 'react'
 import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
+import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
 import { useMainPageStatusText } from '../../../../../../Redux/Hooks/MainPageStatusText'
 
 import { View, TouchableOpacity, Image } from 'react-native'
@@ -21,20 +22,52 @@ import Animated, { useSharedValue, useAnimatedStyle, withSequence, withRepeat, w
 
 const device_is_iphone = Platform.OS === 'ios'
 
-let styles, theme
-
 
 const Center = () => {
 
-  [styles, theme] = useThemes (styles => styles.MainPage.Main.Center)
+  const [texts, appLanguage] = useAppLanguage (texts => texts.MainPage.Main.Center)
+
+  const connection_is_not_protected_TXT = texts.connection_is_not_protected
+  const tap_to_connect_to_vpn_TXT = texts.tap_to_connect_to_vpn
+  const tap_again_to_disconnect_TXT = texts.tap_again_to_disconnect
+  const netherlands_TXT = texts.netherlands
+  const connected_TXT = texts.connected
+
+  const seconds_TXT = texts.seconds
+  const minutes_TXT = texts.minutes
+  const hours_TXT = texts.hours
+  const days_TXT = texts.days
+
 
   const [mainPageStatusText, setMainPageStatusText] = useMainPageStatusText ()
   
   const durationInterval = useRef (null)
   const [connectionTime, setConnectionTime] = useState ({initialization_moment: null, current_duration: null})
 
-  const [tipText, setTipText] = useState ('Нажмите для подключения к VPN')
-  const [connectionDestinationText, setConnectionDestinationText] = useState ('Нидерланды')
+  const [tipText, setTipText] = useState (tap_to_connect_to_vpn_TXT)
+  const [connectionDestinationText, setConnectionDestinationText] = useState (netherlands_TXT)
+
+  useEffect (() => {(async () => {
+
+    // set_connection_is_not_protected_TXT (texts.connection_is_not_protected)
+  
+    const VpnState = await RNSimpleOpenvpn.getCurrentState ()
+  
+    switch (VpnState) {
+  
+      case 0: setTipText (tap_to_connect_to_vpn_TXT); break
+      case 2: setTipText (tap_again_to_disconnect_TXT); break
+  
+    }
+
+    setConnectionDestinationText (netherlands_TXT)
+  
+    // set_connected_TXT (texts.connected)
+
+  }) ()
+
+  
+  }, [appLanguage])
 
 
   const limeVpnConnectionConfiguration = {
@@ -120,10 +153,10 @@ const Center = () => {
     let minutes = Math.floor ((inp_seconds - (hours * 60 * 60) - (days * 60 * 60 * 24)) / 60)
     let seconds = inp_seconds - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60)
   
-    days = days == 0 ? '' : `${days} дн. `
-    hours = days == 0 && hours == 0 ? '' : `${hours} ч. `
-    minutes = days == 0 && hours == 0 && minutes == 0 ? '' : `${minutes} мин. `
-    seconds = hours != 0 || days != 0 ? '' : `${seconds} сек.`
+    days = days == 0 ? '' : `${days} ${days_TXT} `
+    hours = days == 0 && hours == 0 ? '' : `${hours} ${hours_TXT} `
+    minutes = days == 0 && hours == 0 && minutes == 0 ? '' : `${minutes} ${minutes_TXT} `
+    seconds = hours != 0 || days != 0 ? '' : `${seconds} ${seconds_TXT}`
   
     return days + hours + minutes + seconds
   
@@ -184,7 +217,7 @@ const Center = () => {
       , 1000)
 
 
-      setTipText ('Нажмите, чтобы отключиться')
+      setTipText (tap_again_to_disconnect_TXT)
 
     }
   
@@ -192,7 +225,7 @@ const Center = () => {
   
       clearDurationInterval ()
       setConnectionTime ({initialization_moment: null, current_duration: null})  // triggers useEffect
-      setTipText ('Нажмите для подключения к VPN')
+      setTipText (tap_to_connect_to_vpn_TXT)
 
     }
 
@@ -238,10 +271,10 @@ const Center = () => {
 
     lodash.isEqual (connectionTime, {initialization_moment: null, current_duration: null})
 
-      ? setMainPageStatusText ('Соединение не защищено')
-      : setMainPageStatusText (`Подключено:  ${convertTime(connectionTime.current_duration)}`)
+      ? setMainPageStatusText (connection_is_not_protected_TXT)
+      : setMainPageStatusText (`${connected_TXT}:  ${convertTime(connectionTime.current_duration)}`)
 
-  }, [connectionTime])
+  }, [connectionTime, appLanguage])  // appLanguage
 
 
   useEffect (() => {(async () => {
@@ -288,6 +321,9 @@ const Center = () => {
 
 
 const VpnButton = ({onPress}) => {
+
+  const [styles] = useThemes (styles => styles.MainPage.Main.Center)
+
 
   const scaleControl = useSharedValue (1)
   const opacityControl = useSharedValue (1)
@@ -371,6 +407,9 @@ const VpnButton = ({onPress}) => {
 }
 
 const Tip = ({text}) => {
+
+  const [styles, theme] = useThemes (styles => styles.MainPage.Main.Center)
+
 
   const picOpacityTemporalControl = useSharedValue (1)
   const textColorControl = useSharedValue (styles.Tip.color)
@@ -511,6 +550,7 @@ const Tip = ({text}) => {
 
 const Action = ({text}) => {
 
+  const [styles, theme] = useThemes (styles => styles.MainPage.Main.Center)
   const navigation = useNavigation ()
 
 
@@ -580,7 +620,7 @@ const Action = ({text}) => {
     scaleControl.value = withSequence (withTiming (0.9575, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
     opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
 
-    navigation.navigate ('ServersList')
+    setTimeout (() => navigation.navigate ('ServersList'), AnDu/2)
 
   }
 

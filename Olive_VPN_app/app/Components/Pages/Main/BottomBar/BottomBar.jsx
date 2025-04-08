@@ -5,28 +5,18 @@ import { useAppOpenedWindows } from '../../../../../Redux/Hooks/OpenedWindows'
 
 import { useEffect } from 'react'
 import { useThemes } from '../../../../../Redux/Hooks/UseThemes'
+import { useAppLanguage } from '../../../../../Redux/Hooks/AppLanguage'
+
 import { View, TouchableOpacity } from 'react-native'
 import Animated, { useSharedValue, useAnimatedStyle, withSequence, withTiming, Easing } from 'react-native-reanimated'
 
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent (TouchableOpacity)
 
-let styles, theme
-
 
 const BottomBar = () => {
 
-  [styles, theme] = useThemes (styles => styles.MainPage.Bottom)
-
   const [appOpenedWindows, setAppOpenedWindows] = useAppOpenedWindows ()
-
-
-  const tipText = {
-
-    metalinkText: 'Подробнее',
-    restText: ' о приложении, которое созданно для обхода ограничений.'
-
-  }
 
 
   const setIsAppDescriptionOpened = bool => {
@@ -54,7 +44,6 @@ const BottomBar = () => {
     paddingTop: 28}}>
 
       <Tip
-      tipText = {tipText}
       onPress = {() => handleTipPress()}/>
 
     </View>
@@ -64,7 +53,11 @@ const BottomBar = () => {
 }
 
 
-const Tip = ({tipText, onPress}) => {
+const Tip = ({onPress}) => {
+
+  const [styles, theme] = useThemes (styles => styles.MainPage.Bottom)
+  const [texts] = useAppLanguage (texts => texts.MainPage.Bottom)
+
 
   const barBorderColorControl = useSharedValue (styles.borderColor)
   const barBackgroundColorControl = useSharedValue (styles.backgroundColor)
@@ -127,7 +120,7 @@ const Tip = ({tipText, onPress}) => {
     opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
     marginControl.value = withSequence (withTiming (-0.5, {duration: AnDu, easing: comEsng}), withTiming (0, {duration: AnDu, easing: comEsng}))
 
-    onPress ()
+    setTimeout (() => onPress (), AnDu)
 
   }
 
@@ -156,7 +149,7 @@ const Tip = ({tipText, onPress}) => {
       fontSize: 17},
       animationStyles]}>
 
-        <MetaLink>{tipText.metalinkText}</MetaLink>{tipText.restText}
+        <MetaLink>{texts.metalink}</MetaLink>{texts.rest_text}
 
       </Animated.Text>
 
@@ -167,6 +160,9 @@ const Tip = ({tipText, onPress}) => {
 }
 
 const MetaLink = ({children: text}) => {
+
+  const [styles, theme] = useThemes (styles => styles.MainPage.Bottom)
+
 
   const textColorControl = useSharedValue (styles.metalinkColor)
 

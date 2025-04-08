@@ -3,16 +3,18 @@
 
 import { useEffect } from 'react'
 import { useThemes } from '../../../../Redux/Hooks/UseThemes'
-
-import { StatusBar } from 'react-native'
 import { Dimensions } from 'react-native'
 
-import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
+import { StatusBar } from 'react-native'
+
+import { useAppMenuSlider } from '../../../../Redux/Hooks/MenuSlider'
+import Animated, { useSharedValue, withTiming, Easing, withDelay } from 'react-native-reanimated'
 
 
 const MainField = ({style, children}) => {
 
   const [styles, theme] = useThemes ()
+  const [isAppMenuSliderOpened, setIsAppMenuSliderOpened] = useAppMenuSlider ()
 
 
   const windowWidth = Dimensions.get('window').width  // should it be under triggering ?
@@ -32,6 +34,18 @@ const MainField = ({style, children}) => {
   const backgroundRotateControl = useSharedValue (`-${getRandom(25, 0)}deg`)
   const backgroundScaleControl = useSharedValue (getRandom(1, 1.1))
   const backgroundOpacityControl = useSharedValue (getRandom(0.45, 0.55))
+
+  const marginControl = useSharedValue (0)
+
+
+  useEffect (() => {
+
+    isAppMenuSliderOpened
+
+      ? marginControl.value = withDelay (25, withTiming (50, {duration: 180, easing: Easing.inOut (Easing.quad)}))
+      : marginControl.value = withTiming (0, {duration: 95, easing: Easing.inOut (Easing.quad)})
+
+  }, [isAppMenuSliderOpened])
 
 
   // background image animations:
@@ -87,7 +101,9 @@ const MainField = ({style, children}) => {
     <Animated.View style = {[{
     width: '100%',
     height: '100%',
-    backgroundColor: viewBackgroundColorControl},
+    backgroundColor: viewBackgroundColorControl,
+    left: marginControl,
+    },
     style]}>
 
       <StatusBar

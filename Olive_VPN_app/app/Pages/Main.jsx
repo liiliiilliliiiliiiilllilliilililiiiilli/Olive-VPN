@@ -19,7 +19,6 @@ const Main = () => {
   return (
 
     <MainField style = {{
-    display: 'flex',
     alignItems: 'center',
     flex: 1}}>
 

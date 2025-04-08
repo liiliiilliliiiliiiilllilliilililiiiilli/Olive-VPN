@@ -42,7 +42,8 @@
           },
           "imageWidth": 200
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true
@@ -52,9 +53,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "733703da-34ed-4225-b448-adee1848a94f"
+        "projectId": "f56580e6-cda4-4015-9d0c-ed7b0e3c7167"
       }
     },
-    "owner": "liiliiilliliiiliiiilll_0"
+    "owner": "liiliiilliliiiliiiilllilli_0"
   }
 }

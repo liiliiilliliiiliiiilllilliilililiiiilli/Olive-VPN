@@ -17,13 +17,8 @@ import Animated, { useSharedValue, withSequence, withTiming, Easing } from 'reac
 
 const device_is_iphone = Platform.OS === 'ios'
 
-let styles, theme
-
 
 const Top = () => {
-
-  [styles, theme] = useThemes (styles => styles.MainPage.Main.Top)
-
 
   return (
 
@@ -43,6 +38,7 @@ const Top = () => {
 
 const StatusText = () => {
 
+  const [styles, theme] = useThemes (styles => styles.MainPage.Main.Top)
   const [textValue] = useMainPageStatusText ()
 
   const colorControl = useSharedValue (styles.StatusText.color)
@@ -78,6 +74,9 @@ const StatusText = () => {
 }
 
 const Action = () => {
+
+  const [styles, theme] = useThemes (styles => styles.MainPage.Main.Top)
+
 
   const [ipTextState, setIpTextState] = useState ('')
 

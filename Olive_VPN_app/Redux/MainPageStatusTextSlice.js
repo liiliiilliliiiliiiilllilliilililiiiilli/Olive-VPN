@@ -18,7 +18,7 @@ const mainPageStatusTextSlice = createSlice ({
 
   name: 'mainPageStatusText',
 
-  initialState: {value: 'Соединение не защищено'},  // temporal
+  initialState: {value: ''},  // temporal
 
   reducers: {
     

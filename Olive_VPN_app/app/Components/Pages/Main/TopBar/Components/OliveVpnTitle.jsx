@@ -3,14 +3,18 @@
 
 import { useEffect } from 'react'
 import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
+import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
+
 import { View } from 'react-native'
+
 import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
 
 
 const OliveVpnTitle = () => {
 
   const [styles, theme] = useThemes (styles => styles.MainPage.Top.Title)
-  
+  const [texts] = useAppLanguage (texts => texts.MainPage.Top.Title)
+
   const textColorControl = useSharedValue (styles.color)
   const lineColorControl = useSharedValue (styles.lineColor)
 
@@ -41,7 +45,7 @@ const OliveVpnTitle = () => {
       color: textColorControl,
       fontSize: 25}}>
 
-        OliveVPN
+        {texts.olive_vpn}
 
       </Animated.Text>
 

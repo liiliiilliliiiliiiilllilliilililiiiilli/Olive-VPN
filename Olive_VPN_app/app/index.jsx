@@ -4,6 +4,8 @@
 import { Provider } from 'react-redux'
 import { ReduxStore } from '../Redux/Store'
 
+import { View } from 'react-native'
+
 import App from './App'
 
 
@@ -11,9 +13,17 @@ const index = () => {
 
   return (
 
-    <Provider store = {ReduxStore}>
-      <App/>
-    </Provider>
+    <View style = {{
+    flex: 1,
+    backgroundColor: 'black'}}>
+
+      <Provider store = {ReduxStore}>
+
+        <App/>
+
+      </Provider>
+
+    </View>
 
   )
 

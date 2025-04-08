@@ -1,6 +1,8 @@
 // This is Options page.
 
 
+import { useThemes } from '../../Redux/Hooks/UseThemes'
+
 import { View } from 'react-native'
 
 import TopBar from '../Components/Pages/ServersList/TopBar/TopBar'
@@ -9,13 +11,15 @@ import MainContent from '../Components/Pages/ServersList/MainContent/MainContent
 
 const ServersList = () => {
 
+  const [styles] = useThemes (styles => styles.MainField)
+
+
   return (
 
     <View style = {{
-    display: 'flex',
     alignItems: 'center',
     flex: 1,
-    backgroundColor: 'black'}}>
+    backgroundColor: styles.backgroundColor}}>
 
       <TopBar/>
       <MainContent/>

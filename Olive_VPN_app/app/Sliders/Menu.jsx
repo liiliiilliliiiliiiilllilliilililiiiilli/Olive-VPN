@@ -1,21 +1,48 @@
 // This is Main Page menu slider.
 
 
+import { useState, useEffect } from 'react'
 import { useThemes } from '../../Redux/Hooks/UseThemes'
+import { useAppLanguage } from '../../Redux/Hooks/AppLanguage'
 import { useAppMenuSlider } from '../../Redux/Hooks/MenuSlider'
 import { useAppOpenedWindows } from '../../Redux/Hooks/OpenedWindows'
+import { useAppAutoVpnToggle } from '../../Redux/Hooks/AppAutoVpnToggle'
 
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 
+import Animated, { useSharedValue, withTiming } from 'react-native-reanimated'
 
-let styles
+const AnimatedTouchableOpacity = Animated.createAnimatedComponent (TouchableOpacity)
 
 
 const Menu = () => {
 
-  [styles] = useThemes (styles => styles.MenuSlider)
-
   const [isAppMenuSliderOpened, setIsAppMenuSliderOpened] = useAppMenuSlider ()
+
+
+  const [doesAppears, setDoesAppears] = useState (false)
+
+  const opacityControl = useSharedValue (0)
+  const marginControl = useSharedValue (-350)
+
+
+  const performOpening = () => {
+
+    setDoesAppears (true)
+
+    opacityControl.value = withTiming (1, {duration: 120})
+    marginControl.value = withTiming (-50, {duration: 120})
+
+  }
+
+  const performClosing = () => {
+
+    opacityControl.value = withTiming (0, {duration: 120})
+    marginControl.value = withTiming (-350, {duration: 120})
+
+    setTimeout (() => {setDoesAppears (false); setIsAppMenuSliderOpened (false)}, 120)
+
+  }
 
 
   const handleShadowPress = () => {
@@ -25,27 +52,39 @@ const Menu = () => {
   }
 
 
+  useEffect (() =>
+
+    isAppMenuSliderOpened
+
+      ? performOpening ()
+      : performClosing ()
+
+  , [isAppMenuSliderOpened])
+
+
   return (
 
     <>
     
-      {isAppMenuSliderOpened ?
+      {doesAppears ?
       
         <View style = {{
         position: 'absolute',
         width: '100%',
         height: '100%'}}>
 
-          <TouchableOpacity  // shadow touch
+          <AnimatedTouchableOpacity  // shadow touch
           activeOpacity = {1}
           onPress = {() => handleShadowPress()}
           style = {{
           position: 'absolute',
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.5)'}}/>
+          width: '400%',
+          height: '400%',
+          opacity: opacityControl}}/>
 
-          <SliderBlock/>
+          <SliderBlock
+          margin = {marginControl}
+          performClosing = {handleShadowPress}/>
 
         </View>
 
@@ -58,46 +97,52 @@ const Menu = () => {
 }
 
 
-const SliderBlock = () => {
+const SliderBlock = ({margin, performClosing}) => {
+
+  const [styles] = useThemes (styles => styles.MenuSlider)
+  const [texts] = useAppLanguage (texts => texts.MenuSlider)
+
 
   const [appOpenedWindows, setAppOpenedWindows] = useAppOpenedWindows ()
   const [isAppMenuSliderOpened, setIsAppMenuSliderOpened] = useAppMenuSlider ()
 
 
-  const menu_txt = 'Меню'
-  const language_txt = 'Язык'
-  const language_value_txt = 'Русский'
-  const feedback_txt = 'Обратная связь'
-  const connection_to_vpn_on_app_launch_txt = 'Подключение к VPN при запуске приложения'
-  // const _txt = ''
+  const menu_TXT = texts.Skeleton.menu
+  const language_TXT = texts.LanguageButton.language
+  const language_value_TXT = texts.LanguageButton.language_value
+  const feedback_TXT = texts.FeedbackButton.feedback
+  const connection_to_vpn_on_app_launch_TXT = texts.AutoVpnToggler.connection_to_vpn_on_app_launch
+  // const _TXT = ''
 
 
   const Skeleton = ({children}) => {
 
     return (
 
-      <View style = {{
+      <Animated.View style = {{
       position: 'absolute',
-      width: '80%',
-      maxWidth: 300,
+      width: 300,
       height: '100%',
+      left: margin,  // animation
       gap: 12,
-      backgroundColor: '#0b0b0b'}}>
+      backgroundColor: styles.Skeleton.backgroundColor,
+      boxShadow: '15px 0px 25px rgba(3, 10, 1, 0.5)'}}>
     
         <View style = {{
+        marginBottom: 1,
         paddingTop: 17.5,
         paddingLeft: 32,
         paddingBottom: 7.5,
         borderBottomWidth: 2,
-        borderBottomColor: '#171717',
-        backgroundColor: '#070707'}}>
+        borderBottomColor: styles.Skeleton.Top.borderBottomColor,
+        backgroundColor: styles.Skeleton.Top.backgroundColor}}>
   
           <Text style = {{
-          fontFamily: 'Archivo-ExtraBold',
-          color: '#f2f2f2',
+          fontFamily: styles.Skeleton.Top.fontFamily,
+          color: styles.Skeleton.Top.color,
           fontSize: 25}}>
   
-            {menu_txt}
+            {menu_TXT}
   
           </Text>
   
@@ -105,7 +150,7 @@ const SliderBlock = () => {
 
         {children}
   
-      </View>
+      </Animated.View>
 
     )
 
@@ -117,9 +162,9 @@ const SliderBlock = () => {
 
       <View style = {{
       height: 2,
-      marginHorizontal: 25,
+      marginHorizontal: 23,
       borderRadius: 8,
-      backgroundColor: '#262626'}}/>
+      backgroundColor: styles.Separator.backgroundColor}}/>
 
     )
 
@@ -130,7 +175,7 @@ const SliderBlock = () => {
     const handlePress = () => {
 
       setAppOpenedWindows (prev => [...prev, 'LanguageChoose'])
-      setIsAppMenuSliderOpened (false)
+      performClosing ()
 
     }
 
@@ -146,37 +191,31 @@ const SliderBlock = () => {
       paddingVertical: 8,
       paddingHorizontal: 23}}>
 
-        <View style = {{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        gap: 14}}>
-
-          <Image
-          source = {styles.LanguageButton.Planet_PNG}
-          style = {{
-          width: 19,
-          height: 19,
-          bottom: 0.75,
-          right: 0.25}}/>
-
-          <Text style = {{
-          fontFamily: 'Archivo-SemiBold',
-          color: '#f2f2f2',
-          fontSize: 18}}>
-
-            {language_txt}
-
-          </Text>
-
-        </View>
+        <Image
+        source = {styles.LanguageButton.Planet_PNG}
+        style = {{
+        width: 19,
+        height: 19,
+        bottom: 0.75,
+        right: 0.25,
+        marginRight: 14,}}/>
 
         <Text style = {{
-        fontFamily: 'Archivo-Regular',
-        color: '#bfbfbf',
+        marginRight: 'auto',
+        fontFamily: styles.LanguageButton.fontFamily_language,
+        color: styles.LanguageButton.color_language,
         fontSize: 18}}>
 
-          {language_value_txt}
+          {language_TXT}
+
+        </Text>
+
+        <Text style = {{
+        fontFamily: styles.LanguageButton.fontFamily_language_value,
+        color: styles.LanguageButton.color_language_value,
+        fontSize: 18}}>
+
+          {language_value_TXT}
 
         </Text>
 
@@ -191,7 +230,7 @@ const SliderBlock = () => {
     const handlePress = () => {
 
       setAppOpenedWindows (prev => [...prev, 'Feedback'])
-      setIsAppMenuSliderOpened (false)
+      performClosing ()
 
     }
 
@@ -222,11 +261,11 @@ const SliderBlock = () => {
           right: 0.25}}/>
 
           <Text style = {{
-          fontFamily: 'Archivo-SemiBold',
-          color: '#f2f2f2',
+          fontFamily: styles.FeedbackButton.fontFamily,
+          color: styles.FeedbackButton.color,
           fontSize: 18}}>
 
-            {feedback_txt}
+            {feedback_TXT}
 
           </Text>
 
@@ -248,21 +287,20 @@ const SliderBlock = () => {
 
   const AutoVpnToggler = ({style}) => {
 
-    const useAppAutoVpnToggle = () => [1, () => {}]  //
-    const [isChecked, setIsChecked] = useAppAutoVpnToggle ()
+    const [isAutoVpnOn, setIsAutoVpnOn] = useAppAutoVpnToggle ()
 
 
     const Toggler = () => {
 
-      const [togglerBorderColor, togglerBackgroundColor] = isChecked
+      const [togglerBorderColor, togglerBackgroundColor] = isAutoVpnOn
 
-        ? [ styles.AutoVpnToggler.borderColor_Chosen,
-            styles.AutoVpnToggler.backgroundColor_Chosen ]
+        ? [ styles.AutoVpnToggler.Toggler.borderColor_Chosen,
+            styles.AutoVpnToggler.Toggler.backgroundColor_Chosen ]
 
-        : [ styles.AutoVpnToggler.borderColor_Unchosen,
-            styles.AutoVpnToggler.backgroundColor_Unchosen ]
+        : [ styles.AutoVpnToggler.Toggler.borderColor_Unchosen,
+            styles.AutoVpnToggler.Toggler.backgroundColor_Unchosen ]
 
-      const togglerPicOpacity = isChecked
+      const togglerPicOpacity = isAutoVpnOn ? 1 : 0
 
 
       return (
@@ -278,7 +316,7 @@ const SliderBlock = () => {
         backgroundColor: togglerBackgroundColor}}>
 
           <Image
-          source = {styles.AutoVpnToggler.Done_PNG}
+          source = {styles.AutoVpnToggler.Toggler.Done_PNG}
           style = {{
           width: 16,
           height: 16,
@@ -294,8 +332,7 @@ const SliderBlock = () => {
     return (
 
       <TouchableOpacity
-      activeOpacity = {1}
-      onPress = {() => setIsChecked (prev => !prev)}
+      onPress = {() => setIsAutoVpnOn (!isAutoVpnOn)}
       style = {[{
       height: 75,
       flexDirection: 'row',
@@ -303,8 +340,8 @@ const SliderBlock = () => {
       paddingVertical: 8,
       paddingHorizontal: 23,
       borderTopWidth: 2,
-      borderTopColor: '#171717',
-      backgroundColor: '#070707'},
+      borderTopColor: styles.AutoVpnToggler.borderTopColor,
+      backgroundColor: styles.AutoVpnToggler.backgroundColor},
       style]}>
 
         <View style = {{
@@ -315,11 +352,11 @@ const SliderBlock = () => {
 
           <Text style = {{
           flex: 1,
-          fontFamily: 'Archivo-SemiBold',
-          color: '#f2f2f2',
+          fontFamily: styles.AutoVpnToggler.fontFamily,
+          color: styles.AutoVpnToggler.color,
           fontSize: 17}}>
 
-            {connection_to_vpn_on_app_launch_txt}
+            {connection_to_vpn_on_app_launch_TXT}
 
           </Text>
 

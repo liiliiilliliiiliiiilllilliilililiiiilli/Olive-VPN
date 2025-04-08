@@ -8,7 +8,7 @@ import { View, Text } from 'react-native'
 
 const Liner = ({text, style}) => {
 
-  const [styles, theme] = useThemes (styles => styles.MainPage.Main.Top)
+  const [styles] = useThemes (styles => styles.ServersListPage.Main.Liner)
 
 
   return (
@@ -26,12 +26,12 @@ const Liner = ({text, style}) => {
       <Text style = {{
       zIndex: 1,
       fontSize: 27,
-      fontFamily: 'Archivo-SemiBold',
-      color: '#f2f2f2',
+      fontFamily: styles.fontFamily,
+      color: styles.color,
       height: '100%',
       left: 36,
       paddingHorizontal: 8,
-      backgroundColor: 'black'}}>
+      backgroundColor: styles.backgroundColor}}>
 
         {text}
 
@@ -42,7 +42,7 @@ const Liner = ({text, style}) => {
       width: '100%',
       height: 1,
       bottom: 20,
-      backgroundColor: 'rgba(44, 44, 44, 1)'}}/>
+      backgroundColor: styles.lineColor}}/>
 
     </View>
 

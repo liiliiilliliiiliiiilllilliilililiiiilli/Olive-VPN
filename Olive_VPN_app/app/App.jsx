@@ -4,9 +4,13 @@
 import axios from 'axios'
 import * as SecureStore from 'expo-secure-store'
 
+import RNSimpleOpenvpn from 'react-native-simple-openvpn'
+
 import { useState, useEffect } from 'react'
 import { useFonts } from 'expo-font'
-import { useThemes } from '../Styles/Hooks/UseThemes'
+import { useThemes } from '../Redux/Hooks/UseThemes'
+import { useAppLanguage } from '../Redux/Hooks/AppLanguage'
+import { useAppAutoVpnToggle } from '../Redux/Hooks/AppAutoVpnToggle'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
@@ -27,6 +31,7 @@ const Stack = createNativeStackNavigator ()
 const generalScreenOptions = {
 
   headerShown: false
+  // animation: 'fade'
 
 }
 
@@ -36,14 +41,30 @@ const App = () => {
   const [isAppSetUp, setIsAppSetUp] = useState (false)
 
   const [styles, theme, setTheme] = useThemes ()
+  const [texts, appLanguage, setAppLanguage] = useAppLanguage ()
+  const [isAutoVpnOn, setIsAutoVpnOn] = useAppAutoVpnToggle ()
 
   const [JwtAccessUser, setJwtAccessUser] = useState ()  // need to put into redux for futher global usage and trigger it
   const [JwtRefreshUser, setJwtRefreshUser] = useState ()  // need to put into redux for futher global usage and trigger it
+
+  const [afterDark, setAfterDark] = useState (false)
 
 
   const configureThemes = () => {
 
     setTheme ('init')
+
+  }
+
+  const configureAppLanguage = async () => {
+
+    setAppLanguage ('init')
+
+  }
+
+  const configureAutoVpn = () => {
+
+    setIsAutoVpnOn ('init')
 
   }
 
@@ -88,7 +109,9 @@ const App = () => {
     Promise.all ([
 
       configureThemes (),
-      configureUserTokens ()
+      configureAppLanguage (),
+      configureUserTokens (),
+      configureAutoVpn ()
 
     ])
     
@@ -97,13 +120,67 @@ const App = () => {
   useEffect (() => {  // trigger threads readiness
 
     const isThemeConfigured = theme != null
+    const isAppLanguageConfigured = appLanguage != null
     const areUserTokensConfigured = (JwtAccessUser != null) && (JwtRefreshUser != null)
+    const isAutoVpnConfigured = isAutoVpnOn != null
 
-    if (isThemeConfigured && areUserTokensConfigured) setIsAppSetUp (true)
+    if (isThemeConfigured && isAppLanguageConfigured && areUserTokensConfigured && isAutoVpnConfigured) {setIsAppSetUp (true); setAfterDark (true)}
       
-  }, [theme, JwtAccessUser, JwtRefreshUser])
+  }, [theme, appLanguage, JwtAccessUser, JwtRefreshUser, isAutoVpnOn])
 
   // .
+
+
+  const limeVpnConnectionConfiguration = {
+
+    ovpnFileName: 'lime',
+    notificationTitle: 'RNSimpleOpenVPN',
+    providerBundleIdentifier: 'com.example.OliveVPN',
+    localizedDescription: 'TestRNSimpleOvpn',
+    compatMode: 'MODERN_DEFAULTS'
+
+  }
+
+  const connectVPN = async vpnConnectionConfiguration => {
+
+    try {
+
+      await RNSimpleOpenvpn.connect ({
+
+        ...vpnConnectionConfiguration,
+
+        compatMode: {
+
+          MODERN_DEFAULTS: RNSimpleOpenvpn.CompatMode.MODERN_DEFAULTS,
+          OVPN_TWO_FIVE_PEER: RNSimpleOpenvpn.CompatMode.OVPN_TWO_FIVE_PEER,
+          OVPN_TWO_FOUR_PEER: RNSimpleOpenvpn.CompatMode.OVPN_TWO_FOUR_PEER,
+          OVPN_TWO_THREE_PEER: RNSimpleOpenvpn.CompatMode.OVPN_TWO_THREE_PEER
+
+        } [vpnConnectionConfiguration.compatMode]
+
+      })
+
+    }
+
+    catch (error) {
+
+      console.info (`connectVPN: error while connecting to VPN server\n\n${error}`)
+
+    }
+
+  }
+
+
+  useEffect (() => {
+
+    if (!afterDark && isAutoVpnOn) {
+
+      connectVPN (limeVpnConnectionConfiguration)
+      setAfterDark (true)
+
+    }
+
+  }, [isAutoVpnOn])
 
 
   return (

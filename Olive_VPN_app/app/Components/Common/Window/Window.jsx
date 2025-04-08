@@ -1,10 +1,26 @@
 // Component.
 
 
+import { useState, useEffect } from 'react'
+import { useThemes } from '../../../../Redux/Hooks/UseThemes'
+
 import { View, TouchableOpacity, Text } from 'react-native'
+
+import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
 
 
 const Window = ({isOpened, closeSelf, title, leftButton, rightButton, centerButton, style, children}) => {
+
+  const [styles] = useThemes (styles => styles.Shadow)
+  
+  const [doesAppears, setDdoesAppears] = useState (isOpened)
+
+  const opacityControl = useSharedValue (0)
+  const scaleControl = useSharedValue (0.975)
+
+
+  const commonEasing = comEsng = Easing.inOut (Easing.quad)
+
 
   const handleShadowPress = () => {
 
@@ -13,27 +29,58 @@ const Window = ({isOpened, closeSelf, title, leftButton, rightButton, centerButt
   }
 
 
+  const performOpening = () => {
+
+    setDdoesAppears (true)
+
+    opacityControl.value = withTiming (1, {duration: 120, easing: comEsng})
+    scaleControl.value = withTiming (1, {duration: 120, easing: comEsng})
+
+  }
+
+  const performClosing = () => {
+
+    opacityControl.value = withTiming (0, {duration: 120, easing: comEsng})
+    scaleControl.value = withTiming (0.975, {duration: 120, easing: comEsng})
+
+    setTimeout (() => setDdoesAppears (false), 120)
+
+  }
+
+
+  useEffect (() =>
+
+    isOpened
+
+      ? performOpening ()
+      : performClosing ()
+
+  , [isOpened])
+
+
   return (
 
     <>
 
-      {isOpened ?
+      {doesAppears ?
 
-        <View style = {{
+        <Animated.View style = {{
         position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        height: '100%'}}>
+        height: '100%',
+        opacity: opacityControl,
+        transform: [{scale: scaleControl}]}}>
 
           <TouchableOpacity
           activeOpacity = {1}
           onPress = {() => handleShadowPress()}
           style = {{
           position: 'absolute',
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.5)'}}/>
+          width: '150%',
+          height: '150%',
+          backgroundColor: styles.backgroundColor}}/>
 
           <WindowBlock
           title = {title}
@@ -46,7 +93,7 @@ const Window = ({isOpened, closeSelf, title, leftButton, rightButton, centerButt
 
           </WindowBlock>
 
-        </View>
+        </Animated.View>
 
       : null}
 
@@ -59,6 +106,9 @@ const Window = ({isOpened, closeSelf, title, leftButton, rightButton, centerButt
 
 const WindowBlock = ({title, leftButton, rightButton, centerButton, style, children}) => {
 
+  const [styles] = useThemes (styles => styles.Window)
+
+
   const TopBar = ({title: title}) => {
 
     return (
@@ -70,13 +120,13 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
       paddingVertical: 11,
       paddingLeft: 26,
       borderBottomWidth: 2.5,
-      borderColor: '#0f0f0f',
-      backgroundColor: '#1a1a1a',
-      boxShadow: '0px 2.5px 10px #141414'}}>
+      borderColor: styles.TopBar.borderColor,
+      backgroundColor: styles.TopBar.backgroundColor,
+      boxShadow: styles.TopBar.boxShadow}}>
 
         <Text style = {{
-        fontFamily: 'Archivo-SemiBold',
-        color: '#f2f2f2',
+        fontFamily: styles.TopBar.fontFamily,
+        color: styles.TopBar.color,
         fontSize: 18}}>
 
           {title}
@@ -95,7 +145,8 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
 
       <View style = {{
       flex: 1,
-      width: '100%'}}>
+      width: '100%',
+      paddingTop: 2.5}}>
 
         {children}
 
@@ -115,7 +166,7 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
       alignItems: 'center',
       width: '100%',
       height: 53 + 5,
-      boxShadow: '0px -2.5px 10px #141414'}}>
+      boxShadow: styles.BottomBar.boxShadow}}>
 
         { centerButton ?
 
@@ -129,8 +180,8 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
           paddingBottom: 2.5}}>
 
             <Text style = {{
-            fontFamily: 'Archivo-SemiBold',
-            color: '#8b9e80',
+            fontFamily: styles.BottomBar.fontFamily,
+            color: styles.BottomBar.color,
             fontSize: 18}}>
 
               {centerButton.text}
@@ -156,8 +207,8 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
             paddingBottom: 2.5}}>
 
               <Text style = {{
-              fontFamily: 'Archivo-Regular',
-              color: '#8b9e80',
+              fontFamily: styles.BottomBar.fontFamily,
+              color: styles.BottomBar.color,
               fontSize: 18}}>
 
                 {leftButton.text}
@@ -181,8 +232,8 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
             paddingBottom: 2.5}}>
 
               <Text style = {{
-              fontFamily: 'Archivo-Regular',
-              color: '#8b9e80',
+              fontFamily: styles.BottomBar.fontFamily,
+              color: styles.BottomBar.color,
               fontSize: 18}}>
 
                 {rightButton.text}
@@ -212,8 +263,8 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
     borderRadius: 8,
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
-    backgroundColor: '#141414',
-    boxShadow: '0px 2.5px 25px rgb(3, 10, 1)',
+    backgroundColor: styles.backgroundColor,
+    boxShadow: styles.boxShadow,
     overflow: 'hidden'},
     style]}>
 

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import { themeReducer } from './ThemeSlice'
-import { mainPageStatusTextReducer } from './MainPageStatusTextSlice'
-import { openedWindowsReducer } from './OpenedWindowsSlice'
+import { appLanguageReducer } from './AppLanguageSlice'
 import { menuSliderReducer } from './MenuSliderSlice'
+import { openedWindowsReducer } from './OpenedWindowsSlice'
+import { mainPageStatusTextReducer } from './MainPageStatusTextSlice'
+import { autoVpnOnReducer } from './AppAutoVpnToggleSlice'
 
 
 const ReduxStore = configureStore ({
@@ -11,9 +13,11 @@ const ReduxStore = configureStore ({
     reducer: {
         
         theme: themeReducer,
-        mainPageStatusText: mainPageStatusTextReducer,
+        appLanguage: appLanguageReducer,
+        isMenuSliderOpened: menuSliderReducer,
         openedWindows: openedWindowsReducer,
-        isMenuSliderOpened: menuSliderReducer
+        mainPageStatusText: mainPageStatusTextReducer,
+        isAutoVpnOn: autoVpnOnReducer
     
     },
 

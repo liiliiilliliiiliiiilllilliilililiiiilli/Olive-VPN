@@ -57,12 +57,14 @@ const Colors = {
     LightBorderButton: '#cdcdcd',
     Line: '#1c1c1c',
     Olive: '#8b9e80',
-    OliveHightTransparent: 'rgba(139, 158, 128, 0.75)',
     OliveButtonShadow: '0px 2.5px 10px rgb(3, 10, 1)',
     OliveDark: '#687262',
+    OliveHightTransparent: 'rgba(139, 158, 128, 0.75)',
     PreWhite: '#f2f2f2',
     Sun: '#9e9780',
     Text: '#bfbfbf',
+    TextLink: '#9da6d9',
+    TextLinkPressed: '#6c7499',
     Tip: '#0d0d0d',
     TipText: '#545454',
     White: '#ffffff'
@@ -71,7 +73,6 @@ const Colors = {
     // olive_dark: 'rgb(41, 52, 50)'
 
 }
-
 
 const MainTheme = {
 
@@ -86,45 +87,41 @@ const MainTheme = {
 
         ColorfulBackground_PNG: ColorfulBackground_PNG,
 
+
         backgroundColor: Colors.Black
 
     },
 
+    Shadow: {
 
-    LanguageChooseWindow: {},
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
 
-    LocationsWindow: {},
+    },
 
-    AppDescriptionWindow: {},
+    Window: {
+
+        backgroundColor: '#141414',
+        boxShadow: '0px 2.5px 25px rgb(3, 10, 1)',
 
 
-    MenuSlider: {
+        TopBar: {
 
-        Skeleton: {},
+            boxShadow: '0px 2.5px 10px #141414',
 
-        Separator: {},
+            borderColor: '#0f0f0f',
+            backgroundColor: '#1a1a1a',
 
-        LanguageButton: {
-
-            Planet_PNG: World_grey_PNG
-
-        },
-
-        FeedbackButton: {
-
-            Info_PNG: Info_grey_PNG,
-            Arrow_PNG: ArrowCompact_grey_PNG
+            fontFamily: 'Archivo-SemiBold',
+            color: Colors.PreWhite
 
         },
 
-        AutoVpnToggler: {
+        BottomBar: {
 
-            Done_PNG: Done_Black_PNG,
+            boxShadow: '0px -2.5px 10px #141414',
 
-            backgroundColor_Chosen: 'rgb(175, 192, 168)',
-            backgroundColor_Unchosen: '#171717',
-            borderColor_Chosen: '#f2f2f2',
-            borderColor_Unchosen: '#f2f2f2'
+            fontFamily: 'Archivo-Regular',
+            color: Colors.Olive
 
         }
 
@@ -186,6 +183,7 @@ const MainTheme = {
                     Apps_PNG: Apps_grey_PNG,
                     Arrow_PNG: ArrowCompact_grey_PNG,
 
+
                     fontFamily: 'Archivo-Bold',
                     color: Colors.Grey
 
@@ -199,6 +197,7 @@ const MainTheme = {
 
                     Olive_PNG: Olive_black_PNG,
 
+
                     borderColor: Colors.Black,
                     backgroundColor: Colors.OliveHightTransparent,
                     boxShadow: Colors.OliveButtonShadow
@@ -209,6 +208,7 @@ const MainTheme = {
 
                     Tap_PNG: Tap_dark_green_PNG,
 
+
                     fontFamily: 'Archivo-Regular',
                     color: Colors.OliveDark
 
@@ -218,6 +218,7 @@ const MainTheme = {
 
                     Location_PNG: Location_green_PNG,
                     Arrow_PNG: ArrowCompact_green_PNG,
+
 
                     fontFamily: 'Arimo-Bold',
                     color: Colors.Olive
@@ -288,16 +289,177 @@ const MainTheme = {
 
             Liner: {
 
+                fontFamily: 'Archivo-SemiBold',
+                color: Colors.PreWhite,
+                backgroundColor: 'black',
 
+                lineColor: '#2c2c2c'
 
             },
 
             ServerInstance: {
 
                 Netherlands_PNG: Netherlands_PNG,
-                Germany_PNG: Germany_PNG
+                Germany_PNG: Germany_PNG,
+
+
+                backgroundColor: Colors.Black,
+
+
+                Block: {
+
+                    borderColor_Chosen: '#394335',
+                    borderColor_Unchosen: '',
+                    backgroundColor: '#101010',
+
+                    fontFamily: 'Arimo-SemiBold',
+                    color: Colors.PreWhite,
+
+
+                    Pic: {
+
+                        borderColor: '#303030'
+
+                    },
+
+                    PilStatus: {
+
+                        color_1: 'lightgreen',
+                        color_2: 'orange',
+                        color_3: 'darkred'
+
+                    }
+
+                }
 
             }
+
+        }
+
+    },
+
+
+    MenuSlider: {
+
+        Skeleton: {
+
+            backgroundColor: '#0b0b0b',
+
+
+            Top: {
+
+                borderBottomColor: Colors.BarBorder,
+                backgroundColor: Colors.BarBackground,
+
+                fontFamily: 'Archivo-ExtraBold',
+                color: Colors.PreWhite
+
+            }
+
+        },
+
+        Separator: {
+
+            backgroundColor: '#262626'
+
+        },
+
+        LanguageButton: {
+
+            Planet_PNG: World_grey_PNG,
+
+
+            fontFamily_language: 'Archivo-SemiBold',
+            color_language: Colors.PreWhite,
+
+            fontFamily_language_value: 'Archivo-SemiBold',
+            color_language_value: Colors.DarkBlockButton
+
+        },
+
+        FeedbackButton: {
+
+            Info_PNG: Info_grey_PNG,
+            Arrow_PNG: ArrowCompact_grey_PNG,
+
+
+            fontFamily: 'Archivo-SemiBold',
+            color: Colors.PreWhite
+
+        },
+
+        AutoVpnToggler: {
+
+            borderTopColor: Colors.BarBorder,
+            backgroundColor: Colors.BarBackground,
+
+            fontFamily: 'Archivo-SemiBold',
+            color: Colors.PreWhite,
+
+
+            Toggler: {
+
+                Done_PNG: Done_Black_PNG,
+
+
+                backgroundColor_Chosen: '#afc0a8',
+                backgroundColor_Unchosen: Colors.BarBorder,
+                borderColor_Chosen: Colors.PreWhite,
+                borderColor_Unchosen: Colors.PreWhite
+
+            }
+
+        }
+
+    },
+
+
+    AppDescriptionWindow: {
+
+        Content: {
+
+            fontFamily: 'Archivo-Regular',
+            color: Colors.PreWhite
+
+        }
+
+    },
+    
+    LanguageChooseWindow: {
+
+        Content: {
+
+            ChooseRadioButton: {
+
+                outerColor_chosen: '#394335',
+                innerColor_chosen: '#8b9e80',
+                outerColor_unchosen: '#3e3e3e',
+                innerColor_unchosen: '#1f1f1f'
+    
+            },
+    
+            ChooseVariant: {
+    
+                fontFamily_language: 'Archivo-SemiBold',
+                color_language: Colors.PreWhite,
+    
+                fontFamily_language_native: 'Archivo-SemiBold',
+                color_language_native: Colors.DarkBlockButton
+    
+            }
+
+        }
+
+    },
+    
+    FeedbackWindow: {
+
+        Content: {
+
+            fontFamily: 'Archivo-Regular',
+            color: Colors.PreWhite,
+            color_link: Colors.TextLink,
+            color_link_pressed: Colors.TextLinkPressed
 
         }
 

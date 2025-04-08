@@ -3,13 +3,19 @@
 
 import { useEffect } from 'react'
 import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
+import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
+
 import { View } from 'react-native'
+
 import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
 
 
 const Title = () => {
 
   const [styles, theme] = useThemes (styles => styles.ServersListPage.Top.Title)
+  const [texts] = useAppLanguage (texts => texts.ServersListPage.Top.Title)
+
+  const choose_your_server_TXT = texts.choose_your_server
 
 
   const textColorControl = useSharedValue (styles.color)
@@ -34,7 +40,7 @@ const Title = () => {
   return (
 
     <View style = {{
-    paddingLeft: 14,
+    paddingLeft: 16,
     flex: 1}}>
 
       <Animated.Text style = {{
@@ -42,7 +48,7 @@ const Title = () => {
       color: textColorControl,
       fontSize: 25}}>
 
-        Выберете сервер
+        {choose_your_server_TXT}
 
       </Animated.Text>
 

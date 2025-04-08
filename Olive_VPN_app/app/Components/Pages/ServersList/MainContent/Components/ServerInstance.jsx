@@ -8,7 +8,7 @@ import { View, TouchableOpacity, Image, Text } from 'react-native'
 
 const ServerInstance = ({pic, title, availability, isChosen, style}) => {
 
-  const [styles, theme] = useThemes (styles => styles.ServersListPage.Main.ServerInstance)
+  const [styles] = useThemes (styles => styles.ServersListPage.Main.ServerInstance)
 
 
   return (
@@ -16,9 +16,9 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
     <View style = {[{  // items container
     width: '100%',
     marginBottom: 8,
-    paddingVertical: 5,
+    paddingVertical: 2.5,
     paddingHorizontal: 5,
-    backgroundColor: '#000000',
+    backgroundColor: styles.backgroundColor,
     opacity: availability ? 1 : 0.5,
     pointerEvents: availability != 0 && !isChosen ? 'auto' : 'none'},
     style]}>
@@ -35,21 +35,32 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
       paddingHorizontal: 21,
       borderRadius: 16,
       borderWidth: 2,
-      borderColor: isChosen ? 'darkgreen' : '',
-      backgroundColor: '#101010'}}>
+      borderColor: isChosen ? styles.Block.borderColor_Chosen : styles.Block.borderColor_Unchosen,
+      backgroundColor: styles.Block.backgroundColor}}>
 
-        <Image
-        source = {pic}
-        style = {{
+        <View style = {{
+        justifyContent: 'flex-start',
+        alignItems: 'center',
         width: 42,
         height: 42,
-        borderColor: '#606060',
         borderWidth: 2,
-        borderRadius: 1000}}/>
+        borderColor: styles.Block.Pic.borderColor,
+        borderRadius: 1000}}>
+
+          <Image
+          source = {pic}
+          style = {{
+          width: 38,
+          height: 38,
+          borderWidth: 2,
+          borderRadius: 1000}}/>
+
+        </View>
+
 
         <Text style = {{
-        fontFamily: 'Arimo-SemiBold',
-        color: '#f2f2f2',
+        fontFamily: styles.Block.fontFamily,
+        color: styles.Block.color,
         fontSize: 17}}>
 
           {title}
@@ -62,7 +73,7 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
         marginLeft: 'auto',
         marginRight: 14,
         borderRadius: 1000,
-        backgroundColor: {1: 'lightgreen', 0.5: 'yellow', 0: 'darkred'} [availability]}}/>
+        backgroundColor: {1: styles.Block.PilStatus.color_1, 0.5: styles.Block.PilStatus.color_2, 0: styles.Block.PilStatus.color_3} [availability]}}/>
 
       </TouchableOpacity>
 
@@ -75,28 +86,3 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
 
 
 export default ServerInstance
-
-
-
-
-
-{/* <Text style = {{
-zIndex: 1,
-fontSize: 27,
-fontFamily: 'Archivo-SemiBold',
-color: '#f2f2f2',
-height: '100%',
-left: 36,
-paddingHorizontal: 8,
-backgroundColor: 'black'}}>
-
-  3 онлайн
-
-</Text>
-
-<View style = {{  // crossline
-position: 'absolute',
-width: '100%',
-height: 1,
-bottom: 20,
-backgroundColor: 'rgba(44, 44, 44, 1)'}}/> */}

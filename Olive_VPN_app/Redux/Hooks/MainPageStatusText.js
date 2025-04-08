@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { SetMainPageStatusText } from '../MainPageStatusTextSlice'
+import { setMainPageStatusText } from '../MainPageStatusTextSlice'
 
 
 const useMainPageStatusText = () => {
@@ -7,7 +7,7 @@ const useMainPageStatusText = () => {
   const statusText = useSelector (state => state.mainPageStatusText.value)
 
   const dispatch = useDispatch ()
-  const setStatusText = text => dispatch (SetMainPageStatusText (text))
+  const setStatusText = text => dispatch (setMainPageStatusText (text))
 
 
   return [statusText, setStatusText]

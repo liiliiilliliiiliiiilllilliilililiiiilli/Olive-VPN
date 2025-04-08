@@ -3,17 +3,28 @@
 
 import TextLink from 'react-native-text-link'
 
+import { useThemes } from '../../Redux/Hooks/UseThemes'
+import { useAppLanguage } from '../../Redux/Hooks/AppLanguage'
 import { useAppOpenedWindows } from '../../Redux/Hooks/OpenedWindows'
+
 import { View, Linking } from 'react-native'
+
 import Window from '../Components/Common/Window/Window'
 
 
 const Feedback = () => {
 
+  const [texts] = useAppLanguage (texts => texts.FeedbackWindow)
+
+  const feedback_TXT = texts.Top.feedback
+  const okay_TXT = texts.Bottom.okay
+
+
   const [appOpenedWindows, setAppOpenedWindows] = useAppOpenedWindows ()
 
 
   const isOpened = appOpenedWindows.includes ('Feedback')
+
 
   const setIsSelfOpened = bool => {
 
@@ -37,9 +48,9 @@ const Feedback = () => {
     <Window
     isOpened = {isOpened}
     closeSelf = {() => handleOkayPress()}
-    title = 'Обратная связь'
+    title = {feedback_TXT}
     rightButton = {{
-      text: 'Ок',
+      text: okay_TXT,
       onPress: () => handleOkayPress()}}
     style = {{height: 'auto'}}>
 
@@ -54,15 +65,19 @@ const Feedback = () => {
 
 const Content = () => {
 
-  const urlTelegramChannel = 'https://t.me/OliveVPN'
-  const urlGooglePlay = 'https://google.com'
-  const urlAppStore = 'https://yandex.ru'
+  const [styles] = useThemes (styles => styles.FeedbackWindow.Content)
+  const [texts] = useAppLanguage (texts => texts.FeedbackWindow)
 
-  const feedbackText = 'Следите за новостями сервиса в нашем Телеграм-канале.\n\nОцените наш сервис на Google Play или App Store.'
 
-  const link_Telegram = 'нашем Телеграм-канале'
-  const link_Googlelay = 'Google Play'
-  const link_AppStore = 'App Store'
+  const urlTelegramChannel_TXT = texts.Main.urlTelegramChannel
+  const urlGooglePlay_TXT = texts.Main.urlGooglePlay
+  const urlAppStore_TXT = texts.Main.urlAppStore
+
+  const feedbackText_TXT = texts.Main.feedbackText
+
+  const link_Telegram_TXT = texts.Main.link_Telegram
+  const link_Googlelay_TXT = texts.Main.link_Googlelay
+  const link_AppStore_TXT = texts.Main.link_AppStore
 
 
   return (
@@ -74,32 +89,32 @@ const Content = () => {
 
       <TextLink
       textStyle = {{
-        fontFamily: 'Archivo-Regular',
-        color: '#f2f2f2',
+        fontFamily: styles.fontFamily,
+        color: styles.color,
         fontSize: 17.5}}
       textLinkStyle = {{
-        fontFamily: 'Archivo-Regular',
-        color: 'rgb(157, 166, 217)',
+        fontFamily: styles.fontFamily,
+        color: styles.color_link,
         fontSize: 17.5}}
       pressingLinkStyle = {{
-        fontFamily: 'Archivo-Regular',
-        color: 'rgb(108, 116, 153)',
+        fontFamily: styles.fontFamily,
+        color: styles.color_link_pressed,
         fontSize: 17.5}}
 
       links = {[
 
-        { text: link_Telegram,
-          onPress: () => Linking.openURL (urlTelegramChannel) },
+        { text: link_Telegram_TXT,
+          onPress: () => Linking.openURL (urlTelegramChannel_TXT) },
 
-        { text: link_Googlelay,
-          onPress: () => Linking.openURL (urlGooglePlay) },
+        { text: link_Googlelay_TXT,
+          onPress: () => Linking.openURL (urlGooglePlay_TXT) },
 
-        { text: link_AppStore,
-          onPress: () => Linking.openURL (urlAppStore) }
+        { text: link_AppStore_TXT,
+          onPress: () => Linking.openURL (urlAppStore_TXT) }
 
       ]}>
 
-       {feedbackText}
+       {feedbackText_TXT}
 
       </TextLink>
 
