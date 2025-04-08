@@ -67,7 +67,11 @@ const Colors = {
     TextLinkPressed: '#6c7499',
     Tip: '#0d0d0d',
     TipText: '#545454',
-    White: '#ffffff'
+    White: '#ffffff',
+
+    Shadow: 'rgba(0, 0, 0, 0.5)',
+
+    PinOutChosen: '#394335'
 
     // cartes: 'rgba(128, 128, 255, 0.5)',
     // olive_dark: 'rgb(41, 52, 50)'
@@ -80,7 +84,7 @@ const MainTheme = {
 
         color: 'light-content',
         backgroundColor: Colors.BarBackground
-    
+
     },
 
     MainField: {
@@ -94,7 +98,7 @@ const MainTheme = {
 
     Shadow: {
 
-        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+        backgroundColor: Colors.Shadow
 
     },
 
@@ -106,7 +110,7 @@ const MainTheme = {
 
         TopBar: {
 
-            boxShadow: '0px 2.5px 10px #141414',
+            boxShadow: '0px 5px 21px #141414',
 
             borderColor: '#0f0f0f',
             backgroundColor: '#1a1a1a',
@@ -117,8 +121,6 @@ const MainTheme = {
         },
 
         BottomBar: {
-
-            boxShadow: '0px -2.5px 10px #141414',
 
             fontFamily: 'Archivo-Regular',
             color: Colors.Olive
@@ -308,7 +310,7 @@ const MainTheme = {
 
                 Block: {
 
-                    borderColor_Chosen: '#394335',
+                    borderColor_Chosen: Colors.PinOutChosen,
                     borderColor_Unchosen: '',
                     backgroundColor: '#101010',
 
@@ -324,9 +326,10 @@ const MainTheme = {
 
                     PilStatus: {
 
-                        color_1: 'lightgreen',
+                        color_3: 'lightgreen',
                         color_2: 'orange',
-                        color_3: 'darkred'
+                        color_1: 'darkred',
+                        color_0: 'grey'
 
                     }
 
@@ -399,13 +402,13 @@ const MainTheme = {
 
             Toggler: {
 
-                Done_PNG: Done_Black_PNG,
+                Done_PNG: Done_White_PNG,
 
 
-                backgroundColor_Chosen: '#afc0a8',
-                backgroundColor_Unchosen: Colors.BarBorder,
-                borderColor_Chosen: Colors.PreWhite,
-                borderColor_Unchosen: Colors.PreWhite
+                backgroundColor_Chosen: '#0b0b0b',
+                backgroundColor_Unchosen: '#0b0b0b',
+                borderColor_Chosen: Colors.BarBorder,
+                borderColor_Unchosen: Colors.BarBorder
 
             }
 
@@ -431,8 +434,8 @@ const MainTheme = {
 
             ChooseRadioButton: {
 
-                outerColor_chosen: '#394335',
-                innerColor_chosen: '#8b9e80',
+                outerColor_chosen: Colors.PinOutChosen,
+                innerColor_chosen: Colors.Olive,
                 outerColor_unchosen: '#3e3e3e',
                 innerColor_unchosen: '#1f1f1f'
     

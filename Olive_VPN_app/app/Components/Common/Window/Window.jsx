@@ -166,7 +166,8 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
       alignItems: 'center',
       width: '100%',
       height: 53 + 5,
-      boxShadow: styles.BottomBar.boxShadow}}>
+      boxShadow: styles.BottomBar.boxShadow,
+      }}>
 
         { centerButton ?
 

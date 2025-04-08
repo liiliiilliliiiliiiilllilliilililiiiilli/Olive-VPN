@@ -32,14 +32,14 @@ const MainContent = () => {
   const Netherlands = {
 
     title: netherlands_TXT,
-    availability: 1
+    availability: 3
 
   }
 
   const Germany = {
 
     title: germany_TXT,
-    availability: 1
+    availability: 3
 
   }
 
@@ -70,7 +70,7 @@ const MainContent = () => {
       <ServerInstance
       pic = {styles.ServerInstance.Germany_PNG}
       title = {Germany.title}
-      availability = {0.5}/>
+      availability = {2}/>
 
       <ServerInstance
       pic = {styles.ServerInstance.Germany_PNG}

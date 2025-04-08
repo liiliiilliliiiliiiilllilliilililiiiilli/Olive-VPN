@@ -11,11 +11,12 @@ import App from './App'
 
 const index = () => {
 
+
   return (
 
     <View style = {{
     flex: 1,
-    backgroundColor: 'black'}}>
+    backgroundColor: '#8b9e80'}}>
 
       <Provider store = {ReduxStore}>
 

@@ -73,7 +73,7 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
         marginLeft: 'auto',
         marginRight: 14,
         borderRadius: 1000,
-        backgroundColor: {1: styles.Block.PilStatus.color_1, 0.5: styles.Block.PilStatus.color_2, 0: styles.Block.PilStatus.color_3} [availability]}}/>
+        backgroundColor: {3: styles.Block.PilStatus.color_3, 2: styles.Block.PilStatus.color_2, 1: styles.Block.PilStatus.color_1, 0: styles.Block.PilStatus.color_0} [availability]}}/>
 
       </TouchableOpacity>
 

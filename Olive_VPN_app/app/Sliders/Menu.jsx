@@ -126,7 +126,8 @@ const SliderBlock = ({margin, performClosing}) => {
       left: margin,  // animation
       gap: 12,
       backgroundColor: styles.Skeleton.backgroundColor,
-      boxShadow: '15px 0px 25px rgba(3, 10, 1, 0.5)'}}>
+      boxShadow: '15px 0px 25px rgba(3, 10, 1, 0.33)',
+      }}>
     
         <View style = {{
         marginBottom: 1,
@@ -318,8 +319,8 @@ const SliderBlock = ({margin, performClosing}) => {
           <Image
           source = {styles.AutoVpnToggler.Toggler.Done_PNG}
           style = {{
-          width: 16,
-          height: 16,
+          width: 13,
+          height: 13,
           opacity: togglerPicOpacity}}/>
 
         </View>
