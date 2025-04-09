@@ -10,7 +10,7 @@ import { useAppAutoVpnToggle } from '../../Redux/Hooks/AppAutoVpnToggle'
 
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 
-import Animated, { useSharedValue, withTiming } from 'react-native-reanimated'
+import Animated, { Easing, useSharedValue, withDelay, withSequence, withTiming } from 'react-native-reanimated'
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent (TouchableOpacity)
 
@@ -22,7 +22,6 @@ const Menu = () => {
 
   const [doesAppears, setDoesAppears] = useState (false)
 
-  const opacityControl = useSharedValue (0)
   const marginControl = useSharedValue (-350)
 
 
@@ -30,17 +29,15 @@ const Menu = () => {
 
     setDoesAppears (true)
 
-    opacityControl.value = withTiming (1, {duration: 120})
     marginControl.value = withTiming (-50, {duration: 120})
 
   }
 
   const performClosing = () => {
 
-    opacityControl.value = withTiming (0, {duration: 120})
-    marginControl.value = withTiming (-350, {duration: 120})
+    marginControl.value = withTiming (-350, {duration: 150})
 
-    setTimeout (() => {setDoesAppears (false); setIsAppMenuSliderOpened (false)}, 120)
+    setTimeout (() => {setDoesAppears (false); setIsAppMenuSliderOpened (false)}, 150 + 25)
 
   }
 
@@ -79,8 +76,7 @@ const Menu = () => {
           style = {{
           position: 'absolute',
           width: '400%',
-          height: '400%',
-          opacity: opacityControl}}/>
+          height: '400%'}}/>
 
           <SliderBlock
           margin = {marginControl}
@@ -173,10 +169,43 @@ const SliderBlock = ({margin, performClosing}) => {
 
   const LanguageButton = () => {
 
+    const scaleControl = useSharedValue (1)
+    const marginControl = useSharedValue (0)
+    const opacityControl = useSharedValue (1)
+
+
+    const commonEasing = comEsng = Easing.inOut (Easing.quad)
+    const animationDuration = AnDu = 95
+
+
+    const handlePressIn = () => {
+
+      scaleControl.value = withTiming (0.975, {duration: AnDu, easing: comEsng})
+      marginControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
+      opacityControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
+
+    }
+
+    const handlePressOut = () => {
+
+      scaleControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+      marginControl.value = withTiming (0, {duration: AnDu, easing: comEsng})
+      opacityControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+
+    }
+
     const handlePress = () => {
 
-      setAppOpenedWindows (prev => [...prev, 'LanguageChoose'])
-      performClosing ()
+      scaleControl.value = withSequence (withTiming (0.975, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+      marginControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (0, {duration: AnDu, easing: comEsng}))
+      opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+
+      setTimeout (() => {
+
+        setAppOpenedWindows (prev => [...prev, 'LanguageChoose'])
+        performClosing ()  
+
+      }, AnDu / 1.5)
 
     }
 
@@ -184,41 +213,51 @@ const SliderBlock = ({margin, performClosing}) => {
     return (
 
       <TouchableOpacity
+      activeOpacity = {1}
+      onPressIn = {() => handlePressIn()}
+      onPressOut = {() => handlePressOut()}
       onPress = {() => handlePress()}
       style = {{
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
       paddingVertical: 8,
       paddingHorizontal: 23}}>
 
-        <Image
-        source = {styles.LanguageButton.Planet_PNG}
-        style = {{
-        width: 19,
-        height: 19,
-        bottom: 0.75,
-        right: 0.25,
-        marginRight: 14,}}/>
+        <Animated.View style = {{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        bottom: marginControl,
+        opacity: opacityControl,
+        transform: [{scale: scaleControl}]}}>
 
-        <Text style = {{
-        marginRight: 'auto',
-        fontFamily: styles.LanguageButton.fontFamily_language,
-        color: styles.LanguageButton.color_language,
-        fontSize: 18}}>
+          <Image
+          source = {styles.LanguageButton.Planet_PNG}
+          style = {{
+          width: 19,
+          height: 19,
+          bottom: 0.75,
+          right: 0.25,
+          marginRight: 14,}}/>
 
-          {language_TXT}
+          <Text style = {{
+          marginRight: 'auto',
+          fontFamily: styles.LanguageButton.fontFamily_language,
+          color: styles.LanguageButton.color_language,
+          fontSize: 18}}>
 
-        </Text>
+            {language_TXT}
 
-        <Text style = {{
-        fontFamily: styles.LanguageButton.fontFamily_language_value,
-        color: styles.LanguageButton.color_language_value,
-        fontSize: 18}}>
+          </Text>
 
-          {language_value_TXT}
+          <Text style = {{
+          fontFamily: styles.LanguageButton.fontFamily_language_value,
+          color: styles.LanguageButton.color_language_value,
+          fontSize: 18}}>
 
-        </Text>
+            {language_value_TXT}
+
+          </Text>
+
+        </Animated.View>
 
       </TouchableOpacity>
 
@@ -228,10 +267,43 @@ const SliderBlock = ({margin, performClosing}) => {
 
   const FeedbackButton = () => {
 
+    const scaleControl = useSharedValue (1)
+    const marginControl = useSharedValue (0)
+    const opacityControl = useSharedValue (1)
+
+
+    const commonEasing = comEsng = Easing.inOut (Easing.quad)
+    const animationDuration = AnDu = 95
+
+
+    const handlePressIn = () => {
+
+      scaleControl.value = withTiming (0.975, {duration: AnDu, easing: comEsng})
+      marginControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
+      opacityControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
+
+    }
+
+    const handlePressOut = () => {
+
+      scaleControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+      marginControl.value = withTiming (0, {duration: AnDu, easing: comEsng})
+      opacityControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+
+    }
+
     const handlePress = () => {
 
-      setAppOpenedWindows (prev => [...prev, 'Feedback'])
-      performClosing ()
+      scaleControl.value = withSequence (withTiming (0.975, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+      marginControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (0, {duration: AnDu, easing: comEsng}))
+      opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+
+      setTimeout (() => {
+
+        setAppOpenedWindows (prev => [...prev, 'Feedback'])
+        performClosing ()      
+
+      }, AnDu / 1.5)
 
     }
 
@@ -239,46 +311,56 @@ const SliderBlock = ({margin, performClosing}) => {
     return (
 
       <TouchableOpacity
+      activeOpacity = {1}
+      onPressIn = {() => handlePressIn()}
+      onPressOut = {() => handlePressOut()}
       onPress = {() => handlePress()}
       style = {{
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
       paddingVertical: 8,
       paddingHorizontal: 23}}>
 
-        <View style = {{
+        <Animated.View style = {{
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        gap: 14}}>
+        bottom: marginControl,
+        opacity: opacityControl,
+        transform: [{scale: scaleControl}]}}>
+
+          <View style = {{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: 14}}>
+
+            <Image
+            source = {styles.FeedbackButton.Info_PNG}
+            style = {{
+            width: 19,
+            height: 19,
+            bottom: 0.75,
+            right: 0.25}}/>
+
+            <Text style = {{
+            fontFamily: styles.FeedbackButton.fontFamily,
+            color: styles.FeedbackButton.color,
+            fontSize: 18}}>
+
+              {feedback_TXT}
+
+            </Text>
+
+          </View>
 
           <Image
-          source = {styles.FeedbackButton.Info_PNG}
+          source = {styles.FeedbackButton.Arrow_PNG}
           style = {{
-          width: 19,
-          height: 19,
-          bottom: 0.75,
+          width: 14,
+          height: 14,
+          top: 0.25,
           right: 0.25}}/>
 
-          <Text style = {{
-          fontFamily: styles.FeedbackButton.fontFamily,
-          color: styles.FeedbackButton.color,
-          fontSize: 18}}>
-
-            {feedback_TXT}
-
-          </Text>
-
-        </View>
-
-        <Image
-        source = {styles.FeedbackButton.Arrow_PNG}
-        style = {{
-        width: 14,
-        height: 14,
-        top: 0.25,
-        right: 0.25}}/>
+        </Animated.View>
 
       </TouchableOpacity>
 
@@ -290,6 +372,16 @@ const SliderBlock = ({margin, performClosing}) => {
 
     const [isAutoVpnOn, setIsAutoVpnOn] = useAppAutoVpnToggle ()
 
+    const scaleControl = useSharedValue (1)
+    const marginControl = useSharedValue (0)
+    const opacityControl = useSharedValue (1)
+
+    const picOpacityControl = useSharedValue (isAutoVpnOn ? 1 : 0)
+
+
+    const commonEasing = comEsng = Easing.inOut (Easing.quad)
+    const animationDuration = AnDu = 95
+
 
     const Toggler = () => {
 
@@ -300,8 +392,6 @@ const SliderBlock = ({margin, performClosing}) => {
 
         : [ styles.AutoVpnToggler.Toggler.borderColor_Unchosen,
             styles.AutoVpnToggler.Toggler.backgroundColor_Unchosen ]
-
-      const togglerPicOpacity = isAutoVpnOn ? 1 : 0
 
 
       return (
@@ -316,12 +406,12 @@ const SliderBlock = ({margin, performClosing}) => {
         borderColor: togglerBorderColor,
         backgroundColor: togglerBackgroundColor}}>
 
-          <Image
+          <Animated.Image
           source = {styles.AutoVpnToggler.Toggler.Done_PNG}
           style = {{
           width: 13,
           height: 13,
-          opacity: togglerPicOpacity}}/>
+          opacity: picOpacityControl}}/>
 
         </View>
 
@@ -330,10 +420,42 @@ const SliderBlock = ({margin, performClosing}) => {
     }
 
 
+    const handlePressIn = () => {
+
+      scaleControl.value = withTiming (0.975, {duration: AnDu, easing: comEsng})
+      marginControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
+      opacityControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
+
+    }
+
+    const handlePressOut = () => {
+
+      scaleControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+      marginControl.value = withTiming (0, {duration: AnDu, easing: comEsng})
+      opacityControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+
+    }
+
+    const handlePress = () => {
+
+      scaleControl.value = withSequence (withTiming (0.975, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+      marginControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (0, {duration: AnDu, easing: comEsng}))
+      opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+
+      setTimeout (() => picOpacityControl.value = withTiming (isAutoVpnOn ? 0 : 1, {duration: AnDu / 4, easing: comEsng}), AnDu / 1.5)
+
+      setTimeout (() => setIsAutoVpnOn (!isAutoVpnOn), AnDu / 1.5)
+
+    }
+
+
     return (
 
       <TouchableOpacity
-      onPress = {() => setIsAutoVpnOn (!isAutoVpnOn)}
+      activeOpacity = {1}
+      onPressIn = {() => handlePressIn()}
+      onPressOut = {() => handlePressOut()}
+      onPress = {() => handlePress()}
       style = {[{
       height: 75,
       flexDirection: 'row',
@@ -345,11 +467,14 @@ const SliderBlock = ({margin, performClosing}) => {
       backgroundColor: styles.AutoVpnToggler.backgroundColor},
       style]}>
 
-        <View style = {{
+        <Animated.View style = {{
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        gap: 10}}>
+        gap: 10,
+        bottom: marginControl,
+        opacity: opacityControl,
+        transform: [{scale: scaleControl}]}}>
 
           <Text style = {{
           flex: 1,
@@ -363,7 +488,7 @@ const SliderBlock = ({margin, performClosing}) => {
 
           <Toggler/>
 
-        </View>
+        </Animated.View>
 
       </TouchableOpacity>
 

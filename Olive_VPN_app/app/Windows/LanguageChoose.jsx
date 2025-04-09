@@ -1,11 +1,14 @@
 // This is app language choose window.
 
 
+import { useEffect } from 'react'
 import { useThemes } from '../../Redux/Hooks/UseThemes'
 import { useAppLanguage } from '../../Redux/Hooks/AppLanguage'
 import { useAppOpenedWindows } from '../../Redux/Hooks/OpenedWindows'
 
 import { View, TouchableOpacity, Text } from 'react-native'
+
+import Animated, { useSharedValue, withSequence, withTiming, Easing } from 'react-native-reanimated'
 
 import Window from '../Components/Common/Window/Window'
 
@@ -69,24 +72,51 @@ const Content = () => {
 
   const ChooseRadioButton = ({isChosen}) => {
 
+    const outerColorControl = useSharedValue (styles.ChooseRadioButton.outerColor_unchosen)
+    const innerColorControl = useSharedValue (styles.ChooseRadioButton.innerColor_unchosen)
+
+
+    const commonEasing = comEsng = Easing.inOut (Easing.quad)
+    const animationDuration = AnDu = 95
+
+
+    useEffect (() => {
+
+      if (isChosen) {
+
+        outerColorControl.value = withTiming (styles.ChooseRadioButton.outerColor_chosen, {duration: AnDu, easing: comEsng})
+        innerColorControl.value = withTiming (styles.ChooseRadioButton.innerColor_chosen, {duration: AnDu, easing: comEsng})
+
+      }
+
+      else {
+
+        outerColorControl.value = withTiming (styles.ChooseRadioButton.outerColor_unchosen, {duration: AnDu, easing: comEsng})
+        innerColorControl.value = withTiming (styles.ChooseRadioButton.innerColor_unchosen, {duration: AnDu, easing: comEsng})
+
+      }
+
+    }, [appLanguage])
+
+
     return (
       
-      <View style = {{
+      <Animated.View style = {{
       justifyContent: 'center',
       alignItems: 'center',
       width: 25,
       height: 25,
       borderRadius: 1000,
       borderWidth: 2,
-      borderColor: !isChosen ? styles.ChooseRadioButton.outerColor_unchosen : styles.ChooseRadioButton.outerColor_chosen}}>
+      borderColor: outerColorControl}}>
 
-        <View style = {{
+        <Animated.View style = {{
         width: isChosen ? 14 : 21,
         height: isChosen ? 14 : 21,
         borderRadius: 1000,
-        backgroundColor: !isChosen ? styles.ChooseRadioButton.innerColor_unchosen : styles.ChooseRadioButton.innerColor_chosen}}/>
+        backgroundColor: innerColorControl}}/>
 
-      </View>
+      </Animated.View>
       
     )
 
@@ -94,40 +124,87 @@ const Content = () => {
 
   const ChooseVariant = ({language, language_native, isChosen, onPress}) => {
 
+    const scaleControl = useSharedValue (1)
+    const opacityControl = useSharedValue (1)
+
+
+    const commonEasing = comEsng = Easing.inOut (Easing.quad)
+    const animationDuration = AnDu = 95
+
+
+    // press animations:
+  
+    const handlePressIn = () => {
+  
+      scaleControl.value = withTiming (0.975, {duration: AnDu, easing: comEsng})
+      opacityControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
+  
+    }
+  
+    const handlePressOut = () => {
+  
+      scaleControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+      opacityControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+  
+    }
+  
+    const handlePress = () => {
+  
+      scaleControl.value = withSequence (withTiming (0.975, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+      opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+
+      setTimeout (() => onPress (), AnDu)
+  
+    }
+  
+    // .
+
+
     return (
 
       <TouchableOpacity
-      onPress = {() => onPress()}
+      activeOpacity = {1}
+      onPressIn = {() => handlePressIn()}
+      onPressOut = {() => handlePressOut()}
+      onPress = {() => handlePress()}
       style = {{
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: 23,
       paddingVertical: 8,
       paddingHorizontal: 23}}>
 
-        <ChooseRadioButton isChosen = {isChosen}/>
+        <Animated.View style = {{
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 23,
+        transform: [{scale: scaleControl}],
+        opacity: opacityControl}}>
 
-        <View>
-          <Text style = {{
-          marginBottom: -2.5,
-          marginRight: 'auto',
-          fontFamily: styles.ChooseVariant.fontFamily_language,
-          color: styles.ChooseVariant.color_language,
-          fontSize: 17}}>
+          <ChooseRadioButton isChosen = {isChosen}/>
 
-            {language}
+          <View>
 
-          </Text>
+            <Text style = {{
+            marginBottom: -2.5,
+            marginRight: 'auto',
+            fontFamily: styles.ChooseVariant.fontFamily_language,
+            color: styles.ChooseVariant.color_language,
+            fontSize: 17}}>
 
-          <Text style = {{
-          fontFamily: styles.ChooseVariant.fontFamily_language_native,
-          color: styles.ChooseVariant.color_language_native,
-          fontSize: 15.5}}>
+              {language}
 
-            {language_native}
+            </Text>
 
-          </Text>
-        </View>
+            <Text style = {{
+            fontFamily: styles.ChooseVariant.fontFamily_language_native,
+            color: styles.ChooseVariant.color_language_native,
+            fontSize: 15.5}}>
+
+              {language_native}
+
+            </Text>
+
+          </View>
+
+        </Animated.View>
 
       </TouchableOpacity>
 

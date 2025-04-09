@@ -4,6 +4,8 @@
 import { Provider } from 'react-redux'
 import { ReduxStore } from '../Redux/Store'
 
+import { useState } from 'react'
+
 import { View } from 'react-native'
 
 import App from './App'
@@ -11,16 +13,18 @@ import App from './App'
 
 const index = () => {
 
+  const [backgroundColor, setBackgroundColor] = useState ('8b9e80')
+
 
   return (
 
     <View style = {{
     flex: 1,
-    backgroundColor: '#8b9e80'}}>
+    backgroundColor: backgroundColor}}>
 
       <Provider store = {ReduxStore}>
 
-        <App/>
+        <App setBackgroundColor = {setBackgroundColor}/>
 
       </Provider>
 

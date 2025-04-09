@@ -44,7 +44,7 @@ const Center = () => {
   const durationInterval = useRef (null)
   const [connectionTime, setConnectionTime] = useState ({initialization_moment: null, current_duration: null})
 
-  const [tipText, setTipText] = useState (tap_to_connect_to_vpn_TXT)
+  const [tipText, setTipText] = useState (texts.tap_to_connect_to_vpn)
   const [connectionDestinationText, setConnectionDestinationText] = useState (netherlands_TXT)
 
   useEffect (() => {(async () => {
@@ -55,8 +55,8 @@ const Center = () => {
   
     switch (VpnState) {
   
-      case 0: setTipText (tap_to_connect_to_vpn_TXT); break
-      case 2: setTipText (tap_again_to_disconnect_TXT); break
+      case 0: setTipText (texts.tap_to_connect_to_vpn); break
+      case 2: setTipText (texts.tap_again_to_disconnect); break
   
     }
 
@@ -204,6 +204,14 @@ const Center = () => {
 
       }
 
+      
+      setConnectionTime (prev => ({  // triggers useEffect
+  
+        initialization_moment: typeof (prev.initialization_moment) == 'number' ? prev.initialization_moment : init_time,
+        current_duration: typeof (prev.initialization_moment) == 'number' ? currentTime() - prev.initialization_moment : currentTime() - init_time
+
+      }))
+
 
       setDurationInterval (() =>
 
@@ -217,7 +225,7 @@ const Center = () => {
       , 1000)
 
 
-      setTipText (tap_again_to_disconnect_TXT)
+      setTipText (texts.tap_again_to_disconnect)
 
     }
   
@@ -225,7 +233,7 @@ const Center = () => {
   
       clearDurationInterval ()
       setConnectionTime ({initialization_moment: null, current_duration: null})  // triggers useEffect
-      setTipText (tap_to_connect_to_vpn_TXT)
+      setTipText (texts.tap_to_connect_to_vpn)
 
     }
 
@@ -294,7 +302,7 @@ const Center = () => {
 
     return async () => await unsubscribeVPN ()
 
-  })()}, [])
+  })()}, [appLanguage])
 
 
   return (
@@ -409,6 +417,7 @@ const VpnButton = ({onPress}) => {
 const Tip = ({text}) => {
 
   const [styles, theme] = useThemes (styles => styles.MainPage.Main.Center)
+  const [texts, appLanguage] = useAppLanguage (texts => texts.MainPage.Main.Center)
 
 
   const picOpacityTemporalControl = useSharedValue (1)

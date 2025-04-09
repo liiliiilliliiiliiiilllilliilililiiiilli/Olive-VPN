@@ -6,7 +6,7 @@ import { useThemes } from '../../../../Redux/Hooks/UseThemes'
 
 import { View, TouchableOpacity, Text } from 'react-native'
 
-import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
+import Animated, { useSharedValue, withTiming, Easing, withSequence } from 'react-native-reanimated'
 
 
 const Window = ({isOpened, closeSelf, title, leftButton, rightButton, centerButton, style, children}) => {
@@ -158,6 +158,36 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
 
   const BottomBar = ({centerButton, rightButton, leftButton}) => {
 
+    const scaleControl = useSharedValue (1)
+    const opacityControl = useSharedValue (1)
+
+
+    const commonEasing = comEsng = Easing.inOut (Easing.quad)
+    const animationDuration = AnDu = 95
+
+
+    const handlePressIn = () => {
+
+      scaleControl.value = withTiming (0.975, {duration: AnDu, easing: comEsng})
+      opacityControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
+
+    }
+
+    const handlePressOut = () => {
+
+      scaleControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+      opacityControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+
+    }
+
+    const handlePress = () => {
+
+      scaleControl.value = withSequence (withTiming (0.975, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+      opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+
+    }
+
+
     return (
 
       <View style = {{
@@ -166,13 +196,15 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
       alignItems: 'center',
       width: '100%',
       height: 53 + 5,
-      boxShadow: styles.BottomBar.boxShadow,
-      }}>
+      boxShadow: styles.BottomBar.boxShadow}}>
 
         { centerButton ?
 
           <TouchableOpacity
-          onPress = {() => centerButton.onPress()}
+          activeOpacity = {1}
+          onPressIn = {() => handlePressIn()}
+          onPressOut = {() => handlePressOut()}
+          onPress = {() => {handlePress(); setTimeout (() => centerButton.onPress(), AnDu / 1.5)}}
           style = {{
           justifyContent: 'center',
           alignItems: 'center',
@@ -180,14 +212,16 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
           height: '100%',
           paddingBottom: 2.5}}>
 
-            <Text style = {{
+            <Animated.Text style = {{
             fontFamily: styles.BottomBar.fontFamily,
             color: styles.BottomBar.color,
-            fontSize: 18}}>
+            fontSize: 18,
+            opacity: opacityControl,
+            transform: [{scale: scaleControl}]}}>
 
               {centerButton.text}
 
-            </Text>
+            </Animated.Text>
 
           </TouchableOpacity>
 
@@ -197,7 +231,10 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
 
             <TouchableOpacity
             key = {1}
-            onPress = {() => leftButton.onPress()}
+            activeOpacity = {1}
+            onPressIn = {() => handlePressIn()}
+            onPressOut = {() => handlePressOut()}
+            onPress = {() => {handlePress(); setTimeout (() => leftButton.onPress(), AnDu / 1.5)}}
             style = {{
             justifyContent: 'center',
             alignItems: 'flex-start',
@@ -207,14 +244,16 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
             paddingLeft: 35,
             paddingBottom: 2.5}}>
 
-              <Text style = {{
+              <Animated.Text style = {{
               fontFamily: styles.BottomBar.fontFamily,
               color: styles.BottomBar.color,
-              fontSize: 18}}>
+              fontSize: 18,
+              opacity: opacityControl,
+              transform: [{scale: scaleControl}]}}>
 
                 {leftButton.text}
 
-              </Text>
+              </Animated.Text>
 
             </TouchableOpacity>
 
@@ -222,7 +261,10 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
 
             <TouchableOpacity
             key = {2}
-            onPress = {() => rightButton.onPress()}
+            activeOpacity = {1}
+            onPressIn = {() => handlePressIn()}
+            onPressOut = {() => handlePressOut()}
+            onPress = {() => {handlePress(); setTimeout (() => rightButton.onPress(), AnDu / 1.5)}}
             style = {{
             justifyContent: 'center',
             alignItems: 'flex-end',
@@ -232,14 +274,16 @@ const WindowBlock = ({title, leftButton, rightButton, centerButton, style, child
             paddingRight: 35,
             paddingBottom: 2.5}}>
 
-              <Text style = {{
+              <Animated.Text style = {{
               fontFamily: styles.BottomBar.fontFamily,
               color: styles.BottomBar.color,
-              fontSize: 18}}>
+              fontSize: 18,
+              opacity: opacityControl,
+              transform: [{scale: scaleControl}]}}>
 
                 {rightButton.text}
 
-              </Text>
+              </Animated.Text>
 
             </TouchableOpacity>
 

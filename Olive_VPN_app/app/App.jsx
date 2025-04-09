@@ -36,11 +36,11 @@ const generalScreenOptions = {
 }
 
 
-const App = () => {
+const App = ({setBackgroundColor}) => {
 
   const [isAppSetUp, setIsAppSetUp] = useState (false)
 
-  const [styles, theme, setTheme] = useThemes ()
+  const [styles, theme, setTheme] = useThemes (styles => styles)
   const [texts, appLanguage, setAppLanguage] = useAppLanguage ()
   const [isAutoVpnOn, setIsAutoVpnOn] = useAppAutoVpnToggle ()
 
@@ -131,6 +131,19 @@ const App = () => {
   // .
 
 
+  useEffect (() => {
+
+    if (theme != null) {
+      
+      console.info ('theme:', theme, 'styles:', styles)
+
+      setBackgroundColor (styles.MainBackground.backgroundColor)
+    
+    }
+
+  }, [theme])
+
+
   const limeVpnConnectionConfiguration = {
 
     ovpnFileName: 'lime',
@@ -171,16 +184,19 @@ const App = () => {
   }
 
 
-  useEffect (() => {
+  useEffect (() => {(async () => {
 
     if (!afterDark && isAutoVpnOn) {
 
-      connectVPN (limeVpnConnectionConfiguration)
+      const VpnState = await RNSimpleOpenvpn.getCurrentState ()
+
+      VpnState == 0 && connectVPN (limeVpnConnectionConfiguration)
+
       setAfterDark (true)
 
     }
 
-  }, [isAutoVpnOn])
+  })()}, [isAutoVpnOn])
 
 
   return (

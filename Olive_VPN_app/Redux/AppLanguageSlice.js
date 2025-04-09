@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { getLocales } from 'expo-localization'
 
 
-const defaultAppLanguage = 'Russian'
+const defaultAppLanguage = 'English'
 
 const languageCode_map = {
 

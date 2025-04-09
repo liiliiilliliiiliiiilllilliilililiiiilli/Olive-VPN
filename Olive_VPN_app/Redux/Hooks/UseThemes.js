@@ -10,7 +10,12 @@ const useThemes = (specific_styles_to_return_callback = e => e) => {
   const dispatch = useDispatch ()
   const setTheme = theme => dispatch (setThemeRedux (theme))
 
-  let stylesObject = Themes?.[theme?.type]?.[theme?.palette] || {systemThemeLight: Themes.Light.MainTheme, systemThemeDark: Themes.Dark.MainTheme} [theme]
+
+  let stylesObject
+
+  try { stylesObject = Themes?.[JSON.parse (theme)?.type]?.[JSON.parse (theme)?.palette] || {systemThemeLight: Themes.Light.MainTheme, systemThemeDark: Themes.Dark.MainTheme} [theme] }
+  catch { stylesObject = Themes?.[theme?.type]?.[theme?.palette] || {systemThemeLight: Themes.Light.MainTheme, systemThemeDark: Themes.Dark.MainTheme} [theme] }
+
   stylesObject = specific_styles_to_return_callback (stylesObject)
 
 

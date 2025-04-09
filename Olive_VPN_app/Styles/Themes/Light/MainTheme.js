@@ -24,6 +24,7 @@
 const ColorfulBackground_PNG = require ('../../../assets/PNG/_Other_/ColorfulBackgroundImage.png')
 
 const ArrowCompact_black_PNG = require ('../../../assets/PNG/Arrows/Black.png')
+const ArrowCompact_grey_PNG = require ('../../../assets/PNG/Arrows/Grey.png')
 
 const Burger_dark_grey_PNG = require ('../../../assets/PNG/Burger/DarkGrey.png')
 const Moon_dark_grey_PNG = require ('../../../assets/PNG/Moon/DarkGrey.png')
@@ -35,18 +36,12 @@ const Tap_black_PNG = require ('../../../assets/PNG/Tap/Black.png')
 const Location_black_PNG = require ('../../../assets/PNG/Location/Black.png')
 const MagicWand_black_PNG = require ('../../../assets/PNG/MagicWand/Black.png')
 
-
-const ArrowCompact_grey_PNG = require ('../../../assets/PNG/Arrows/Grey.png')
-
 const World_black_PNG = require ('../../../assets/PNG/World/Black.png')
 const Info_black_PNG = require ('../../../assets/PNG/Info/Black.png')
 const Done_Black_PNG = require ('../../../assets/PNG/Done/Black.png')
 
 const Netherlands_PNG = require ('../../../assets/PNG/Flags/Netherlands.png')
 const Germany_PNG = require ('../../../assets/PNG/Flags/Germany.png')
-
-
-
 
 
 const Colors = {
@@ -87,8 +82,13 @@ const Colors = {
 
 }
 
-
 const MainTheme = {
+
+    MainBackground: {
+
+        backgroundColor: Colors.PreWhite
+
+    },
 
     StatusBar: {
 
@@ -325,11 +325,13 @@ const MainTheme = {
 
                     fontFamily: 'Arimo-SemiBold',
                     color: Colors.Black,
+                    color_chosen: Colors.Grey,
 
 
                     Pic: {
 
-                        borderColor: Colors.TopBarBorder
+                        borderColor: Colors.TopBarBorder,
+                        borderColor_Inner: Colors.PreWhite
 
                     },
 
@@ -402,8 +404,8 @@ const MainTheme = {
 
         AutoVpnToggler: {
 
-            borderTopColor: '#b5b7b6',
-            backgroundColor: '#cfcfcf',
+            borderTopColor: 'rgba(0, 0, 0, 0.08)',
+            backgroundColor: 'hsl(0, 0%, 87.50%)',
 
             fontFamily: 'Archivo-SemiBold',
             color: Colors.Black,
@@ -444,9 +446,15 @@ const MainTheme = {
             ChooseRadioButton: {
 
                 innerColor_chosen: Colors.Olive,
-                innerColor_unchosen: '',
+                innerColor_unchosen: Colors.White,
                 outerColor_chosen: Colors.LightBorderButton,
                 outerColor_unchosen: Colors.LightBorderButton
+
+                
+                // innerColor_chosen: Colors.Olive,
+                // innerColor_unchosen: '#1f1f1f',
+                // outerColor_chosen: Colors.PinOutChosen,
+                // outerColor_unchosen: '#3e3e3e'
 
             },
     

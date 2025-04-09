@@ -9,7 +9,6 @@ const appLanguages = [
 
 ]
 
-
 const appLanguagesAsset = {
 
   Russian: {
@@ -99,7 +98,9 @@ const appLanguagesAsset = {
 
           netherlands: 'Нидерланды',
           germany: 'Германия',
-          poland: 'Польша'
+          poland: 'Польша',
+
+          chosen: 'Выбран'
 
         }
 
@@ -307,7 +308,9 @@ const appLanguagesAsset = {
 
           netherlands: 'Netherlands',
           germany: 'Germany',
-          poland: 'Poland'
+          poland: 'Poland',
+
+          chosen: 'Chosen'
 
         }
 
@@ -515,7 +518,9 @@ const appLanguagesAsset = {
 
           netherlands: '荷蘭',
           germany: '德國',
-          poland: '波蘭'
+          poland: '波蘭',
+
+          chosen: '已选定'
 
         }
 

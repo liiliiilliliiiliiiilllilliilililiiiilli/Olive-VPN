@@ -1,14 +1,59 @@
 // Component.
 
 
+import Animated, { Easing, useSharedValue, withSequence, withTiming } from 'react-native-reanimated'
 import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
 
 import { View, TouchableOpacity, Image, Text } from 'react-native'
+import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
 
 
 const ServerInstance = ({pic, title, availability, isChosen, style}) => {
 
   const [styles] = useThemes (styles => styles.ServersListPage.Main.ServerInstance)
+
+
+  const [texts] = useAppLanguage (texts => texts.ServersListPage.Main.ServerInstance)
+
+  const chosen_TXT = texts.chosen
+
+
+  const scaleControl = useSharedValue (1)
+  const opacityControl = useSharedValue (1)
+  const marginControl = useSharedValue (0)
+
+
+  const commonEasing = comEsng = Easing.inOut (Easing.quad)
+  const animationDuration = AnDu = 95
+
+
+  // press animations:
+
+  const handlePressIn = () => {
+
+    scaleControl.value = withTiming (0.975, {duration: AnDu, easing: comEsng})
+    opacityControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
+    marginControl.value = withTiming (-0.5, {duration: AnDu, easing: comEsng})
+
+  }
+
+  const handlePressOut = () => {
+
+    scaleControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+    opacityControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+    marginControl.value = withTiming (0, {duration: AnDu, easing: comEsng})
+
+  }
+
+  const handlePress = () => {
+
+    scaleControl.value = withSequence (withTiming (0.975, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+    opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
+    marginControl.value = withSequence (withTiming (-0.5, {duration: AnDu, easing: comEsng}), withTiming (0, {duration: AnDu, easing: comEsng}))
+
+  }
+
+  // .
 
 
   return (
@@ -24,56 +69,79 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
     style]}>
 
       <TouchableOpacity
-      onPress = {() => {}}
-      style = {{
-      flexDirection: 'row',
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-      height: 75,
-      width: 'auto',
-      gap: 21,
-      paddingHorizontal: 21,
-      borderRadius: 16,
-      borderWidth: 2,
-      borderColor: isChosen ? styles.Block.borderColor_Chosen : styles.Block.borderColor_Unchosen,
-      backgroundColor: styles.Block.backgroundColor}}>
+      activeOpacity = {1}
+      onPressIn = {() => handlePressIn()}
+      onPressOut = {() => handlePressOut()}
+      onPress = {() => handlePress()}>
 
-        <View style = {{
+        <Animated.View style = {{
+        flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        width: 42,
-        height: 42,
+        height: 75,
+        width: 'auto',
+        gap: 21,
+        paddingHorizontal: 21,
+        borderRadius: 16,
         borderWidth: 2,
-        borderColor: styles.Block.Pic.borderColor,
-        borderRadius: 1000}}>
+        borderColor: isChosen ? styles.Block.borderColor_Chosen : styles.Block.borderColor_Unchosen,
+        backgroundColor: styles.Block.backgroundColor,
+        opacity: opacityControl,
+        transform: [{scale: scaleControl}]}}>
 
-          <Image
-          source = {pic}
-          style = {{
-          width: 38,
-          height: 38,
+          <View style = {{
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          width: 42,
+          height: 42,
           borderWidth: 2,
-          borderRadius: 1000}}/>
+          borderColor: styles.Block.Pic.borderColor,
+          borderRadius: 1000}}>
 
-        </View>
+            <Image
+            source = {pic}
+            style = {{
+            width: 38,
+            height: 38,
+            borderWidth: 2,
+            borderColor: styles.Block.Pic.borderColor_Inner,
+            borderRadius: 1000}}/>
 
+          </View>
 
-        <Text style = {{
-        fontFamily: styles.Block.fontFamily,
-        color: styles.Block.color,
-        fontSize: 17}}>
+          <Text style = {{
+          fontFamily: styles.Block.fontFamily,
+          color: styles.Block.color,
+          fontSize: 17,
+          marginRight: 17}}>
 
-          {title}
+            {title}
 
-        </Text>
+          </Text>
 
-        <View style = {{
-        width: 8,
-        height: 8,
-        marginLeft: 'auto',
-        marginRight: 14,
-        borderRadius: 1000,
-        backgroundColor: {3: styles.Block.PilStatus.color_3, 2: styles.Block.PilStatus.color_2, 1: styles.Block.PilStatus.color_1, 0: styles.Block.PilStatus.color_0} [availability]}}/>
+          {isChosen ?
+
+            <Text style = {{
+            fontFamily: styles.Block.fontFamily,
+            color: styles.Block.color_chosen,
+            fontSize: 17,
+            marginHorizontal: 'auto'}}>
+
+              {chosen_TXT}
+
+            </Text>
+
+          : null}
+
+          <View style = {{
+          width: 8,
+          height: 8,
+          marginLeft: 'auto',
+          marginRight: 16,
+          borderRadius: 1000,
+          backgroundColor: {3: styles.Block.PilStatus.color_3, 2: styles.Block.PilStatus.color_2, 1: styles.Block.PilStatus.color_1, 0: styles.Block.PilStatus.color_0} [availability]}}/>
+
+        </Animated.View>
 
       </TouchableOpacity>
 

@@ -38,7 +38,6 @@ const MagicWand_light_PNG = require ('../../../assets/PNG/MagicWand/Light.png')
 
 const World_grey_PNG = require ('../../../assets/PNG/World/Grey.png')
 const Info_grey_PNG = require ('../../../assets/PNG/Info/Grey.png')
-const Done_Black_PNG = require ('../../../assets/PNG/Done/Black.png')
 const Done_White_PNG = require ('../../../assets/PNG/Done/White.png')
 
 const Netherlands_PNG = require ('../../../assets/PNG/Flags/Netherlands.png')
@@ -78,7 +77,14 @@ const Colors = {
 
 }
 
+
 const MainTheme = {
+
+    MainBackground: {
+
+        backgroundColor: Colors.Black
+
+    },
 
     StatusBar: {
 
@@ -257,7 +263,7 @@ const MainTheme = {
 
         Bottom: {
 
-            fontFamily: 'Archivo-Regular',
+            fontFamily: 'Archivo-Medium',
             color: Colors.TipText,
             metalinkColor: Colors.Olive,
             
@@ -316,11 +322,13 @@ const MainTheme = {
 
                     fontFamily: 'Arimo-SemiBold',
                     color: Colors.PreWhite,
+                    color_chosen: Colors.Grey,
 
 
                     Pic: {
 
-                        borderColor: '#303030'
+                        borderColor: '#303030',
+                        borderColor_Inner: Colors.Black
 
                     },
 
@@ -434,10 +442,10 @@ const MainTheme = {
 
             ChooseRadioButton: {
 
-                outerColor_chosen: Colors.PinOutChosen,
                 innerColor_chosen: Colors.Olive,
-                outerColor_unchosen: '#3e3e3e',
-                innerColor_unchosen: '#1f1f1f'
+                innerColor_unchosen: '#1f1f1f',
+                outerColor_chosen: Colors.PinOutChosen,
+                outerColor_unchosen: '#3e3e3e'
     
             },
     
