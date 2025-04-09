@@ -1,6 +1,6 @@
 /*
 
-    This file contains style varriables on which app themes depend.
+    This is app styles control file.
 
 
     # Pictures:
@@ -16,32 +16,32 @@
     All colors are represented in HEX format for Android compatibility.
 
 
-    Any stuff this file contains is either meaningfully grouped or alphabetically sorted, just for better understanding.
+    Any stuff this file contains is either meaningfully grouped or/and alphabetically sorted, just for better understanding.
 
 */
 
 
 const ColorfulBackground_PNG = require ('../../../assets/PNG/_Other_/ColorfulBackgroundImage.png')
 
-const ArrowCompact_grey_PNG = require ('../../../assets/PNG/Arrows/Grey.png')
 const ArrowCompact_green_PNG = require ('../../../assets/PNG/Arrows/Green.png')
+const ArrowCompact_grey_PNG = require ('../../../assets/PNG/Arrows/Grey.png')
 
+const A_grey_PNG = require ('../../../assets/PNG/A/Grey.png')
 const Burger_grey_PNG = require ('../../../assets/PNG/Burger/Grey.png')
 const Sun_grey_PNG = require ('../../../assets/PNG/Sun/Grey.png')
-const A_grey_PNG = require ('../../../assets/PNG/A/Grey.png')
 
 const Apps_grey_PNG = require ('../../../assets/PNG/Apps/Grey.png')
-const Olive_black_PNG = require ('../../../assets/PNG/Olive/Black.png')
-const Tap_dark_green_PNG = require ('../../../assets/PNG/Tap/DarkGreen.png')
 const Location_green_PNG = require ('../../../assets/PNG/Location/Green.png')
 const MagicWand_light_PNG = require ('../../../assets/PNG/MagicWand/Light.png')
+const Olive_black_PNG = require ('../../../assets/PNG/Olive/Black.png')
+const Tap_dark_green_PNG = require ('../../../assets/PNG/Tap/DarkGreen.png')
 
-const World_grey_PNG = require ('../../../assets/PNG/World/Grey.png')
+const Done_white_PNG = require ('../../../assets/PNG/Done/White.png')
 const Info_grey_PNG = require ('../../../assets/PNG/Info/Grey.png')
-const Done_White_PNG = require ('../../../assets/PNG/Done/White.png')
+const World_grey_PNG = require ('../../../assets/PNG/World/Grey.png')
 
-const Netherlands_PNG = require ('../../../assets/PNG/Flags/Netherlands.png')
 const Germany_PNG = require ('../../../assets/PNG/Flags/Germany.png')
+const Netherlands_PNG = require ('../../../assets/PNG/Flags/Netherlands.png')
 
 
 const Colors = {
@@ -50,30 +50,38 @@ const Colors = {
     BarBorder: '#171717',
     Black: '#000000',
     Button: '#202020',
+    DarkBack: '#0b0b0b',
     DarkBlockButton: '#bfbfbf',
-    DarkGrey: '#404040',
     Grey: '#808080',
-    LightBorderButton: '#cdcdcd',
     Line: '#1c1c1c',
+    Liner: '#2c2c2c',
     Olive: '#8b9e80',
-    OliveButtonShadow: '0px 2.5px 10px rgb(3, 10, 1)',
     OliveDark: '#687262',
-    OliveHightTransparent: 'rgba(139, 158, 128, 0.75)',
+    PicBorder: '#303030',
+    PinGreen: 'lime',
+    PinGrey: 'grey',
+    PinOrange: 'orange',
+    PinOutChosen: '#394335',
+    PinRed: 'red',
     PreWhite: '#f2f2f2',
+    Separator: '#262626',
+    SoapBack: '#101010',
     Sun: '#9e9780',
-    Text: '#bfbfbf',
     TextLink: '#9da6d9',
     TextLinkPressed: '#6c7499',
     Tip: '#0d0d0d',
     TipText: '#545454',
+    ToggInner: '#1f1f1f',
+    ToggOuter: '#3e3e3e',
+    Transparent: 'transparent',
     White: '#ffffff',
+    WindowTopBackground: '#1a1a1a',
+    WindowTopBorder: '#0f0f0f',
 
+    OliveButtonShadow: '0px 2.5px 10px rgb(3, 10, 1)',
+    OliveHightTransparent: 'rgba(139, 158, 128, 0.75)',
     Shadow: 'rgba(0, 0, 0, 0.5)',
-
-    PinOutChosen: '#394335'
-
-    // cartes: 'rgba(128, 128, 255, 0.5)',
-    // olive_dark: 'rgb(41, 52, 50)'
+    WindowShadow: '0px 2.5px 25px rgb(3, 10, 1)'
 
 }
 
@@ -111,18 +119,18 @@ const MainTheme = {
     Window: {
 
         backgroundColor: '#141414',
-        boxShadow: '0px 2.5px 25px rgb(3, 10, 1)',
+        boxShadow: Colors.WindowShadow,
 
 
         TopBar: {
 
-            boxShadow: '0px 5px 21px #141414',
-
-            borderColor: '#0f0f0f',
-            backgroundColor: '#1a1a1a',
+            borderColor: Colors.WindowTopBorder,
+            backgroundColor: Colors.WindowTopBackground,
 
             fontFamily: 'Archivo-SemiBold',
-            color: Colors.PreWhite
+            color: Colors.PreWhite,
+
+            boxShadow: '0px 5px 21px #141414'
 
         },
 
@@ -242,11 +250,11 @@ const MainTheme = {
                     MagicWand_PNG: MagicWand_light_PNG,
 
 
-                    fontFamily: 'Archivo-Bold',
-                    color: Colors.PreWhite,
-
                     borderColor: Colors.Black,
-                    backgroundColor: Colors.Line
+                    backgroundColor: Colors.Line,
+                    
+                    fontFamily: 'Archivo-Bold',
+                    color: Colors.PreWhite
 
                 },
 
@@ -263,12 +271,12 @@ const MainTheme = {
 
         Bottom: {
 
+            borderColor: 'rgba(0, 0, 0, 0.25)',
+            backgroundColor: 'rgba(11, 11, 11, 0.80)',
+
             fontFamily: 'Archivo-Medium',
             color: Colors.TipText,
-            metalinkColor: Colors.Olive,
-            
-            borderColor: 'rgba(0, 0, 0, 0.25)',
-            backgroundColor: 'rgba(11, 11, 11, 0.80)'
+            metalinkColor: Colors.Olive
 
         }
 
@@ -297,11 +305,11 @@ const MainTheme = {
 
             Liner: {
 
-                fontFamily: 'Archivo-SemiBold',
-                color: Colors.PreWhite,
-                backgroundColor: 'black',
+                lineColor: Colors.Liner,
 
-                lineColor: '#2c2c2c'
+                backgroundColor: Colors.Black,
+                fontFamily: 'Archivo-SemiBold',
+                color: Colors.PreWhite
 
             },
 
@@ -318,26 +326,26 @@ const MainTheme = {
 
                     borderColor_Chosen: Colors.PinOutChosen,
                     borderColor_Unchosen: '',
-                    backgroundColor: '#101010',
+                    backgroundColor: Colors.SoapBack,
 
                     fontFamily: 'Arimo-SemiBold',
                     color: Colors.PreWhite,
-                    color_chosen: Colors.Grey,
+                    color_IsChosen: Colors.Grey,
 
 
                     Pic: {
 
-                        borderColor: '#303030',
-                        borderColor_Inner: Colors.Black
+                        borderColor_Out: Colors.PicBorder,
+                        borderColor_In: Colors.Black
 
                     },
 
-                    PilStatus: {
+                    PinStatus: {
 
-                        color_3: 'lightgreen',
-                        color_2: 'orange',
-                        color_1: 'darkred',
-                        color_0: 'grey'
+                        green: Colors.PinGreen,
+                        orange: Colors.PinOrange,
+                        red: Colors.PinRed,
+                        transparent: Colors.Transparent
 
                     }
 
@@ -354,7 +362,7 @@ const MainTheme = {
 
         Skeleton: {
 
-            backgroundColor: '#0b0b0b',
+            backgroundColor: Colors.DarkBack,
 
 
             Top: {
@@ -371,7 +379,7 @@ const MainTheme = {
 
         Separator: {
 
-            backgroundColor: '#262626'
+            backgroundColor: Colors.Separator
 
         },
 
@@ -380,11 +388,11 @@ const MainTheme = {
             Planet_PNG: World_grey_PNG,
 
 
-            fontFamily_language: 'Archivo-SemiBold',
-            color_language: Colors.PreWhite,
+            fontFamily_Language: 'Archivo-SemiBold',
+            color_Language: Colors.PreWhite,
 
-            fontFamily_language_value: 'Archivo-SemiBold',
-            color_language_value: Colors.DarkBlockButton
+            fontFamily_LanguageValue: 'Archivo-SemiBold',
+            color_LanguageValue: Colors.DarkBlockButton
 
         },
 
@@ -410,11 +418,11 @@ const MainTheme = {
 
             Toggler: {
 
-                Done_PNG: Done_White_PNG,
+                Done_PNG: Done_white_PNG,
 
 
-                backgroundColor_Chosen: '#0b0b0b',
-                backgroundColor_Unchosen: '#0b0b0b',
+                backgroundColor_Chosen: Colors.DarkBack,
+                backgroundColor_Unchosen: Colors.DarkBack,
                 borderColor_Chosen: Colors.BarBorder,
                 borderColor_Unchosen: Colors.BarBorder
 
@@ -442,20 +450,20 @@ const MainTheme = {
 
             ChooseRadioButton: {
 
-                innerColor_chosen: Colors.Olive,
-                innerColor_unchosen: '#1f1f1f',
-                outerColor_chosen: Colors.PinOutChosen,
-                outerColor_unchosen: '#3e3e3e'
+                innerColor_Chosen: Colors.Olive,
+                innerColor_Unchosen: Colors.ToggInner,
+                outerColor_Chosen: Colors.PinOutChosen,
+                outerColor_Unchosen: Colors.ToggOuter
     
             },
     
             ChooseVariant: {
     
-                fontFamily_language: 'Archivo-SemiBold',
-                color_language: Colors.PreWhite,
+                fontFamily_Language: 'Archivo-SemiBold',
+                color_Language: Colors.PreWhite,
     
-                fontFamily_language_native: 'Archivo-SemiBold',
-                color_language_native: Colors.DarkBlockButton
+                fontFamily_LanguageNative: 'Archivo-SemiBold',
+                color_LanguageNative: Colors.DarkBlockButton
     
             }
 
@@ -469,8 +477,8 @@ const MainTheme = {
 
             fontFamily: 'Archivo-Regular',
             color: Colors.PreWhite,
-            color_link: Colors.TextLink,
-            color_link_pressed: Colors.TextLinkPressed
+            color_Link: Colors.TextLink,
+            color_LinkPressed: Colors.TextLinkPressed
 
         }
 

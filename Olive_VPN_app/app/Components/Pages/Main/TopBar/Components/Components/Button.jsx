@@ -3,7 +3,9 @@
 
 import { useEffect } from 'react'
 import { useThemes } from '../../../../../../../Redux/Hooks/UseThemes'
+
 import { TouchableOpacity, Image } from 'react-native'
+
 import Animated, { useSharedValue, useAnimatedStyle, withSequence, withTiming, Easing } from 'react-native-reanimated'
 
 

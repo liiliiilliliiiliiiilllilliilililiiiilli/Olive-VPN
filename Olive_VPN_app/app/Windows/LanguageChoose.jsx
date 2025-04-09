@@ -72,8 +72,8 @@ const Content = () => {
 
   const ChooseRadioButton = ({isChosen}) => {
 
-    const outerColorControl = useSharedValue (styles.ChooseRadioButton.outerColor_unchosen)
-    const innerColorControl = useSharedValue (styles.ChooseRadioButton.innerColor_unchosen)
+    const outerColorControl = useSharedValue (styles.ChooseRadioButton.outerColor_Unchosen)
+    const innerColorControl = useSharedValue (styles.ChooseRadioButton.innerColor_Unchosen)
 
 
     const commonEasing = comEsng = Easing.inOut (Easing.quad)
@@ -84,15 +84,15 @@ const Content = () => {
 
       if (isChosen) {
 
-        outerColorControl.value = withTiming (styles.ChooseRadioButton.outerColor_chosen, {duration: AnDu, easing: comEsng})
-        innerColorControl.value = withTiming (styles.ChooseRadioButton.innerColor_chosen, {duration: AnDu, easing: comEsng})
+        outerColorControl.value = withTiming (styles.ChooseRadioButton.outerColor_Chosen, {duration: AnDu, easing: comEsng})
+        innerColorControl.value = withTiming (styles.ChooseRadioButton.innerColor_Chosen, {duration: AnDu, easing: comEsng})
 
       }
 
       else {
 
-        outerColorControl.value = withTiming (styles.ChooseRadioButton.outerColor_unchosen, {duration: AnDu, easing: comEsng})
-        innerColorControl.value = withTiming (styles.ChooseRadioButton.innerColor_unchosen, {duration: AnDu, easing: comEsng})
+        outerColorControl.value = withTiming (styles.ChooseRadioButton.outerColor_Unchosen, {duration: AnDu, easing: comEsng})
+        innerColorControl.value = withTiming (styles.ChooseRadioButton.innerColor_Unchosen, {duration: AnDu, easing: comEsng})
 
       }
 
@@ -185,8 +185,8 @@ const Content = () => {
             <Text style = {{
             marginBottom: -2.5,
             marginRight: 'auto',
-            fontFamily: styles.ChooseVariant.fontFamily_language,
-            color: styles.ChooseVariant.color_language,
+            fontFamily: styles.ChooseVariant.fontFamily_Language,
+            color: styles.ChooseVariant.color_Language,
             fontSize: 17}}>
 
               {language}
@@ -194,8 +194,8 @@ const Content = () => {
             </Text>
 
             <Text style = {{
-            fontFamily: styles.ChooseVariant.fontFamily_language_native,
-            color: styles.ChooseVariant.color_language_native,
+            fontFamily: styles.ChooseVariant.fontFamily_LanguageNative,
+            color: styles.ChooseVariant.color_LanguageNative,
             fontSize: 15.5}}>
 
               {language_native}

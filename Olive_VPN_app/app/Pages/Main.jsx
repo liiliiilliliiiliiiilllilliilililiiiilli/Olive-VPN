@@ -9,9 +9,9 @@ import BottomBar from '../Components/Pages/Main/BottomBar/BottomBar'
 
 import { default as MenuSlider } from '../Sliders/Menu'
 
+import { default as AppDescriptionWindow } from '../Windows/AppDescription'
 import { default as LanguageChooseWindow } from '../Windows/LanguageChoose'
 import { default as FeedbackWindow } from '../Windows/Feedback'
-import { default as AppDescriptionWindow } from '../Windows/AppDescription'
 
 
 const Main = () => {

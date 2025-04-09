@@ -64,7 +64,7 @@ const Content = () => {
   const [texts] = useAppLanguage (texts => texts.AppDescriptionWindow)
 
 
-  const _description__TXT = texts.Main._description_
+  const description_text_TXT = texts.Main.description_text
 
 
   return (
@@ -84,7 +84,7 @@ const Content = () => {
       color: styles.color,
       fontSize: 17.5}}>
 
-        {_description__TXT}
+        {description_text_TXT}
 
       </Text>
 

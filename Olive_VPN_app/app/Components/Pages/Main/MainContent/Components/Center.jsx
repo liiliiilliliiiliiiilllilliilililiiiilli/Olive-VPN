@@ -49,8 +49,6 @@ const Center = () => {
 
   useEffect (() => {(async () => {
 
-    // set_connection_is_not_protected_TXT (texts.connection_is_not_protected)
-  
     const VpnState = await RNSimpleOpenvpn.getCurrentState ()
   
     switch (VpnState) {
@@ -60,9 +58,7 @@ const Center = () => {
   
     }
 
-    setConnectionDestinationText (netherlands_TXT)
-  
-    // set_connected_TXT (texts.connected)
+    setConnectionDestinationText (netherlands_TXT)  
 
   }) ()
 
@@ -104,7 +100,7 @@ const Center = () => {
 
     catch (error) {
 
-      console.info (`connectVPN: error while connecting to VPN server\n\n${error}`)
+      console.info (`connectVPN: error while connecting to VPN server:\n\n${error}`)
 
     }
 
@@ -120,7 +116,7 @@ const Center = () => {
     
     catch (error) {
 
-      console.info (`disconnectVPN: error while disconnecting from VPN server\n\n${error}`)
+      console.info (`disconnectVPN: error while disconnecting from VPN server:\n\n${error}`)
 
     }
 

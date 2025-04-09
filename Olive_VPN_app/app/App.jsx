@@ -1,9 +1,7 @@
 // This is application start up file.
 
 
-import axios from 'axios'
 import * as SecureStore from 'expo-secure-store'
-
 import RNSimpleOpenvpn from 'react-native-simple-openvpn'
 
 import { useState, useEffect } from 'react'
@@ -20,18 +18,11 @@ import Main from './Pages/Main'
 import ServersList from './Pages/ServersList'
 
 
-// axios.defaults.baseURL = 'https://OliveVPN.net:5000'
-axios.defaults.method = 'post'
-axios.defaults.rejectUnauthorized = false
-axios.defaults.timeout = 2500
-
-
 const Stack = createNativeStackNavigator ()
 
 const generalScreenOptions = {
 
   headerShown: false
-  // animation: 'fade'
 
 }
 
@@ -40,7 +31,7 @@ const App = ({setBackgroundColor}) => {
 
   const [isAppSetUp, setIsAppSetUp] = useState (false)
 
-  const [styles, theme, setTheme] = useThemes (styles => styles)
+  const [styles, theme, setTheme] = useThemes ()
   const [texts, appLanguage, setAppLanguage] = useAppLanguage ()
   const [isAutoVpnOn, setIsAutoVpnOn] = useAppAutoVpnToggle ()
 
@@ -80,27 +71,16 @@ const App = ({setBackgroundColor}) => {
 
   useFonts ({  // configure global app fonts
 
-    'Archivo': require ('../assets/Fonts/Archivo/Archivo-VariableFont_wdth,wght.ttf'),
-
     'Archivo-Regular': require ('../assets/Fonts/Archivo/Archivo-Regular.ttf'),
     'Archivo-Medium': require ('../assets/Fonts/Archivo/Archivo-Medium.ttf'),
     'Archivo-SemiBold': require ('../assets/Fonts/Archivo/Archivo-SemiBold.ttf'),
     'Archivo-Bold': require ('../assets/Fonts/Archivo/Archivo-Bold.ttf'),
     'Archivo-ExtraBold': require ('../assets/Fonts/Archivo/Archivo-ExtraBold.ttf'),
-    
-    'Arimo': require ('../assets/Fonts/Arimo/Arimo-VariableFont_wght.ttf'),
-    'Arimo-Regular': require ('../assets/Fonts/Arimo/Arimo-Regular.ttf'),
+
     'Arimo-SemiBold': require ('../assets/Fonts/Arimo/Arimo-SemiBold.ttf'),
     'Arimo-Bold': require ('../assets/Fonts/Arimo/Arimo-Bold.ttf'),
     
-    'FiraSans-SemiBold': require ('../assets/Fonts/FiraSans/FiraSans-SemiBold.ttf'),
-    
-    'Fredoka-SemiBold': require ('../assets/Fonts/Fredoka/Fredoka-SemiBold.ttf'),
-    
-    'Gadugi-Regular': require ('../assets/Fonts/Gadugi/gadugi-normal.ttf'),
-    'Gadugi-Bold': require ('../assets/Fonts/Gadugi/gadugi-bold.ttf'),
-    
-    'Inter-SemiBold': require ('../assets/Fonts/Inter/Inter_18pt-SemiBold.ttf')
+    'Fredoka-SemiBold': require ('../assets/Fonts/Fredoka/Fredoka-SemiBold.ttf')
 
   })
 
@@ -133,13 +113,7 @@ const App = ({setBackgroundColor}) => {
 
   useEffect (() => {
 
-    if (theme != null) {
-      
-      console.info ('theme:', theme, 'styles:', styles)
-
-      setBackgroundColor (styles.MainBackground.backgroundColor)
-    
-    }
+    if (theme != null) setBackgroundColor (styles.MainBackground.backgroundColor)
 
   }, [theme])
 
@@ -177,7 +151,7 @@ const App = ({setBackgroundColor}) => {
 
     catch (error) {
 
-      console.info (`connectVPN: error while connecting to VPN server\n\n${error}`)
+      console.info (`connectVPN: error while connecting to VPN server:\n\n${error}`)
 
     }
 
@@ -189,8 +163,7 @@ const App = ({setBackgroundColor}) => {
     if (!afterDark && isAutoVpnOn) {
 
       const VpnState = await RNSimpleOpenvpn.getCurrentState ()
-
-      VpnState == 0 && connectVPN (limeVpnConnectionConfiguration)
+      if (VpnState == 0) connectVPN (limeVpnConnectionConfiguration)
 
       setAfterDark (true)
 

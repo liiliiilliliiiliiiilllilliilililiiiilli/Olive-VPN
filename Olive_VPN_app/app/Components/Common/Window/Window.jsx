@@ -6,7 +6,7 @@ import { useThemes } from '../../../../Redux/Hooks/UseThemes'
 
 import { View, TouchableOpacity, Text } from 'react-native'
 
-import Animated, { useSharedValue, withTiming, Easing, withSequence } from 'react-native-reanimated'
+import Animated, { useSharedValue, withSequence, withTiming, Easing } from 'react-native-reanimated'
 
 
 const Window = ({isOpened, closeSelf, title, leftButton, rightButton, centerButton, style, children}) => {

@@ -1,13 +1,13 @@
 // This is app feedback window.
 
 
-import TextLink from 'react-native-text-link'
-
 import { useThemes } from '../../Redux/Hooks/UseThemes'
 import { useAppLanguage } from '../../Redux/Hooks/AppLanguage'
 import { useAppOpenedWindows } from '../../Redux/Hooks/OpenedWindows'
 
 import { View, Linking } from 'react-native'
+
+import TextLink from 'react-native-text-link'
 
 import Window from '../Components/Common/Window/Window'
 
@@ -69,14 +69,14 @@ const Content = () => {
   const [texts] = useAppLanguage (texts => texts.FeedbackWindow)
 
 
-  const urlTelegramChannel_TXT = texts.Main.urlTelegramChannel
-  const urlGooglePlay_TXT = texts.Main.urlGooglePlay
-  const urlAppStore_TXT = texts.Main.urlAppStore
+  const url_Telegram_channel_TXT = texts.Main.url_Telegram_channel
+  const url_GooglePlay_TXT = texts.Main.url_GooglePlay
+  const url_AppStore_TXT = texts.Main.url_AppStore
 
-  const feedbackText_TXT = texts.Main.feedbackText
+  const feedback_text_TXT = texts.Main.feedback_text
 
   const link_Telegram_TXT = texts.Main.link_Telegram
-  const link_Googlelay_TXT = texts.Main.link_Googlelay
+  const link_GooglePlay_TXT = texts.Main.link_GooglePlay
   const link_AppStore_TXT = texts.Main.link_AppStore
 
 
@@ -94,27 +94,27 @@ const Content = () => {
         fontSize: 17.5}}
       textLinkStyle = {{
         fontFamily: styles.fontFamily,
-        color: styles.color_link,
+        color: styles.color_Link,
         fontSize: 17.5}}
       pressingLinkStyle = {{
         fontFamily: styles.fontFamily,
-        color: styles.color_link_pressed,
+        color: styles.color_LinkPressed,
         fontSize: 17.5}}
 
       links = {[
 
         { text: link_Telegram_TXT,
-          onPress: () => Linking.openURL (urlTelegramChannel_TXT) },
+          onPress: () => Linking.openURL (url_Telegram_channel_TXT) },
 
-        { text: link_Googlelay_TXT,
-          onPress: () => Linking.openURL (urlGooglePlay_TXT) },
+        { text: link_GooglePlay_TXT,
+          onPress: () => Linking.openURL (url_GooglePlay_TXT) },
 
         { text: link_AppStore_TXT,
-          onPress: () => Linking.openURL (urlAppStore_TXT) }
+          onPress: () => Linking.openURL (url_AppStore_TXT) }
 
       ]}>
 
-       {feedbackText_TXT}
+       {feedback_text_TXT}
 
       </TextLink>
 

@@ -13,8 +13,8 @@ const useThemes = (specific_styles_to_return_callback = e => e) => {
 
   let stylesObject
 
-  try { stylesObject = Themes?.[JSON.parse (theme)?.type]?.[JSON.parse (theme)?.palette] || {systemThemeLight: Themes.Light.MainTheme, systemThemeDark: Themes.Dark.MainTheme} [theme] }
-  catch { stylesObject = Themes?.[theme?.type]?.[theme?.palette] || {systemThemeLight: Themes.Light.MainTheme, systemThemeDark: Themes.Dark.MainTheme} [theme] }
+  try { stylesObject = Themes?.[JSON.parse (theme)?.type]?.[JSON.parse (theme)?.palette] || {systemThemeLight: Themes.Light.MainTheme, systemThemeDark: Themes.Dark.MainTheme} [theme] }  // ?
+  catch { stylesObject = Themes?.[theme?.type]?.[theme?.palette] || {systemThemeLight: Themes.Light.MainTheme, systemThemeDark: Themes.Dark.MainTheme} [theme] }  // ?
 
   stylesObject = specific_styles_to_return_callback (stylesObject)
 

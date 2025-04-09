@@ -1,11 +1,12 @@
 // Component.
 
 
-import Animated, { Easing, useSharedValue, withSequence, withTiming } from 'react-native-reanimated'
 import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
+import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
 
 import { View, TouchableOpacity, Image, Text } from 'react-native'
-import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
+
+import Animated, { useSharedValue, withSequence, withTiming, Easing } from 'react-native-reanimated'
 
 
 const ServerInstance = ({pic, title, availability, isChosen, style}) => {
@@ -25,6 +26,16 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
 
   const commonEasing = comEsng = Easing.inOut (Easing.quad)
   const animationDuration = AnDu = 95
+
+
+  const pinColor = {  
+
+    3: styles.Block.PinStatus.green,
+    2: styles.Block.PinStatus.orange,
+    1: styles.Block.PinStatus.red,
+    0: styles.Block.PinStatus.transparent
+
+  } [availability]
 
 
   // press animations:
@@ -95,7 +106,7 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
           width: 42,
           height: 42,
           borderWidth: 2,
-          borderColor: styles.Block.Pic.borderColor,
+          borderColor: styles.Block.Pic.borderColor_Out,
           borderRadius: 1000}}>
 
             <Image
@@ -104,7 +115,7 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
             width: 38,
             height: 38,
             borderWidth: 2,
-            borderColor: styles.Block.Pic.borderColor_Inner,
+            borderColor: styles.Block.Pic.borderColor_In,
             borderRadius: 1000}}/>
 
           </View>
@@ -123,7 +134,7 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
 
             <Text style = {{
             fontFamily: styles.Block.fontFamily,
-            color: styles.Block.color_chosen,
+            color: styles.Block.color_IsChosen,
             fontSize: 17,
             marginHorizontal: 'auto'}}>
 
@@ -139,7 +150,7 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
           marginLeft: 'auto',
           marginRight: 16,
           borderRadius: 1000,
-          backgroundColor: {3: styles.Block.PilStatus.color_3, 2: styles.Block.PilStatus.color_2, 1: styles.Block.PilStatus.color_1, 0: styles.Block.PilStatus.color_0} [availability]}}/>
+          backgroundColor: pinColor}}/>
 
         </Animated.View>
 

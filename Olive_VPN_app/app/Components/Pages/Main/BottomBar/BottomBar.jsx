@@ -1,13 +1,13 @@
 // Component.
 
 
-import { useAppOpenedWindows } from '../../../../../Redux/Hooks/OpenedWindows'
-
 import { useEffect } from 'react'
 import { useThemes } from '../../../../../Redux/Hooks/UseThemes'
 import { useAppLanguage } from '../../../../../Redux/Hooks/AppLanguage'
+import { useAppOpenedWindows } from '../../../../../Redux/Hooks/OpenedWindows'
 
 import { View, TouchableOpacity } from 'react-native'
+
 import Animated, { useSharedValue, useAnimatedStyle, withSequence, withTiming, Easing } from 'react-native-reanimated'
 
 
@@ -73,7 +73,7 @@ const Tip = ({onPress}) => {
 
     transform: [{scale: scaleControl.value}],
     opacity: opacityControl.value,
-    top: marginControl.value
+    marginBottom: marginControl.value
 
   }))
 
@@ -102,7 +102,7 @@ const Tip = ({onPress}) => {
 
     scaleControl.value = withTiming (0.975, {duration: AnDu, easing: comEsng})
     opacityControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
-    marginControl.value = withTiming (-0.5, {duration: AnDu, easing: comEsng})
+    marginControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
 
   }
 
@@ -118,7 +118,7 @@ const Tip = ({onPress}) => {
 
     scaleControl.value = withSequence (withTiming (0.975, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
     opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
-    marginControl.value = withSequence (withTiming (-0.5, {duration: AnDu, easing: comEsng}), withTiming (0, {duration: AnDu, easing: comEsng}))
+    marginControl.value = withSequence (withTiming (1, {duration: AnDu, easing: comEsng}), withTiming (0, {duration: AnDu, easing: comEsng}))
 
     setTimeout (() => onPress (), AnDu)
 

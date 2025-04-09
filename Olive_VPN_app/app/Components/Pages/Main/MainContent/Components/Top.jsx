@@ -145,7 +145,7 @@ const Action = () => {
 
         publicIP ()
         .then (ip => setIpText (ip))
-        .catch (error => console.info (`Unable to get IP address: ${error}`))
+        .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
 
       }
 
@@ -170,7 +170,7 @@ const Action = () => {
 
         publicIP ()
         .then (ip => setIpText (ip))
-        .catch (error => console.info ('Unable to get IP address:', error))
+        .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
 
       }
 
@@ -195,7 +195,7 @@ const Action = () => {
 
     publicIP ()
     .then (ip => setIpText (ip))
-    .catch (error => console.info (`Unable to get IP address: ${error}`))
+    .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
 
     const unsubscribeNet = subscribeNet ()
     subscribeVpn ()

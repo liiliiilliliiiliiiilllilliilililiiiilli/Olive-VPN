@@ -52,7 +52,7 @@ const MainContent = () => {
     width: '100%'}}>
 
       <Liner
-      text = {`3 ${offline_TXT}`}
+      text = {`3 ${online_TXT}`}
       style = {{marginBottom: 14}}/>
 
       {/* {availableServers.map ((server, index) => */}
@@ -75,10 +75,10 @@ const MainContent = () => {
       <ServerInstance
       pic = {styles.ServerInstance.Germany_PNG}
       title = {Germany.title}
-      availability = {Germany.availability}/>
+      availability = {1}/>
 
       <Liner
-      text = {`1 ${online_TXT}`}
+      text = {`1 ${offline_TXT}`}
       style = {{marginBottom: 25}}/>
 
       {/* {availableServers.map ((server, index) => */}

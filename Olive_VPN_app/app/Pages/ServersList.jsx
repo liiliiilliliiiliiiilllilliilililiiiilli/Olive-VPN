@@ -1,4 +1,4 @@
-// This is Options page.
+// This is ServersList page.
 
 
 import { useThemes } from '../../Redux/Hooks/UseThemes'

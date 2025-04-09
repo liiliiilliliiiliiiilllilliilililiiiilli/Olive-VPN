@@ -10,7 +10,8 @@ import { useAppAutoVpnToggle } from '../../Redux/Hooks/AppAutoVpnToggle'
 
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 
-import Animated, { Easing, useSharedValue, withDelay, withSequence, withTiming } from 'react-native-reanimated'
+import Animated, { useSharedValue, withSequence, withTiming, Easing } from 'react-native-reanimated'
+
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent (TouchableOpacity)
 
@@ -18,7 +19,6 @@ const AnimatedTouchableOpacity = Animated.createAnimatedComponent (TouchableOpac
 const Menu = () => {
 
   const [isAppMenuSliderOpened, setIsAppMenuSliderOpened] = useAppMenuSlider ()
-
 
   const [doesAppears, setDoesAppears] = useState (false)
 
@@ -108,7 +108,6 @@ const SliderBlock = ({margin, performClosing}) => {
   const language_value_TXT = texts.LanguageButton.language_value
   const feedback_TXT = texts.FeedbackButton.feedback
   const connection_to_vpn_on_app_launch_TXT = texts.AutoVpnToggler.connection_to_vpn_on_app_launch
-  // const _TXT = ''
 
 
   const Skeleton = ({children}) => {
@@ -240,8 +239,8 @@ const SliderBlock = ({margin, performClosing}) => {
 
           <Text style = {{
           marginRight: 'auto',
-          fontFamily: styles.LanguageButton.fontFamily_language,
-          color: styles.LanguageButton.color_language,
+          fontFamily: styles.LanguageButton.fontFamily_Language,
+          color: styles.LanguageButton.color_Language,
           fontSize: 18}}>
 
             {language_TXT}
@@ -249,8 +248,8 @@ const SliderBlock = ({margin, performClosing}) => {
           </Text>
 
           <Text style = {{
-          fontFamily: styles.LanguageButton.fontFamily_language_value,
-          color: styles.LanguageButton.color_language_value,
+          fontFamily: styles.LanguageButton.fontFamily_LanguageValue,
+          color: styles.LanguageButton.color_LanguageValue,
           fontSize: 18}}>
 
             {language_value_TXT}
@@ -423,7 +422,7 @@ const SliderBlock = ({margin, performClosing}) => {
     const handlePressIn = () => {
 
       scaleControl.value = withTiming (0.975, {duration: AnDu, easing: comEsng})
-      marginControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
+      marginControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
       opacityControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
 
     }
@@ -439,7 +438,7 @@ const SliderBlock = ({margin, performClosing}) => {
     const handlePress = () => {
 
       scaleControl.value = withSequence (withTiming (0.975, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
-      marginControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (0, {duration: AnDu, easing: comEsng}))
+      marginControl.value = withSequence (withTiming (1, {duration: AnDu, easing: comEsng}), withTiming (0, {duration: AnDu, easing: comEsng}))
       opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
 
       setTimeout (() => picOpacityControl.value = withTiming (isAutoVpnOn ? 0 : 1, {duration: AnDu / 4, easing: comEsng}), AnDu / 1.5)

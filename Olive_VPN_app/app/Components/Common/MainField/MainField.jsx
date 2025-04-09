@@ -3,12 +3,12 @@
 
 import { useEffect } from 'react'
 import { useThemes } from '../../../../Redux/Hooks/UseThemes'
-import { Dimensions } from 'react-native'
+import { useAppMenuSlider } from '../../../../Redux/Hooks/MenuSlider'
 
 import { StatusBar } from 'react-native'
+import { Dimensions } from 'react-native'
 
-import { useAppMenuSlider } from '../../../../Redux/Hooks/MenuSlider'
-import Animated, { useSharedValue, withTiming, Easing, withDelay } from 'react-native-reanimated'
+import Animated, { useSharedValue, withDelay, withTiming, Easing } from 'react-native-reanimated'
 
 
 const MainField = ({style, children}) => {

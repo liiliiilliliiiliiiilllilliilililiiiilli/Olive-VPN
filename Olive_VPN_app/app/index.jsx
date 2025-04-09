@@ -13,7 +13,7 @@ import App from './App'
 
 const index = () => {
 
-  const [backgroundColor, setBackgroundColor] = useState ('8b9e80')
+  const [backgroundColor, setBackgroundColor] = useState ('')
 
 
   return (
