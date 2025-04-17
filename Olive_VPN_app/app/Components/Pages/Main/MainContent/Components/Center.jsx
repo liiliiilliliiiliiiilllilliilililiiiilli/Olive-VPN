@@ -13,6 +13,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
 import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
 import { useMainPageStatusText } from '../../../../../../Redux/Hooks/MainPageStatusText'
+import { useAppVpn } from '../../../../../../Redux/Hooks/AppVpn'
 
 import { View, TouchableOpacity, Image } from 'react-native'
 import { Platform } from 'react-native'
@@ -24,6 +25,8 @@ const device_is_iphone = Platform.OS === 'ios'
 
 
 const Center = () => {
+
+  const [appVpn, setAppVpn, getVpnState, connectToVpn, disconnectFromVpn] = useAppVpn ()
 
   const [texts, appLanguage] = useAppLanguage (texts => texts.MainPage.Main.Center)
 
@@ -45,11 +48,12 @@ const Center = () => {
   const [connectionTime, setConnectionTime] = useState ({initialization_moment: null, current_duration: null})
 
   const [tipText, setTipText] = useState (texts.tap_to_connect_to_vpn)
-  const [connectionDestinationText, setConnectionDestinationText] = useState (netherlands_TXT)
+  const [connectionDestinationText, setConnectionDestinationText] = useState (texts[appVpn])
+  useEffect (() => setConnectionDestinationText (texts[appVpn]), [appVpn])
 
   useEffect (() => {(async () => {
 
-    const VpnState = await RNSimpleOpenvpn.getCurrentState ()
+    const VpnState = await getVpnState ()
   
     switch (VpnState) {
   
@@ -58,78 +62,24 @@ const Center = () => {
   
     }
 
-    setConnectionDestinationText (netherlands_TXT)  
+    // setConnectionDestinationText (netherlands_TXT)
+    setConnectionDestinationText (texts[appVpn])
 
-  }) ()
-
-  
-  }, [appLanguage])
+  }) ()}, [appLanguage])
 
 
-  const limeVpnConnectionConfiguration = {
+  const connectVPN = async () => { await connectToVpn () }
 
-    ovpnFileName: 'lime',
-    notificationTitle: 'RNSimpleOpenVPN',
-    providerBundleIdentifier: 'com.example.OliveVPN',
-    localizedDescription: 'TestRNSimpleOvpn',
-    compatMode: 'MODERN_DEFAULTS'
-
-  }
-
-
-  const connectVPN = async vpnConnectionConfiguration => {
-
-    try {
-
-      await RNSimpleOpenvpn.connect ({
-
-        ...vpnConnectionConfiguration,
-
-        compatMode: {
-
-          MODERN_DEFAULTS: RNSimpleOpenvpn.CompatMode.MODERN_DEFAULTS,
-          OVPN_TWO_FIVE_PEER: RNSimpleOpenvpn.CompatMode.OVPN_TWO_FIVE_PEER,
-          OVPN_TWO_FOUR_PEER: RNSimpleOpenvpn.CompatMode.OVPN_TWO_FOUR_PEER,
-          OVPN_TWO_THREE_PEER: RNSimpleOpenvpn.CompatMode.OVPN_TWO_THREE_PEER
-
-        } [vpnConnectionConfiguration.compatMode]
-
-      })
-
-    }
-
-    catch (error) {
-
-      console.info (`connectVPN: error while connecting to VPN server:\n\n${error}`)
-
-    }
-
-  }
-
-  const disconnectVPN = async () => {
-
-    try {
-      
-      await RNSimpleOpenvpn.disconnect ()
-
-    }
-    
-    catch (error) {
-
-      console.info (`disconnectVPN: error while disconnecting from VPN server:\n\n${error}`)
-
-    }
-
-  }
+  const disconnectVPN = async () => { await disconnectFromVpn () }
 
   const toggleVPN = async () => {
 
-    const VpnState = await RNSimpleOpenvpn.getCurrentState ()
+    const VpnState = await getVpnState ()
 
     switch (VpnState) {
 
-      case 0: connectVPN (limeVpnConnectionConfiguration); break
-      case 2: disconnectVPN (); break
+      case 0: await connectVPN (); break
+      case 2: await disconnectVPN (); break
 
     }
 
@@ -242,7 +192,7 @@ const Center = () => {
 
     addVpnStateListener (async () => {
 
-      const VpnState = await RNSimpleOpenvpn.getCurrentState ()
+      const VpnState = await getVpnState ()
 
       switch (VpnState) {
 
@@ -286,7 +236,7 @@ const Center = () => {
     await subscribeVPN ()
 
 
-    const VpnState = await RNSimpleOpenvpn.getCurrentState ()
+    const VpnState = await getVpnState ()
 
     switch (VpnState) {
 
@@ -325,6 +275,8 @@ const Center = () => {
 
 
 const VpnButton = ({onPress}) => {
+
+  const [appVpn, setAppVpn, getVpnState, connectToVpn, disconnectFromVpn] = useAppVpn ()
 
   const [styles] = useThemes (styles => styles.MainPage.Main.Center)
 
@@ -389,7 +341,7 @@ const VpnButton = ({onPress}) => {
       alignItems: 'center',
       width: 225,
       height: 225,
-      borderWidth: 2.5,
+      borderWidth: 3.5,
       borderRadius: 1000,
       borderColor: styles.VpnButton.borderColor,
       backgroundColor: styles.VpnButton.backgroundColor,
@@ -399,8 +351,10 @@ const VpnButton = ({onPress}) => {
         <Image
         source = {styles.VpnButton.Olive_PNG}
         style = {{
-        width: 185,
-        height: 185}}/>
+        width: 155,
+        height: 155,
+        bottom: 6.5,
+        transform: [{rotate: '5deg'}]}}/>
 
       </Animated.View>
 
@@ -411,6 +365,8 @@ const VpnButton = ({onPress}) => {
 }
 
 const Tip = ({text}) => {
+
+  const [appVpn, setAppVpn, getVpnState, connectToVpn, disconnectFromVpn] = useAppVpn ()
 
   const [styles, theme] = useThemes (styles => styles.MainPage.Main.Center)
   const [texts, appLanguage] = useAppLanguage (texts => texts.MainPage.Main.Center)
@@ -456,7 +412,7 @@ const Tip = ({text}) => {
 
   const subscribeVPN = async () => {  // logging on triggering
 
-    const VpnState = await RNSimpleOpenvpn.getCurrentState ()
+    const VpnState = await getVpnState ()
 
     switch (VpnState) {
 
@@ -478,7 +434,7 @@ const Tip = ({text}) => {
 
     addVpnStateListener (async () => {
 
-      const VpnState = await RNSimpleOpenvpn.getCurrentState ()
+      const VpnState = await getVpnState ()
 
       switch (VpnState) {
 
@@ -554,6 +510,8 @@ const Tip = ({text}) => {
 }
 
 const Action = ({text}) => {
+
+  const [appVpn, setAppVpn, getVpnState, connectToVpn, disconnectFromVpn] = useAppVpn ()
 
   const [styles, theme] = useThemes (styles => styles.MainPage.Main.Center)
   const navigation = useNavigation ()

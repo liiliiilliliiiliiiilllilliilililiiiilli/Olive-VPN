@@ -1,18 +1,19 @@
 // This is application start up file.
 
 
+import * as SplashScreen from 'expo-splash-screen'
+
 import * as SecureStore from 'expo-secure-store'
-import RNSimpleOpenvpn from 'react-native-simple-openvpn'
+// import RNSimpleOpenvpn from 'react-native-simple-openvpn'
 
 import { useState, useEffect } from 'react'
 import { useFonts } from 'expo-font'
 import { useThemes } from '../Redux/Hooks/UseThemes'
 import { useAppLanguage } from '../Redux/Hooks/AppLanguage'
 import { useAppAutoVpnToggle } from '../Redux/Hooks/AppAutoVpnToggle'
+import { useAppVpn } from '../Redux/Hooks/AppVpn'
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-
-import { Text } from 'react-native'
 
 import Main from './Pages/Main'
 import ServersList from './Pages/ServersList'
@@ -30,15 +31,16 @@ const generalScreenOptions = {
 const App = ({setBackgroundColor}) => {
 
   const [isAppSetUp, setIsAppSetUp] = useState (false)
+  const [isAppReady, setIsAppReady] = useState (false)
 
   const [styles, theme, setTheme] = useThemes ()
   const [texts, appLanguage, setAppLanguage] = useAppLanguage ()
   const [isAutoVpnOn, setIsAutoVpnOn] = useAppAutoVpnToggle ()
 
+  const [appVpn, setAppVpn, getVpnState, connectToVpn, disconnectFromVpn] = useAppVpn ()
+
   const [JwtAccessUser, setJwtAccessUser] = useState ()  // need to put into redux for futher global usage and trigger it
   const [JwtRefreshUser, setJwtRefreshUser] = useState ()  // need to put into redux for futher global usage and trigger it
-
-  const [afterDark, setAfterDark] = useState (false)
 
 
   const configureThemes = () => {
@@ -60,9 +62,15 @@ const App = ({setBackgroundColor}) => {
   }
 
   const configureUserTokens = async () => {
-
+    
     setJwtAccessUser (await SecureStore.getItemAsync ('JwtAccessUser') || '')
     setJwtRefreshUser (await SecureStore.getItemAsync ('JwtRefreshUser') || '')
+    
+  }
+
+  const configureAppVpn = () => {
+
+    setAppVpn ('init')
 
   }
 
@@ -91,7 +99,8 @@ const App = ({setBackgroundColor}) => {
       configureThemes (),
       configureAppLanguage (),
       configureUserTokens (),
-      configureAutoVpn ()
+      configureAutoVpn (),
+      configureAppVpn ()
 
     ])
     
@@ -103,84 +112,38 @@ const App = ({setBackgroundColor}) => {
     const isAppLanguageConfigured = appLanguage != null
     const areUserTokensConfigured = (JwtAccessUser != null) && (JwtRefreshUser != null)
     const isAutoVpnConfigured = isAutoVpnOn != null
+    const isAppVpnConfigured = appVpn != null
 
-    if (isThemeConfigured && isAppLanguageConfigured && areUserTokensConfigured && isAutoVpnConfigured) {setIsAppSetUp (true); setAfterDark (true)}
+    if (isThemeConfigured && isAppLanguageConfigured && areUserTokensConfigured && isAutoVpnConfigured, isAppVpnConfigured) setIsAppSetUp (true)
       
-  }, [theme, appLanguage, JwtAccessUser, JwtRefreshUser, isAutoVpnOn])
+  }, [theme, appLanguage, JwtAccessUser, JwtRefreshUser, isAutoVpnOn, appVpn])
 
   // .
 
 
-  useEffect (() => {
-
-    if (theme != null) setBackgroundColor (styles.MainBackground.backgroundColor)
-
-  }, [theme])
-
-
-  const limeVpnConnectionConfiguration = {
-
-    ovpnFileName: 'lime',
-    notificationTitle: 'RNSimpleOpenVPN',
-    providerBundleIdentifier: 'com.example.OliveVPN',
-    localizedDescription: 'TestRNSimpleOvpn',
-    compatMode: 'MODERN_DEFAULTS'
-
-  }
-
-  const connectVPN = async vpnConnectionConfiguration => {
-
-    try {
-
-      await RNSimpleOpenvpn.connect ({
-
-        ...vpnConnectionConfiguration,
-
-        compatMode: {
-
-          MODERN_DEFAULTS: RNSimpleOpenvpn.CompatMode.MODERN_DEFAULTS,
-          OVPN_TWO_FIVE_PEER: RNSimpleOpenvpn.CompatMode.OVPN_TWO_FIVE_PEER,
-          OVPN_TWO_FOUR_PEER: RNSimpleOpenvpn.CompatMode.OVPN_TWO_FOUR_PEER,
-          OVPN_TWO_THREE_PEER: RNSimpleOpenvpn.CompatMode.OVPN_TWO_THREE_PEER
-
-        } [vpnConnectionConfiguration.compatMode]
-
-      })
-
-    }
-
-    catch (error) {
-
-      console.info (`connectVPN: error while connecting to VPN server:\n\n${error}`)
-
-    }
-
-  }
-
-
   useEffect (() => {(async () => {
 
-    if (!afterDark && isAutoVpnOn) {
+    setBackgroundColor (styles.MainBackground.backgroundColor)
 
-      const VpnState = await RNSimpleOpenvpn.getCurrentState ()
-      if (VpnState == 0) connectVPN (limeVpnConnectionConfiguration)
+    if (isAutoVpnOn) {
 
-      setAfterDark (true)
+      const VpnState = await getVpnState ()
+      if (VpnState == 0) { await connectToVpn () }
 
     }
 
-  })()}, [isAutoVpnOn])
+    setIsAppReady (true)
+
+    SplashScreen.hide ()
+
+  })()}, [isAppSetUp])
 
 
   return (
 
     <>
-    
-      {!isAppSetUp ?
 
-        <Text>Загрузка...</Text>
-
-      :
+      {isAppReady ?
 
         <Stack.Navigator
         initialRouteName = 'Main'
@@ -196,8 +159,8 @@ const App = ({setBackgroundColor}) => {
 
         </Stack.Navigator>
 
-      }
-    
+      : null}
+
     </>
 
   )

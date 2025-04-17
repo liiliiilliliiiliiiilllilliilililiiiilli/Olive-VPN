@@ -26,8 +26,7 @@
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "output": "static"
     },
     "plugins": [
       "expo-router",
@@ -53,9 +52,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "e53e0347-23ed-4ff6-91e2-f7a2cb047878"
+        "projectId": "a46d6fad-c245-4023-ba0c-fa25cb52d572"
       }
     },
-    "owner": "liiliiilliliiiliiiilllilliililil_0"
+    "owner": "liiliiilliliiiliiiilllilliilililiiiill_0"
   }
 }

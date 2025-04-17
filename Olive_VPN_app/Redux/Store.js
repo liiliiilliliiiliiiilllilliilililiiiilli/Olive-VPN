@@ -6,6 +6,7 @@ import { menuSliderReducer } from './MenuSliderSlice'
 import { openedWindowsReducer } from './OpenedWindowsSlice'
 import { mainPageStatusTextReducer } from './MainPageStatusTextSlice'
 import { autoVpnOnReducer } from './AppAutoVpnToggleSlice'
+import { AppVpnReducer } from './AppVpnSlice'
 
 
 const ReduxStore = configureStore ({
@@ -17,7 +18,8 @@ const ReduxStore = configureStore ({
         isMenuSliderOpened: menuSliderReducer,
         openedWindows: openedWindowsReducer,
         mainPageStatusText: mainPageStatusTextReducer,
-        isAutoVpnOn: autoVpnOnReducer
+        isAutoVpnOn: autoVpnOnReducer,
+        AppVpn: AppVpnReducer
     
     },
 

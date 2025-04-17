@@ -1,6 +1,7 @@
 // Component.
 
 
+import { useEffect } from 'react'
 import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
 import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
 
@@ -9,7 +10,7 @@ import { View, TouchableOpacity, Image, Text } from 'react-native'
 import Animated, { useSharedValue, withSequence, withTiming, Easing } from 'react-native-reanimated'
 
 
-const ServerInstance = ({pic, title, availability, isChosen, style}) => {
+const ServerInstance = ({isChosen, pic, title, availability, onPress, style}) => {
 
   const [styles] = useThemes (styles => styles.ServersListPage.Main.ServerInstance)
 
@@ -21,7 +22,10 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
 
   const scaleControl = useSharedValue (1)
   const opacityControl = useSharedValue (1)
-  const marginControl = useSharedValue (0)
+
+  const borderColorControl = useSharedValue (isChosen ? styles.Block.borderColor_Chosen : styles.Block.borderColor_Unchosen)
+
+  const opacityStatusTextControl = useSharedValue (isChosen ? 1 : 0)
 
 
   const commonEasing = comEsng = Easing.inOut (Easing.quad)
@@ -44,7 +48,6 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
 
     scaleControl.value = withTiming (0.975, {duration: AnDu, easing: comEsng})
     opacityControl.value = withTiming (0.5, {duration: AnDu, easing: comEsng})
-    marginControl.value = withTiming (-0.5, {duration: AnDu, easing: comEsng})
 
   }
 
@@ -52,7 +55,6 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
 
     scaleControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
     opacityControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
-    marginControl.value = withTiming (0, {duration: AnDu, easing: comEsng})
 
   }
 
@@ -60,11 +62,20 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
 
     scaleControl.value = withSequence (withTiming (0.975, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
     opacityControl.value = withSequence (withTiming (0.5, {duration: AnDu, easing: comEsng}), withTiming (1, {duration: AnDu, easing: comEsng}))
-    marginControl.value = withSequence (withTiming (-0.5, {duration: AnDu, easing: comEsng}), withTiming (0, {duration: AnDu, easing: comEsng}))
+
+    onPress ()
 
   }
 
   // .
+
+
+  useEffect (() => {
+
+    borderColorControl.value = withTiming (isChosen ? styles.Block.borderColor_Chosen : styles.Block.borderColor_Unchosen, {duration: AnDu, easing: comEsng})
+    opacityStatusTextControl.value = withTiming (isChosen ? 1 : 0, {duration: AnDu, easing: comEsng})
+
+  }, [isChosen])
 
 
   return (
@@ -95,7 +106,7 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
         paddingHorizontal: 21,
         borderRadius: 16,
         borderWidth: 2,
-        borderColor: isChosen ? styles.Block.borderColor_Chosen : styles.Block.borderColor_Unchosen,
+        borderColor: borderColorControl,
         backgroundColor: styles.Block.backgroundColor,
         opacity: opacityControl,
         transform: [{scale: scaleControl}]}}>
@@ -130,19 +141,16 @@ const ServerInstance = ({pic, title, availability, isChosen, style}) => {
 
           </Text>
 
-          {isChosen ?
+          <Animated.Text style = {{
+          fontFamily: styles.Block.fontFamily,
+          color: styles.Block.color_IsChosen,
+          fontSize: 17,
+          marginHorizontal: 'auto',
+          opacity: opacityStatusTextControl}}>
 
-            <Text style = {{
-            fontFamily: styles.Block.fontFamily,
-            color: styles.Block.color_IsChosen,
-            fontSize: 17,
-            marginHorizontal: 'auto'}}>
+            {chosen_TXT}
 
-              {chosen_TXT}
-
-            </Text>
-
-          : null}
+          </Animated.Text>
 
           <View style = {{
           width: 8,

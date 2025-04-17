@@ -325,7 +325,7 @@ const MainTheme = {
                 Block: {
 
                     borderColor_Chosen: Colors.PinOutChosen,
-                    borderColor_Unchosen: '',
+                    borderColor_Unchosen: 'transparent',
                     backgroundColor: Colors.SoapBack,
 
                     fontFamily: 'Arimo-SemiBold',

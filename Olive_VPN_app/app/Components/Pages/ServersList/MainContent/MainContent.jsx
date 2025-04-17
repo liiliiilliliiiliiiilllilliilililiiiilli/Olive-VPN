@@ -3,6 +3,7 @@
 
 import { useThemes } from '../../../../../Redux/Hooks/UseThemes'
 import { useAppLanguage } from '../../../../../Redux/Hooks/AppLanguage'
+import { useAppVpn } from '../../../../../Redux/Hooks/AppVpn'
 
 import { View } from 'react-native'
 
@@ -12,36 +13,15 @@ import ServerInstance from './Components/ServerInstance'
 
 const MainContent = () => {
 
+  const [appVpn, setAppVpn, getVpnState, connectToVpn, disconnectFromVpn] = useAppVpn ()
   const [styles, theme] = useThemes (styles => styles.ServersListPage.Main)
-
-
   const [texts] = useAppLanguage (texts => texts.ServersListPage.Main)
 
   const online_TXT = texts.Liner.online
-  const offline_TXT = texts.Liner.offline
-
+  // const offline_TXT = texts.Liner.offline
   const netherlands_TXT = texts.ServerInstance.netherlands
   const germany_TXT = texts.ServerInstance.germany
   const poland_TXT = texts.ServerInstance.poland
-
-
-  // const [availableServers, setServer] = useAppAvailableServers ()
-  const [availableServers, setServer] = [1, () => 1]
-
-
-  const Netherlands = {
-
-    title: netherlands_TXT,
-    availability: 3
-
-  }
-
-  const Germany = {
-
-    title: germany_TXT,
-    availability: 3
-
-  }
 
 
   return (
@@ -62,24 +42,29 @@ const MainContent = () => {
       {/* )} */}
 
       <ServerInstance
-      isChosen = {true}
+      isChosen = {appVpn == 'Netherlands'}
+      onPress = {() => setAppVpn ('Netherlands')}
       pic = {styles.ServerInstance.Netherlands_PNG}
-      title = {Netherlands.title}
-      availability = {Netherlands.availability}/>
+      title = {netherlands_TXT}
+      availability = {3}/>
 
       <ServerInstance
+      isChosen = {appVpn == 'Germany'}
+      onPress = {() => setAppVpn ('Germany')}
       pic = {styles.ServerInstance.Germany_PNG}
-      title = {Germany.title}
+      title = {germany_TXT}
+      availability = {3}/>
+
+      <ServerInstance
+      isChosen = {appVpn == 'Poland'}
+      onPress = {() => setAppVpn ('Poland')}
+      pic = {styles.ServerInstance.Poland_PNG}
+      title = {poland_TXT}
       availability = {2}/>
 
-      <ServerInstance
-      pic = {styles.ServerInstance.Germany_PNG}
-      title = {Germany.title}
-      availability = {1}/>
-
-      <Liner
+      {/* <Liner
       text = {`1 ${offline_TXT}`}
-      style = {{marginBottom: 25}}/>
+      style = {{marginBottom: 25}}/> */}
 
       {/* {availableServers.map ((server, index) => */}
 
@@ -87,10 +72,10 @@ const MainContent = () => {
 
       {/* )} */}
 
-      <ServerInstance
+      {/* <ServerInstance
       pic = {styles.ServerInstance.Germany_PNG}
       title = {Germany.title}
-      availability = {0}/>
+      availability = {0}/> */}
 
     </View>
 

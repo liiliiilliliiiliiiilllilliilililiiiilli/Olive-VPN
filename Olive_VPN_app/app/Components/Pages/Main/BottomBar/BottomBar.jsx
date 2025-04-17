@@ -129,31 +129,44 @@ const Tip = ({onPress}) => {
 
   return (
 
-    <AnimatedTouchableOpacity
-    activeOpacity = {1}
-    onPressIn = {() => handlePressIn()}
-    onPressOut = {() => handlePressOut()}
-    onPress = {() => handlePress()}
-    style = {{
-    justifyContent: 'center',
+    <View style = {{
     width: '100%',
-    height: 75,
-    paddingVertical: 12,
-    paddingHorizontal: 25,
-    borderTopWidth: 2,
-    borderColor: barBorderColorControl,
-    backgroundColor: barBackgroundColorControl}}>
+    height: 75}}>
 
-      <Animated.Text style = {[{
-      fontFamily: styles.fontFamily,
-      fontSize: 17},
-      animationStyles]}>
+      <AnimatedTouchableOpacity
+      activeOpacity = {1}
+      onPressIn = {() => handlePressIn()}
+      onPressOut = {() => handlePressOut()}
+      onPress = {() => handlePress()}
+      style = {{
+      justifyContent: 'center',
+      width: '100%',
+      height: 75,
+      paddingVertical: 12,
+      paddingHorizontal: 25,
+      borderTopWidth: 2,
+      borderColor: barBorderColorControl,
+      backgroundColor: barBackgroundColorControl}}>
 
-        <MetaLink>{texts.metalink}</MetaLink>{texts.rest_text}
+        <Animated.Text style = {[{
+        fontFamily: styles.fontFamily,
+        fontSize: 17},
+        animationStyles]}>
 
-      </Animated.Text>
+          <MetaLink>{texts.metalink}</MetaLink>{texts.rest_text}
 
-    </AnimatedTouchableOpacity>
+        </Animated.Text>
+
+      </AnimatedTouchableOpacity>
+
+      <View style = {{
+      zIndex: 0,
+      position: 'absolute',
+      width: '100%',
+      height: 5,
+      bottom: -1}}/>
+
+    </View>
 
   )
 

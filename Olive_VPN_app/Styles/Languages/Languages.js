@@ -51,7 +51,11 @@ const appLanguagesAsset = {
           days: 'дн.',
           hours: 'ч.',
           minutes: 'мин.',
-          seconds: 'сек.'
+          seconds: 'сек.',
+
+          Netherlands: 'Нидерланды',
+          Germany: 'Германия',
+          Poland: 'Польша'
 
         },
 
@@ -261,7 +265,11 @@ const appLanguagesAsset = {
           days: 'd.',
           hours: 'h.',
           minutes: 'min.',
-          seconds: 'sec.'
+          seconds: 'sec.',
+
+          Netherlands: 'Netherlands',
+          Germany: 'Germany',
+          Poland: 'Poland'
 
         },
 
@@ -471,7 +479,11 @@ const appLanguagesAsset = {
           days: '天',
           hours: '小时',
           minutes: '分钟',
-          seconds: '秒'
+          seconds: '秒',
+
+          Netherlands: '荷兰',
+          Germany: '德国',
+          Poland: '波兰'
 
         },
 
@@ -517,9 +529,9 @@ const appLanguagesAsset = {
 
         ServerInstance: {
 
-          netherlands: '荷蘭',
-          germany: '德國',
-          poland: '波蘭',
+          netherlands: '荷兰',
+          germany: '德国',
+          poland: '波兰',
 
           chosen: '已选定'
 
