@@ -1,7 +1,5 @@
 // Here additional buisness providers, contexts and so on are added.
 
-// hello!!!!!
-
 
 import * as SplashScreen from 'expo-splash-screen'
 
