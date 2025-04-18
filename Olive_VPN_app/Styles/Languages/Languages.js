@@ -38,9 +38,9 @@ const appLanguagesAsset = {
 
           Actions: {
 
-            netherlands_ip: '77.83.86.57',
-            germany_ip: '217.11.166.234',
-            finland_ip: '217.11.167.238'
+            "netherlands_ip": '77.83.86.57',
+            "germany_ip": '217.11.166.234',
+            "finland_ip": '217.11.167.238'
 
           }
 
@@ -260,9 +260,9 @@ const appLanguagesAsset = {
 
           Actions: {
 
-            netherlands_ip: '77.83.86.57',
-            germany_ip: '217.11.166.234',
-            finland_ip: '217.11.167.238'
+            "netherlands_ip": '77.83.86.57',
+            "germany_ip": '217.11.166.234',
+            "finland_ip": '217.11.167.238'
 
           }
 
@@ -482,9 +482,9 @@ const appLanguagesAsset = {
 
           Actions: {
 
-            netherlands_ip: '77.83.86.57',
-            germany_ip: '217.11.166.234',
-            finland_ip: '217.11.167.238'
+            "netherlands_ip": '77.83.86.57',
+            "germany_ip": '217.11.166.234',
+            "finland_ip": '217.11.167.238'
 
           }
 

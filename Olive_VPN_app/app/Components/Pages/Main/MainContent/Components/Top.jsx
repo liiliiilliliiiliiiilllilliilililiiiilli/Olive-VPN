@@ -145,7 +145,7 @@ const Action = () => {
 
     return NetInfo.addEventListener (async event => {
 
-      const currVpnState = await RNSimpleOpenvpn.getCurrentState ()
+      let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
 
       if (currVpnState == 2) {
 
@@ -177,7 +177,7 @@ const Action = () => {
 
     addVpnStateListener (async () => {
 
-      const currVpnState = await RNSimpleOpenvpn.getCurrentState ()
+      let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
 
       if (currVpnState == 2) {
 
@@ -221,7 +221,7 @@ const Action = () => {
 
   useEffect (() => {(async () => {
 
-    const currVpnState = await RNSimpleOpenvpn.getCurrentState ()
+    let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
 
     if (currVpnState == 2) {
 
