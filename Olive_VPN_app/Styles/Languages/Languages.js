@@ -531,7 +531,7 @@ const appLanguagesAsset = {
 
           netherlands: '荷兰',
           germany: '德国',
-          finalnd: '芬兰',
+          finland: '芬兰',
 
           chosen: '已选定'
 
