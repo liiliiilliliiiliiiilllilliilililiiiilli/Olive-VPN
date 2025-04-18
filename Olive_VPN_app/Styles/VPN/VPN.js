@@ -14,7 +14,7 @@ const appVpnsAsset = {
 
   Netherlands: {
 
-    ovpnFileName: 'lime_netherlands_4',
+    ovpnFileName: 'lime_netherlands_5',
     notificationTitle: 'RNSimpleOpenVPN',
     providerBundleIdentifier: 'com.example.OliveVPN',
     localizedDescription: 'TestRNSimpleOvpn',
@@ -24,7 +24,7 @@ const appVpnsAsset = {
 
   Germany: {
 
-    ovpnFileName: 'lime_germany_3',
+    ovpnFileName: 'lime_germany_5',
     notificationTitle: 'RNSimpleOpenVPN',
     providerBundleIdentifier: 'com.example.OliveVPN',
     localizedDescription: 'TestRNSimpleOvpn',
@@ -34,7 +34,7 @@ const appVpnsAsset = {
 
   Finland: {
 
-    ovpnFileName: 'lime_finland_3',
+    ovpnFileName: 'lime_finland_5',
     notificationTitle: 'RNSimpleOpenVPN',
     providerBundleIdentifier: 'com.example.OliveVPN',
     localizedDescription: 'TestRNSimpleOvpn',
