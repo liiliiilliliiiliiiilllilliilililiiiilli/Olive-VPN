@@ -13,6 +13,8 @@ import { View } from 'react-native'
 import { Platform } from 'react-native'
 
 import Animated, { useSharedValue, withSequence, withTiming, Easing } from 'react-native-reanimated'
+import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
+import { useAppVpn } from '../../../../../../Redux/Hooks/AppVpn'
 
 
 const device_is_iphone = Platform.OS === 'ios'
@@ -76,6 +78,8 @@ const StatusText = () => {
 const Action = () => {
 
   const [styles, theme] = useThemes (styles => styles.MainPage.Main.Top)
+  const [texts] = useAppLanguage (texts => texts.MainPage.Main.Top.Actions)
+  const [appVpn] = useAppVpn ()
 
 
   const [ipTextState, setIpTextState] = useState ('')
@@ -141,15 +145,27 @@ const Action = () => {
 
     return NetInfo.addEventListener (async event => {
 
-      if (event.isConnected) {
+      const currVpnState = await RNSimpleOpenvpn.getCurrentState ()
 
-        publicIP ()
-        .then (ip => setIpText (ip))
-        .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
+      if (currVpnState == 2) {
+
+        setIpText (texts [{"Netherlands": "netherlands_ip", "Germany": "germany_ip", "Finland": "finland_ip"}[appVpn]])
 
       }
 
-      else setIpText (' ')
+      else {
+
+        if (event.isConnected) {
+
+          publicIP ()
+         .then (ip => setIpText (ip))
+         .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
+
+        }
+
+        else setIpText (' ')
+
+      }
 
     })
 
@@ -161,20 +177,32 @@ const Action = () => {
 
     addVpnStateListener (async () => {
 
-      let networkConnected
+      const currVpnState = await RNSimpleOpenvpn.getCurrentState ()
 
-      NetInfo.fetch ()
-      .then (state => networkConnected = state.isConnected)
+      if (currVpnState == 2) {
 
-      if (networkConnected) {
-
-        publicIP ()
-        .then (ip => setIpText (ip))
-        .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
+        setIpText (texts [{"Netherlands": "netherlands_ip", "Germany": "germany_ip", "Finland": "finland_ip"}[appVpn]])
 
       }
 
-      else setIpText ('')
+      else {
+
+       let networkConnected
+
+        NetInfo.fetch ()
+        .then (state => networkConnected = state.isConnected)
+
+       if (networkConnected) {
+
+          publicIP ()
+          .then (ip => setIpText (ip))
+          .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
+
+       }
+
+       else setIpText ('')
+
+      }
 
     })
 
@@ -193,9 +221,21 @@ const Action = () => {
 
   useEffect (() => {
 
-    publicIP ()
-    .then (ip => setIpText (ip))
-    .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
+    const currVpnState = await RNSimpleOpenvpn.getCurrentState ()
+
+    if (currVpnState == 2) {
+
+      setIpText (texts [{"Netherlands": "netherlands_ip", "Germany": "germany_ip", "Finland": "finland_ip"}[appVpn]])
+
+    }
+
+    else {
+
+      publicIP ()
+      .then (ip => setIpText (ip))
+      .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
+
+    }
 
     const unsubscribeNet = subscribeNet ()
     subscribeVpn ()

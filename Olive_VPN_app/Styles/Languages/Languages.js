@@ -34,6 +34,14 @@ const appLanguagesAsset = {
 
             not_connected: 'Соединение не защищено'
 
+          },
+
+          Actions: {
+
+            netherlands_ip: '77.83.86.57',
+            germany_ip: '217.11.166.234',
+            finland_ip: '217.11.167.238'
+
           }
 
         },
@@ -248,6 +256,14 @@ const appLanguagesAsset = {
 
             not_connected: 'Conection is not secured'
 
+          },
+
+          Actions: {
+
+            netherlands_ip: '77.83.86.57',
+            germany_ip: '217.11.166.234',
+            finland_ip: '217.11.167.238'
+
           }
 
         },
@@ -461,6 +477,14 @@ const appLanguagesAsset = {
           StatusText: {
 
             not_connected: '連線不安全'
+
+          },
+
+          Actions: {
+
+            netherlands_ip: '77.83.86.57',
+            germany_ip: '217.11.166.234',
+            finland_ip: '217.11.167.238'
 
           }
 
