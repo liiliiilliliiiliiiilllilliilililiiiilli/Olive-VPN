@@ -15,6 +15,7 @@ import { Platform } from 'react-native'
 import Animated, { useSharedValue, withSequence, withTiming, Easing } from 'react-native-reanimated'
 import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
 import { useAppVpn } from '../../../../../../Redux/Hooks/AppVpn'
+import { useSelector } from 'react-redux'
 
 
 const device_is_iphone = Platform.OS === 'ios'
@@ -141,15 +142,24 @@ const Action = () => {
 
   }
 
+  const getCurrAppVpn = async () => {
+
+    let appVpn = useSelector (state => state.AppVpn.value)
+
+    return appVpn
+
+  }
+
   const subscribeNet = () => {
 
     return NetInfo.addEventListener (async event => {
 
       let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
+      let currAppVpn = await getCurrAppVpn ()
 
       if (currVpnState == 2) {
 
-        setIpText (texts [{"Netherlands": "netherlands_ip", "Germany": "germany_ip", "Finland": "finland_ip"}[appVpn]])
+        setIpText (texts [{"Netherlands": "netherlands_ip", "Germany": "germany_ip", "Finland": "finland_ip"}[currAppVpn]])
 
       }
 
@@ -178,10 +188,11 @@ const Action = () => {
     addVpnStateListener (async () => {
 
       let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
+      let currAppVpn = await getCurrAppVpn ()
 
       if (currVpnState == 2) {
 
-        setIpText (texts [{"Netherlands": "netherlands_ip", "Germany": "germany_ip", "Finland": "finland_ip"}[appVpn]])
+        setIpText (texts [{"Netherlands": "netherlands_ip", "Germany": "germany_ip", "Finland": "finland_ip"}[currAppVpn]])
 
       }
 
@@ -222,10 +233,11 @@ const Action = () => {
   useEffect (() => {(async () => {
 
     let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
+    let currAppVpn = await getCurrAppVpn ()
 
     if (currVpnState == 2) {
 
-      setIpText (texts [{"Netherlands": "netherlands_ip", "Germany": "germany_ip", "Finland": "finland_ip"}[appVpn]])
+      setIpText (texts [{"Netherlands": "netherlands_ip", "Germany": "germany_ip", "Finland": "finland_ip"}[currAppVpn]])
 
     }
 
