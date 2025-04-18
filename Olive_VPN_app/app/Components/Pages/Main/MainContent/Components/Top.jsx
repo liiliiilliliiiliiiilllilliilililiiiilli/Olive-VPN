@@ -219,7 +219,7 @@ const Action = () => {
   // .
 
 
-  useEffect (() => {
+  useEffect (() => {(async () => {
 
     const currVpnState = await RNSimpleOpenvpn.getCurrentState ()
 
@@ -248,7 +248,7 @@ const Action = () => {
 
     }
 
-  }, [])
+  })()}, [])
 
 
   return (
