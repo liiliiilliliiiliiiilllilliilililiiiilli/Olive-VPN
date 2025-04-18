@@ -46,7 +46,7 @@ const appLanguagesAsset = {
           connected: 'Подключено',
           netherlands: 'Нидерланды',
           germany: 'Германия',
-          poland: 'Польша',
+          finland: 'Финляндия',
 
           days: 'дн.',
           hours: 'ч.',
@@ -55,7 +55,7 @@ const appLanguagesAsset = {
 
           Netherlands: 'Нидерланды',
           Germany: 'Германия',
-          Poland: 'Польша'
+          Finland: 'Финляндия'
 
         },
 
@@ -103,7 +103,7 @@ const appLanguagesAsset = {
 
           netherlands: 'Нидерланды',
           germany: 'Германия',
-          poland: 'Польша',
+          finland: 'Финляндия',
 
           chosen: 'Выбран'
 
@@ -260,7 +260,7 @@ const appLanguagesAsset = {
           connected: 'Connected',
           netherlands: 'Netherlands',
           germany: 'Germany',
-          poland: 'Poland',
+          finland: 'Finland',
 
           days: 'd.',
           hours: 'h.',
@@ -269,7 +269,7 @@ const appLanguagesAsset = {
 
           Netherlands: 'Netherlands',
           Germany: 'Germany',
-          Poland: 'Poland'
+          Finland: 'Finland'
 
         },
 
@@ -317,7 +317,7 @@ const appLanguagesAsset = {
 
           netherlands: 'Netherlands',
           germany: 'Germany',
-          poland: 'Poland',
+          finland: 'Finland',
 
           chosen: 'Chosen'
 
@@ -474,7 +474,7 @@ const appLanguagesAsset = {
           connected: '已連接',
           netherlands: '荷蘭',
           germany: '德國',
-          poland: '波蘭',
+          finland: '芬兰',
 
           days: '天',
           hours: '小时',
@@ -483,7 +483,7 @@ const appLanguagesAsset = {
 
           Netherlands: '荷兰',
           Germany: '德国',
-          Poland: '波兰'
+          Finland: '芬兰'
 
         },
 
@@ -531,7 +531,7 @@ const appLanguagesAsset = {
 
           netherlands: '荷兰',
           germany: '德国',
-          poland: '波兰',
+          finalnd: '芬兰',
 
           chosen: '已选定'
 

@@ -42,6 +42,7 @@ const World_grey_PNG = require ('../../../assets/PNG/World/Grey.png')
 
 const Germany_PNG = require ('../../../assets/PNG/Flags/Germany.png')
 const Netherlands_PNG = require ('../../../assets/PNG/Flags/Netherlands.png')
+const Finland_PNG = require ('../../../assets/PNG/Flags/Finland.png')
 
 
 const Colors = {
@@ -317,6 +318,7 @@ const MainTheme = {
 
                 Netherlands_PNG: Netherlands_PNG,
                 Germany_PNG: Germany_PNG,
+                Finland_PNG: Finland_PNG,
 
 
                 backgroundColor: Colors.Black,

@@ -21,7 +21,7 @@ const MainContent = () => {
   // const offline_TXT = texts.Liner.offline
   const netherlands_TXT = texts.ServerInstance.netherlands
   const germany_TXT = texts.ServerInstance.germany
-  const poland_TXT = texts.ServerInstance.poland
+  const finland_TXT = texts.ServerInstance.finland
 
 
   return (
@@ -56,11 +56,11 @@ const MainContent = () => {
       availability = {3}/>
 
       <ServerInstance
-      isChosen = {appVpn == 'Poland'}
-      onPress = {() => setAppVpn ('Poland')}
-      pic = {styles.ServerInstance.Poland_PNG}
-      title = {poland_TXT}
-      availability = {2}/>
+      isChosen = {appVpn == 'Finland'}
+      onPress = {() => setAppVpn ('Finland')}
+      pic = {styles.ServerInstance.Finland_PNG}
+      title = {finland_TXT}
+      availability = {3}/>
 
       {/* <Liner
       text = {`1 ${offline_TXT}`}

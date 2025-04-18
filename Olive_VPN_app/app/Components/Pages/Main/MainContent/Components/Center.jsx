@@ -50,6 +50,7 @@ const Center = () => {
   const [tipText, setTipText] = useState (texts.tap_to_connect_to_vpn)
   const [connectionDestinationText, setConnectionDestinationText] = useState (texts[appVpn])
   useEffect (() => setConnectionDestinationText (texts[appVpn]), [appVpn])
+  useEffect (() => setConnectionDestinationText (texts[appVpn]), [])
 
   useEffect (() => {(async () => {
 
@@ -63,6 +64,7 @@ const Center = () => {
     }
 
     // setConnectionDestinationText (netherlands_TXT)
+    
     setConnectionDestinationText (texts[appVpn])
 
   }) ()}, [appLanguage])
