@@ -144,9 +144,13 @@ const Action = () => {
 
   const getCurrAppVpn = async () => {
 
-    let appVpn = useSelector (state => state.AppVpn.value)
+    return new Promise ((resolve) => {
 
-    return appVpn
+      let currAppVpn = appVpn
+
+      resolve (currAppVpn)
+
+    })
 
   }
 
