@@ -82,6 +82,7 @@ const ServerInstance = ({isChosen, pic, title, availability, onPress, style}) =>
 
     <View style = {[{  // items container
     width: '100%',
+    maxWidth: 250,
     marginBottom: 8,
     paddingVertical: 2.5,
     paddingHorizontal: 5,
