@@ -104,13 +104,13 @@ const Content = () => {
       links = {[
 
         { text: link_Telegram_TXT,
-          onPress: () => Linking.openURL (url_Telegram_channel_TXT) },
+          onPress: () => Linking.openURL (url_Telegram_channel_TXT) }
 
-        { text: link_GooglePlay_TXT,
-          onPress: () => Linking.openURL (url_GooglePlay_TXT) },
+        //{ text: link_GooglePlay_TXT,
+        //  onPress: () => Linking.openURL (url_GooglePlay_TXT) },
 
-        { text: link_AppStore_TXT,
-          onPress: () => Linking.openURL (url_AppStore_TXT) }
+        //{ text: link_AppStore_TXT,
+        //  onPress: () => Linking.openURL (url_AppStore_TXT) }
 
       ]}>
 

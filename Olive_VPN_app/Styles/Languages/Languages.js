@@ -216,7 +216,8 @@ const appLanguagesAsset = {
         url_GooglePlay: 'https://google.com',
         url_AppStore: 'https://yandex.ru',
 
-        feedback_text: 'Следите за новостями сервиса в нашем Телеграм-канале.\n\nОцените наш сервис на Google Play или App Store.',
+        //feedback_text: 'Следите за новостями сервиса в нашем Телеграм-канале.\n\nОцените наш сервис на Google Play или App Store.',
+        feedback_text: 'Следите за новостями сервиса в нашем Телеграм-канале.',
 
         link_Telegram: 'нашем Телеграм-канале',
         link_GooglePlay: 'Google Play',
@@ -438,7 +439,8 @@ const appLanguagesAsset = {
         url_GooglePlay: 'https://google.com',
         url_AppStore: 'https://yandex.ru',
 
-        feedback_text: 'Follow for the updates in our Telegram channel.\n\nRate us on Android\'s Google Play and Apple\'s AppStore.',
+        // feedback_text: 'Follow for the updates in our Telegram channel.\n\nRate us on Android\'s Google Play and Apple\'s AppStore.',
+        feedback_text: 'Follow for the updates in our Telegram channel.',
 
         link_Telegram: 'our Telegram channel',
         link_GooglePlay: 'Google Play',
@@ -660,7 +662,8 @@ const appLanguagesAsset = {
         url_GooglePlay: 'https://google.com',
         url_AppStore: 'https://yandex.ru',
 
-        feedback_text: '在我們的 Telegram 頻道中關注服務新聞。 \n\n在 Google Play 或 App Store 上評價我們的服務。',
+        // feedback_text: '在我們的 Telegram 頻道中關注服務新聞。 \n\n在 Google Play 或 App Store 上評價我們的服務。',
+        feedback_text: '在我们的 Telegram 频道中关注服务新闻。',
 
         link_Telegram: '在我們的 Telegram 頻道',
         link_GooglePlay: 'Google Play',

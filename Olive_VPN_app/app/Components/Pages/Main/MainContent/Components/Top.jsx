@@ -146,7 +146,7 @@ const Action = () => {
 
   useEffect (() => {
 
-    setIpText (texts [{"Netherlands": "netherlands_ip", "Germany": "Germany_ip", "Finland": "finland_ip"}[appVpn]])
+    setIpText (texts [{"Netherlands": "netherlands_ip", "Germany": "germany_ip", "Finland": "finland_ip"}[appVpn]])
 
   }, [actionsUpdated])
 
