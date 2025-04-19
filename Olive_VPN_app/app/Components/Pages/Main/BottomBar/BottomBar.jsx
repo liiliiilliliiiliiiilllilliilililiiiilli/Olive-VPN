@@ -71,7 +71,7 @@ const Tip = ({onPress}) => {
 
     color: textColorControl.value,
 
-    transform: [{scale: 0.5 * scaleControl.value}],
+    transform: [{scale: scaleControl.value}],
     opacity: opacityControl.value,
     marginBottom: marginControl.value
 
@@ -131,7 +131,7 @@ const Tip = ({onPress}) => {
 
     <View style = {{
     width: '100%',
-    height: 75 * 0.5}}>
+    height: 75}}>
 
       <AnimatedTouchableOpacity
       activeOpacity = {1}
@@ -142,9 +142,9 @@ const Tip = ({onPress}) => {
       justifyContent: 'center',
       alignItems: 'center',
       width: '100%',
-      height: 75 * 0.5,
+      height: 75,
       // paddingVertical: 12 * 0.5,
-      paddingHorizontal: 25 * 0.5,
+      paddingHorizontal: 25,
       borderTopWidth: 2,
       borderColor: barBorderColorControl,
       backgroundColor: barBackgroundColorControl}}>
