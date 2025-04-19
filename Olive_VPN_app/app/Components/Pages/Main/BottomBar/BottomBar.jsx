@@ -161,13 +161,6 @@ const Tip = ({onPress}) => {
 
       </AnimatedTouchableOpacity>
 
-      <View style = {{
-      zIndex: 0,
-      position: 'absolute',
-      width: '100%',
-      height: 5 * 0.5,
-      bottom: -1 * 0.5}}/>
-
     </View>
 
   )

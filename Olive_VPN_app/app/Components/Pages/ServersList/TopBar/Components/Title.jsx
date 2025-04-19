@@ -40,7 +40,9 @@ const Title = () => {
   return (
 
     <View style = {{
+    flexDirection: 'row',
     paddingLeft: 16 * 0.5,
+    justifyContent: 'flex-start',
     flex: 1}}>
 
       <Animated.Text style = {{
