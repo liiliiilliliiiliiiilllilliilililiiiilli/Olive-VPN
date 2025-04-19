@@ -71,7 +71,7 @@ const Tip = ({onPress}) => {
 
     color: textColorControl.value,
 
-    transform: [{scale: scaleControl.value}],
+    transform: [{scale: 0.5 * scaleControl.value}],
     opacity: opacityControl.value,
     marginBottom: marginControl.value
 
@@ -152,8 +152,7 @@ const Tip = ({onPress}) => {
         <Animated.Text style = {[{
         maxWidth: 500,
         fontFamily: styles.fontFamily,
-        fontSize: 17,
-        transform: [{scale: 0.5}]},
+        fontSize: 17},
         animationStyles]}>
 
           <MetaLink>{texts.metalink}</MetaLink>{texts.rest_text}

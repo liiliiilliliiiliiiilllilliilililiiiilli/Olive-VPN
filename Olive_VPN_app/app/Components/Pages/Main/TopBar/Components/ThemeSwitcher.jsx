@@ -22,8 +22,7 @@ const ThemeSwitcher = ({onPress}) => {
     pic = {themePic}
     style = {{
     paddingBottom: picMargin,
-    borderRadius: 1000,
-    transfrom: [{scale: 0.5}]}}/>
+    borderRadius: 1000}}/>
 
   )
 
