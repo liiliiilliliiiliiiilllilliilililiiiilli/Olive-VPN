@@ -20,25 +20,23 @@ import { default as FeedbackWindow } from '../Windows/Feedback'
 
 const Main = () => {
 
-  // const [adSize, setAdSize] = useState ()
-  //
-  // useEffect (() => {(async () => {
-  //
-  //   const banerWidth = await BannerAdSize.stickySize (Dimensions.get('window').width)
-  //   setAdSize (banerWidth)
-  //
-  // })()}, [])
+  const [adSize, setAdSize] = useState ()
+  
+  useEffect (() => {(async () => {
 
-  const adSize = 400
+    const banerWidth = await BannerAdSize.stickySize (Dimensions.get('window').width)
+    setAdSize (banerWidth)
+  
+  })()}, [])
 
 
   const adRequest = new AdRequest ({
 
-    age: '20',
+    age: '14',
     contextQuery: 'context-query',
     contextTags: ['context-tag'],
     gender: Gender.Male,
-    location: new Location (55.734202, 37.588063),
+    // location: new Location (55.734202, 37.588063),
     adTheme: AdTheme.Dark
 
   })
@@ -53,21 +51,21 @@ const Main = () => {
       { /* <TopBar/> */ }
       <MainContent/>
 
-      { /* {adSize && ( */ }
+      {adSize ?
 
         <BannerView
-        size={adSize}
-        adUnitId={'demo-banner-yandex'}
-        adRequest={adRequest}
-        onAdLoaded={() => console.log('Did load')}
-        onAdFailedToLoad={(event: any) => console.log(`Did fail to load with error: ${JSON.stringify(event.nativeEvent)}`)}
-        onAdClicked={() => console.log('Did click')}
-        onLeftApplication={() => console.log('Did leave application')}
-        onReturnToApplication={() => console.log('Did return to application')}
-        onAdImpression={(event: any) => console.log(`Did track impression: ${JSON.stringify(event.nativeEvent.impressionData)}`)}
-        onAdClose={() => console.log('Did close')}/>
+        size = {adSize}
+        adUnitId = {'demo-banner-yandex'}
+        adRequest = {adRequest}
+        onAdLoaded = {() => console.info ('Did load.')}
+        onAdFailedToLoad = {() => console.info ('Did fail to load with error.')}
+        onAdClicked = {() => console.info ('Did click.')}
+        onLeftApplication = {() => console.info ('Did leave application.')}
+        onReturnToApplication = {() => console.info ('Did return to application.')}
+        onAdImpression = {() => console.info ('Did track impression.')}
+        onAdClose = {() => console.info ('Did close')}/>
 
-      { /* )} */ }
+      : null}
       
       { /* <BottomBar/> */ }
 
