@@ -212,7 +212,7 @@ const Action = () => {
 
       }
 
-      else setIpText ('')
+      else setIpText (' ')
 
     })
 
@@ -258,7 +258,7 @@ const Action = () => {
 
     else {
 
-      setIpText ('')
+      setIpText (' ')
 
     }
 
