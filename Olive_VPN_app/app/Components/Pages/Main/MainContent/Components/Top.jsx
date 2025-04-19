@@ -187,32 +187,32 @@ const Action = () => {
 
     addVpnStateListener (async () => {
 
-      let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
+      let networkConnected
 
-      if (currVpnState == 2) {
+      NetInfo.fetch ()
+      .then (state => networkConnected = state.isConnected)
 
-        setActionsUpdated (prev => ((prev + 1) % 100))
+      if (networkConnected) {
 
-      }
+        let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
 
-      else {
+        if (currVpnState == 2) {
 
-       let networkConnected
+          setActionsUpdated (prev => ((prev + 1) & 100))
+        
+        }
 
-        NetInfo.fetch ()
-        .then (state => networkConnected = state.isConnected)
-
-       if (networkConnected) {
+        else {
 
           publicIP ()
           .then (ip => setIpText (ip))
           .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
 
-       }
-
-       else setIpText ('')
+        }
 
       }
+
+      else setIpText ('')
 
     })
 
@@ -231,21 +231,37 @@ const Action = () => {
 
   useEffect (() => {(async () => {
 
-    let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
+    let networkConnected
 
-    if (currVpnState == 2) {
+    NetInfo.fetch ()
+    .then (state => networkConnected = state.isConnected)
 
-      setActionsUpdated (prev => ((prev + 1) % 100))
+    if (networkConnected) {
+
+      let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
+
+      if (currVpnState == 2) {
+
+        setActionsUpdated (prev => ((prev + 1) % 100))
+
+      }
+
+      else {
+
+        publicIP ()
+        .then (ip => setIpText (ip))
+        .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
+
+      }
 
     }
 
     else {
 
-      publicIP ()
-      .then (ip => setIpText (ip))
-      .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
+      setIpText ('')
 
     }
+
 
     const unsubscribeNet = subscribeNet ()
     subscribeVpn ()
