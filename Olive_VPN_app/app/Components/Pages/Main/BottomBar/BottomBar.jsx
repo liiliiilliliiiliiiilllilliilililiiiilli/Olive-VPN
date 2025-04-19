@@ -165,8 +165,8 @@ const Tip = ({onPress}) => {
       zIndex: 0,
       position: 'absolute',
       width: '100%',
-      height: 5,
-      bottom: -1}}/>
+      height: 5 * 0.5,
+      bottom: -1 * 0.5}}/>
 
     </View>
 
