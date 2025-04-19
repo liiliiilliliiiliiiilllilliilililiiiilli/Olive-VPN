@@ -131,8 +131,7 @@ const Tip = ({onPress}) => {
 
     <View style = {{
     width: '100%',
-    height: 75,
-    transform: [{scale: 0.5}]}}>
+    height: 75}}>
 
       <AnimatedTouchableOpacity
       activeOpacity = {1}
@@ -153,7 +152,8 @@ const Tip = ({onPress}) => {
         <Animated.Text style = {[{
         maxWidth: 500,
         fontFamily: styles.fontFamily,
-        fontSize: 17},
+        fontSize: 17,
+        transform: [{scale: 0.5}]},
         animationStyles]}>
 
           <MetaLink>{texts.metalink}</MetaLink>{texts.rest_text}

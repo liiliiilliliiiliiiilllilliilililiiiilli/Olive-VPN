@@ -15,7 +15,10 @@ const MenuButton = ({onPress}) => {
 
 		<Button
 		onPress = {() => onPress()}
-		pic = {styles.Menu_PNG}/>
+		pic = {styles.Menu_PNG}
+		style = {{
+			transform: [{scale: 0.5}]
+		}}/>
 
 	)
 

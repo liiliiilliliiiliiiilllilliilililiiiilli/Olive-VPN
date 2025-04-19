@@ -38,7 +38,8 @@ const OliveVpnTitle = () => {
 
     <View style = {{
     alignItems: 'center',
-    flex: 1}}>
+    flex: 1,
+    transform: [{scale: 0.5}]}}>
 
       <Animated.Text style = {{
       fontFamily: styles.fontFamily,

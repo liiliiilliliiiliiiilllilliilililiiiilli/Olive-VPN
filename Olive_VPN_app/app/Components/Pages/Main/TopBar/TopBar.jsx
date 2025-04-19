@@ -59,8 +59,7 @@ const TopBar = () => {
     paddingHorizontal: 18.5,
     borderBottomWidth: 2,
     borderColor: borderColorControl,
-    backgroundColor: backgroundColorControl,
-    transform: [{scale: 0.5}]}}>
+    backgroundColor: backgroundColorControl}}>
             
       <MenuButton
       onPress = {() => handleMenuButtonPressed()}/>
