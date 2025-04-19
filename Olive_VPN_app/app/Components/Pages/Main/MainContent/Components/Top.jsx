@@ -185,7 +185,7 @@ const Action = () => {
 
     if (device_is_iphone) await RNSimpleOpenvpn.observeState ()
 
-    addVpnStateListener (() => {
+    addVpnStateListener (async () => {
 
       let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
 
