@@ -26,7 +26,7 @@ const MainContent = () => {
 
   const toggleConditionalSwitch = async () => {
 
-    const currVpnState = getVpnState ()
+    const currVpnState = await getVpnState ()
 
     if (currVpnState == 2) {
 
