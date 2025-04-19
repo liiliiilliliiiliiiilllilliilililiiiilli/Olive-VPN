@@ -40,7 +40,7 @@ const Title = () => {
   return (
 
     <View style = {{
-    paddingLeft: 16,
+    paddingLeft: 16 * 0.5,
     flex: 1,
     transform: [{scale: 0.5}]}}>
 
