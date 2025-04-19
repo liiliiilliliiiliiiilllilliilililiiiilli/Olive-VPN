@@ -665,7 +665,7 @@ const appLanguagesAsset = {
         // feedback_text: '在我們的 Telegram 頻道中關注服務新聞。 \n\n在 Google Play 或 App Store 上評價我們的服務。',
         feedback_text: '在我们的 Telegram 频道中关注服务新闻。',
 
-        link_Telegram: '在我們的 Telegram 頻道',
+        link_Telegram: '在我们的 Telegram 频道',
         link_GooglePlay: 'Google Play',
         link_AppStore: 'App Store'
 

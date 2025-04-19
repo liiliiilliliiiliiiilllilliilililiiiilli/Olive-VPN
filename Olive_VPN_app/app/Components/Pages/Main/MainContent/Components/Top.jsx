@@ -155,27 +155,27 @@ const Action = () => {
 
     return NetInfo.addEventListener (async event => {
 
-      let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
+      if (event.isConnected) {
 
-      if (currVpnState == 2) {
+        let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
+        
+        if (currVpnState == 2) {
 
-        setActionsUpdated (prev => ((prev + 1) % 100))
-
-      }
-
-      else {
-
-        if (event.isConnected) {
-
-          publicIP ()
-         .then (ip => setIpText (ip))
-         .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
+          setActionsUpdated (prev => ((prev + 1) & 100))
 
         }
 
-        else setIpText (' ')
+        else {
+
+          publicIP ()
+          .then (ip => setIpText (ip))
+          .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
+
+         }
 
       }
+
+      else setIpText (' ')
 
     })
 
