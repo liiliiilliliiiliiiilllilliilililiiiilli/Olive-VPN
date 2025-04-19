@@ -24,14 +24,14 @@ const MainContent = () => {
   const finland_TXT = texts.ServerInstance.finland
 
 
-  const toggleConditionalSwitch = async vpnTo => {
+  const toggleConditionalSwitch = async () => {
 
     const currVpnState = getVpnState ()
 
     if (currVpnState == 2) {
 
       await disconnectFromVpn ()
-      await connectToVpn (vpnTo)
+      await connectToVpn ()
 
     }
 
@@ -57,21 +57,21 @@ const MainContent = () => {
 
       <ServerInstance
       isChosen = {appVpn == 'Netherlands'}
-      onPress = {() => {setAppVpn('Netherlands'); toggleConditionalSwitch('Netherlands')}}
+      onPress = {() => {setAppVpn('Netherlands'); setTimeout (() => toggleConditionalSwitch(), 250)}}
       pic = {styles.ServerInstance.Netherlands_PNG}
       title = {netherlands_TXT}
       availability = {3}/>
 
       <ServerInstance
       isChosen = {appVpn == 'Germany'}
-      onPress = {() => {setAppVpn('Germany'); toggleConditionalSwitch('Germany')}}
+      onPress = {() => {setAppVpn('Germany'); setTimeout (() => toggleConditionalSwitch(), 250)}}
       pic = {styles.ServerInstance.Germany_PNG}
       title = {germany_TXT}
       availability = {3}/>
 
       <ServerInstance
       isChosen = {appVpn == 'Finland'}
-      onPress = {() => {setAppVpn('Finland'); toggleConditionalSwitch('Finland')}}
+      onPress = {() => {setAppVpn('Finland'); setTimeout (() => toggleConditionalSwitch(), 250)}}
       pic = {styles.ServerInstance.Finland_PNG}
       title = {finland_TXT}
       availability = {3}/>
