@@ -20,14 +20,16 @@ import { default as FeedbackWindow } from '../Windows/Feedback'
 
 const Main = () => {
 
-  const [adSize, setAdSize] = useState ()
+  //const [adSize, setAdSize] = useState ()
   
-  useEffect (() => {(async () => {
+  //useEffect (() => {(async () => {
 
-    const banerWidth = await BannerAdSize.stickySize (Dimensions.get('window').width)
-    setAdSize (banerWidth)
+  //  const banerWidth = await BannerAdSize.stickySize (Dimensions.get('window').width)
+  //  setAdSize (banerWidth)
   
-  })()}, [])
+  //})()}, [])
+
+  const adSize = 400
 
 
   const adRequest = new AdRequest ({
