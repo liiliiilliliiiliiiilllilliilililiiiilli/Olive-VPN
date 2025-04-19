@@ -140,6 +140,7 @@ const Tip = ({onPress}) => {
       onPress = {() => handlePress()}
       style = {{
       justifyContent: 'center',
+      alignItems: 'center',
       width: '100%',
       height: 75,
       paddingVertical: 12,
@@ -149,6 +150,7 @@ const Tip = ({onPress}) => {
       backgroundColor: barBackgroundColorControl}}>
 
         <Animated.Text style = {[{
+        maxWidth: 500,
         fontFamily: styles.fontFamily,
         fontSize: 17},
         animationStyles]}>
