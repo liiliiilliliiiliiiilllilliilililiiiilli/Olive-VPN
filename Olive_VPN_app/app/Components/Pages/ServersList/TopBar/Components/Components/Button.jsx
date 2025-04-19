@@ -26,7 +26,7 @@ const Button = ({pic, style, imageStyle, onPress}) => {
     borderColor: borderColorControl.value,
     backgroundColor: backgroundColorControl.value,
 
-    transform: [{scale: scaleControl.value}],
+    transform: [{scale: 0.5 * scaleControl.value}],
     top: marginControl.value,
     opacity: opacityControl.value
 

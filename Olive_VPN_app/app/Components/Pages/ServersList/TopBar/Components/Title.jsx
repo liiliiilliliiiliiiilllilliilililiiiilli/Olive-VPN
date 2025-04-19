@@ -41,7 +41,8 @@ const Title = () => {
 
     <View style = {{
     paddingLeft: 16,
-    flex: 1}}>
+    flex: 1,
+    transform: [{scale: 0.5}]}}>
 
       <Animated.Text style = {{
       fontFamily: styles.fontFamily,
