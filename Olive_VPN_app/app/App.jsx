@@ -1,6 +1,8 @@
 // This is application start up file.
 
 
+import { MobileAds } from 'yandex-mobile-ads'
+
 import * as SplashScreen from 'expo-splash-screen'
 
 import * as SecureStore from 'expo-secure-store'
@@ -76,6 +78,12 @@ const App = ({setBackgroundColor}) => {
 
 
   // set up the app after start up:
+
+  useEffect (() => {(async () => {
+
+    await MobileAds.initialize ()
+
+  })()})
 
   const [areFontsLoaded, errorFontsLoading] = useFonts ({  // configure global app fonts
 

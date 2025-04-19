@@ -1,6 +1,10 @@
 // This is Main page.
 
 
+import { useState, useEffect } from 'react'
+import { Dimensions } from 'react-native'
+import { AdRequest, AdTheme, BannerAdSize, BannerView, Gender, Location } from 'yandex-mobile-ads'
+
 import MainField from '../Components/Common/MainField/MainField'
 
 import TopBar from '../Components/Pages/Main/TopBar/TopBar'
@@ -16,15 +20,56 @@ import { default as FeedbackWindow } from '../Windows/Feedback'
 
 const Main = () => {
 
+  // const [adSize, setAdSize] = useState ()
+  //
+  // useEffect (() => {(async () => {
+  //
+  //   const banerWidth = await BannerAdSize.stickySize (Dimensions.get('window').width)
+  //   setAdSize (banerWidth)
+  //
+  // })()}, [])
+
+  const adSize = 400
+
+
+  const adRequest = new AdRequest ({
+
+    age: '20',
+    contextQuery: 'context-query',
+    contextTags: ['context-tag'],
+    gender: Gender.Male,
+    location: new Location (55.734202, 37.588063),
+    adTheme: AdTheme.Dark
+
+  })
+
+
   return (
 
     <MainField style = {{
     alignItems: 'center',
     flex: 1}}>
 
-      <TopBar/>
+      { /* <TopBar/> */ }
       <MainContent/>
-      <BottomBar/>
+
+      { /* {adSize && ( */ }
+
+        <BannerView
+        size={adSize}
+        adUnitId={'demo-banner-yandex'}
+        adRequest={adRequest}
+        onAdLoaded={() => console.log('Did load')}
+        onAdFailedToLoad={(event: any) => console.log(`Did fail to load with error: ${JSON.stringify(event.nativeEvent)}`)}
+        onAdClicked={() => console.log('Did click')}
+        onLeftApplication={() => console.log('Did leave application')}
+        onReturnToApplication={() => console.log('Did return to application')}
+        onAdImpression={(event: any) => console.log(`Did track impression: ${JSON.stringify(event.nativeEvent.impressionData)}`)}
+        onAdClose={() => console.log('Did close')}/>
+
+      { /* )} */ }
+      
+      { /* <BottomBar/> */ }
 
       <MenuSlider/>
 
