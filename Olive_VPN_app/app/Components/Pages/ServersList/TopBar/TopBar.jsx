@@ -54,7 +54,8 @@ const TopBar = () => {
     paddingHorizontal: 18.5,
     borderBottomWidth: 2,
     borderColor: borderColorControl,
-    backgroundColor: backgroundColorControl}}>
+    backgroundColor: backgroundColorControl,
+    transform: [{scale: 0.5}]}}>
             
       <BackButton
       onPress = {() => handleBackButtonPressed()}/>

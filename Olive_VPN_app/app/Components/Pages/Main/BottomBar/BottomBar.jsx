@@ -131,7 +131,8 @@ const Tip = ({onPress}) => {
 
     <View style = {{
     width: '100%',
-    height: 75}}>
+    height: 75,
+    transform: [{scale: 0.5}]}}>
 
       <AnimatedTouchableOpacity
       activeOpacity = {1}
