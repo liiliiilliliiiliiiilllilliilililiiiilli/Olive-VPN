@@ -57,21 +57,21 @@ const MainContent = () => {
 
       <ServerInstance
       isChosen = {appVpn == 'Netherlands'}
-      onPress = {() => {setAppVpn('Netherlands'); setTimeout (() => toggleConditionalSwitch(), 250)}}
+      onPress = {() => {setAppVpn('Netherlands'); setTimeout (async () => await toggleConditionalSwitch(), 250)}}
       pic = {styles.ServerInstance.Netherlands_PNG}
       title = {netherlands_TXT}
       availability = {3}/>
 
       <ServerInstance
       isChosen = {appVpn == 'Germany'}
-      onPress = {() => {setAppVpn('Germany'); setTimeout (() => toggleConditionalSwitch(), 250)}}
+      onPress = {() => {setAppVpn('Germany'); setTimeout (async () => await toggleConditionalSwitch(), 250)}}
       pic = {styles.ServerInstance.Germany_PNG}
       title = {germany_TXT}
       availability = {3}/>
 
       <ServerInstance
       isChosen = {appVpn == 'Finland'}
-      onPress = {() => {setAppVpn('Finland'); setTimeout (() => toggleConditionalSwitch(), 250)}}
+      onPress = {() => {setAppVpn('Finland'); setTimeout (async () => await toggleConditionalSwitch(), 250)}}
       pic = {styles.ServerInstance.Finland_PNG}
       title = {finland_TXT}
       availability = {3}/>
