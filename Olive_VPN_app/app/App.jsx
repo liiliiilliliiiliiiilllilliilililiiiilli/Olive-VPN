@@ -77,7 +77,7 @@ const App = ({setBackgroundColor}) => {
 
   // set up the app after start up:
 
-  useFonts ({  // configure global app fonts
+  const [areFontsLoaded, errorFontsLoading] = useFonts ({  // configure global app fonts
 
     'Archivo-Regular': require ('../assets/Fonts/Archivo/Archivo-Regular.ttf'),
     'Archivo-Medium': require ('../assets/Fonts/Archivo/Archivo-Medium.ttf'),
@@ -114,9 +114,9 @@ const App = ({setBackgroundColor}) => {
     const isAutoVpnConfigured = isAutoVpnOn != null
     const isAppVpnConfigured = appVpn != null
 
-    if (isThemeConfigured && isAppLanguageConfigured && areUserTokensConfigured && isAutoVpnConfigured, isAppVpnConfigured) setIsAppSetUp (true)
+    if (isThemeConfigured && isAppLanguageConfigured && areFontsLoaded && areUserTokensConfigured && isAutoVpnConfigured, isAppVpnConfigured) setIsAppSetUp (true)
       
-  }, [theme, appLanguage, JwtAccessUser, JwtRefreshUser, isAutoVpnOn, appVpn])
+  }, [theme, appLanguage, areFontsLoaded, JwtAccessUser, JwtRefreshUser, isAutoVpnOn, appVpn])
 
   // .
 
