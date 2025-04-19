@@ -29,8 +29,6 @@ const Main = () => {
   
   })()})
 
-  // const adSize = 400
-
 
   const adRequest = new AdRequest ({
 
@@ -50,7 +48,8 @@ const Main = () => {
     alignItems: 'center',
     flex: 1}}>
 
-      { /* <TopBar/> */ }
+      <TopBar/>
+
       <MainContent/>
 
       {adSize ?
@@ -66,12 +65,13 @@ const Main = () => {
         onReturnToApplication = {() => console.info ('Did return to application.')}
         onAdImpression = {() => console.info ('Did track impression.')}
         onAdClose = {() => console.info ('Did close')}/>
-
       : null}
-      
-      { /* <BottomBar/> */ }
+
+      <BottomBar/>
+
 
       <MenuSlider/>
+
 
       <AppDescriptionWindow/>
       <LanguageChooseWindow/>
