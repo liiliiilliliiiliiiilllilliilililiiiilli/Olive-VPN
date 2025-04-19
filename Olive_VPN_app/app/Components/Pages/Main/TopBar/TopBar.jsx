@@ -54,9 +54,9 @@ const TopBar = () => {
     <Animated.View style = {{
     flexDirection: 'row',
     alignItems: 'center',
-    height: 65.5 * 0.5,
+    height: 65.5,
     marginBottom: 28,
-    paddingHorizontal: 18.5 * 0.5,
+    paddingHorizontal: 18.5,
     borderBottomWidth: 2,
     borderColor: borderColorControl,
     backgroundColor: backgroundColorControl}}>

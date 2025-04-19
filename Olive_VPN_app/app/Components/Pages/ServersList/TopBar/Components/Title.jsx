@@ -41,15 +41,14 @@ const Title = () => {
 
     <View style = {{
     flexDirection: 'row',
-    paddingLeft: 16 * 0.5,
+    paddingLeft: 16,
     justifyContent: 'flex-start',
     flex: 1}}>
 
       <Animated.Text style = {{
       fontFamily: styles.fontFamily,
       color: textColorControl,
-      fontSize: 25,
-      transform: [{scale: 0.5}]}}>
+      fontSize: 25}}>
 
         {choose_your_server_TXT}
 

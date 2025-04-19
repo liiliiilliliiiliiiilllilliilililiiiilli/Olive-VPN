@@ -143,7 +143,7 @@ const Tip = ({onPress}) => {
       alignItems: 'center',
       width: '100%',
       height: 75,
-      // paddingVertical: 12 * 0.5,
+      // paddingVertical: 12,
       paddingHorizontal: 25,
       borderTopWidth: 2,
       borderColor: barBorderColorControl,

@@ -50,8 +50,8 @@ const TopBar = () => {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    height: 65.5 * 0.5,
-    paddingHorizontal: 18.5 * 0.5,
+    height: 65.5,
+    paddingHorizontal: 18.5,
     borderBottomWidth: 2,
     borderColor: borderColorControl,
     backgroundColor: backgroundColorControl}}>
