@@ -187,32 +187,32 @@ const Action = () => {
 
     addVpnStateListener (async () => {
 
-      let networkConnected
+      let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
 
-      NetInfo.fetch ()
-      .then (state => networkConnected = state.isConnected)
+      if (currVpnState == 2) {
 
-      if (networkConnected) {
+        setActionsUpdated (prev => ((prev + 1) % 100))
 
-        let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
+      }
 
-        if (currVpnState == 2) {
+      else {
 
-          setActionsUpdated (prev => ((prev + 1) & 100))
-        
-        }
+       let networkConnected
 
-        else {
+        NetInfo.fetch ()
+        .then (state => networkConnected = state.isConnected)
+
+       if (networkConnected) {
 
           publicIP ()
           .then (ip => setIpText (ip))
           .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
 
-        }
+       }
+
+       else setIpText ('')
 
       }
-
-      else setIpText (' ')
 
     })
 
@@ -231,37 +231,21 @@ const Action = () => {
 
   useEffect (() => {(async () => {
 
-    let networkConnected
+    let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
 
-    NetInfo.fetch ()
-    .then (state => networkConnected = state.isConnected)
+    if (currVpnState == 2) {
 
-    if (networkConnected) {
-
-      let currVpnState = await RNSimpleOpenvpn.getCurrentState ()
-
-      if (currVpnState == 2) {
-
-        setActionsUpdated (prev => ((prev + 1) % 100))
-
-      }
-
-      else {
-
-        publicIP ()
-        .then (ip => setIpText (ip))
-        .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
-
-      }
+      setActionsUpdated (prev => ((prev + 1) % 100))
 
     }
 
     else {
 
-      setIpText (' ')
+      publicIP ()
+      .then (ip => setIpText (ip))
+      .catch (error => console.info (`Unable to get IP address:\n\n${error}`))
 
     }
-
 
     const unsubscribeNet = subscribeNet ()
     subscribeVpn ()
@@ -276,6 +260,7 @@ const Action = () => {
 
   })()}, [])
 
+  // .
 
   return (
 
