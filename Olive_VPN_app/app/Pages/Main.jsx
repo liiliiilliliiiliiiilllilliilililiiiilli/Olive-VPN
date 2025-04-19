@@ -20,7 +20,7 @@ import { default as FeedbackWindow } from '../Windows/Feedback'
 
 const Main = () => {
 
-  const [adSize, setAdSize] = useState ()
+  const [adSize, setAdSize] = useState (380)
   
   useEffect (() => {(async () => {
 
