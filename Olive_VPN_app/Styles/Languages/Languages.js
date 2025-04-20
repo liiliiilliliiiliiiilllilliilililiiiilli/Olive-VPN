@@ -92,7 +92,7 @@ const appLanguagesAsset = {
 
         Title: {
 
-          choose_your_server: 'Выберете сервер'
+          choose_your_server: 'Выберите сервер'
 
         }
 
