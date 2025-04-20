@@ -265,6 +265,7 @@ const Action = () => {
   return (
 
     <View style = {{
+    height: 25,
     flexDirection: 'row',
     alignItems: 'center',
     margin: -5,
@@ -274,6 +275,7 @@ const Action = () => {
     borderRadius: 10}}>
 
       <Animated.Text style = {{
+      height: 25,
       fontFamily: styles.Action.fontFamily,
       color: colorControl,
       fontSize: 19.5,
