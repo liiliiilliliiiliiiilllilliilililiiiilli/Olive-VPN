@@ -26,7 +26,7 @@ const Main = () => {
   
   useEffect (() => {(async () => {
 
-    const banerWidth = await BannerAdSize.stickySize (Dimensions.get('window').width, 75)
+    const banerWidth = await BannerAdSize.inlineSize (Dimensions.get('window').width, 75)
     setAddSize (banerWidth)
   
   })()})

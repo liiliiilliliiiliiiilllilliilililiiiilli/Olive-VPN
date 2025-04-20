@@ -79,7 +79,7 @@ const App = ({setBackgroundColor}) => {
 
   // set up the app after start up:
 
-   useEffect (() => {(async () => {
+  useEffect (() => {(async () => {
   
     await MobileAds.initialize ()
   
