@@ -20,7 +20,7 @@ const appLanguagesAsset = {
 
         Title: {
 
-          olive_vpn: 'OliveVPN'
+          olive_vpn: ' OliveVPN '
 
         }
 
@@ -243,7 +243,7 @@ const appLanguagesAsset = {
 
         Title: {
 
-          olive_vpn: 'OliveVPN'
+          olive_vpn: ' OliveVPN '
 
         }
 
