@@ -74,10 +74,8 @@ const Main = () => {
       <TopBar/>
 
       <MainContent/>
-
-      {
       
-      // addSize && randomExistence ?
+      { /* addSize && randomExistence ? */ }
 
         <View style = {{
         justifyContent: 'center',
@@ -86,20 +84,16 @@ const Main = () => {
         height: addExists ? 75 + 14 : 14,
         opacity: addExists ? 1 : 0}}>
 
-          {
-          // <BannerView
-          // size = {addSize}
-          // adUnitId = {'demo-banner-yandex'}
-          // onAdLoaded = {() => handleAddLoading()}
-          // onAdFailedToLoad = {() => handleAddFailedLoading()}
-          // </MainField>onAdClose = {() => handleAddClose()}/>
-          }
+          <BannerView
+          size = {addSize}
+          adUnitId = {'demo-banner-yandex'}
+          onAdLoaded = {() => handleAddLoading()}
+          onAdFailedToLoad = {() => handleAddFailedLoading()}
+          onAdClose = {() => handleAddClose()}/>
 
         </View>
 
-      // : null
-
-      }
+      { /* : null */ }
 
       <BottomBar/>
 
