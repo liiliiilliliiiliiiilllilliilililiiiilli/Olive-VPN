@@ -32,7 +32,7 @@ const appLanguagesAsset = {
 
           StatusText: {
 
-            not_connected: 'Соединение не защищено'
+            not_connected: '               Соединение не защищено               '
 
           },
 
@@ -50,20 +50,20 @@ const appLanguagesAsset = {
 
           tap_to_connect_to_vpn: 'Нажмите для подключения к VPN',
           tap_again_to_disconnect: 'Нажмите снова, чтобы отключиться',
-          connection_is_not_protected: 'Соединение не защищено',
+          connection_is_not_protected: '                    Соединение не защищено                    ',
           connected: 'Подключено',
-          netherlands: 'Нидерланды',
-          germany: 'Германия',
-          finland: 'Финляндия',
+          netherlands: ' Нидерланды ',
+          germany: ' Германия ',
+          finland: ' Финляндия ',
 
           days: 'дн.',
           hours: 'ч.',
           minutes: 'мин.',
           seconds: 'сек.',
 
-          Netherlands: 'Нидерланды',
-          Germany: 'Германия',
-          Finland: 'Финляндия'
+          Netherlands: ' Нидерланды ',
+          Germany: ' Германия ',
+          Finland: ' Финляндия '
 
         },
 
@@ -243,7 +243,7 @@ const appLanguagesAsset = {
 
         Title: {
 
-          olive_vpn: ' OliveVPN '
+          olive_vpn: '  OliveVPN  '
 
         }
 
@@ -255,7 +255,7 @@ const appLanguagesAsset = {
 
           StatusText: {
 
-            not_connected: 'Conection is not secured'
+            not_connected: '                    Conection is not secured                    '
 
           },
 
@@ -273,20 +273,20 @@ const appLanguagesAsset = {
 
           tap_to_connect_to_vpn: 'Tap to connect to VPN',
           tap_again_to_disconnect: 'Tap again to disconnect',
-          connection_is_not_protected: 'Conection is not secured',
+          connection_is_not_protected: '                    Conection is not secured                    ',
           connected: 'Connected',
-          netherlands: 'Netherlands',
-          germany: 'Germany',
-          finland: 'Finland',
+          netherlands: ' Netherlands ',
+          germany: ' Germany ',
+          finland: ' Finland ',
 
           days: 'd.',
           hours: 'h.',
           minutes: 'min.',
           seconds: 'sec.',
 
-          Netherlands: 'Netherlands',
-          Germany: 'Germany',
-          Finland: 'Finland'
+          Netherlands: ' Netherlands ',
+          Germany: ' Germany ',
+          Finland: ' Finland '
 
         },
 
