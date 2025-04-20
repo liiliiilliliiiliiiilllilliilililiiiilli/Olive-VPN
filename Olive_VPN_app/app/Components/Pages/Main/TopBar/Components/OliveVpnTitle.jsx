@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
 import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
 
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 
 import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
 
