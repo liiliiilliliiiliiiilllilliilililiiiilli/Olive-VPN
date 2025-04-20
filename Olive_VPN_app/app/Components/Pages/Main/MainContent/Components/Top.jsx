@@ -63,8 +63,7 @@ const StatusText = () => {
   return (
 
     <Animated.Text style = {{
-    overflow: 'visible',
-    height: 10,
+    height: 20,
     fontFamily: styles.StatusText.fontFamily,
     color: colorControl,
     fontSize: 29}}>
