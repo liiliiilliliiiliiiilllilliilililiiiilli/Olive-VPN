@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
 import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
 
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 
 import Animated, { useSharedValue, withTiming, Easing } from 'react-native-reanimated'
 
@@ -40,14 +40,14 @@ const OliveVpnTitle = () => {
     alignItems: 'center',
     flex: 1}}>
 
-      <Text style = {{
+      <Animated.Text style = {{
       fontFamily: styles.fontFamily,
-      color: 'grey',
+      color: textColorControl,
       fontSize: 25}}>
 
         {texts.olive_vpn}
 
-      </Text>
+      </Animated.Text>
 
       <Animated.View style = {{
       width: 110,

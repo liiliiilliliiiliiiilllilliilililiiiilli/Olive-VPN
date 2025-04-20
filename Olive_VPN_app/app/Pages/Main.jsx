@@ -1,11 +1,11 @@
 // This is Main page.
 
 
-import { useState, useEffect } from 'react'
+/* import { useState, useEffect } from 'react'
 import { Dimensions } from 'react-native'
 import { AdRequest, AdTheme, BannerAdSize, BannerView, Gender, Location } from 'yandex-mobile-ads'
 
-import { View } from 'react-native'
+import { View } from 'react-native' */
 
 import MainField from '../Components/Common/MainField/MainField'
 
@@ -22,7 +22,7 @@ import { default as FeedbackWindow } from '../Windows/Feedback'
 
 const Main = () => {
 
-  const [addSize, setAddSize] = useState ()
+  /* const [addSize, setAddSize] = useState ()
   const [addExists, setAddExists] = useState (false)
   const [randomExistence, setRandomExistense] = useState (true)
   
@@ -62,7 +62,7 @@ const Main = () => {
 
     setAddExists (false)
 
-  }
+  } */
 
 
   return (
@@ -75,7 +75,7 @@ const Main = () => {
 
       <MainContent/>
       
-      {addSize && randomExistence ?
+      { /* addSize && randomExistence ?
 
         <View style = {{
         justifyContent: 'center',
@@ -94,7 +94,7 @@ const Main = () => {
 
         </View>
 
-      : null}
+      : null */ }
 
       <BottomBar/>
 

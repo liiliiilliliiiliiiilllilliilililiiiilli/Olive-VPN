@@ -155,7 +155,7 @@ const MainTheme = {
 
             Title: {
     
-                fontFamily: 'Archivo-Bold',
+                fontFamily: 'Fredoka-Semibold',
                 color: Colors.PreWhite,
                 lineColor: Colors.Olive
     
@@ -190,7 +190,7 @@ const MainTheme = {
 
                 StatusText: {
 
-                    fontFamily: 'Archivo-Bold',
+                    fontFamily: 'Archivo-ExtraBold',
                     color: Colors.PreWhite
 
                 },
@@ -295,7 +295,7 @@ const MainTheme = {
 
             Title: {
 
-                fontFamily: 'Archivo-Bold',
+                fontFamily: 'Fredoka-SemiBold',
                 color: Colors.PreWhite
 
             }

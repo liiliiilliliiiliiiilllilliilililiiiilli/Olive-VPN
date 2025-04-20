@@ -1,7 +1,7 @@
 // This is application start up file.
 
 
-import { MobileAds } from 'yandex-mobile-ads'
+// import { MobileAds } from 'yandex-mobile-ads'
 
 import * as SplashScreen from 'expo-splash-screen'
 
