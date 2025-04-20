@@ -41,7 +41,7 @@ const BottomBar = () => {
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    paddingTop: 28}}>
+    paddingTop: 14}}>
 
       <Tip
       onPress = {() => handleTipPress()}/>

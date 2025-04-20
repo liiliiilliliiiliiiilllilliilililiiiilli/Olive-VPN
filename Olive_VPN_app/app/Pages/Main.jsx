@@ -20,26 +20,47 @@ import { default as FeedbackWindow } from '../Windows/Feedback'
 
 const Main = () => {
 
-  const [adSize, setAdSize] = useState ()
+  const [addSize, setAddSize] = useState ()
+  const [addExists, setAddExists] = useState (false)
+  const [randomExistence, setRandomExistense] = useState (true)
   
   useEffect (() => {(async () => {
 
-    const banerWidth = await BannerAdSize.stickySize (Dimensions.get('window').width)
-    setAdSize (banerWidth)
+    const banerWidth = await BannerAdSize.stickySize (Dimensions.get('window').width, 75)
+    setAddSize (banerWidth)
   
   })()})
 
 
-  const adRequest = new AdRequest ({
+  const getRandomInt = (min, max) => {
 
-    age: '14',
-    contextQuery: 'context-query',
-    contextTags: ['context-tag'],
-    gender: Gender.Male,
-    // location: new Location (55.734202, 37.588063),
-    adTheme: AdTheme.Dark
+    const minCeiled = Math.ceil (min)
+    const maxFloored = Math.floor (max + 1)
 
-  })
+    return Math.floor (Math.random() * (maxFloored - minCeiled) + minCeiled)
+
+  }
+
+  useEffect (() => setRandomExistense (getRandomInt (1, 100) <= 75), [])
+
+
+  const handleAddLoading = () => {
+
+    setAddExists (true)
+
+  }
+
+  const handleAddFailedLoading = () => {
+
+    setAddExists (false)
+
+  }
+
+  const handleAddClose = () => {
+
+    setAddExists (false)
+
+  }
 
 
   return (
@@ -52,19 +73,24 @@ const Main = () => {
 
       <MainContent/>
 
-      {adSize ?
+      {addSize && randomExistence ?
 
-        <BannerView
-        size = {adSize}
-        adUnitId = {'demo-banner-yandex'}
-        adRequest = {adRequest}
-        onAdLoaded = {() => console.info ('Did load.')}
-        onAdFailedToLoad = {() => console.info ('Did fail to load with error.')}
-        onAdClicked = {() => console.info ('Did click.')}
-        onLeftApplication = {() => console.info ('Did leave application.')}
-        onReturnToApplication = {() => console.info ('Did return to application.')}
-        onAdImpression = {() => console.info ('Did track impression.')}
-        onAdClose = {() => console.info ('Did close')}/>
+        <View style = {{
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        width: '100%',
+        height: addExists ? 75 + 14 : 14,
+        opacity: addExists ? 1 : 0}}>
+
+          <BannerView
+          size = {addSize}
+          adUnitId = {'R-M-15161745-1'}
+          onAdLoaded = {() => handleAddLoading()}
+          onAdFailedToLoad = {() => handleAddFailedLoading()}
+          onAdClose = {() => handleAddClose()}/>
+
+        </View>
+
       : null}
 
       <BottomBar/>
