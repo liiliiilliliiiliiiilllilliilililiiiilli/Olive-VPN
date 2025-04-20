@@ -82,7 +82,7 @@ const Main = () => {
         alignItems: 'flex-end',
         width: '100%',
         height: addExists ? 75 + 14 : 14,
-        opacity: addExists ? 1 : 1,
+        opacity: addExists ? 1 : 0,
         backgroundColor: 'blue'}}>
 
           <BannerView
