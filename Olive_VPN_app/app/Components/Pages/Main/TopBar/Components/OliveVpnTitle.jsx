@@ -40,14 +40,14 @@ const OliveVpnTitle = () => {
     alignItems: 'center',
     flex: 1}}>
 
-      <Animated.Text style = {{
+      <Text style = {{
       fontFamily: styles.fontFamily,
-      color: textColorControl,
+      color: 'grey',
       fontSize: 25}}>
 
         {texts.olive_vpn}
 
-      </Animated.Text>
+      </Text>
 
       <Animated.View style = {{
       width: 110,
