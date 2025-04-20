@@ -65,6 +65,7 @@ const StatusText = () => {
     <Animated.Text
     numberOfLines = {1}
     style = {{
+    width: 1500,
     fontFamily: styles.StatusText.fontFamily,
     color: colorControl,
     fontSize: 29}}>
