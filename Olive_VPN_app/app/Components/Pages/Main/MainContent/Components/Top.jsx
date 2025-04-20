@@ -63,6 +63,8 @@ const StatusText = () => {
   return (
 
     <Animated.Text style = {{
+    overflow: 'visible',
+    height: 10,
     fontFamily: styles.StatusText.fontFamily,
     color: colorControl,
     fontSize: 29}}>
@@ -265,7 +267,6 @@ const Action = () => {
   return (
 
     <View style = {{
-    height: 25,
     flexDirection: 'row',
     alignItems: 'center',
     margin: -5,
@@ -275,7 +276,6 @@ const Action = () => {
     borderRadius: 10}}>
 
       <Animated.Text style = {{
-      height: 25,
       fontFamily: styles.Action.fontFamily,
       color: colorControl,
       fontSize: 19.5,
