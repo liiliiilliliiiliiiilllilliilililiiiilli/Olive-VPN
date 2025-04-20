@@ -75,7 +75,7 @@ const Main = () => {
 
       <MainContent/>
       
-      { /* {addSize && randomExistence ?
+      {addSize && randomExistence ?
 
         <View style = {{
         justifyContent: 'center',
@@ -83,8 +83,7 @@ const Main = () => {
         width: '100%',
         height: addExists ? 75 : 0,
         paddingTop: 14,
-        opacity: addExists ? 1 : 1,
-        backgroundColor: 'blue'}}>
+        opacity: addExists ? 1 : 0}}>
 
           <BannerView
           size = {addSize}
@@ -95,7 +94,7 @@ const Main = () => {
 
         </View>
 
-      : null} */ }
+      : null}
 
       <BottomBar/>
 
