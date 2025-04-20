@@ -64,23 +64,20 @@ const StatusText = () => {
 
     <View style = {{
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'yellow',
-    }}>
+    alignItems: 'center'}}>
 
-    <Animated.Text
-    numberOfLines = {1}
-    style = {{
-    width: 1000,
-    textAlign: 'center',
-    fontFamily: styles.StatusText.fontFamily,
-    color: colorControl,
-    fontSize: 29,
-    backgroundColor: 'blue'}}>
+      <Animated.Text
+      numberOfLines = {1}
+      style = {{
+      width: 1000,
+      textAlign: 'center',
+      fontFamily: styles.StatusText.fontFamily,
+      color: colorControl,
+      fontSize: 29}}>
 
-      {textValue}
+        {textValue}
 
-    </Animated.Text>
+      </Animated.Text>
 
     </View>
 

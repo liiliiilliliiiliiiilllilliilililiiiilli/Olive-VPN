@@ -466,7 +466,7 @@ const appLanguagesAsset = {
 
         Title: {
 
-          olive_vpn: 'OliveVPN'
+          olive_vpn: ' OliveVPN '
 
         }
 
@@ -478,7 +478,7 @@ const appLanguagesAsset = {
 
           StatusText: {
 
-            not_connected: '連線不安全'
+            not_connected: '  連線不安全  '
 
           },
 
@@ -496,20 +496,20 @@ const appLanguagesAsset = {
 
           tap_to_connect_to_vpn: '點擊連接VPN',
           tap_again_to_disconnect: '再按一次即可断开连接',
-          connection_is_not_protected: '連線不安全',
+          connection_is_not_protected: '  連線不安全  ',
           connected: '已連接',
-          netherlands: '荷蘭',
-          germany: '德國',
-          finland: '芬兰',
+          netherlands: ' 荷蘭 ',
+          germany: ' 德國 ',
+          finland: ' 芬兰 ',
 
           days: '天',
           hours: '小时',
           minutes: '分钟',
           seconds: '秒',
 
-          Netherlands: '荷兰',
-          Germany: '德国',
-          Finland: '芬兰'
+          Netherlands: ' 荷兰 ',
+          Germany: ' 德国 ',
+          Finland: ' 芬兰 '
 
         },
 
