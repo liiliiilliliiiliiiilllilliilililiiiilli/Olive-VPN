@@ -81,8 +81,9 @@ const Main = () => {
         justifyContent: 'center',
         alignItems: 'flex-end',
         width: '100%',
-        height: addExists ? 75 + 14 : 14,
-        opacity: addExists ? 1 : 0,
+        height: addExists ? 75 : 0,
+        paddingTop: 14,
+        opacity: addExists ? 1 : 1,
         backgroundColor: 'blue'}}>
 
           <BannerView
