@@ -84,12 +84,12 @@ const Main = () => {
         height: addExists ? 75 + 14 : 14,
         opacity: addExists ? 1 : 0}}>
 
-          <BannerView
+          { /* <BannerView
           size = {addSize}
           adUnitId = {'demo-banner-yandex'}
           onAdLoaded = {() => handleAddLoading()}
           onAdFailedToLoad = {() => handleAddFailedLoading()}
-          onAdClose = {() => handleAddClose()}/>
+          onAdClose = {() => handleAddClose()}/> */ }
 
         </View>
 
