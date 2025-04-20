@@ -147,7 +147,7 @@ const MainTheme = {
 
             Title: {
     
-                fontFamily: 'Fredoka-SemiBold',
+                fontFamily: 'Archivo-Bold',
                 color: Colors.Black,
                 lineColor: Colors.Olive
     
@@ -182,7 +182,7 @@ const MainTheme = {
 
                 StatusText: {
 
-                    fontFamily: 'Archivo-ExtraBold',
+                    fontFamily: 'Archivo-Bold',
                     color: Colors.Black
 
                 },
@@ -229,7 +229,7 @@ const MainTheme = {
                     Arrow_PNG: ArrowCompact_black_PNG,
 
 
-                    fontFamily: 'Arimo-Bold',
+                    fontFamily: 'Archivo-Bold',
                     color: Colors.Black
 
                 }
@@ -287,7 +287,7 @@ const MainTheme = {
 
             Title: {
 
-                fontFamily: 'Fredoka-SemiBold',
+                fontFamily: 'Archivo-Bold',
                 color: Colors.Black
 
             }
