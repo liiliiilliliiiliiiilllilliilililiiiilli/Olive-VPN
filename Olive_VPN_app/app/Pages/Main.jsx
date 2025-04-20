@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { Dimensions } from 'react-native'
 import { AdRequest, AdTheme, BannerAdSize, BannerView, Gender, Location } from 'yandex-mobile-ads'
 
-import { View } from 'react'
+import { View } from 'react-native'
 
 import MainField from '../Components/Common/MainField/MainField'
 
