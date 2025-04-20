@@ -26,12 +26,12 @@ const Main = () => {
   const [addExists, setAddExists] = useState (false)
   const [randomExistence, setRandomExistense] = useState (true)
   
-  useEffect (() => {(async () => {
+  /* useEffect (() => {(async () => {
 
     const banerWidth = await BannerAdSize.inlineSize (Dimensions.get('window').width, 75)
     setAddSize (banerWidth)
   
-  })()})
+  })()}) */
 
 
   const getRandomInt = (min, max) => {
@@ -43,7 +43,7 @@ const Main = () => {
 
   }
 
-  useEffect (() => setRandomExistense (getRandomInt (1, 100) <= 75), [])
+  // useEffect (() => setRandomExistense (getRandomInt (1, 100) <= 75), [])
 
 
   const handleAddLoading = () => {
@@ -75,7 +75,7 @@ const Main = () => {
 
       <MainContent/>
       
-      {addSize && randomExistence ?
+      { /* {addSize && randomExistence ?
 
         <View style = {{
         justifyContent: 'center',
@@ -95,7 +95,7 @@ const Main = () => {
 
         </View>
 
-      : null}
+      : null} */ }
 
       <BottomBar/>
 
