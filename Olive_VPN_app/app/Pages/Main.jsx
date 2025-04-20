@@ -84,7 +84,7 @@ const Main = () => {
 
           <BannerView
           size = {addSize}
-          adUnitId = {'R-M-15161745-1'}
+          adUnitId = {'demo-banner-yandex'}
           onAdLoaded = {() => handleAddLoading()}
           onAdFailedToLoad = {() => handleAddFailedLoading()}
           onAdClose = {() => handleAddClose()}/>
