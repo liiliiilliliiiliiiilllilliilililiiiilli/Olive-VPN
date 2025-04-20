@@ -147,7 +147,7 @@ const MainTheme = {
 
             Title: {
     
-                fontFamily: 'Fredoka-Semibold',
+                fontFamily: 'Fredoka-SemiBold',
                 color: Colors.Black,
                 lineColor: Colors.Olive
     
