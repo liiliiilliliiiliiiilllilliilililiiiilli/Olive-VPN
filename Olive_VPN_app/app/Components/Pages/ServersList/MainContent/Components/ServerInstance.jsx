@@ -87,7 +87,7 @@ const ServerInstance = ({isChosen, pic, title, availability, onPress, style}) =>
     paddingVertical: 2.5,
     paddingHorizontal: 5,
     backgroundColor: styles.backgroundColor,
-    opacity: availability ? 1 : 0.5,
+    // opacity: availability ? 1 : 0.5,
     pointerEvents: availability != 0 && !isChosen ? 'auto' : 'none'},
     style]}>
 

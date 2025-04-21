@@ -24,9 +24,17 @@ const MainContent = () => {
 
   useEffect (() => {(async () => {
 
-    const netherlands_data = await fetch ('http://77.83.86.57/get_server_load_data')
-    const germany_data = await fetch ('http://217.11.167.238/get_server_load_data')
-    const finland_data = await fetch ('http://217.11.166.234/get_server_load_data')
+    let netherlands_data
+    try {netherlands_data = await fetch ('http://77.83.86.57:505/get_server_load_data')}
+    catch {netherlands_data = 0.0}
+
+    let germany_data
+    try {germany_data = await fetch ('http://217.11.167.238:505/get_server_load_data')}
+    catch {germany_data = 0.0}
+
+    let finland_data
+    try {finland_data = await fetch ('http://217.11.166.234:505/get_server_load_data')}
+    catch {finland_data = 0.0}
 
     setNetherlandsAvailability (parseFloat (netherlands_data))
     setGermanyAvailability (parseFloat (germany_data))
