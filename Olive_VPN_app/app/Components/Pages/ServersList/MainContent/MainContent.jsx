@@ -56,7 +56,7 @@ const MainContent = () => {
 
     checkStatuses ()
 
-    const periodicCheckStatuses = setInterval(() => {checkStatuses (); console.info (8)}, 10000)
+    const periodicCheckStatuses = setInterval(() => checkStatuses (), 10000)
 
 
     return clearInterval (periodicCheckStatuses)
