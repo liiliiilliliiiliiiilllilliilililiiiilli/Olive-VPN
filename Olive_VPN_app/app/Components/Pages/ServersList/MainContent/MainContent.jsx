@@ -22,9 +22,9 @@ const MainContent = () => {
   const [germanyAvailability, setGermanyAvailability] = useState ()
   const [finlandAvailability, setFinlandAvailability] = useState ()
 
-  useEffect (() => {(async () => {
+  useEffect (() => {
 
-    const checkStatuses = () => {
+    const checkStatuses = async () => {
 
       let netherlands_data
       try {
@@ -61,7 +61,7 @@ const MainContent = () => {
 
     return clearInterval (periodicCheckStatuses)
 
-  })()}, [])
+  }, [])
 
 
   const online_TXT = texts.Liner.online
