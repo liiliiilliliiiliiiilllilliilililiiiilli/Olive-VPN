@@ -21,7 +21,7 @@ const MainContent = () => {
   const [germanyAvailability, setGermanyAvailability] = useState ()
   const [finlandAvailability, setFinlandAvailability] = useState ()
 
-  useEffect (() => {
+  useEffect (() => {(async () => {
 
     const netherlands_data = await fetch ('http://77.83.86.57/get_server_load_data')
     const germany_data = await fetch ('http://217.11.167.238/get_server_load_data')
@@ -31,7 +31,8 @@ const MainContent = () => {
     setGermanyAvailability (parseFloat (germany_data))
     setFinlandAvailability (parseFloat (finland_data))
 
-  }, [])
+
+  })()}, [])
 
 
   const online_TXT = texts.Liner.online
