@@ -31,32 +31,32 @@ const MainContent = () => {
         netherlands_data = await fetch ('http://77.83.86.57:505/get_server_load_data')
         netherlands_data = await netherlands_data.json ()
       }
-      catch {netherlands_data = 1}
+      catch (error) {netherlands_data = null}
 
       let germany_data
       try {
         germany_data = await fetch ('http://217.11.167.238:505/get_server_load_data')
         germany_data = await germany_data.json ()
       }
-      catch {germany_data = 1}
+      catch (error) {germany_data = null}
 
       let finland_data
       try {
         finland_data = await fetch ('http://217.11.166.234:505/get_server_load_data')
         finland_data = await finland_data.json ()
-       }
-      catch {finland_data = 1}
+      }
+      catch (error) {finland_data = null}
 
-      setNetherlandsAvailability (parseFloat (netherlands_data))
-      setGermanyAvailability (parseFloat (germany_data))
-      setFinlandAvailability (parseFloat (finland_data))
+      netherlands_data != null && setNetherlandsAvailability (parseFloat (netherlands_data))
+      germany_data != null && setGermanyAvailability (parseFloat (germany_data))
+      finland_data != null && setFinlandAvailability (parseFloat (finland_data))
 
     }
 
 
     checkStatuses ()
 
-    const periodicCheckStatuses = setInterval(() => checkStatuses (), 10000)
+    const periodicCheckStatuses = setInterval (() => checkStatuses (), 10000)
 
 
     return clearInterval (periodicCheckStatuses)
