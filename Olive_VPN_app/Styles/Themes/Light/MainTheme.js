@@ -339,6 +339,7 @@ const MainTheme = {
                         green: Colors.PinGreen,
                         orange: Colors.PinOrange,
                         red: Colors.PinRed,
+                        grey: Colors.Grey,
                         transparent: Colors.Transparent
 
                     }

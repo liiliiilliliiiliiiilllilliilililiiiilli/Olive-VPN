@@ -24,34 +24,42 @@ const MainContent = () => {
 
   useEffect (() => {(async () => {
 
-    let netherlands_data
-    try {
-      netherlands_data = await fetch ('http://77.83.86.57:505/get_server_load_data')
-      netherlands_data = await netherlands_data.json ()
+    const checkStatuses = () => {
+
+      let netherlands_data
+      try {
+        netherlands_data = await fetch ('http://77.83.86.57:505/get_server_load_data')
+        netherlands_data = await netherlands_data.json ()
+      }
+      catch {netherlands_data = 1}
+
+      let germany_data
+      try {
+        germany_data = await fetch ('http://217.11.167.238:505/get_server_load_data')
+        germany_data = await germany_data.json ()
+      }
+      catch {germany_data = 1}
+
+      let finland_data
+      try {
+        finland_data = await fetch ('http://217.11.166.234:505/get_server_load_data')
+        finland_data = await finland_data.json ()
+       }
+      catch {finland_data = 1}
+
+      setNetherlandsAvailability (parseFloat (netherlands_data))
+      setGermanyAvailability (parseFloat (germany_data))
+      setFinlandAvailability (parseFloat (finland_data))
+
     }
-    catch {netherlands_data = 1}
 
-    let germany_data
-    try {
-      germany_data = await fetch ('http://217.11.167.238:505/get_server_load_data')
-      germany_data = await germany_data.json ()
-    }
-    catch {germany_data = 1}
 
-    let finland_data
-    try {
-      finland_data = await fetch ('http://217.11.166.234:505/get_server_load_data')
-      finland_data = await finland_data.json ()
-    }
-    catch {finland_data = 1}
+    checkStatuses ()
 
-    setNetherlandsAvailability (parseFloat (netherlands_data))
-    setGermanyAvailability (parseFloat (germany_data))
-    setFinlandAvailability (parseFloat (finland_data))
+    const periodicCheckStatuses = setInterval(() => {checkStatuses (); console.info (8)}, 10000)
 
-    console.info (parseFloat (netherlands_data))
-    console.info (parseFloat (germany_data))
-    comsole.info (parseFloat (finland_data))
+
+    return clearInterval (periodicCheckStatuses)
 
   })()}, [])
 
