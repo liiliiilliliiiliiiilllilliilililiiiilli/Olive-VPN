@@ -29,21 +29,21 @@ const MainContent = () => {
       netherlands_data = await fetch ('http://77.83.86.57:505/get_server_load_data')
       netherlands_data = await netherlands_data.json ()
     }
-    catch {netherlands_data = 0.0}
+    catch {netherlands_data = 1.0}
 
     let germany_data
     try {
       germany_data = await fetch ('http://217.11.167.238:505/get_server_load_data')
       germany_data = await germany_data.json ()
     }
-    catch {germany_data = 0.0}
+    catch {germany_data = 1.0}
 
     let finland_data
     try {
       finland_data = await fetch ('http://217.11.166.234:505/get_server_load_data')
       finland_data = await finland_data.json ()
     }
-    catch {finland_data = 0.0}
+    catch {finland_data = 1.0}
 
     setNetherlandsAvailability (parseFloat (netherlands_data))
     setGermanyAvailability (parseFloat (germany_data))
@@ -99,7 +99,7 @@ const MainContent = () => {
       onPress = {() => {setAppVpn('Netherlands'); setTimeout (async () => await toggleConditionalSwitch(), 100)}}
       pic = {styles.ServerInstance.Netherlands_PNG}
       title = {netherlands_TXT}
-      availability = {netherlandsAvailability ? netherlandsAvailability <= 0.33 ? 1 : netherlandsAvailability <= 0.66 ? 2 : 3 : 0}/>
+      availability = {netherlandsAvailability ? netherlandsAvailability <= 0.33 ? 3 : netherlandsAvailability <= 0.66 ? 2 : 1 : 0}/>
 
       <ServerInstance
       isChosen = {appVpn == 'Germany'}
