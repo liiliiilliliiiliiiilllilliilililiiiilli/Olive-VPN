@@ -1,7 +1,7 @@
 // Component.
 
 
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useThemes } from '../../../../../../Redux/Hooks/UseThemes'
 import { useAppLanguage } from '../../../../../../Redux/Hooks/AppLanguage'
 
@@ -32,14 +32,27 @@ const ServerInstance = ({isChosen, pic, title, availability, onPress, style}) =>
   const animationDuration = AnDu = 95
 
 
-  const pinColor = {  
+  const [pinColor, setPinColor] = useState ({  
 
     3: styles.Block.PinStatus.green,
     2: styles.Block.PinStatus.orange,
     1: styles.Block.PinStatus.red,
     0: styles.Block.PinStatus.transparent
 
-  } [availability]
+  } [availability])
+
+  useEffect (() => {
+
+    setPinColor ({
+
+      3: styles.Block.PinStatus.green,
+      2: styles.Block.PinStatus.orange,
+      1: styles.Block.PinStatus.red,
+      0: styles.Block.PinStatus.transparent
+      
+    } [availability])
+    
+  }, [availability])
 
 
   // press animations:
