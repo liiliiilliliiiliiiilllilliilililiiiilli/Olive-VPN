@@ -32,7 +32,7 @@ const MainContent = () => {
         netherlands_data = await netherlands_data.json ()
       }
       catch (error) {netherlands_data = null}
- 
+
       let germany_data
       try {
         germany_data = await fetch ('http://217.11.167.238:505/get_server_load_data')
