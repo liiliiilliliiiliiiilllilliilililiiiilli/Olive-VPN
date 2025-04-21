@@ -17,6 +17,23 @@ const MainContent = () => {
   const [styles, theme] = useThemes (styles => styles.ServersListPage.Main)
   const [texts] = useAppLanguage (texts => texts.ServersListPage.Main)
 
+  const [netherlandsAvailability, setNetherlandsAvailability] = useState ()
+  const [germanyAvailability, setGermanyAvailability] = useState ()
+  const [finlandAvailability, setFinlandAvailability] = useState ()
+
+  useEffect (() => {
+
+    const netherlands_data = await fetch ('http://77.83.86.57/get_server_load_data')
+    const germany_data = await fetch ('http://217.11.167.238/get_server_load_data')
+    const finland_data = await fetch ('http://217.11.166.234/get_server_load_data')
+
+    setNetherlandsAvailability (parseFloat (netherlands_data))
+    setGermanyAvailability (parseFloat (germany_data))
+    setFinlandAvailability (parseFloat (finland_data))
+
+  }, [])
+
+
   const online_TXT = texts.Liner.online
   // const offline_TXT = texts.Liner.offline
   const netherlands_TXT = texts.ServerInstance.netherlands
@@ -60,21 +77,21 @@ const MainContent = () => {
       onPress = {() => {setAppVpn('Netherlands'); setTimeout (async () => await toggleConditionalSwitch(), 100)}}
       pic = {styles.ServerInstance.Netherlands_PNG}
       title = {netherlands_TXT}
-      availability = {3}/>
+      availability = {netherlandsAvailability ? netherlandsAvailability <= 0.33 ? 1 : netherlandsAvailability <= 0.66 ? 2 : 3 : 0}/>
 
       <ServerInstance
       isChosen = {appVpn == 'Germany'}
       onPress = {() => {setAppVpn('Germany'); setTimeout (async () => await toggleConditionalSwitch(), 100)}}
       pic = {styles.ServerInstance.Germany_PNG}
       title = {germany_TXT}
-      availability = {3}/>
+      availability = {germanyAvailability ? germanyAvailability <= 0.33 ? 1 : germanyAvailability <= 0.66 ? 2: 3: 0}/>
 
       <ServerInstance
       isChosen = {appVpn == 'Finland'}
       onPress = {() => {setAppVpn('Finland'); setTimeout (async () => await toggleConditionalSwitch(), 100)}}
       pic = {styles.ServerInstance.Finland_PNG}
       title = {finland_TXT}
-      availability = {3}/>
+      availability = {finlandAvailability ? finlandAvailability <= 0.33 ? 1 : finlandAvailability <= 0.66 ? 2: 3: 0}/>
 
       {/* <Liner
       text = {`1 ${offline_TXT}`}
