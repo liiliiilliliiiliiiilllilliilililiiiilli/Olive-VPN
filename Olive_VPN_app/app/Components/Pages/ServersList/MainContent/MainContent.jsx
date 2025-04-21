@@ -32,6 +32,9 @@ const MainContent = () => {
     setGermanyAvailability (parseFloat (germany_data))
     setFinlandAvailability (parseFloat (finland_data))
 
+    console.info (netherlands_data)
+    console.info (germany_data)
+    comsole.info (finland_data)
 
   })()}, [])
 
