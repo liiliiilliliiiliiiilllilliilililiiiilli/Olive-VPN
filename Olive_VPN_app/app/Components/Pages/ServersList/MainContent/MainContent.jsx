@@ -18,11 +18,11 @@ const MainContent = () => {
   const [styles, theme] = useThemes (styles => styles.ServersListPage.Main)
   const [texts] = useAppLanguage (texts => texts.ServersListPage.Main)
 
-  const [netherlandsAvailability, setNetherlandsAvailability] = useState ()
-  const [germanyAvailability, setGermanyAvailability] = useState ()
-  const [finlandAvailability, setFinlandAvailability] = useState ()
+  const [netherlandsAvailability, setNetherlandsAvailability] = useState (0.1)
+  const [germanyAvailability, setGermanyAvailability] = useState (0.51)
+  const [finlandAvailability, setFinlandAvailability] = useState (0.88)
 
-  useEffect (() => {(async () => {
+  /* useEffect (() => {(async () => {
 
     let netherlands_data
     try {
@@ -53,7 +53,7 @@ const MainContent = () => {
     console.info (germany_data)
     comsole.info (finland_data)
 
-  })()}, [])
+  })()}, []) */
 
 
   const online_TXT = texts.Liner.online
