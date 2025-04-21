@@ -99,21 +99,21 @@ const MainContent = () => {
       onPress = {() => {setAppVpn('Netherlands'); setTimeout (async () => await toggleConditionalSwitch(), 100)}}
       pic = {styles.ServerInstance.Netherlands_PNG}
       title = {netherlands_TXT}
-      availability = {netherlandsAvailability ? netherlandsAvailability <= 0.33 ? 3 : netherlandsAvailability <= 0.66 ? 2 : 1 : 0}/>
+      availability = {netherlandsAvailability ? (netherlandsAvailability <= 0.33 ? 3 : netherlandsAvailability <= 0.66 ? 2 : 1) : 0}/>
 
       <ServerInstance
       isChosen = {appVpn == 'Germany'}
       onPress = {() => {setAppVpn('Germany'); setTimeout (async () => await toggleConditionalSwitch(), 100)}}
       pic = {styles.ServerInstance.Germany_PNG}
       title = {germany_TXT}
-      availability = {germanyAvailability ? germanyAvailability <= 0.33 ? 1 : germanyAvailability <= 0.66 ? 2: 3: 0}/>
+      availability = {germanyAvailability ? (germanyAvailability <= 0.33 ? 3 : germanyAvailability <= 0.66 ? 2 : 1) : 0}/>
 
       <ServerInstance
       isChosen = {appVpn == 'Finland'}
       onPress = {() => {setAppVpn('Finland'); setTimeout (async () => await toggleConditionalSwitch(), 100)}}
       pic = {styles.ServerInstance.Finland_PNG}
       title = {finland_TXT}
-      availability = {finlandAvailability ? finlandAvailability <= 0.33 ? 1 : finlandAvailability <= 0.66 ? 2: 3: 0}/>
+      availability = {finlandAvailability ? (finlandAvailability <= 0.33 ? 3 : finlandAvailability <= 0.66 ? 2 : 1) : 0}/>
 
       {/* <Liner
       text = {`1 ${offline_TXT}`}
