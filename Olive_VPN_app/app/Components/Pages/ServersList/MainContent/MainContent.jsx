@@ -29,19 +29,19 @@ const MainContent = () => {
       let netherlands_data
 
       await fetch ('http://77.83.86.57:505/get_server_load_data')
-      .then (data => netherlands_data = await data.json ())
+      .then (async data => netherlands_data = await data.json ())
 
 
       let germany_data
 
       await fetch ('http://217.11.166.234:505/get_server_load_data')
-      .then (data => germany_data = await data.json ())
+      .then (async data => germany_data = await data.json ())
 
 
       let finland_data
 
        await fetch ('http://217.11.167.238:505/get_server_load_data')
-      .then (data => finland_data = await data.json ())
+      .then (async data => finland_data = await data.json ())
 
 
       typeof netherlands_data == 'number' && setNetherlandsAvailability (parseFloat (netherlands_data))
