@@ -74,7 +74,7 @@ const Colors = {
     TipText: '#545454',
     ToggInner: '#1f1f1f',
     ToggOuter: '#3e3e3e',
-    Transparent: 'transparent',
+    Transparent: 'rgba(0, 0, 0, 0)',
     White: '#ffffff',
     WindowTopBackground: '#1a1a1a',
     WindowTopBorder: '#0f0f0f',

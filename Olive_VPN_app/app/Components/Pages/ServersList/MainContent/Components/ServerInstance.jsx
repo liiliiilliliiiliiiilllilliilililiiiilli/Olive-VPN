@@ -48,7 +48,7 @@ const ServerInstance = ({isChosen, pic, title, availability, onPress, style}) =>
       3: styles.Block.PinStatus.green,
       2: styles.Block.PinStatus.orange,
       1: styles.Block.PinStatus.red,
-      0: styles.Block.PinStatus.grey
+      0: styles.Block.PinStatus.transparent
       
     } [availability])
     

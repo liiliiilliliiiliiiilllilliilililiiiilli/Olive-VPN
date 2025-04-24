@@ -66,7 +66,7 @@ const Colors = {
     TextLinkPressed: '#36418c',
     Tip: '#0d0d0d',
     TipTextDark: '#030a01',
-    Transparent: 'transparent',
+    Transparent: 'rgba(0, 0, 0, 0)',
     White: '#ffffff',
 
     OliveButtonShadow: '0px 2.5px 10px rgb(3, 10, 1)',

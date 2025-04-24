@@ -35,14 +35,14 @@ const MainContent = () => {
 
       let germany_data
       try {
-        germany_data = await fetch ('http://217.11.167.238:505/get_server_load_data')
+        germany_data = await fetch ('http://217.11.166.234:505/get_server_load_data')
         germany_data = await germany_data.json ()
       }
       catch (error) {germany_data = null}
 
       let finland_data
       try {
-        finland_data = await fetch ('http://217.11.166.234:505/get_server_load_data')
+        finland_data = await fetch ('http://217.11.167.238:505/get_server_load_data')
         finland_data = await finland_data.json ()
       }
       catch (error) {finland_data = null}
