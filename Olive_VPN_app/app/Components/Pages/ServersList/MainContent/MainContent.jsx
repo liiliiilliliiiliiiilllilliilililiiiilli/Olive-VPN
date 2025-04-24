@@ -30,18 +30,21 @@ const MainContent = () => {
 
       await fetch ('http://77.83.86.57:505/get_server_load_data')
       .then (async data => netherlands_data = await data.json ())
+      .catch (() => {})
 
 
       let germany_data
 
       await fetch ('http://217.11.166.234:505/get_server_load_data')
       .then (async data => germany_data = await data.json ())
+      .catch (() => {})
 
 
       let finland_data
 
        await fetch ('http://217.11.167.238:505/get_server_load_data')
       .then (async data => finland_data = await data.json ())
+      .catch (() => {})
 
 
       typeof netherlands_data == 'number' && setNetherlandsAvailability (parseFloat (netherlands_data))
