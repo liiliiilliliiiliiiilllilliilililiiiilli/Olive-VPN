@@ -46,9 +46,9 @@ const MainContent = () => {
       .then (res => finland_data = res.data, error => {})
 
 
-      setNetherlandsAvailability (parseFloat (netherlands_data))
-      setGermanyAvailability (parseFloat (germany_data))
-      setFinlandAvailability (parseFloat (finland_data))
+      netherlands_data && setNetherlandsAvailability (parseFloat (netherlands_data))
+      germany_data && setGermanyAvailability (parseFloat (germany_data))
+      finland_data && setFinlandAvailability (parseFloat (finland_data))
 
     }
 
