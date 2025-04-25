@@ -46,9 +46,9 @@ const MainContent = () => {
       .then (res => finland_data = res.data, error => {})
 
 
-      typeof netherlands_data == 'number' && setNetherlandsAvailability (parseFloat (netherlands_data))
-      typeof germany_data == 'number' && setGermanyAvailability (parseFloat (germany_data))
-      typeof finland_data == 'number' && setFinlandAvailability (parseFloat (finland_data))
+      setNetherlandsAvailability (parseFloat (netherlands_data))
+      setGermanyAvailability (parseFloat (germany_data))
+      setFinlandAvailability (parseFloat (finland_data))
 
     }
 
