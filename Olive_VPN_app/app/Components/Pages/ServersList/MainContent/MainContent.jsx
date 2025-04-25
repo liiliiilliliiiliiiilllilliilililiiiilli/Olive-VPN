@@ -28,27 +28,16 @@ const MainContent = () => {
 
     const checkStatuses = async () => {
 
-      let netherlands_data
-
-      await axios.post ('http://77.83.86.57:505/get_server_load_data')
-      .then (res => netherlands_data = res.data, error => {})
+      await axios.get ('http://77.83.86.57:505/get_server_load_data')
+      .then (res => typeof res.data == 'number' && setNetherlandsAvailability (parsefloat (res.data)), error => {})
 
 
-      let germany_data
-
-      await axios.post ('http://217.11.166.234:505/get_server_load_data')
-      .then (res => germany_data = res.data, error => {})
+      await axios.get ('http://217.11.166.234:505/get_server_load_data')
+      .then (res => typeof res.data == 'number' && setGermanyAvailability (parsefloat (res.data)), error => {})
 
 
-      let finland_data
-
-      await axios.post ('http://217.11.167.238:505/get_server_load_data')
-      .then (res => finland_data = res.data, error => {})
-
-
-      typeof netherlands_data == 'number' && setNetherlandsAvailability (parseFloat (netherlands_data))
-      typeof germany_data == 'number' && setGermanyAvailability (parseFloat (germany_data))
-      typeof finland_data == 'number' && setFinlandAvailability (parseFloat (finland_data))
+      await axios.get ('http://217.11.167.238:505/get_server_load_data')
+      .then (res => typeof res.data == 'number' && setFinlandAvailability (parsefloat (res.data)), error => {})
 
     }
 
