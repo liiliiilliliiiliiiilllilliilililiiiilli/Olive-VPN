@@ -29,15 +29,15 @@ const MainContent = () => {
     const checkStatuses = async () => {
 
       axios.get ('http://77.83.86.57:505/get_server_load_data')
-      .then (res => typeof res.data == 'number' && setNetherlandsAvailability (parsefloat (res.data)), error => {})
+      .then (res => setNetherlandsAvailability (parsefloat (0)), error => {})
 
 
       axios.get ('http://217.11.166.234:505/get_server_load_data')
-      .then (res => typeof res.data == 'number' && setGermanyAvailability (parsefloat (res.data)), error => {})
+      .then (res => setGermanyAvailability (parsefloat (0)), error => {})
 
 
       axios.get ('http://217.11.167.238:505/get_server_load_data')
-      .then (res => typeof res.data == 'number' && setFinlandAvailability (parsefloat (res.data)), error => {})
+      .then (res => setFinlandAvailability (parsefloat (0)), error => {})
 
     }
 
