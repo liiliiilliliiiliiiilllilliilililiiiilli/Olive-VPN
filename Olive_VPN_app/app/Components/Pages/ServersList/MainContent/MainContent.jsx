@@ -30,19 +30,19 @@ const MainContent = () => {
 
       let netherlands_data
 
-      axios.get ('http://77.83.86.57:505/get_server_load_data')
+      axios.post ('http://77.83.86.57:505/get_server_load_data')
       .then (res => netherlands_data = res.data, error => {})
 
 
       let germany_data
 
-      axios.get ('http://217.11.166.234:505/get_server_load_data')
+      axios.post ('http://217.11.166.234:505/get_server_load_data')
       .then (res => germany_data = res.data, error => {})
 
 
       let finland_data
 
-      axios.get ('http://217.11.167.238:505/get_server_load_data')
+      axios.post ('http://217.11.167.238:505/get_server_load_data')
       .then (res => finland_data = res.data, error => {})
 
 
