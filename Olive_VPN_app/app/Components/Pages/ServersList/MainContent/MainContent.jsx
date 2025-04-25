@@ -1,6 +1,8 @@
 // Component.
 
 
+import axios from 'axios'
+
 import { useState, useEffect } from 'react'
 import { useThemes } from '../../../../../Redux/Hooks/UseThemes'
 import { useAppLanguage } from '../../../../../Redux/Hooks/AppLanguage'
@@ -28,23 +30,20 @@ const MainContent = () => {
 
       let netherlands_data
 
-      await fetch ('http://77.83.86.57:505/get_server_load_data')
-      .then (async data => netherlands_data = await data.json ())
-      .catch (() => {})
+      axios.get ('http://77.83.86.57:505/get_server_load_data')
+      .then (res => netherlands_data = res.data, error => {})
 
 
       let germany_data
 
-      await fetch ('http://217.11.166.234:505/get_server_load_data')
-      .then (async data => germany_data = await data.json ())
-      .catch (() => {})
+      axios.get ('http://217.11.166.234:505/get_server_load_data')
+      .then (res => germany_data = res.data, error => {})
 
 
       let finland_data
 
-       await fetch ('http://217.11.167.238:505/get_server_load_data')
-      .then (async data => finland_data = await data.json ())
-      .catch (() => {})
+      axios.get ('http://217.11.167.238:505/get_server_load_data')
+      .then (res => finland_data = res.data, error => {})
 
 
       typeof netherlands_data == 'number' && setNetherlandsAvailability (parseFloat (netherlands_data))

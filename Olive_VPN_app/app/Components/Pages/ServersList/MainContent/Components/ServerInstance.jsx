@@ -101,7 +101,8 @@ const ServerInstance = ({isChosen, pic, title, availability, onPress, style}) =>
     paddingHorizontal: 5,
     backgroundColor: styles.backgroundColor,
     // opacity: availability ? 1 : 0.5,
-    pointerEvents: availability != 0 && !isChosen ? 'auto' : 'none'},
+    // pointerEvents: availability != 0 && !isChosen ? 'auto' : 'none'
+    },
     style]}>
 
       <TouchableOpacity
