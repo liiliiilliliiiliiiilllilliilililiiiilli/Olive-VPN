@@ -20,9 +20,9 @@ const MainContent = () => {
   const [styles, theme] = useThemes (styles => styles.ServersListPage.Main)
   const [texts] = useAppLanguage (texts => texts.ServersListPage.Main)
 
-  const [netherlandsAvailability, setNetherlandsAvailability] = useState ()
-  const [germanyAvailability, setGermanyAvailability] = useState ()
-  const [finlandAvailability, setFinlandAvailability] = useState ()
+  const [netherlandsAvailability, setNetherlandsAvailability] = useState (null)
+  const [germanyAvailability, setGermanyAvailability] = useState (null)
+  const [finlandAvailability, setFinlandAvailability] = useState (null)
 
 // /*
   useEffect (() => {(async () => {
