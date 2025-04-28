@@ -25,7 +25,7 @@ const MainContent = () => {
   const [finlandAvailability, setFinlandAvailability] = useState (null)
 
 // /*
-  useEffect (() => {(() => {
+  useEffect (() => {(async () => {
 
     const checkStatuses = async () => {
 
