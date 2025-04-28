@@ -21,9 +21,10 @@ const MainContent = () => {
   const [texts] = useAppLanguage (texts => texts.ServersListPage.Main)
 
   const [netherlandsAvailability, setNetherlandsAvailability] = useState (null)
-  const [germanyAvailability, setGermanyAvailability] = useState (null)
+  const [germanyAvailability, setGermanyAvailability] = useState (0.5)
   const [finlandAvailability, setFinlandAvailability] = useState (null)
 
+/*
   useEffect (() => {
 
     const checkStatuses = async () => {
@@ -50,6 +51,7 @@ const MainContent = () => {
     return clearInterval (periodicCheckStatuses)
 
   }, [])
+*/
 
 
   const online_TXT = texts.Liner.online
