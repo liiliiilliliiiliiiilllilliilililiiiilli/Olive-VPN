@@ -52,11 +52,16 @@ const ServerInstance = ({isChosen, pic, title, availability, onPress, style}) =>
 
     } [availability])
 
-    pinColorControl.value = withTiming (pinColor, {duration: AnDu, easing: comEsng})
-    
   }, [availability])
 
+
   const pinColorControl = useSharedValue (pinColor)
+
+  useEffect (() => {
+
+    pinColorControl.value = withTiming (pinColor, {duration: AnDu, easing: comEsng})
+
+  }, [pinColor])
 
 
   // press animations:
