@@ -34,11 +34,11 @@ const MainContent = () => {
 
 
       axios.get ('http://217.11.166.234:505/get_server_load_data')
-      .then (res => setGermanyAvailability (parsefloat (0)), error => {})
+      .then (res => setGermanyAvailability (parseFloat (0)), error => {})
 
 
       axios.get ('http://217.11.167.238:505/get_server_load_data')
-      .then (res => setFinlandAvailability (parsefloat (res)), error => {})
+      .then (res => setFinlandAvailability (parseFloat (res)), error => {})
 
     }
 
