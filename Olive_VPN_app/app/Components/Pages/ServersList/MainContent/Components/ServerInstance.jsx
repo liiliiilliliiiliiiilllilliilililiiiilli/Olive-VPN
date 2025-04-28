@@ -59,7 +59,7 @@ const ServerInstance = ({isChosen, pic, title, availability, onPress, style}) =>
 
   useEffect (() => {
 
-    pinColorControl.value = withTiming (pinColor, {duration: AnDu, easing: comEsng})
+    pinColorControl.value = withTiming (pinColor, {duration: AnDu * 2, easing: comEsng})
 
   }, [pinColor])
 
