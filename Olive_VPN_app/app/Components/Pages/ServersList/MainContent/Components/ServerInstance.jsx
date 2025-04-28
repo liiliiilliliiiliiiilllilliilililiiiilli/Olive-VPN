@@ -49,10 +49,14 @@ const ServerInstance = ({isChosen, pic, title, availability, onPress, style}) =>
       2: styles.Block.PinStatus.orange,
       1: styles.Block.PinStatus.red,
       0: styles.Block.PinStatus.transparent
-      
+
     } [availability])
+
+    pinColorControl.value = withTiming (pinColor, {duration: AnDu, easing: comEsng})
     
   }, [availability])
+
+  const pinColorControl = useSharedValue (pinColor)
 
 
   // press animations:
@@ -102,7 +106,7 @@ const ServerInstance = ({isChosen, pic, title, availability, onPress, style}) =>
     backgroundColor: styles.backgroundColor,
     // opacity: availability ? 1 : 0.5,
     // pointerEvents: availability != 0 && !isChosen ? 'auto' : 'none'
-    },
+    pointerEvents: !isChosen ? 'auto' : 'none'},
     style]}>
 
       <TouchableOpacity
@@ -167,13 +171,13 @@ const ServerInstance = ({isChosen, pic, title, availability, onPress, style}) =>
 
           </Animated.Text>
 
-          <View style = {{
+          <Animated.View style = {{
           width: 8,
           height: 8,
           marginLeft: 'auto',
           marginRight: 16,
           borderRadius: 1000,
-          backgroundColor: pinColor}}/>
+          backgroundColor: pinColorControl}}/>
 
         </Animated.View>
 

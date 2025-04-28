@@ -26,7 +26,7 @@ const MainContent = () => {
 
   useEffect (() => {
 
-    const checkStatuses = async () => {
+    const checkStatuses = () => {
 
       axios.get ('http://77.83.86.57:505/get_server_load_data')
       .then (
@@ -48,12 +48,12 @@ const MainContent = () => {
     }
 
 
-    await checkStatuses ()
+    checkStatuses ()
 
-    // const periodicCheckStatuses = setInterval (async () => await checkStatuses (), 10000)
+    const periodicCheckStatuses = setInterval (() => checkStatuses (), 10000)
 
 
-    // return clearInterval (periodicCheckStatuses)
+    return clearInterval (periodicCheckStatuses)
 
   }, [])
 
