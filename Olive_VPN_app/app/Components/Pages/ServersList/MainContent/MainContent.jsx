@@ -30,7 +30,7 @@ const MainContent = () => {
     const checkStatuses = async () => {
 
       axios.get ('http://77.83.86.57:505/get_server_load_data')
-      .then (res => setNetherlandsAvailability (1), error => {})
+      .then (res => setNetherlandsAvailability (parseFloat (1)), error => {})
 
 
       axios.get ('http://217.11.166.234:505/get_server_load_data')
