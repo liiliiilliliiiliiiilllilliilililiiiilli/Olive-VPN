@@ -36,11 +36,11 @@ const MainContent = () => {
 
 
         axios.get ('http://217.11.166.234:505/get_server_load_data')
-        .then (res => {setGermanyAvailability (parseFloat (res.data)); console.info ('germany:', res, parseFloat (res))}),
+        .then (res => {setGermanyAvailability (parseFloat (res.data)); console.info ('germany:', res.data, parseFloat (res.data))}),
 
 
         axios.get ('http://217.11.167.238:505/get_server_load_data')
-        .then (res => {setFinlandAvailability (parseFloat (res.data)); console.info ('finland:', res, parseFloat (res))})
+        .then (res => {setFinlandAvailability (parseFloat (res.data)); console.info ('finland:', res.data, parseFloat (res.data))})
 
       ])
 
