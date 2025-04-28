@@ -29,7 +29,7 @@ const MainContent = () => {
 
     const checkStatuses = async () => {
 
-      Promise.all ([
+      // Promise.all ([
 
         axios.get ('http://77.83.86.57:505/get_server_load_data')
         .then (res => {
@@ -51,7 +51,7 @@ const MainContent = () => {
           console.info ('finland:', res.data, parseFloat (res.data))
         })
 
-      ])
+      // ])
 
     }
 
