@@ -24,8 +24,8 @@ const MainContent = () => {
   const [germanyAvailability, setGermanyAvailability] = useState (0.5)
   const [finlandAvailability, setFinlandAvailability] = useState (null)
 
-/*
-  useEffect (() => {
+// /*
+  useEffect (() => {(() => {
 
     const checkStatuses = async () => {
 
@@ -43,15 +43,15 @@ const MainContent = () => {
     }
 
 
-    checkStatuses ()
+    await checkStatuses ()
 
-    const periodicCheckStatuses = setInterval (() => checkStatuses (), 10000)
+    // const periodicCheckStatuses = setInterval (async () => await checkStatuses (), 10000)
 
 
-    return clearInterval (periodicCheckStatuses)
+    // return clearInterval (periodicCheckStatuses)
 
-  }, [])
-*/
+  })()}, [])
+// */
 
 
   const online_TXT = texts.Liner.online
