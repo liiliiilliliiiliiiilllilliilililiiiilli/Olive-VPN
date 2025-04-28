@@ -32,15 +32,15 @@ const MainContent = () => {
       Promise.all ([
 
         axios.get ('http://77.83.86.57:505/get_server_load_data')
-        .then (res => {setNetherlandsAvailability (parseFloat (res)); console.info ('netherlands:', res, parseFloat (res))}),
+        .then (res => {setNetherlandsAvailability (parseFloat (res.data)); console.info ('netherlands:', res, parseFloat (res))}),
 
 
         axios.get ('http://217.11.166.234:505/get_server_load_data')
-        .then (res => {setGermanyAvailability (parseFloat (res)); console.info ('germany:', res, parseFloat (res))}),
+        .then (res => {setGermanyAvailability (parseFloat (res.data)); console.info ('germany:', res, parseFloat (res))}),
 
 
         axios.get ('http://217.11.167.238:505/get_server_load_data')
-        .then (res => {setFinlandAvailability (parseFloat (res)); console.info ('finland:', res, parseFloat (res))})
+        .then (res => {setFinlandAvailability (parseFloat (res.data)); console.info ('finland:', res, parseFloat (res))})
 
       ])
 
