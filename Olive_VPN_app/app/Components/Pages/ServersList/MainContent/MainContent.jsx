@@ -36,7 +36,7 @@ const MainContent = () => {
 
 
         axios.get ('http://217.11.166.234:505/get_server_load_data')
-        .then (res => setGermanyAvailability (parseFloat (res)), error => {}),
+        .then (res => setGermanyAvailability (res), error => {}),
 
 
         axios.get ('http://217.11.167.238:505/get_server_load_data')
