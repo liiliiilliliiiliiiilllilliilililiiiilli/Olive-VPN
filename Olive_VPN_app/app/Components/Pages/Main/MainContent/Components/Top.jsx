@@ -54,13 +54,25 @@ const StatusText = () => {
   const themeAnimationDuration = thAnDu = 250
 
 
+  const [q, setQ] = useState (0)
+
   useEffect (() => {
 
     opacityControl.value = withTiming (0, {duration: swAnDu, easing: comEsng})
-    setTimeout (() => setStatusText (textValue), AnDu)
+    setTimeout (() => setStatusText (q), AnDu)
     opacityControl.value = withTiming (1, {duration: swAnDu, easing: comEsng})
 
-  }, [textValue])
+  }, [textValue, q])
+
+  useEffect (() => {
+
+    setInterval(() => 
+      
+      setQ (prev => 1 - prev)
+
+    , 5000)
+
+  }, [])
 
 
   // theme animations:
