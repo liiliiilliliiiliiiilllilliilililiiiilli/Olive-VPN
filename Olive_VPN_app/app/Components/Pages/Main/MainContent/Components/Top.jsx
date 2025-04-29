@@ -41,6 +41,7 @@ const Top = () => {
 const StatusText = () => {
 
   const [styles, theme] = useThemes (styles => styles.MainPage.Main.Top)
+  const [texts] = useAppLanguage (texts => texts.MainPage.Main.Top.StatusText)
   const [textValue] = useMainPageStatusText ()
 
   const [statusText, setStatusText] = useState (textValue)
@@ -56,13 +57,19 @@ const StatusText = () => {
 
   useEffect (() => {
 
-    opacityControl.value = withTiming (0, {duration: swAnDu, easing: comEsng})
-    setTimeout (() => {
-      
-      setStatusText (textValue)
-      opacityControl.value = withTiming (1, {duration: swAnDu, easing: comEsng})
+    if (statusText == texts.not_connected || textValue == texts.not_connected) {
 
-    }, swAnDu)
+      opacityControl.value = withTiming (0, {duration: swAnDu, easing: comEsng})
+      setTimeout (() => {
+      
+        setStatusText (textValue)
+        opacityControl.value = withTiming (1, {duration: swAnDu, easing: comEsng})
+
+      }, swAnDu)
+
+    }
+
+    else setStatusText (textValue)
 
   }, [textValue])
 
