@@ -43,10 +43,24 @@ const StatusText = () => {
   const [styles, theme] = useThemes (styles => styles.MainPage.Main.Top)
   const [textValue] = useMainPageStatusText ()
 
+  const [statusText, setStatusText] = useState (textValue)
+
+
   const colorControl = useSharedValue (styles.StatusText.color)
+  const opacityControl = useSharedValue (1)
 
   const commonEasing = comEsng = Easing.inOut (Easing.quad)
+  const switchAnimationDuration = swAnDu = 350
   const themeAnimationDuration = thAnDu = 250
+
+
+  useEffect (() => {
+
+    opacityControl.value = withTiming (0, {duration: swAnDu, easing: comEsng})
+    setTimeout (() => setStatusText (textValue), AnDu)
+    opacityControl.value = withTiming (1, {duration: swAnDu, easing: comEsng})
+
+  }, [textValue])
 
 
   // theme animations:
@@ -73,9 +87,10 @@ const StatusText = () => {
       textAlign: 'center',
       fontFamily: styles.StatusText.fontFamily,
       color: colorControl,
-      fontSize: 29}}>
+      fontSize: 29,
+      opacity: opacityControl}}>
 
-        {textValue}
+        {statusText}
 
       </Animated.Text>
 
