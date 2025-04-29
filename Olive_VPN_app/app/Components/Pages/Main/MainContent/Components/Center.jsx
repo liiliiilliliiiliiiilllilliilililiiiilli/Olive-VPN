@@ -371,24 +371,24 @@ const Tip = ({text}) => {
   const [appVpn, setAppVpn, getVpnState, connectToVpn, disconnectFromVpn] = useAppVpn ()
 
   const [styles, theme] = useThemes (styles => styles.MainPage.Main.Center)
-  const [texts, appLanguage] = useAppLanguage (texts => texts.MainPage.Main.Center)
+  // const [texts, appLanguage] = useAppLanguage (texts => texts.MainPage.Main.Center)
 
 
-  const [tipText, setTipText] = useState (text)
+  // const [tipText, setTipText] = useState (text)
 
 
   const picOpacityTemporalControl = useSharedValue (1)
   const textColorControl = useSharedValue (styles.Tip.color)
 
   const opacityControl = useSharedValue (1)
-  const opacityTextControl = useSharedValue (1)
+  // const opacityTextControl = useSharedValue (1)
   const scaleControl = useSharedValue (1)
 
   const animationDuration = AnDu = 350
   const commonEasing = comEsng = Easing.inOut (Easing.quad)
 
 
-  useEffect (() => {
+  /* useEffect (() => {
 
     opacityTextControl.value = withTiming (0, {duration: AnDu, easing: comEsng})
 
@@ -399,7 +399,7 @@ const Tip = ({text}) => {
 
     }, AnDu)
 
-  }, [text])
+  }, [text]) */
 
 
   // theme animations:
@@ -496,11 +496,11 @@ const Tip = ({text}) => {
 
 
 
-  const opacityStyles = useAnimatedStyle (() => ({
+  /* const opacityStyles = useAnimatedStyle (() => ({
 
     opacity: opacityControl.value * opacityTextControl.value
 
-  }))
+  })) */
 
 
 
@@ -513,9 +513,10 @@ const Tip = ({text}) => {
     padding: 10,
     marginVertical: -10,
     borderRadius: 15,
-    // opacity: opacityControl.value * opacityTextControl.value,
+    opacity: opacityControl,
     transform: [{scale: scaleControl}]},
-    opacityStyles]}>
+    // opacityStyles
+    ]}>
 
       <Animated.Image
       source = {styles.Tip.Tap_PNG}
