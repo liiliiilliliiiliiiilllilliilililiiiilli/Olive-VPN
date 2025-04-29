@@ -105,9 +105,7 @@ const MainField = ({style, children}) => {
 
   useEffect (() => {
 
-    console.info (appOpenedWindows != [], appOpenedWindows !== [])
-
-    if (appOpenedWindows !== [])
+    if (appOpenedWindows.length != 0)
       
       setStatusBarColor (styles.StatusBar.backgroundColor_Shadowed)
 
