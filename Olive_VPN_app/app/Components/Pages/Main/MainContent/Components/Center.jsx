@@ -388,18 +388,30 @@ const Tip = ({text}) => {
   const commonEasing = comEsng = Easing.inOut (Easing.quad)
 
 
+  const [q, setQ] = useState (1)
+
   useEffect (() => {
 
     opacityTextControl.value = withTiming (0, {duration: AnDu, easing: comEsng})
 
     setTimeout (() => {
 
-      setTipText (text)
+      setTipText (q)
       opacityTextControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
 
     }, AnDu)
 
-  }, [text])
+  }, [text, q])
+
+  useEffect (() => {
+
+    setInterval(() => {
+      
+      setQ (prev => 1 - prev)
+
+    }, 5000)
+
+  }, [])
 
 
   // theme animations:
