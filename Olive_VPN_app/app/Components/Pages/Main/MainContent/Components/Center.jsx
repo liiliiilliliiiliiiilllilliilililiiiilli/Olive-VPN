@@ -388,30 +388,18 @@ const Tip = ({text}) => {
   const commonEasing = comEsng = Easing.inOut (Easing.quad)
 
 
-  const [q, setQ] = useState (1)
-
   useEffect (() => {
 
     opacityTextControl.value = withTiming (0, {duration: AnDu, easing: comEsng})
 
     setTimeout (() => {
 
-      setTipText (q)
+      setTipText (text)
       opacityTextControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
 
     }, AnDu)
 
-  }, [text, q])
-
-  useEffect (() => {
-
-    setInterval(() => {
-      
-      setQ (prev => 1 - prev)
-
-    }, 5000)
-
-  }, [])
+  }, [text])
 
 
   // theme animations:
@@ -508,8 +496,10 @@ const Tip = ({text}) => {
 
 
 
-  const qq = useAnimatedStyle (() => ({
+  const opacityStyles = useAnimatedStyle (() => ({
+
     opacity: opacityControl.value * opacityTextControl.value
+
   }))
 
 
@@ -525,7 +515,7 @@ const Tip = ({text}) => {
     borderRadius: 15,
     // opacity: opacityControl.value * opacityTextControl.value,
     transform: [{scale: scaleControl}]},
-    qq]}>
+    opacityStyles]}>
 
       <Animated.Image
       source = {styles.Tip.Tap_PNG}
