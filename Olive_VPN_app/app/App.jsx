@@ -99,7 +99,7 @@ const App = ({setBackgroundColor}) => {
     'Fredoka-SemiBold': require ('../assets/Fonts/Fredoka/Fredoka-SemiBold.ttf')
 
   })
-
+ 
   useEffect (() => {  // call all independant initialization threads in parallel
 
     Promise.all ([
