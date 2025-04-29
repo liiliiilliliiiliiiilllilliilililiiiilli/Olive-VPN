@@ -518,7 +518,7 @@ const Tip = ({text}) => {
       fontFamily: styles.Tip.fontFamily,
       color: textColorControl,
       fontSize: 19,
-      opacityTextControl}}>
+      opacity: opacityTextControl}}>
 
         {tipText}
 
