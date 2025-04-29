@@ -92,7 +92,7 @@ const MainTheme = {
 
         color: 'dark-content',
         backgroundColor: Colors.StatusBar,
-        backgroundColor_Shadowed: Colors.StatusBarShadowed
+        backgroundColor_Shadowed: Colors.DarkGrey
 
     },
 

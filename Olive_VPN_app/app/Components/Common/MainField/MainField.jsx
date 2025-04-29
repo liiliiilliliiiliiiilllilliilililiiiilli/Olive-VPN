@@ -103,6 +103,8 @@ const MainField = ({style, children}) => {
   // .
 
 
+  // handle topbar on windows color change:
+
   useEffect (() => {
 
     if (appOpenedWindows.length != 0)
@@ -114,6 +116,8 @@ const MainField = ({style, children}) => {
       setStatusBarColor (styles.StatusBar.backgroundColor)
 
   }, [appOpenedWindows])
+
+  // .
 
 
   return (
