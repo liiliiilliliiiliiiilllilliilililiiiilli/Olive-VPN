@@ -390,7 +390,7 @@ const Tip = ({text}) => {
 
   useEffect (() => {
 
-    opacityControl.value = withTiming (0, {duration: AnDu, easing: comEsng})
+    opacityTextControl.value = withTiming (0, {duration: AnDu, easing: comEsng})
 
     setTimeout (() => {
 
