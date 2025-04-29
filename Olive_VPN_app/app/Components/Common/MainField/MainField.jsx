@@ -111,7 +111,7 @@ const MainField = ({style, children}) => {
 
     else
 
-      setStatusBarColor (styles.statusBarColor.backgroundColor)
+      setStatusBarColor (styles.StatusBar.backgroundColor)
 
   }, [appOpenedWindows])
 
