@@ -59,8 +59,12 @@ const StatusText = () => {
   useEffect (() => {
 
     opacityControl.value = withTiming (0, {duration: swAnDu, easing: comEsng})
-    setTimeout (() => setStatusText (q), AnDu)
-    opacityControl.value = withTiming (1, {duration: swAnDu, easing: comEsng})
+    setTimeout (() => {
+      
+      setStatusText (q)
+      opacityControl.value = withTiming (1, {duration: swAnDu, easing: comEsng})
+
+    }, swAnDu)
 
   }, [textValue, q])
 
