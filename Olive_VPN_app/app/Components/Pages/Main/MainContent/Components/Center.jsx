@@ -532,7 +532,7 @@ const Tip = ({text}) => {
       // opacity: opacityTextControl
       }}>
 
-        {tipText}
+        {text}
 
       </Animated.Text>
 
