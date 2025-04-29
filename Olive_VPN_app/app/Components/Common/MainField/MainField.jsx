@@ -105,7 +105,7 @@ const MainField = ({style, children}) => {
 
   useEffect (() => {
 
-    console.info (appOpenedWindows)
+    console.info (appOpenedWindows != [], appOpenedWindows !== [])
 
     if (appOpenedWindows !== [])
       
