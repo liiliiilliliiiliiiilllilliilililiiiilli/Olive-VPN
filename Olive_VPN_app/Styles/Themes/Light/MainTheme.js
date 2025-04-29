@@ -78,7 +78,7 @@ const Colors = {
     WindowShadow: '0px 2.5px 25px rgb(3, 10, 1)'
 
 }
-
+ 
 
 const MainTheme = {
 
