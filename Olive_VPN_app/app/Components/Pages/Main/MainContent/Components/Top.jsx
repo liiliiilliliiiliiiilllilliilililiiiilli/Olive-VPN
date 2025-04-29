@@ -55,6 +55,8 @@ const StatusText = () => {
   const themeAnimationDuration = thAnDu = 250
 
 
+  console.info (texts.not_connected)
+
   useEffect (() => {
 
     if (statusText == texts.not_connected || textValue == texts.not_connected) {

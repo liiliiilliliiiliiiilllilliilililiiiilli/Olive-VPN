@@ -32,7 +32,7 @@ const appLanguagesAsset = {
 
           StatusText: {
 
-            not_connected: '               Соединение не защищено               '
+            not_connected: '                    Соединение не защищено                    '
 
           },
 
