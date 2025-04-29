@@ -516,7 +516,7 @@ const Tip = ({text}) => {
     padding: 10,
     marginVertical: -10,
     borderRadius: 15,
-    opacity: opacityControl * opacityTextControl,
+    opacity: opacityControl.value * opacityTextControl.value,
     transform: [{scale: scaleControl}]}}>
 
       <Animated.Image
