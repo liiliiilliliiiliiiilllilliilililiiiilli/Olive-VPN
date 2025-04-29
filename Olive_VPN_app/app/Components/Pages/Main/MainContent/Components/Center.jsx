@@ -507,17 +507,25 @@ const Tip = ({text}) => {
   }, [])
 
 
+
+  const qq = useAnimatedStyle (() => ({
+    opacity: opacityControl.value * opacityTextControl.value
+  }))
+
+
+
   return (
 
-    <Animated.View style = {{
+    <Animated.View style = {[{
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
     padding: 10,
     marginVertical: -10,
     borderRadius: 15,
-    opacity: opacityControl.value * opacityTextControl.value,
-    transform: [{scale: scaleControl}]}}>
+    // opacity: opacityControl.value * opacityTextControl.value,
+    transform: [{scale: scaleControl}]},
+    qq]}>
 
       <Animated.Image
       source = {styles.Tip.Tap_PNG}
