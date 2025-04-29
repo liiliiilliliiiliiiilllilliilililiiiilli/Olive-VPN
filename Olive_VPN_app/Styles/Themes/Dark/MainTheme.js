@@ -98,7 +98,8 @@ const MainTheme = {
     StatusBar: {
 
         color: 'light-content',
-        backgroundColor: Colors.BarBackground
+        backgroundColor: Colors.BarBackground,
+        backgroundColor_Shadowed: Colors.Black
 
     },
 

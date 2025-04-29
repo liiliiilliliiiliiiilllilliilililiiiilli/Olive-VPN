@@ -61,7 +61,8 @@ const Colors = {
     PinOutChosen: '#394335',
     PinRed: 'red',
     PreWhite: '#f2f2f2',
-    StatusBar: '#ababab20',
+    StatusBar: '#ababab',
+    StatusBarShadowed: 'grey',
     TextLink: '#4758b8',
     TextLinkPressed: '#36418c',
     Tip: '#0d0d0d',
@@ -90,7 +91,8 @@ const MainTheme = {
     StatusBar: {
 
         color: 'dark-content',
-        backgroundColor: Colors.StatusBar
+        backgroundColor: Colors.StatusBar,
+        backgroundColor_Shadowed: Colors.StatusBarShadowed
 
     },
 

@@ -9,12 +9,17 @@ import { StatusBar } from 'react-native'
 import { Dimensions } from 'react-native'
 
 import Animated, { useSharedValue, withDelay, withTiming, Easing } from 'react-native-reanimated'
+import { useAppOpenedWindows } from '../../../../Redux/Hooks/OpenedWindows'
 
 
 const MainField = ({style, children}) => {
 
   const [styles, theme] = useThemes ()
   const [isAppMenuSliderOpened, setIsAppMenuSliderOpened] = useAppMenuSlider ()
+  const [appOpenedWindows] = useAppOpenedWindows ()
+
+
+  const [statusBarColor, setStatusBarColor] = useState (styles.StatusBar.backgroundColor)
 
 
   const windowWidth = Dimensions.get('window').width  // should it be under triggering ?
@@ -87,13 +92,28 @@ const MainField = ({style, children}) => {
 
   // theme animations:
 
-  useEffect (() =>
+  useEffect (() => {
 
     viewBackgroundColorControl.value = withTiming (styles.MainField.backgroundColor, {duration: 250, easing: Easing.inOut(Easing.quad)})
 
-  , [theme])
+    setStatusBarColor (styles.StatusBar.backgroundColor)
+
+  }, [theme])
 
   // .
+
+
+  useEffect (() => {
+
+    if (appOpenedWindows != [])
+      
+      setStatusBarColor (styles.StatusBar.backgroundColor_Shadowed)
+
+    else
+
+      setStatusBarColor (styles.statusBarColor.backgroundColor)
+
+  }, [appOpenedWindows])
 
 
   return (
@@ -108,7 +128,7 @@ const MainField = ({style, children}) => {
       <StatusBar
       animated = {true}
       translucent = {false}  // temporal
-      backgroundColor = {styles.StatusBar.backgroundColor}
+      backgroundColor = {statusBarColor}
       barStyle = {styles.StatusBar.color}/>
 
       <Animated.Image  // cool animated background gradient image, temporal
