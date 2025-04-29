@@ -374,14 +374,32 @@ const Tip = ({text}) => {
   const [texts, appLanguage] = useAppLanguage (texts => texts.MainPage.Main.Center)
 
 
+  const [tipText, setTipText] = useState (text)
+
+
   const picOpacityTemporalControl = useSharedValue (1)
   const textColorControl = useSharedValue (styles.Tip.color)
 
   const opacityControl = useSharedValue (1)
+  const opacityTextControl = useSharedValue (1)
   const scaleControl = useSharedValue (1)
 
-
+  const animationDuration = AnDu = 350
   const commonEasing = comEsng = Easing.inOut (Easing.quad)
+
+
+  useEffect (() => {
+
+    opacityControl.value = withTiming (0, {duration: AnDu, easing: comEsng})
+
+    setTimeout (() => {
+
+      setTipText (text)
+      opacityTextControl.value = withTiming (1, {duration: AnDu, easing: comEsng})
+
+    }, AnDu)
+
+  }, [text])
 
 
   // theme animations:
@@ -499,9 +517,10 @@ const Tip = ({text}) => {
       <Animated.Text style = {{
       fontFamily: styles.Tip.fontFamily,
       color: textColorControl,
-      fontSize: 19}}>
+      fontSize: 19,
+      opacityTextControl}}>
 
-        {text}
+        {tipText}
 
       </Animated.Text>
 
