@@ -32,8 +32,8 @@ const Main = () => {
   let ini_width = 1920
   let ini_scale = 2.63125 / PixelRatio.get ()
 
-  let height = Dimensions.get('screen').height
-  let width = Dimensions.get('screen').width
+  let height = Dimensions.get('screen').height * PixelRatio.get ()
+  let width = Dimensions.get('screen').width * PixelRatio.get ()
 
   if (ini_height * ini_scale > height || ini_width * ini_scale > width) {
 
@@ -73,8 +73,8 @@ const Main = () => {
 
   else {
 
-    ini_height = height / ini_scale
-    ini_width = width / ini_scale
+    ini_height += (height - ini_height * ini_scale) / ini_scale
+    ini_width += (width - ini_width * ini_scale) / ini_scale
 
   }
 
