@@ -134,9 +134,9 @@ const Main = () => {
   return (
 
     <MainField style = {{
-    width: 1080,
-    height: 2400,
-    transform: [{scale: 1}],
+    width: ini_width,
+    height: ini_height,
+    transform: [{scale: ini_scale}],
     alignItems: 'center',
     flex: 1}}>
 
