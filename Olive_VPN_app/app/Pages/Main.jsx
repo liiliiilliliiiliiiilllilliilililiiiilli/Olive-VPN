@@ -7,7 +7,7 @@ import { AdRequest, AdTheme, BannerAdSize, BannerView, Gender, Location } from '
 
 import { View } from 'react-native' */
 
-import { Dimensions } from 'react-native'
+import { Dimensions, PixelRatio } from 'react-native'
 
 import { useState } from 'react'
 
@@ -28,9 +28,59 @@ const Main = () => {
 
   // Configuring app scales for different devices:
 
-  const [height_adaptive, set_height_adaptive] = useState ()
-  const [width_adaptive, set_width_adaptive] = useState ()
-  const [scale_adaptive, set_scale_adaptive] = useState ()
+  let ini_height = 2400
+  let ini_width = 1920
+  let ini_scale = 2.63125 / PixelRatio.get ()
+
+  let height = Dimensions.get('screen').height
+  let width = Dimensions.get('screen').width
+
+  if (ini_height * ini_scale > height || ini_width * ini_scale > width) {
+
+    if (ini_height * ini_scale > height && ini_width * ini_scale > width) {
+
+      if ((height / width) <= (ini_height / ini_width)) {
+
+        ini_scale /= ((ini_height * ini_scale) / height)
+        ini_width += (width - ini_width * ((ini_height * ini_scale) / height))
+
+      }
+
+      else {
+
+        ini_scale /= ((ini_width * ini_scale) / width)
+        ini_height += (height - ini_height * ((ini_width * ini_scale) / width))
+
+      }
+
+    }
+
+    else if (ini_height * ini_scale > height) {
+
+      ini_scale /= ((ini_height * ini_scale) / height)
+      ini_width += (width - ini_width * ((ini_height * ini_scale) / height))
+
+    }
+
+    else if (ini_width * ini_scale > width) {
+
+      ini_scale /= ((ini_width * ini_scale) / width)
+      ini_height += (height - ini_height * ((ini_width * ini_scale) / width))
+
+    }
+
+  }
+
+  else {
+
+    ini_height = height / ini_scale
+    ini_width = width / ini_scale
+
+  }
+
+  const [height_adaptive, set_height_adaptive] = useState (ini_height)
+  const [width_adaptive, set_width_adaptive] = useState (ini_width)
+  const [scale_adaptive, set_scale_adaptive] = useState (ini_scale)
 
   //
 
@@ -84,9 +134,9 @@ const Main = () => {
   return (
 
     <MainField style = {{
-    // width: width_adaptive,
-    // height: height_adaptive,
-    // scale: scale_adaptive,
+    width: width_adaptive,
+    height: height_adaptive,
+    transform: [{scale: scale_adaptive}],
     alignItems: 'center',
     flex: 1}}>
 
