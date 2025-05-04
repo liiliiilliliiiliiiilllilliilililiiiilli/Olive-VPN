@@ -29,7 +29,7 @@ const MainField = ({style, children}) => {
   const windowSize = Math.max (windowWidth, windowHeight)
 
   console.info ('qqqqq:', windowWidth, windowHeight, ww, wh)
-  console.info ('q:', PixelRatio.get (), PixelRatio.getPixelSizeForLayoutSize ())
+  console.info ('q:', PixelRatio.get (), PixelRatio.getPixelSizeForLayoutSize (1))
 
 
   const getRandom = (min, max) => {
