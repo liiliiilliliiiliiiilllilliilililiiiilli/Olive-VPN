@@ -29,7 +29,7 @@ const Main = () => {
   // Configuring app scales for different devices:
 
   let ini_height = 2400
-  let ini_width = 1920
+  let ini_width = 1080
   let ini_scale = 2.63125 / PixelRatio.get ()
 
   let height = Dimensions.get('screen').height * PixelRatio.get ()
