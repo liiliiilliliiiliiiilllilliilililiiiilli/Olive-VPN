@@ -28,6 +28,8 @@ const Main = () => {
 
   // Configuring app scales for different devices:
 
+  useEffect (() => {
+
   let ini_height = 2400
   let ini_width = 1080
   let ini_scale = 2.63125 / PixelRatio.get ()
@@ -37,9 +39,9 @@ const Main = () => {
 
   console.info ('q:', height, width)
 
-  if (ini_height * ini_scale > height || ini_width * ini_scale > width) {
+  if ((ini_height * ini_scale > height) || (ini_width * ini_scale > width)) {
 
-    if (ini_height * ini_scale > height && ini_width * ini_scale > width) {
+    if ((ini_height * ini_scale > height) && (ini_width * ini_scale > width)) {
 
       if ((height / width) <= (ini_height / ini_width)) {
 
@@ -57,14 +59,14 @@ const Main = () => {
 
     }
 
-    else if (ini_height * ini_scale > height) {
+    else if ((ini_height * ini_scale) > height) {
 
       ini_scale /= ((ini_height * ini_scale) / height)
       ini_width += (width - ini_width * ((ini_height * ini_scale) / height))
 
     }
 
-    else if (ini_width * ini_scale > width) {
+    else if ((ini_width * ini_scale) > width) {
 
       ini_scale /= ((ini_width * ini_scale) / width)
       ini_height += (height - ini_height * ((ini_width * ini_scale) / width))
@@ -73,18 +75,25 @@ const Main = () => {
 
   }
 
-/*
+
   else {
 
     ini_height += (height - ini_height * ini_scale) / ini_scale
     ini_width += (width - ini_width * ini_scale) / ini_scale
 
   }
-*/
 
-  const [height_adaptive, set_height_adaptive] = useState (ini_height)
-  const [width_adaptive, set_width_adaptive] = useState (ini_width)
-  const [scale_adaptive, set_scale_adaptive] = useState (ini_scale)
+
+  set_height_adaptive (ini_height)
+  set_width_adaptive (ini_width)
+  set_scale_adaptive (ini_scale)
+
+  }, [])
+
+
+  const [height_adaptive, set_height_adaptive] = useState ()
+  const [width_adaptive, set_width_adaptive] = useState ()
+  const [scale_adaptive, set_scale_adaptive] = useState ()
 
   //
 
