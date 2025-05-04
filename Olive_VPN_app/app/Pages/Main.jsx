@@ -9,7 +9,7 @@ import { View } from 'react-native' */
 
 import { Dimensions, PixelRatio } from 'react-native'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import MainField from '../Components/Common/MainField/MainField'
 
