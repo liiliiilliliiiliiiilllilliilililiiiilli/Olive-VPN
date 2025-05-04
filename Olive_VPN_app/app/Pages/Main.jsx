@@ -7,6 +7,8 @@ import { AdRequest, AdTheme, BannerAdSize, BannerView, Gender, Location } from '
 
 import { View } from 'react-native' */
 
+import { Dimensions } from 'react-native'
+
 import MainField from '../Components/Common/MainField/MainField'
 
 import TopBar from '../Components/Pages/Main/TopBar/TopBar'
@@ -21,6 +23,18 @@ import { default as FeedbackWindow } from '../Windows/Feedback'
 
 
 const Main = () => {
+
+  // Configuring app scales for different devices:
+
+  const [height_adaptive, set_height_adaptive] = useState ()
+  const [width_adaptive, set_width_adaptive] = useState ()
+  const [scale_adaptive, set_scale_adaptive] = useState ()
+
+  //
+
+
+
+
 
   /* const [addSize, setAddSize] = useState ()
   const [addExists, setAddExists] = useState (false)
@@ -68,6 +82,9 @@ const Main = () => {
   return (
 
     <MainField style = {{
+    // width: width_adaptive,
+    // height: height_adaptive,
+    // scale: scale_adaptive,
     alignItems: 'center',
     flex: 1}}>
 

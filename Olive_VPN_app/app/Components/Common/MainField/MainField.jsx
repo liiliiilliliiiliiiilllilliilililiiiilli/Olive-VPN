@@ -6,7 +6,7 @@ import { useThemes } from '../../../../Redux/Hooks/UseThemes'
 import { useAppMenuSlider } from '../../../../Redux/Hooks/MenuSlider'
 
 import { StatusBar } from 'react-native'
-import { Dimensions } from 'react-native'
+import { Dimensions, PixelRatio } from 'react-native'
 
 import Animated, { useSharedValue, withDelay, withTiming, Easing } from 'react-native-reanimated'
 import { useAppOpenedWindows } from '../../../../Redux/Hooks/OpenedWindows'
@@ -24,7 +24,12 @@ const MainField = ({style, children}) => {
 
   const windowWidth = Dimensions.get('window').width  // should it be under triggering ?
   const windowHeight = Dimensions.get('window').height  // should it be under triggering ?
+  const ww = Dimensions.get('screen').width
+  const wh = Dimensions.get('screen').height
   const windowSize = Math.max (windowWidth, windowHeight)
+
+  console.info ('qqqqq:', windowWidth, windowHeight, ww, wh)
+  console.info ('q:', PixelRatio.get (), PixelRatio.getPixelSizeForLayoutSize (), PixelRatio.roundToNearesPixel (1))
 
 
   const getRandom = (min, max) => {
