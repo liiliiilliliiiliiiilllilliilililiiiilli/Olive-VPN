@@ -35,6 +35,8 @@ const Main = () => {
   let height = Dimensions.get('screen').height * PixelRatio.get ()
   let width = Dimensions.get('screen').width * PixelRatio.get ()
 
+  console.info ('q:', height, width)
+
   if (ini_height * ini_scale > height || ini_width * ini_scale > width) {
 
     if (ini_height * ini_scale > height && ini_width * ini_scale > width) {
@@ -83,6 +85,8 @@ const Main = () => {
   const [scale_adaptive, set_scale_adaptive] = useState (ini_scale)
 
   //
+
+  console.info ('qq:', height_adaptive, width_adaptive, scale_adaptive)
 
 
 
