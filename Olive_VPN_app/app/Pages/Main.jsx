@@ -138,7 +138,7 @@ const Main = () => {
   return (
 
     <MainField style = {{
-    width: width_adaptive,
+    // width: width_adaptive,
     height: height_adaptive,
     transform: [{scale: scale_adaptive}],
     alignItems: 'center',

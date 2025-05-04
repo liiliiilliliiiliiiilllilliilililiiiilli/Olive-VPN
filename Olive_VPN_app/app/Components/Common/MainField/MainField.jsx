@@ -26,7 +26,7 @@ const MainField = ({style, children}) => {
   const windowHeight = Dimensions.get('window').height  // should it be under triggering ?
   const ww = Dimensions.get('screen').width
   const wh = Dimensions.get('screen').height
-  const windowSize = Math.max (windowWidth, windowHeight)
+  const windowSize = Math.max (style.height, style.width)
 
   // console.info ('qqqqq:', windowWidth, windowHeight, ww, wh)
   // console.info ('q:', PixelRatio.get (), PixelRatio.getPixelSizeForLayoutSize (1))
