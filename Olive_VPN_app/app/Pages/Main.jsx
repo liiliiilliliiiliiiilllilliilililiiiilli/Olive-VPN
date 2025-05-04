@@ -91,9 +91,9 @@ const Main = () => {
   }, [])
 
 
-  const [height_adaptive, set_height_adaptive] = useState ()
-  const [width_adaptive, set_width_adaptive] = useState ()
-  const [scale_adaptive, set_scale_adaptive] = useState ()
+  const [height_adaptive, set_height_adaptive] = useState (2400)
+  const [width_adaptive, set_width_adaptive] = useState (1080)
+  const [scale_adaptive, set_scale_adaptive] = useState (1)
 
   //
 
