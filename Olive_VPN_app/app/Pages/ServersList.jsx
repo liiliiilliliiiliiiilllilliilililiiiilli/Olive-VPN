@@ -3,6 +3,7 @@
 
 import { Dimensions } from 'react-native'
 
+import { useState } from 'react'
 import { useThemes } from '../../Redux/Hooks/UseThemes'
 
 import { View } from 'react-native'

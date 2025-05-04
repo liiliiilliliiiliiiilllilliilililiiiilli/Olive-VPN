@@ -9,6 +9,8 @@ import { View } from 'react-native' */
 
 import { Dimensions } from 'react-native'
 
+import { useState } from 'react'
+
 import MainField from '../Components/Common/MainField/MainField'
 
 import TopBar from '../Components/Pages/Main/TopBar/TopBar'
