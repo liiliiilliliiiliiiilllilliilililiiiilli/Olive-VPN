@@ -64,7 +64,7 @@ const Main = () => {
     else if ((ini_height * ini_scale) > height) {
 
       ini_scale /= ((ini_height * ini_scale) / height)
-      ini_width += (width - ini_width * ((ini_height * ini_scale) / height))
+      // ini_width += (width - ini_width * ((ini_height * ini_scale) / height))
 
     }
 
