@@ -73,12 +73,14 @@ const Main = () => {
 
   }
 
+/*
   else {
 
     ini_height += (height - ini_height * ini_scale) / ini_scale
     ini_width += (width - ini_width * ini_scale) / ini_scale
 
   }
+*/
 
   const [height_adaptive, set_height_adaptive] = useState (ini_height)
   const [width_adaptive, set_width_adaptive] = useState (ini_width)
