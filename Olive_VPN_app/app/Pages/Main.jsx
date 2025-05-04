@@ -34,6 +34,8 @@ const Main = () => {
   let ini_width = 1080
   let ini_scale = 2.63125 / PixelRatio.get ()
 
+  console.info ('ini_scale:', ini_scale)
+
   let height = Dimensions.get('screen').height * PixelRatio.get ()
   let width = Dimensions.get('screen').width * PixelRatio.get ()
 
