@@ -28,46 +28,48 @@ const Main = () => {
 
   // Configuring app scales for different devices:
 
-  const {ww, hh} = useWindowDimensions ()
+  // const {ww, hh} = useWindowDimensions ()
 
   useEffect (() => {
 
   let ini_height = 2400
-  let ini_width = 1080 / PixelRatio.get ()
+  let ini_width = 410
   let ini_scale = 2.63125 / PixelRatio.get ()
 
-  console.info ('ini_scale:', ini_scale)
+  // ini_scale = ini_scale <= 1 ? ini_scale : 1
 
-  let height = Dimensions.get('screen').height * PixelRatio.get ()
-  let width = Dimensions.get('screen').width * PixelRatio.get ()
+  // console.info ('ini_scale:', ini_scale)
 
-  console.info ('q:', height, width)
+  let height = Dimensions.get('screen').height
+  let width = Dimensions.get('screen').width
+
+  // console.info ('q:', height, width)
 
   // /*
 
   if ((ini_height * ini_scale > height) || (ini_width * ini_scale > width)) {
 
-    console.info ('if 1')
+    // console.info ('if 1')
 
     if ((ini_height * ini_scale > height) && (ini_width * ini_scale > width)) {
 
-      console.info ('if else 1')
+      // console.info ('if else 1')
 
       if ((height / width) >= (ini_height / ini_width)) {
 
-        console.info ('if if 1')
+        // console.info ('if if 1')
 
         ini_scale /= ((ini_height * ini_scale) / height)
-        ini_width += (width - ini_width * ((ini_height * ini_scale) / height))
+        ini_width += (width - ini_width * ini_scale) / ini_scale
 
       }
 
       else {
 
-        console.info ('if if 2')
+        // console.info ('if if 2')
 
         ini_scale /= ((ini_width * ini_scale) / width)
-        ini_height += (height - ini_height * ((ini_width * ini_scale) / width))
+        ini_height += (height - ini_height * ini_scale) / ini_scale
 
       }
 
@@ -75,19 +77,19 @@ const Main = () => {
 
     else if ((ini_height * ini_scale) > height) {
 
-      console.info ('in else 2')
+      // console.info ('in else 2')
 
       ini_scale /= ((ini_height * ini_scale) / height)
-      // ini_width += (width - ini_width * ((ini_height * ini_scale) / height))
+      ini_width += (width - ini_width * ini_scale) / ini_scale
 
     }
 
     else if ((ini_width * ini_scale) > width) {
 
-      console.info ('if else 3')
+      // console.info ('if else 3')
 
       ini_scale /= ((ini_width * ini_scale) / width)
-      ini_height += (height - ini_height * ((ini_width * ini_scale) / width))
+      ini_height += (height - ini_height * ini_scale) / ini_scale
 
     }
 
@@ -95,10 +97,10 @@ const Main = () => {
 
   else {
 
-    console.info ('else')
+    // console.info ('else')
 
-    ini_height += (height - ini_height * ini_scale)
-    ini_width += (width - ini_width * ini_scale)
+    ini_height += (height - ini_height * ini_scale) / ini_scale
+    ini_width += (width - ini_width * ini_scale) / ini_scale
 
   }
 
@@ -113,12 +115,12 @@ const Main = () => {
 
 
   const [height_adaptive, set_height_adaptive] = useState (2400)
-  const [width_adaptive, set_width_adaptive] = useState (1080)
+  const [width_adaptive, set_width_adaptive] = useState (410)
   const [scale_adaptive, set_scale_adaptive] = useState (1)
 
   //
 
-  console.info ('qq:', height_adaptive, width_adaptive, scale_adaptive)
+  // console.info ('qq:', height_adaptive, width_adaptive, scale_adaptive)
 
 
 
@@ -170,8 +172,8 @@ const Main = () => {
   return (
 
     <MainField style = {{
-    width: 420,
-    height: 2400 * 0.7,
+    width: width_adaptive,
+    height: height_adaptive,
     transform: [{scale: scale_adaptive}],
     justifyContent: 'center',
     alignItems: 'center',
