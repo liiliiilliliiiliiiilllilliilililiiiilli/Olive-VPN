@@ -43,8 +43,8 @@ const Main = () => {
   let height = Dimensions.get('screen').height * 2.63125
   let width = Dimensions.get('screen').width
 
-  let hl = Dimensions.get('screen').height
-  let wl = Dimensions.get('screen').width
+  let hl = Dimensions.get('window').height
+  let wl = Dimensions.get('window').width
 
   console.info ('q:', height, width, hl, wl)
 
