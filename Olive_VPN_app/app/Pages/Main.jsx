@@ -40,7 +40,7 @@ const Main = () => {
 
   console.info ('ini_scale:', ini_scale)
 
-  let height = (Dimensions.get('screen').height + StatusBar.currentHeight)
+  let height = (Dimensions.get('screen').height + StatusBar.currentHeight) * (2.63125 / PixelRatio.get ())
   let width = Dimensions.get('screen').width
 
   /* let height = (Dimensions.get('window').height 
