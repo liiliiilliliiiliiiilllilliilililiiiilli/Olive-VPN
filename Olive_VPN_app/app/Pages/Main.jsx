@@ -28,7 +28,7 @@ const Main = () => {
 
   // Configuring app scales for different devices:
 
-  const {ww, hh} = useWindowDimensions ()
+  const [ww, hh] = useWindowDimensions ()
 
   useEffect (() => {
 
