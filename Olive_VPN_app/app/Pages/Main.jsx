@@ -41,7 +41,7 @@ const Main = () => {
 
   console.info ('q:', height, width)
 
-  /*
+  // /*
 
   if ((ini_height * ini_scale > height) || (ini_width * ini_scale > width)) {
 
@@ -86,7 +86,7 @@ const Main = () => {
 
   }
 
-  */
+  // */
 
 
   set_height_adaptive (ini_height)
