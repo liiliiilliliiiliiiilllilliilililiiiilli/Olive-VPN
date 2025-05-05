@@ -172,7 +172,7 @@ const Main = () => {
     <MainField style = {{
     width: 420,
     height: 2400 * 0.7,
-    transform: [{scale: 1}],
+    transform: [{scale: scale_adaptive}],
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1}}>
