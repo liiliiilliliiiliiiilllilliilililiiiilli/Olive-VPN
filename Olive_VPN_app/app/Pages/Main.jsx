@@ -45,9 +45,15 @@ const Main = () => {
 
   if ((ini_height * ini_scale > height) || (ini_width * ini_scale > width)) {
 
+    console.info ('if 1')
+
     if ((ini_height * ini_scale > height) && (ini_width * ini_scale > width)) {
 
+      console.info ('if else 1')
+
       if ((height / width) >= (ini_height / ini_width)) {
+
+        console.info ('if if 1')
 
         ini_scale /= ((ini_height * ini_scale) / height)
         ini_width += (width - ini_width * ((ini_height * ini_scale) / height))
@@ -55,6 +61,8 @@ const Main = () => {
       }
 
       else {
+
+        console.info ('if if 2')
 
         ini_scale /= ((ini_width * ini_scale) / width)
         ini_height += (height - ini_height * ((ini_width * ini_scale) / width))
@@ -65,12 +73,16 @@ const Main = () => {
 
     else if ((ini_height * ini_scale) > height) {
 
+      console.info ('in else 2')
+
       ini_scale /= ((ini_height * ini_scale) / height)
       // ini_width += (width - ini_width * ((ini_height * ini_scale) / height))
 
     }
 
     else if ((ini_width * ini_scale) > width) {
+
+      console.info ('if else 3')
 
       ini_scale /= ((ini_width * ini_scale) / width)
       ini_height += (height - ini_height * ((ini_width * ini_scale) / width))
@@ -81,8 +93,10 @@ const Main = () => {
 
   else {
 
-    ini_height += (height - ini_height * ini_scale) / ini_scale
-    ini_width += (width - ini_width * ini_scale) / ini_scale
+    console.info ('else')
+
+    ini_height += (height - ini_height * ini_scale)
+    ini_width += (width - ini_width * ini_scale)
 
   }
 

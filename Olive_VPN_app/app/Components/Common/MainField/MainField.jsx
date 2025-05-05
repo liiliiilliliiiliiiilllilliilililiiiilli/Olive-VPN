@@ -131,8 +131,7 @@ const MainField = ({style, children}) => {
     // width: '100%',
     // height: '100%',
     backgroundColor: viewBackgroundColorControl,
-    // left: marginControl
-    },
+    left: marginControl},
     style]}>
 
       <StatusBar
