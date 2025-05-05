@@ -157,6 +157,7 @@ const Main = () => {
     width: width_adaptive,
     height: height_adaptive,
     transform: [{scale: scale_adaptive}],
+    justifyContent: 'center',
     alignItems: 'center',
     flex: 1}}>
 
