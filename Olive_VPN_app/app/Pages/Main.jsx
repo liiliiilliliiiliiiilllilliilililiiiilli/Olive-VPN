@@ -45,7 +45,7 @@ const Main = () => {
 
   let height = (Dimensions.get('window').height 
   
-  // + StatusBar.currentHeight
+  + StatusBar.currentHeight
 
 ) * 2.63125
   let width = Dimensions.get('window').width
