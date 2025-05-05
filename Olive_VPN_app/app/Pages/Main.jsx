@@ -33,7 +33,7 @@ const Main = () => {
   useEffect (() => {
 
   let ini_height = 2400
-  let ini_width = 1080
+  let ini_width = 1080 / PixelRatio.get ()
   let ini_scale = 2.63125 / PixelRatio.get ()
 
   console.info ('ini_scale:', ini_scale)
@@ -106,7 +106,7 @@ const Main = () => {
 
 
   set_height_adaptive (ini_height)
-  set_width_adaptive (ini_width / PixelRatio.get ())
+  set_width_adaptive (ini_width)
   set_scale_adaptive (ini_scale)
 
   }, [])
