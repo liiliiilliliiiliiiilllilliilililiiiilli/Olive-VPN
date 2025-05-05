@@ -46,7 +46,9 @@ const Main = () => {
   let height = Dimensions.get('window').height + StatusBar.currentHeight
   let width = Dimensions.get('window').width
 
-  console.info ('q:', height, width, hl, wl)
+  console.info ('q:', height, width
+  //   , hl, wl
+  )
 
   // /*
 
