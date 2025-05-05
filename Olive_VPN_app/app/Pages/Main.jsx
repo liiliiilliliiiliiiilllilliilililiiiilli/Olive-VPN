@@ -7,7 +7,7 @@ import { AdRequest, AdTheme, BannerAdSize, BannerView, Gender, Location } from '
 
 import { View } from 'react-native' */
 
-import { Dimensions, PixelRatio, useWindowDimensions} from 'react-native'
+import { Dimensions, PixelRatio, useWindowDimensions, StatusBar } from 'react-native'
 
 import { useState, useEffect } from 'react'
 
@@ -43,7 +43,7 @@ const Main = () => {
   let height = Dimensions.get('screen').height * 2.63125
   let width = Dimensions.get('screen').width
 
-  let hl = Dimensions.get('window').height
+  let hl = Dimensions.get('window').height + StatusBar.currentHeight
   let wl = Dimensions.get('window').width
 
   console.info ('q:', height, width, hl, wl)
