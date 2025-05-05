@@ -28,7 +28,7 @@ const Main = () => {
 
   // Configuring app scales for different devices:
 
-  const [ww, hh] = useWindowDimensions ()
+  const {ww, hh} = useWindowDimensions ()
 
   useEffect (() => {
 
@@ -109,7 +109,7 @@ const Main = () => {
   set_width_adaptive (ini_width / PixelRatio.get ())
   set_scale_adaptive (ini_scale)
 
-  }, [ww, hh])
+  }, [])
 
 
   const [height_adaptive, set_height_adaptive] = useState (2400)
