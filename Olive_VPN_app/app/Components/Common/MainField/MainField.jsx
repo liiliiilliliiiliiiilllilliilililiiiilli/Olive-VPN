@@ -22,11 +22,11 @@ const MainField = ({style, children}) => {
   const [statusBarColor, setStatusBarColor] = useState (styles.StatusBar.backgroundColor)
 
 
-  const windowWidth = Dimensions.get('window').width  // should it be under triggering ?
-  const windowHeight = Dimensions.get('window').height  // should it be under triggering ?
+  const windowWidth = Dimensions.get('screen').width  // should it be under triggering ?
+  const windowHeight = Dimensions.get('screen').height  // should it be under triggering ?
   const ww = Dimensions.get('screen').width
   const wh = Dimensions.get('screen').height
-  const windowSize = Math.max (style.height, style.width)
+  const windowSize = Math.max (windowWidth, windowHeight)
 
   // console.info ('qqqqq:', windowWidth, windowHeight, ww, wh)
   // console.info ('q:', PixelRatio.get (), PixelRatio.getPixelSizeForLayoutSize (1))
