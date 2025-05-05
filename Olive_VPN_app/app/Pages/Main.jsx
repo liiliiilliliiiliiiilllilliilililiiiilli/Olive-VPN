@@ -7,7 +7,7 @@ import { AdRequest, AdTheme, BannerAdSize, BannerView, Gender, Location } from '
 
 import { View } from 'react-native' */
 
-import { Dimensions, PixelRatio } from 'react-native'
+import { Dimensions, PixelRatio, useWindowDimensions} from 'react-native'
 
 import { useState, useEffect } from 'react'
 
