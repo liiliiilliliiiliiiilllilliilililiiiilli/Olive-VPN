@@ -40,7 +40,7 @@ const Main = () => {
 
   console.info ('ini_scale:', ini_scale)
 
-  let height = Dimensions.get('screen').height
+  let height = Dimensions.get('screen').height * 2.63125
   let width = Dimensions.get('screen').width
 
   console.info ('q:', height, width)
