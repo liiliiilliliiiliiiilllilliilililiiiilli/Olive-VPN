@@ -64,7 +64,7 @@ const Main = () => {
 
       console.info ('if else 1')
 
-      if ((height / width) >= (ini_height / ini_width)) {
+      if ((height / width) <= (ini_height / ini_width)) {
 
         console.info ('if if 1')
 
