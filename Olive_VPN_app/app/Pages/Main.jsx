@@ -98,7 +98,7 @@ const Main = () => {
     console.info ('else')
 
     ini_height += (height - ini_height * ini_scale) * ini_scale
-    ini_width += (width - ini_width * ini_scale) * ini_scale
+    ini_width += (width - ini_width * ini_scale)
 
   }
 
