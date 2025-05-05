@@ -90,7 +90,7 @@ const Main = () => {
 
 
   set_height_adaptive (ini_height)
-  set_width_adaptive (ini_width)
+  set_width_adaptive (ini_width / PixelRatio.get ())
   set_scale_adaptive (ini_scale)
 
   }, [])
@@ -154,7 +154,7 @@ const Main = () => {
   return (
 
     <MainField style = {{
-    width: 410,
+    width: width_adaptive,
     height: height_adaptive,
     transform: [{scale: scale_adaptive}],
     alignItems: 'center',
