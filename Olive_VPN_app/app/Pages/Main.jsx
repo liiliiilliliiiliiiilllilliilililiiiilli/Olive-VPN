@@ -34,7 +34,7 @@ const Main = () => {
 
   let ini_height = 2400
   let ini_width = 1080
-  let ini_scale = 1 / (2.63125 / PixelRatio.get ())
+  let ini_scale = 2.63125 / PixelRatio.get ()
 
   console.info ('ini_scale:', ini_scale)
 
@@ -97,8 +97,8 @@ const Main = () => {
 
     console.info ('else')
 
-    ini_height += (height - ini_height * ini_scale) * 0.7
-    ini_width += (width - ini_width * ini_scale) / 0.7
+    ini_height += (height - ini_height * ini_scale) * ini_scale
+    ini_width += (width - ini_width * ini_scale) * ini_scale
 
   }
 
