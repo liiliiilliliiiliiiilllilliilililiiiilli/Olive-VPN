@@ -48,13 +48,17 @@ const Main = () => {
 
   let STATUS_BAR_HEIGHT = getStatusBarHeight ()
 
+  ini_height -= STATUS_BAR_HEIGHT
+
   let height = Platform.OS !== 'ios' && Dimensions.get('screen').height !== Dimensions.get('window').height && STATUS_BAR_HEIGHT > 24 
   ? Dimensions.get('screen').height - STATUS_BAR_HEIGHT 
   : STATUS_BAR_HEIGHT > 24 
     ? Dimensions.get('window').height - STATUS_BAR_HEIGHT 
     : Dimensions.get('window').height + initialWindowMetrics.insets.bottom === Dimensions.get('screen').height 
       ? Dimensions.get('window').height - STATUS_BAR_HEIGHT 
-      : Dimensions.get('window').height
+      : Dimensions.get('window').
+      
+  height *= PixelRatio.get ()
 
   /* let height = (Dimensions.get('window').height 
   
