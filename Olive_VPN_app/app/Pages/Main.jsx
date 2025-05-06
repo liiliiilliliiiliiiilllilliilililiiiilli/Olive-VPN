@@ -33,7 +33,7 @@ const Main = () => {
   useEffect (() => {
 
   let ini_height = 2400
-  let ini_width = 410
+  let ini_width = 1080
   let ini_scale = 2.63125 / PixelRatio.get ()
 
   // ini_scale = ini_scale <= 1 ? ini_scale : 1
@@ -41,7 +41,7 @@ const Main = () => {
   console.info ('ini_scale:', ini_scale)
 
   let height = (Dimensions.get('screen').height + StatusBar.currentHeight) * PixelRatio.get ()
-  let width = Dimensions.get('screen').width
+  let width = Dimensions.get('screen').width * PixelRatio.get ()
 
   /* let height = (Dimensions.get('window').height 
   
@@ -124,7 +124,7 @@ const Main = () => {
 
 
   const [height_adaptive, set_height_adaptive] = useState (2400)
-  const [width_adaptive, set_width_adaptive] = useState (410)
+  const [width_adaptive, set_width_adaptive] = useState (1080)
   const [scale_adaptive, set_scale_adaptive] = useState (1)
 
   //
