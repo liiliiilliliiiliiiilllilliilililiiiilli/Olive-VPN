@@ -36,7 +36,7 @@ const Main = () => {
   useEffect (() => {
 
   let ini_height = 2400
-  let ini_width = 1080
+  let ini_width = 410
   let ini_scale = 2.63125 / PixelRatio.get ()
 
   // ini_scale = ini_scale <= 1 ? ini_scale : 1
@@ -44,7 +44,7 @@ const Main = () => {
   console.info ('ini_scale:', ini_scale)
 
   // let height = (Dimensions.get('screen').height + StatusBar.currentHeight) * PixelRatio.get ()
-  let width = Dimensions.get('screen').width * PixelRatio.get ()
+  let width = Dimensions.get('screen').width
 
   let STATUS_BAR_HEIGHT = getStatusBarHeight ()
 
