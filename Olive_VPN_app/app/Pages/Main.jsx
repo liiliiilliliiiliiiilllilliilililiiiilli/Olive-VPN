@@ -82,11 +82,11 @@ const Main = () => {
 
       console.info ('if else 1')
 
-      if ((height / width) <= (ini_height / ini_width)) {
+      if ((height / width) >= (ini_height / ini_width)) {
 
         console.info ('if if 1')
 
-        ini_scale /= ((ini_height * ini_scale) / height)
+        // ini_scale /= ((ini_height * ini_scale) / height)
         ini_width += (width - ini_width * ini_scale) / ini_scale
 
       }
@@ -95,7 +95,7 @@ const Main = () => {
 
         console.info ('if if 2')
 
-        ini_scale /= ((ini_width * ini_scale) / width)
+        // ini_scale /= ((ini_width * ini_scale) / width)
         ini_height += (height - ini_height * ini_scale) / ini_scale
 
       }
@@ -106,7 +106,7 @@ const Main = () => {
 
       console.info ('in else 2')
 
-      ini_scale /= ((ini_height * ini_scale) / height)
+      // ini_scale /= ((ini_height * ini_scale) / height)
       ini_width += (width - ini_width * ini_scale) / ini_scale
 
     }
@@ -115,7 +115,7 @@ const Main = () => {
 
       console.info ('if else 3')
 
-      ini_scale /= ((ini_width * ini_scale) / width)
+      // ini_scale /= ((ini_width * ini_scale) / width)
       ini_height += (height - ini_height * ini_scale) / ini_scale
 
     }
