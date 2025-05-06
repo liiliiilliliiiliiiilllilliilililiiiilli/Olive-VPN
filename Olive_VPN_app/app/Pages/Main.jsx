@@ -55,7 +55,8 @@ const Main = () => {
   : STATUS_BAR_HEIGHT > 24 
     ? Dimensions.get('window').height - STATUS_BAR_HEIGHT 
     : Dimensions.get('window').height + initialWindowMetrics.insets.bottom === Dimensions.get('screen').height 
-      ? Dimensions.get('window').height - STATUS_BAR_HEIGHT 
+      ? Dimensions.get('window').height
+      // - STATUS_BAR_HEIGHT 
       : Dimensions.get('window').height
       
   height *= PixelRatio.get ()
