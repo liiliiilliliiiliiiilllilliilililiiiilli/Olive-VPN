@@ -10,7 +10,7 @@ import { View } from 'react-native' */
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { initialWindowMetrics } from 'react-native-safe-area-context'
 
-import { Dimensions, PixelRatio, useWindowDimensions, StatusBar } from 'react-native'
+import { Dimensions, PixelRatio, useWindowDimensions, StatusBar, Platform } from 'react-native'
 
 import { useState, useEffect } from 'react'
 
