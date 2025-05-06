@@ -7,6 +7,9 @@ import { AdRequest, AdTheme, BannerAdSize, BannerView, Gender, Location } from '
 
 import { View } from 'react-native' */
 
+import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { initialWindowMetrics } from 'react-native-safe-area-context'
+
 import { Dimensions, PixelRatio, useWindowDimensions, StatusBar } from 'react-native'
 
 import { useState, useEffect } from 'react'
@@ -40,8 +43,18 @@ const Main = () => {
 
   console.info ('ini_scale:', ini_scale)
 
-  let height = (Dimensions.get('screen').height + StatusBar.currentHeight) * PixelRatio.get ()
+  // let height = (Dimensions.get('screen').height + StatusBar.currentHeight) * PixelRatio.get ()
   let width = Dimensions.get('screen').width * PixelRatio.get ()
+
+  let STATUS_BAR_HEIGHT = getStatusBarHeight ()
+
+  let height = Platform.OS !== 'ios' && Dimensions.get('screen').height !== Dimensions.get('window').height && STATUS_BAR_HEIGHT > 24 
+  ? Dimensions.get('screen').height - STATUS_BAR_HEIGHT 
+  : STATUS_BAR_HEIGHT > 24 
+    ? Dimensions.get('window').height - STATUS_BAR_HEIGHT 
+    : Dimensions.get('window').height + initialWindowMetrics.insets.bottom === Dimensions.get('screen').height 
+      ? Dimensions.get('window').height - STATUS_BAR_HEIGHT 
+      : Dimensions.get('window').height
 
   /* let height = (Dimensions.get('window').height 
   
