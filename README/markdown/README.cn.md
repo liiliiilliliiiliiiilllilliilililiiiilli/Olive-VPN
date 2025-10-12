@@ -10,4 +10,4 @@
 
 我也尝试过在 **RuStore** 上发布这款应用，但被毫无理由地拒绝了。
 
-如果您克隆一个项目，您需要解压位于`/source/android/app/src/main/`中的一些库的jniLibs/文件夹。
+如果您克隆一个项目，您需要解压位于`./source/android/app/src/main/`中的一些库的`jniLibs/`文件夹。
