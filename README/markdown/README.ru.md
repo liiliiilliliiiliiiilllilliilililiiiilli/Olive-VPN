@@ -1,4 +1,4 @@
-# Мобильное VPN приложение под Android для собственной инфраструктуры.
+# Мобильное VPN приложение под Android.
 
 [![ru](/README/markdown/assets/language-badges/ru.svg)](/README/markdown/README.ru.md)
 [![en](/README/markdown/assets/language-badges/en.svg)](/README/markdown/README.en.md)

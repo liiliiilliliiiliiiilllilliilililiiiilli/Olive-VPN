@@ -1,4 +1,4 @@
-# 定制全自制基础架构的 Android 移动 VPN 客户端。
+# 适用于 Android 的移动 VPN 应用程序。
 
 [![ru](/README/markdown/assets/language-badges/ru.svg)](/README/markdown/README.ru.md)
 [![en](/README/markdown/assets/language-badges/en.svg)](/README/markdown/README.en.md)

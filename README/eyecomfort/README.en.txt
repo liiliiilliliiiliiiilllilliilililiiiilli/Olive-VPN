@@ -1,4 +1,4 @@
-Android mobile VPN app for full full self-deployed infrastructure
+Mobile VPN app for Android.
 
   I created this app to have complete control over my online freedom—without subscription or payment restrictions, ads, etc.
   The older version of the app was released and published in the Huawei AppGallery, but the newer version still needs some work before publication.
