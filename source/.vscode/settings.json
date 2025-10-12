@@ -18,7 +18,7 @@
         "tsconfig.json": true,
 
     },
-    "cmake.sourceDirectory": "/root/Desktop/projects/Olive_VPN_project/development/Olive_VPN_app/node_modules/expo-modules-core/android",
+    "cmake.sourceDirectory": "/root/Desktop/projects/Olive_VPN_project/development/source/node_modules/expo-modules-core/android",
     "java.configuration.updateBuildConfiguration": "interactive",
     "java.compile.nullAnalysis.mode": "automatic"
 }

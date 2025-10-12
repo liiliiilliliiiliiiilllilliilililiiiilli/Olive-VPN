@@ -1,1 +1,1 @@
-I have created this app to have my own hand-handled VPNband client for it, to feel more free in internet. This app was published in Huawei's AppGallery, but the newer versions stillbneed to be released.
+./README/markdown/README.ru.md
